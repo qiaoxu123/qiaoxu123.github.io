@@ -1,0 +1,400 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>车载T-BOX开发记录 1-- 软硬件配置 | Blog</title>
+<meta name="description" content="个人知识记录，学习～">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1562915532659">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1562915532659" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a class="menu purple-link" href="https://qiaoxu123.github.io" class="menu" target="_blank">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">车载T-BOX开发记录 1-- 软硬件配置</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-07-12</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/6B7k_pgop">
+                    车联网
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://qiaoxu123.github.io/tag/5HMxWRPZ1">
+                    工程调试
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>汇总下之前工程项目，记下笔记</p>
+<!-- more -->
+<blockquote>
+<p>T-BOX 的功能是实现远程端和车辆端的通信，其中远程端可以理解为服务器。需要注意的是，T-BOX和普通的车辆上网不同，不仅需要具备上网功能，还要能够实现车辆一定的控制功能。</p>
+</blockquote>
+<h2 id="1-基本架构">1. 基本架构</h2>
+<p>服务器端</p>
+<p>车辆端：需要实现的功能(CAN通信，4G通信)</p>
+<ul>
+<li>操作系统：Linux</li>
+<li>硬件平台：ARM 嵌入式平台</li>
+</ul>
+<p>在项目开发中利用利用现有的比较成熟的，可商用的嵌入式平台实现开发。优势在于可以极大的减少系统硬件平台的工作量，硬件驱动比较全面，技术支持也做的比较好。</p>
+<p>目前使用的平台是：<strong>飞凌<code>OKMX6X-S3</code>开发板</strong></p>
+<p>硬件配置方面：无显示屏配置；1GB内存8GB存储核心板；6DL核心板商业级底板：OKMX6X-S3</p>
+<p>软件系统方面：官方提供交叉编译平台，使用虚拟机配置。可从官方论坛进行下载。</p>
+<hr>
+<h2 id="2-can开发工具配置">2. CAN开发工具配置</h2>
+<blockquote>
+<p>开发板系统配置好后，默认自带CAN驱动。现在需要开发应用层软件，来实现CAN通信并进一步实现车辆信息读取和车辆控制</p>
+</blockquote>
+<h3 id="21编译环境所需工具">2.1.编译环境所需工具：</h3>
+<ul>
+<li><a href="https://public.pengutronix.de/software/libsocketcan/">libsocketcan-0.0.10.tar.bz2</a></li>
+<li><a href="https://public.pengutronix.de/software/socket-can/canutils/v4.0/">canutils-4.0.6.tar.bz2 </a></li>
+</ul>
+<p>交叉编译工具链根据每个开发板所提供的类型进行设置，我的工具链名称为</p>
+<pre><code class="language-c">arm-fsl-linux-gnueabi-gcc
+</code></pre>
+<p>后面实际配置时请注意</p>
+<hr>
+<h3 id="22参考博客">2.2.参考博客</h3>
+<p>https://www.cnblogs.com/eaggle/p/7641526.html
+https://blog.csdn.net/sinat_35706094/article/details/79537749
+https://blog.csdn.net/sno_guo/article/details/17029295</p>
+<hr>
+<h3 id="23具体配置">2.3.具体配置</h3>
+<h4 id="第一步配置交叉编译工具链">第一步：配置交叉编译工具链</h4>
+<p>配置好交叉编译工具链为全局环境，也就是将其添加到环境变量中，具体因人而异。在这不具体说明，请自行查找资料</p>
+<pre><code class="language-shell">export ARCH=arm
+export CROSS_COMPILE=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl
+-linaro-toolchain/bin/arm-none-linux-gnueabi-
+export PATH=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl-linaro-toolch
+ain/bin:$PATH
+</code></pre>
+<h4 id="第二步-交叉编译libsocketcan">第二步 交叉编译libsocketcan</h4>
+<pre><code class="language-shell">cd libsocketcan-0.0.10  //进入目录
+mkdir out              //创建文件夹，放置生成文件
+./configure --prefix=/文件夹路径/libsocketcan-0.0.10/out --host=arm-fsl-linux-gnueabi
+make
+make install
+</code></pre>
+<p>此时生成文件会出现在<code>out/lib</code>文件夹下，将这些生成的库复制到开发板的文件系统内，可以放在lib目录下，也可以放在<code>usr/lib</code>里面
+（每篇博客的设置都不同，该步的生成文件我没有拷贝到开发板。以防后面配置出现问题，可以设置上）</p>
+<hr>
+<h4 id="第三步-编译安装canutils-406tarbz2">第三步 编译安装<code>canutils-4.0.6.tar.bz2</code></h4>
+<p>先将 libsocketcan 里面的头文件 <code>libsocketcan.h</code>， <code>can_netlink.h</code> 复制到 canutils 的 <code>include</code> 里面。这些文件在<code>out/include</code>目录下</p>
+<pre><code class="language-shell">cd canutils-4.0.6/
+mkdir out
+//进行实际配置,可直接复制下面代码，务必仔细修改文件夹路径和交叉编译工具链
+./configure --host=arm-fsl-linux-gnueabi   \
+--prefix=/文件夹路径/canutils-4.0.6/out li   \
+bsocketcan_LIBS=-lsocketcan LDFLAGS=&quot;-L/   \
+文件夹路径/libsocketcan-0.0.10/out/lib/&quot; l   \  
+ibsocketcan_CFLAGS=&quot;-I/文件夹路径/libsocke   \ 
+tcan-0.0.10/out/include&quot;
+
+make
+make install
+</code></pre>
+<p>最后在 <code>out/sbin</code> 下能见到 <code>canconfig</code> 命令，在<code>out/bin</code> 下面 <code>candump/canecho/cansend/cansequence</code>
+将这些文件拷贝到开发板<code>/usr</code>目录下即可。</p>
+<p>具体请看参考博客</p>
+<hr>
+<h3 id="24高级设置">2.4.高级设置</h3>
+<p>关键词：Linux SocketCAN工具<code>can-utils</code>中多线程设置</p>
+<p>实际使用时，将接收到的CAN数据发送到远程，同时远程服务器会再发送数据过来，所以需要多线程的需求。写好编译时，会出现这样的报错</p>
+<pre><code class="language-shell">undefined reference to `pthread_create'
+</code></pre>
+<p>很明显是由于设置多进程导致的，添加相应库后无效。经搜索发现需要在编译时进行相应设置，问题如下：</p>
+<p><strong>问题：</strong> <code>pthread</code> 库不是 Linux 系统默认的库，连接时需要使用静态库 <code>libpthread.a</code>，所以在使用<code>pthread_create()</code>创建线程，以及调用 <code>pthread_atfork()</code>函数建立fork处理程序时，需要链接该库。</p>
+<p>**解决：**在编译中要加 <code>-lpthread</code>参数（最好加在最后面，我到貌似就是这样才行）</p>
+<pre><code class="language-shell">gcc thread.c -o thread -lpthread
+</code></pre>
+<p><code>thread.c</code>为你些的源文件，不要忘了加上头文件<code>#include&lt;pthread.h&gt;</code></p>
+<p>但由于<code>can-utils</code>是通过Makefile管理，因此需要找到相关的编译设置。摸索一小时终于找到~</p>
+<p>在工具链<code>\src\GNUmakefile</code>中，第96行添加<code>-lpthread</code>，效果如下</p>
+<pre><code class="language-shell">CFLAGS = -Wall -g -lpthread -O2
+</code></pre>
+<p>同时在第365行添加<code>-lpthread</code>，效果如下：</p>
+<pre><code class="language-shell">.c.o:
+	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -lpthread -c -o $@ $&lt;
+	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+</code></pre>
+<p>之后执行<code>make</code>,<code>make install</code>编译即可。</p>
+<hr>
+<h2 id="3-can开发工具使用">3. CAN开发工具使用</h2>
+<h3 id="31-组成">3.1. 组成</h3>
+<pre><code class="language-shell">.
+├── aclocal.m4
+├── AUTHORS
+├── autogen.sh
+├── ChangeLog
+├── config
+├── config.log
+├── config.status
+├── configure
+├── configure.ac
+├── COPYING
+├── GNUmakefile
+├── GNUmakefile.am
+├── GNUmakefile.in
+├── include
+│   ├── can_config.h
+│   ├── can_config.h.in
+│   ├── can_netlink.h
+│   ├── can_socket.h		//主要头文件
+│   ├── GNUmakefile
+│   ├── GNUmakefile.am
+│   ├── GNUmakefile.in
+│   ├── libsocketcan.h
+│   └── stamp-h1
+├── libtool
+├── man
+├── out					   //编译后生成的文件
+│   ├── bin
+│   │   ├── candump
+│   │   ├── canecho
+│   │   ├── cansend
+│   │   └── cansequence
+│   ├── lib
+│   ├── sbin
+│   └── share
+├── README.md
+├── server.c
+└── src
+    ├── canconfig
+    ├── canconfig.c
+    ├── canconfig.o
+    ├── candump
+    ├── candump.c			//工程源文件
+    ├── candump.o
+    ├── canecho
+    ├── canecho.c
+    ├── canecho.o
+    ├── cansend
+    ├── cansend.c
+    ├── cansend.o
+    ├── cansequence
+    ├── cansequence.c
+    ├── cansequence.o
+    ├── GNUmakefile
+    ├── GNUmakefile.am
+    └── GNUmakefile.in
+</code></pre>
+<p>整个项目现已上传<code>Github</code>，<a href="https://github.com/qiaoxu123/ARM-Linux-SocketCAN">地址</a></p>
+<h3 id="32-使用">3.2. 使用</h3>
+<p>2.1. 打开虚拟机，选择其中一个目录，如<code>/root</code>，进行项目<code>clone</code></p>
+<pre><code class="language-shell">cd /root
+git clone https://github.com/qiaoxu123/ARM-Linux-SocketCAN.git
+</code></pre>
+<p>2.2. 成功后进入项目，尝试编译，看是否能够运行</p>
+<pre><code class="language-shell">cd /ARM-Linux-SocketCAN
+
+make clean		//清除上一次编译文件
+make		    //编译
+make install	//生成可执行文件
+</code></pre>
+<p>此时在主目录<code>/out/bin</code>下回出现四个可执行文件</p>
+<pre><code>├── out					   //编译后生成的文件
+│   ├── bin
+│   │   ├── candump
+│   │   ├── canecho
+│   │   ├── cansend
+│   │   └── cansequence
+</code></pre>
+<p>2.3. 硬件使用</p>
+<p>将生成的文件通过SD卡形式拷贝到开发板中，也可使用<code>tftp</code>方式拷贝（但实际使用失败，无法建立连接）。</p>
+<p>将SD卡插入卡槽后，自动识别，此时与开发板建立<code>ssh</code>连接，进入命令行状态</p>
+<pre><code class="language-shell">login[2935]: root login on 'ttymxc0'
+root@freescale /$ 
+</code></pre>
+<p>拷贝SD卡文件到/usr目录下执行</p>
+<pre><code class="language-shell">root@freescale /$ cd /usr/  
+root@freescale /usr$ cp /media/mmcblk1p4/can/* ./
+</code></pre>
+<p>将SD中can文件夹下的四个文件复制过来，即可开始于执行。</p>
+<pre><code class="language-shell">root@freescale /usr$ ./candump can0
+</code></pre>
+<hr>
+<h2 id="4-arm-相关配置">4. ARM 相关配置</h2>
+<blockquote>
+<p>ARM开发板(代指飞凌嵌入式这类开发板)，默认其自带系统都已具备4G通信能力，包括内置4G接口和外置4G接口等。其联网实现可以参考官方的指导手册进行，在这仅简单记录下开发过程中的问题</p>
+</blockquote>
+<h3 id="41-4g模块">4.1.  4G模块</h3>
+<blockquote>
+<p>开发板型号：飞凌嵌入式OKMX6X-S3（<a href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.24252e8dR0TiLL&amp;id=540409490040&amp;_u=k25861s80f54">地址</a>）</p>
+<p>4G模块：华为me909s模块</p>
+</blockquote>
+<p>4G模块使用华为<code>me909s</code>模块，开发板上自带模块接口。启动代码如下：</p>
+<pre><code>#4G model
+sleep 5
+/root/me909s.sh
+</code></pre>
+<p>将该段代码添加到开机启动代码中即可实现开机自启动4G模块。</p>
+<h3 id="42-can模块">4.2. CAN模块</h3>
+<p>CAN模块使用<code>FlexCAN</code>，为开发板自带，可直接外接CAN总线使用，配置启动代码如下：</p>
+<pre><code>#CAN model
+ifconfig can0 down
+ip link set can0 up type can bitrate 500000
+ifconfig can0 up
+</code></pre>
+<p>同样，将该段代码添加到开启启动代码中即可实现开机自配置启动CAN模块</p>
+<h3 id="43-开机自启配置">4.3. 开机自启配置</h3>
+<p>开机启动项代码路径：<code>/etc/inittab</code></p>
+<pre><code># see busybox-1.00rc2/examples/inittab for more examples
+::sysinit:/etc/rc.d/rcS
+::respawn:/etc/rc.d/rc_mxc.S
+#::respawn:-/bin/sh
+::sysinit:/etc/rc.d/rc_gpu.S
+::ctrlaltdel:/sbin/reboot
+::shutdown:/etc/rc.d/rcS stop
+::restart:/sbin/init
+</code></pre>
+<p>其中取消第4行注释，注释掉第3行，则实现开机启动登录root账户，但无法使用<code>Ctrl+ c</code>。</p>
+<p>网上搜索ARM开发板开机自启，会有非常多的教程。现在分析自己的需求和问题有两个：</p>
+<ul>
+<li>开机启动后自动进行命令行</li>
+<li>自动启动4G模块</li>
+</ul>
+<p>实际应用参考这篇<a href="https://www.linuxidc.com/Linux/2011-05/36109.htm">博客</a>即可。而我在实际应用中遇到的问题是，可以启动4G模块的命令，但一直处于申请连接状态<code>“sending discover”</code>。</p>
+<p>启动命令如下：</p>
+<pre><code class="language-shell">//启动命令
+./root/me909s.sh &amp;
+</code></pre>
+<p><strong>进入正题，实际原因是需要等其它模块初始化结束再启动4G模块</strong></p>
+<p>因为4G模块拨号需要等USB驱动初始化结束才能执行，而加入初始化程序中的4G模块启动命令并没有等待。因此加入延时，再启动即可。（具体初始命令放置位置可以参考网上博客，不用一概而论，实际测试为准）</p>
+<p>如下：</p>
+<pre><code>cd /etc/rc.d/rc.local
+vi rc.local
+
+//加入启动代码
+sleep 5   
+./root/me909s.sh
+</code></pre>
+<p>延时5s启动即可正常启动</p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/che-lu-xie-tong-ling-yu-c-v2x-de-ying-yong">
+              <h3 class="post-title">
+                下一篇：车路协同领域C-V2X的应用
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">个人知识记录，学习～</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
