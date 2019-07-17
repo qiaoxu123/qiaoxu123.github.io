@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>ARM开发板开机自启 | Blog</title>
+<meta name="description" content="个人知识记录，学习～">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1563340661790">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1563340661790" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a class="menu purple-link" href="https://qiaoxu123.github.io" class="menu" target="_blank">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">ARM开发板开机自启</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-07-17</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/z5yAEU1A9">
+                    ARM
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://qiaoxu123.github.io/tag/5HMxWRPZ1">
+                    工程调试
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>最近调试工程，ARM开发板开机自启问题，困扰了一周左右，现在终于解决，整理记录！</p>
+<!-- more -->
+<h3 id="一-背景">一、背景</h3>
+<blockquote>
+<p>开发板型号：飞凌嵌入式OKMX6X-S3（<a href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.24252e8dR0TiLL&amp;id=540409490040&amp;_u=k25861s80f54">地址</a>）</p>
+<p>4G模块：华为me909s模块</p>
+</blockquote>
+<p>问题来源：因为开发板需要商业应用，所以需要配置自动联网。而在官网提供的文档中，对于华为me909s模块的启动，需要通过拨号命令来实现，所以开始进行问题尝试。</p>
+<hr>
+<h3 id="二-解决">二、解决</h3>
+<p>网上搜索ARM开发板开机自启，会有非常多的教程。现在分析自己的需求和问题有两个：</p>
+<ul>
+<li>开机启动后自动进行命令行</li>
+<li>自动启动4G模块</li>
+</ul>
+<p>实际应用参考这篇<a href="https://www.linuxidc.com/Linux/2011-05/36109.htm">博客</a>即可。而我在实际应用中遇到的问题是，可以启动4G模块的命令，但一直处于申请连接状态<code>“sending discover”</code>。</p>
+<p>启动命令如下：</p>
+<pre><code class="language-shell">//启动命令
+./root/me909s.sh &amp;
+</code></pre>
+<p>具体代码因此项目交付没有保存。</p>
+<h4 id="进入正题实际原因是需要等其它模块初始化结束再启动4g模块">进入正题，实际原因是需要等其它模块初始化结束再启动4G模块</h4>
+<p>因为4G模块拨号需要等USB驱动初始化结束才能执行，而加入初始化程序中的4G模块启动命令并没有等待。因此加入延时，再启动即可。（具体初始命令放置位置可以参考网上博客，不用一概而论，实际测试为准）</p>
+<p>如下：</p>
+<pre><code>cd /etc/rc.d/rc.local
+vi rc.local
+
+//加入启动代码
+sleep 5   
+./root/me909s.sh
+</code></pre>
+<p>延时5s启动，问题解决！</p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/ubuntu18-ROS-install">
+              <h3 class="post-title">
+                下一篇：Ubuntu 16/18下ROS和PCL点云库安装
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">个人知识记录，学习～</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>

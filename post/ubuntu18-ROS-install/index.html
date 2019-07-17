@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>Ubuntu 16/18下ROS和PCL点云库安装 | Blog</title>
+<meta name="description" content="个人知识记录，学习～">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1563340661790">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1563340661790" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a class="menu purple-link" href="https://qiaoxu123.github.io" class="menu" target="_blank">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">Ubuntu 16/18下ROS和PCL点云库安装</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-07-17</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/pejk6cAR4">
+                    Ubuntu使用
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://qiaoxu123.github.io/tag/5HMxWRPZ1">
+                    工程调试
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>最近几天因为项目需要，在Ubuntu下安装了ROS和PCL，中间遇到了各种问题，花了一天多时间终于搞定了，在这记录总结下。另外，最后做了一份<a href="https://ytueducn-my.sharepoint.com/:u:/g/personal/201457506105_ytu_edu_cn/Ec6tEBKagYlGnJPRpCjaHy0BysP5GqzUUUUUIoy-oExdQw?e=fnDguP">镜像</a>作为备份，用户：Ubuntu，密码：123  ，希望能帮到大家</p>
+ <!-- more -->
+<h3 id="分割线-2019年7月1日更新">分割线 - - 2019年7月1日更新</h3>
+<p>最近重新安装了一次，系统版本改为Ubuntu18.04， 照例安装<code>ros</code>以及<code>pcl</code>。发现只需要完整安装<code>ROS</code>，<code>pcl1.8</code>就会自带，不需要安装。(如有问题请指出，没有从网上找到根据，仅个人经验）</p>
+<p><code>ROS</code>最新安装方法是根据<a href="http://wiki.ros.org/melodic/Installation/Ubuntu">官网WIKI</a>进行的，过程中可能需要改源，否则龟速下载。</p>
+<p>安装完成后<code>pcl</code>就可以用了，<code>pcl1.8</code>版本，希望对大家有帮助！</p>
+<hr>
+<h2 id="分割线-2019年5月28更新">分割线 - - 2019年5月28更新</h2>
+<p>因为在之前安装ROS过程中崩溃过，所以最后一次安装时先安装的ROS。结果再安装PCL时候发现PCL所需要的库已经安装完成了。具体过程没有细究，不过应该是ROS完全版中可能包含了PCL所需要的库，大家可以尝试下看看。</p>
+<h3 id="1-安装ros">1. 安装ROS</h3>
+<p>我在这安装的是最新版的ROS，安装过程都是大同小异。在这偷懒，大家按照这个教程安装即可：<br>
+<a href="https://blog.csdn.net/tq08g2z/article/details/79209435">链接</a></p>
+<p>安装完成后，<code>roscore</code>启动测试，成功后就安装完成了。</p>
+<hr>
+<h3 id="2-安装pcl">2. 安装PCL</h3>
+<p>安装过程中坑还是比较多的，有的是按照官网教程，有的是源码安装，不过最后还是找到了一个最简单的安装方法，<a href="https://blog.csdn.net/zy115758521/article/details/79078839">参考链接</a></p>
+<p>备注：文章中指的软件源是Ubuntu原本的软件源，所以当时自己更换了阿里云源后一直找不到，苦恼了好久。。</p>
+<p><strong>测试</strong><br>
+安装完成后，按照该<a href="https://blog.csdn.net/acyddlm/article/details/82974012">教程</a>中最后一部分提供的测试代码进行测试。其中在<code>cmake .</code>以及<code>make</code>部分都有可能出问题，在这可以参考该<a href="https://blog.csdn.net/e_small/article/details/79581484">链接</a>。</p>
+<hr>
+<h3 id="3-总结">3. 总结</h3>
+<p>安装过程还是很复杂的，希望大家一切顺利，如果懒得自己调试，那么可以尝试下文章一开始提供的Ubuntu镜像，生成成功后暂时没有测试。可以直接按照Ubuntu安装步骤进行安装，有问题请及时评论修改，希望能对大家有所帮助！</p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/scan-line-run">
+              <h3 class="post-title">
+                下一篇：Scan Line Run 聚簇算法原理与实现
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">个人知识记录，学习～</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qiaoxu123.github.io</id>
     <title>Blog</title>
-    <updated>2019-07-12T07:13:15.559Z</updated>
+    <updated>2019-07-17T05:19:52.037Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qiaoxu123.github.io"/>
     <link rel="self" href="https://qiaoxu123.github.io/atom.xml"/>
@@ -10,6 +10,47 @@
     <logo>https://qiaoxu123.github.io/images/avatar.png</logo>
     <icon>https://qiaoxu123.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[ARM开发板开机自启]]></title>
+        <id>https://qiaoxu123.github.io/post/arm-boot</id>
+        <link href="https://qiaoxu123.github.io/post/arm-boot">
+        </link>
+        <updated>2019-07-17T05:16:36.000Z</updated>
+        <summary type="html"><![CDATA[<p>最近调试工程，ARM开发板开机自启问题，困扰了一周左右，现在终于解决，整理记录！</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>最近调试工程，ARM开发板开机自启问题，困扰了一周左右，现在终于解决，整理记录！</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Ubuntu 16/18下ROS和PCL点云库安装]]></title>
+        <id>https://qiaoxu123.github.io/post/ubuntu18-ROS-install</id>
+        <link href="https://qiaoxu123.github.io/post/ubuntu18-ROS-install">
+        </link>
+        <updated>2019-07-17T05:13:38.000Z</updated>
+        <summary type="html"><![CDATA[<p>最近几天因为项目需要，在Ubuntu下安装了ROS和PCL，中间遇到了各种问题，花了一天多时间终于搞定了，在这记录总结下。另外，最后做了一份<a href="https://ytueducn-my.sharepoint.com/:u:/g/personal/201457506105_ytu_edu_cn/Ec6tEBKagYlGnJPRpCjaHy0BysP5GqzUUUUUIoy-oExdQw?e=fnDguP">镜像</a>作为备份，用户：Ubuntu，密码：123  ，希望能帮到大家</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>最近几天因为项目需要，在Ubuntu下安装了ROS和PCL，中间遇到了各种问题，花了一天多时间终于搞定了，在这记录总结下。另外，最后做了一份<a href="https://ytueducn-my.sharepoint.com/:u:/g/personal/201457506105_ytu_edu_cn/Ec6tEBKagYlGnJPRpCjaHy0BysP5GqzUUUUUIoy-oExdQw?e=fnDguP">镜像</a>作为备份，用户：Ubuntu，密码：123  ，希望能帮到大家</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Scan Line Run 聚簇算法原理与实现]]></title>
+        <id>https://qiaoxu123.github.io/post/scan-line-run</id>
+        <link href="https://qiaoxu123.github.io/post/scan-line-run">
+        </link>
+        <updated>2019-07-17T05:11:16.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>参考论文：<br>
+<a href="https://ieeexplore.ieee.org/abstract/document/7989591">Fast segmentation of 3D point clouds: A paradigm on LiDAR data for autonomous vehicle applications</a><br>
+<a href="https://github.com/VincentCheungM/Run_based_segmentation/blob/master/nodes/clustering/scanlinerun.cpp">代码地址</a></p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>参考论文：<br>
+<a href="https://ieeexplore.ieee.org/abstract/document/7989591">Fast segmentation of 3D point clouds: A paradigm on LiDAR data for autonomous vehicle applications</a><br>
+<a href="https://github.com/VincentCheungM/Run_based_segmentation/blob/master/nodes/clustering/scanlinerun.cpp">代码地址</a></p>
+</blockquote>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[车载T-BOX开发记录 1-- 软硬件配置]]></title>
         <id>https://qiaoxu123.github.io/post/arm-TBOX</id>
@@ -38,10 +79,10 @@
         <link href="https://qiaoxu123.github.io/post/gp-insac">
         </link>
         <updated>2019-07-12T06:58:08.000Z</updated>
-        <summary type="html"><![CDATA[<p>论文：<em>On the Segmentation of 3D LIDAR Point Clouds</em>
+        <summary type="html"><![CDATA[<p>论文：<em>On the Segmentation of 3D LIDAR Point Clouds</em><br>
 对其中的概念，算法进行介绍</p>
 ]]></summary>
-        <content type="html"><![CDATA[<p>论文：<em>On the Segmentation of 3D LIDAR Point Clouds</em>
+        <content type="html"><![CDATA[<p>论文：<em>On the Segmentation of 3D LIDAR Point Clouds</em><br>
 对其中的概念，算法进行介绍</p>
 ]]></content>
     </entry>
