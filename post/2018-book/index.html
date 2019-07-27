@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>ARM开发板开机自启 | Blog</title>
+<title>我的2018书单 | Blog</title>
 <meta name="description" content="个人知识记录，学习～">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -83,22 +83,22 @@
       <div class="content-container">
         <div class="post-detail">
           
-          <h2 class="post-title">ARM开发板开机自启</h2>
+          <h2 class="post-title">我的2018书单</h2>
           <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2019-07-17</span>
+            <span><i class="icon-calendar-outline"></i> 2019-07-27</span>
             
               <span>
                 <i class="icon-pricetags-outline"></i>
                 
-                  <a href="https://qiaoxu123.github.io/tag/z5yAEU1A9">
-                    ARM
+                  <a href="https://qiaoxu123.github.io/tag/O6S3O2y2P">
+                    生活感悟
                     
                       ，
                     
                   </a>
                 
-                  <a href="https://qiaoxu123.github.io/tag/5HMxWRPZ1">
-                    工程调试
+                  <a href="https://qiaoxu123.github.io/tag/esAW0fpiEj">
+                    阅读
                     
                   </a>
                 
@@ -106,47 +106,103 @@
             
           </div>
           <div class="post-content">
-            <p>最近调试工程，ARM开发板开机自启问题，困扰了一周左右，现在终于解决，整理记录！</p>
-<!-- more -->
-<h3 id="一-背景">一、背景</h3>
-<blockquote>
-<p>开发板型号：飞凌嵌入式OKMX6X-S3（<a href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.24252e8dR0TiLL&amp;id=540409490040&amp;_u=k25861s80f54">地址</a>）</p>
-<p>4G模块：华为me909s模块</p>
+            <blockquote>
+<p>2019马上就要到了，回顾2018年，好多好多事情都历历在目。生活很单调，世界很美好，我，还在路上</p>
 </blockquote>
-<p>问题来源：因为开发板需要商业应用，所以需要配置自动联网。而在官网提供的文档中，对于华为me909s模块的启动，需要通过拨号命令来实现，所以开始进行问题尝试。</p>
 <hr>
-<h3 id="二-解决">二、解决</h3>
-<p>网上搜索ARM开发板开机自启，会有非常多的教程。现在分析自己的需求和问题有两个：</p>
+<blockquote>
+<p>1 ~ 3月：还在北京实习的日子，还在准备毕设的日子，当时，还很迷茫~</p>
+</blockquote>
 <ul>
-<li>开机启动后自动进行命令行</li>
-<li>自动启动4G模块</li>
+<li>《平凡的世界》</li>
+<li>《未来简史》</li>
+<li>《人类简史》<br>
+···</li>
 </ul>
-<p>实际应用参考这篇<a href="https://www.linuxidc.com/Linux/2011-05/36109.htm">博客</a>即可。而我在实际应用中遇到的问题是，可以启动4G模块的命令，但一直处于申请连接状态<code>“sending discover”</code>。</p>
-<p>启动命令如下：</p>
-<pre><code class="language-shell">//启动命令
-./root/me909s.sh &amp;
-</code></pre>
-<p>具体代码因此项目交付没有保存。</p>
-<h4 id="进入正题实际原因是需要等其它模块初始化结束再启动4g模块">进入正题，实际原因是需要等其它模块初始化结束再启动4G模块</h4>
-<p>因为4G模块拨号需要等USB驱动初始化结束才能执行，而加入初始化程序中的4G模块启动命令并没有等待。因此加入延时，再启动即可。（具体初始命令放置位置可以参考网上博客，不用一概而论，实际测试为准）</p>
-<p>如下：</p>
-<pre><code>cd /etc/rc.d/rc.local
-vi rc.local
-
-//加入启动代码
-sleep 5   
-./root/me909s.sh
-</code></pre>
-<p>延时5s启动，问题解决！</p>
+<blockquote>
+<p>4月：知道考上后，觉得自己的人生光明起来。大学也接近了尾声~</p>
+</blockquote>
+<ul>
+<li>《刺杀骑士团长》</li>
+<li>《你一定爱读的极简欧洲史》</li>
+</ul>
+<blockquote>
+<p>5月：回到学校，和四年的老友们最后相聚~</p>
+</blockquote>
+<ul>
+<li>《小王子》</li>
+<li>《当我谈跑步的时候，我在谈些什么》</li>
+</ul>
+<blockquote>
+<p>6月：告别四年的老友们，度过了四年时光，终于回到“真新镇”，我的家</p>
+</blockquote>
+<ul>
+<li>《学会提问》</li>
+<li>《贝多芬传》</li>
+<li>《把时间当作朋友》</li>
+<li>《世界尽头与冷酷仙境》</li>
+<li>《放学后》</li>
+<li>《皮囊》</li>
+<li>《尼罗河上的惨案》</li>
+</ul>
+<blockquote>
+<p>7月：在家百无聊赖，每天陪伴着爸妈，炒菜，读书，做项目，看论文，平凡的世界~ - - -</p>
+</blockquote>
+<ul>
+<li>《舞！舞！舞！》 -</li>
+<li>《被嫌弃的松子的一生》 -</li>
+<li>《动物庄园》 -</li>
+<li>《了不起的盖茨比》 -</li>
+<li>《1973年的弹子球》</li>
+</ul>
+<blockquote>
+<p>8月：又到了分别的时候，迈向生命中又一重要的一站，等待我的，又会是什么~</p>
+</blockquote>
+<ul>
+<li>《寻羊冒险记》</li>
+<li>《且听风吟》</li>
+<li>《我的职业是小说家》</li>
+</ul>
+<blockquote>
+<p>9月：重新安顿好自己，命运很眷顾我，让我遇到他们，真的好幸福~</p>
+</blockquote>
+<ul>
+<li>《高效能人士的七个习惯》</li>
+<li>《挪威的森林》</li>
+<li>《假面山庄》</li>
+<li>《假面饭店》</li>
+</ul>
+<blockquote>
+<p>10月：生活重新归于平淡，每天重复上课，看论文，做项目，紧张有序~</p>
+</blockquote>
+<ul>
+<li>《追风筝的人》</li>
+<li>《海边的卡夫卡》</li>
+<li>《简·爱》</li>
+</ul>
+<blockquote>
+<p>11月：迷茫又一次开始了，总是摸不清自己的想要，想要脚踏实地，但远方，在哪里~</p>
+</blockquote>
+<ul>
+<li>《情书》</li>
+<li>《金字塔原理》</li>
+</ul>
+<blockquote>
+<p>12月：又要结束一年了，感谢命运，让我遇见了她，生活很枯燥，梦想在远方。有什么大不了，重新启程~</p>
+</blockquote>
+<ul>
+<li>《金庸传》</li>
+<li>《假如真有时光机》</li>
+</ul>
 
           </div>
         </div>
 
         
           <div class="next-post">
-            <a class="purple-link" href="https://qiaoxu123.github.io/post/ubuntu18-ROS-install">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/arm-boot">
               <h3 class="post-title">
-                下一篇：Ubuntu 16/18下ROS和PCL点云库安装
+                下一篇：ARM开发板开机自启
               </h3>
             </a>
           </div>
