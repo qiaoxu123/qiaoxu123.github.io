@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>第2课-C到C++的升级 | Blog</title>
+<meta name="description" content="个人知识记录，学习～">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1564393247338">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144014551-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-144014551-1');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1564393247338" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a class="menu purple-link" href="https://qiaoxu123.github.io" class="menu" target="_blank">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">第2课-C到C++的升级</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-07-29</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/6gpyLRVQ_">
+                    C++编程
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>对C语言和C++语言中的语法特性进行对照分析</p>
+<!-- more -->
+<h3 id="一-升级一">一、升级一</h3>
+<ul>
+<li>C++更强调语言的<strong>实用性</strong></li>
+<li>所有的<strong>变量</strong>都可以在<strong>需要使用时再定义</strong></li>
+</ul>
+<pre><code class="language-c++">
+int c = 0;
+for(int i = 0;i &lt;= 3;++i){
+  for(int j = 1;j &lt;= 3;++j){
+    c += i * j;
+  }
+}
+</code></pre>
+<p><strong>对比：C语言中的变量都必须在作用域开始的位置定义</strong></p>
+<hr>
+<h3 id="二-升级二">二、升级二</h3>
+<p><code>register</code>关键字<strong>请求</strong>编译器<strong>将局部变量存储于寄存器中</strong><br>
+（备注：对于C语言中存储空间和变量类型不熟悉，可以看一下这篇博客<br>
+<a href="https://blog.csdn.net/diaorenxiang/article/details/39736087">C变量与函数类型</a>）</p>
+<ul>
+<li>
+<p>在C++中依然支持<code>register</code>关键字</p>
+</li>
+<li>
+<p><strong>C++编译器有自己的优化方式</strong></p>
+<ul>
+<li><strong>C语言中无法获取<code>register</code>变量的地址</strong></li>
+<li>C++中可以取得<code>register</code>变量的地址</li>
+</ul>
+</li>
+<li>
+<p><strong>C++中的register关键字</strong></p>
+</li>
+</ul>
+<p><strong>C++编译器发现程序中需要取<code>register</code>变量的地址时，<code>register</code>对变量的声明变得无效</strong></p>
+<p><strong>早期C语言编译器不会对代码进行优化，因此<code>register</code>变量是一个很好的补充</strong></p>
+<hr>
+<h3 id="三-升级三">三、升级三</h3>
+<ul>
+<li>在C语言中，重复<strong>定义多个同名的全局变量是合法的</strong>
+<ul>
+<li><strong>C语言中多个同名的全局变量最终会被链接到全局数据区的同一个地址空间上</strong></li>
+</ul>
+</li>
+<li>在C++中，<strong>不允许定义多个同名的全局变量</strong>
+<ul>
+<li>C++直接拒绝这种二义性做法</li>
+</ul>
+</li>
+</ul>
+<p><strong>实例分析：C到C++的升级一</strong></p>
+<pre><code class="language-c++">
+#include&lt;stdio.h&gt;
+
+int g_v;
+//int g_v;
+
+int main(int argc,char *argv[]){
+	printf(&quot;Begin...\n&quot;);
+	int c = 0;
+	for(int i = 0;i &lt;= 3;++i){
+		for(int j = 1;j &lt;= 3;++j){
+			c += i * j; 
+		}
+	}
+	printf(&quot;c = %d\n&quot;,c);
+	register int a = 0;
+	printf(&quot;&amp;a = %p\n&quot;,&amp;a);
+	printf(&quot;End...\n&quot;);
+	return 0;
+}
+</code></pre>
+<p>打印结果：</p>
+<pre><code>
+Begin...
+c = 36
+&amp;a = 000000000062FE40
+End...
+</code></pre>
+<p>此程序在C语言编译器中便无法通过，原因就在于以上的“<strong>升级</strong>”。</p>
+<hr>
+<h3 id="四-升级四">四、升级四</h3>
+<ul>
+<li><code>struct</code>关键字的加强
+<ul>
+<li>C语言中的<code>struct</code>定义了一组变量的集合</li>
+<li>C语言中的<code>struct</code>定义的标识符并不是一种新的类型</li>
+<li>C++中的<code>struct</code>用于定义一个全新的类型</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-c++">//C语言中结构体的定义
+typedef struct _tag_student Student; //此时可以作为一种新的类型，但本质仍然是一组变量
+struct _tag_student{
+  const char* name;
+  int age;
+};
+
+//C++中结构体定义
+struct Student{
+  const char* name;
+  int age;
+};
+</code></pre>
+<hr>
+<h3 id="五-面试中的小问题-升级五">五、面试中的小问题-升级五</h3>
+<p><code>int f()</code>与<code>int f(void)</code> 有区别吗？如果有区别是什么？</p>
+<ul>
+<li>C++中所有的<strong>标识符都必须显示地声明类型</strong></li>
+<li>C语言中的<strong>默认类型在C++中是不合法的</strong></li>
+</ul>
+<pre><code class="language-c">
+f(i){
+  printf(&quot;i = %d\n&quot;,i);
+}
+g(){
+  return 5;
+}
+</code></pre>
+<p>问题：</p>
+<ol>
+<li><strong>函数f的返回值和参数分别是什么类型？</strong></li>
+<li><strong>函数g可以接受多少个参数？</strong></li>
+</ol>
+<p>答：</p>
+<ul>
+<li>在C语言中
+<ul>
+<li><code>int f()</code>表示返回值为<code>int</code>，<strong>接受任意参数的函数</strong></li>
+<li><code>f(void)</code>表示返回值为<code>int</code>的<strong>无参函数</strong> （不接受任何参数）</li>
+</ul>
+</li>
+<li>在C++中
+<ul>
+<li><code>int f()</code> 和 <code>int f（void）</code>具有<strong>相同的意义</strong>
+<ul>
+<li>表示返回值为<code>int</code>的无参函数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>实例分析：C到C++的升级二</strong></p>
+<pre><code class="language-c++">
+#include&lt;stdio.h&gt;
+
+//typedef struct Student Student;
+struct Student{
+	const char* name;
+	int age;
+};
+
+//f(i){
+//	printf(&quot;i = %d\n&quot;,i);
+//}
+//g(){
+//	return 5;
+//}
+
+int main(int argc,char *argv[]){
+	Student s1 = {&quot;1&quot;,2};
+	Student s2 = {&quot;3&quot;,4};
+	//f(10);
+	//printf(&quot;g() = %d\n&quot;,g(1,2,3,4,5));
+	return 0;
+}
+</code></pre>
+<p>务必注意注释位置，注释位置只能在C语言编译器下通过。原因见上解释<br>
+（附注：C++是一种强类型的语言，“++”可以理解为<strong>类型的加强</strong>和<strong>面向对象特性的增加</strong>）</p>
+<hr>
+<h3 id="六-总结">六、总结</h3>
+<ul>
+<li>C++更<strong>强调实用性</strong>，可以在<strong>任意的地方声明变量</strong></li>
+<li>C++中的<code>register</code>只是一个<strong>兼容的作用</strong></li>
+<li>C++编译器能够<strong>更好地进行优化</strong></li>
+<li>C++中的<strong>任意标识符都必须显示地指明类型</strong></li>
+</ul>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/2018-book">
+              <h3 class="post-title">
+                下一篇：我的2018书单
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">个人知识记录，学习～</div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/qiaoxu123" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
