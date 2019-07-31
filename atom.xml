@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qiaoxu123.github.io</id>
     <title>Blog</title>
-    <updated>2019-07-30T06:15:38.577Z</updated>
+    <updated>2019-07-31T05:38:41.838Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qiaoxu123.github.io"/>
     <link rel="self" href="https://qiaoxu123.github.io/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://qiaoxu123.github.io/images/avatar.png</logo>
     <icon>https://qiaoxu123.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[狄泰C++第3课-进化后的const分析]]></title>
+        <id>https://qiaoxu123.github.io/post/3-C++Courses</id>
+        <link href="https://qiaoxu123.github.io/post/3-C++Courses">
+        </link>
+        <updated>2019-07-31T05:20:13.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[基于增量高斯分布的Lidar点云分割算法]]></title>
         <id>https://qiaoxu123.github.io/post/GP-INSAC-Algorithms</id>
@@ -29,7 +36,7 @@
         <updated>2019-07-30T06:06:51.000Z</updated>
     </entry>
     <entry>
-        <title type="html"><![CDATA[第2课-C到C++的升级]]></title>
+        <title type="html"><![CDATA[狄泰C++第2课-C到C++的升级]]></title>
         <id>https://qiaoxu123.github.io/post/2-C++Courses</id>
         <link href="https://qiaoxu123.github.io/post/2-C++Courses">
         </link>
@@ -45,6 +52,10 @@
         <link href="https://qiaoxu123.github.io/post/2018-book">
         </link>
         <updated>2019-07-27T09:22:56.000Z</updated>
+        <summary type="html"><![CDATA[<p>2019马上就要到了，回顾2018年，好多好多事情都历历在目。生活很单调，世界很美好，我，还在路上</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>2019马上就要到了，回顾2018年，好多好多事情都历历在目。生活很单调，世界很美好，我，还在路上</p>
+]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[ARM开发板开机自启]]></title>
@@ -111,17 +122,6 @@
         <summary type="html"><![CDATA[<p>汇总下之前工程项目，记下笔记</p>
 ]]></summary>
         <content type="html"><![CDATA[<p>汇总下之前工程项目，记下笔记</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[车路协同领域C-V2X的应用]]></title>
-        <id>https://qiaoxu123.github.io/post/C-V2X-share</id>
-        <link href="https://qiaoxu123.github.io/post/C-V2X-share">
-        </link>
-        <updated>2019-07-12T07:05:47.000Z</updated>
-        <summary type="html"><![CDATA[<p>最近听到的公开课，感觉受益匪浅，在这分享下公开课的PPT，个人记录同时分享下。标明转载，如有问题联系删除</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>最近听到的公开课，感觉受益匪浅，在这分享下公开课的PPT，个人记录同时分享下。标明转载，如有问题联系删除</p>
 ]]></content>
     </entry>
 </feed>

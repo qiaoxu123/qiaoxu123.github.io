@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>狄泰C++第3课-进化后的const分析 | Blog</title>
+<meta name="description" content="个人知识记录，学习～">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1564550712248">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144014551-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-144014551-1');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1564550712248" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a class="menu purple-link" href="https://qiaoxu123.github.io" class="menu" target="_blank">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">狄泰C++第3课-进化后的const分析</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-07-31</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/6gpyLRVQ_">
+                    C++编程
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <h3 id="一-c语言中的const">一、C语言中的const</h3>
+<ul>
+<li><code>const</code>修饰的变量是<strong>只读的</strong>，本质还是<strong>变量</strong></li>
+<li><code>const</code>修饰的<strong>局部变量在栈上分配空间</strong></li>
+<li><code>const</code>修饰的<strong>全局变量在只读存储区分配空间</strong></li>
+<li><code>const</code>只在<strong>编译器有用</strong>，在<strong>运行期无用</strong></li>
+</ul>
+<p><strong><code>const</code>修饰的变量不是真的常量，它只是告诉编译器该变量不能出现在赋值符号的左边</strong></p>
+<ul>
+<li>C语言中的<code>const</code>使得变量具有<strong>只读属性</strong></li>
+<li><code>const</code>将具有全局生命周期的变量存储于只读存储区</li>
+</ul>
+<p><strong><code>const</code>不能定义真正意义上的常量</strong>！</p>
+<p><strong>注：C语言中真正意义上的常量只有枚举！</strong></p>
+<p><strong>编程实验：C/C++中的const</strong></p>
+<pre><code class="language-c++">
+#include&lt;stdio.h&gt;
+
+int main(){
+	const int c = 0;
+	int* p = (int*)&amp;c;
+	
+	printf(&quot;Begin...\n&quot;);
+	*p = 5;
+	printf(&quot;c = %d\n&quot;,c);
+	printf(&quot;End...\n&quot;);
+	return 0;
+} 
+</code></pre>
+<p>打印结果：</p>
+<pre><code>
+Begin...
+c = 0
+End...
+</code></pre>
+<p><strong>注：如果使用C语言编译器进行编译，则c会变成5，它的值通过指针改变了</strong></p>
+<hr>
+<h3 id="二-c中的const">二、C++中的const</h3>
+<p>C++在C的基础上对<code>const</code>进行了<strong>进化处理</strong></p>
+<ul>
+<li>当碰见const声明时<strong>在符号表中放入常量</strong></li>
+<li>编译过程中若发现使用常量则<strong>直接以符号表中的值替换</strong></li>
+<li>编译过程中若发现下述情况则给对应的常量分配存储空间
+<ul>
+<li>对<code>const</code>常量使用了<code>extern</code></li>
+<li>对<code>const</code>常量使用了<code>&amp;</code>操作符</li>
+</ul>
+</li>
+</ul>
+<p><strong>注意：C++编译器虽然可能为const常量分配空间，但不会使用其存储空间中的值</strong></p>
+<p><img src="https://img-blog.csdn.net/20180405111428573?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<ul>
+<li>
+<p>C语言中的<code>const</code>变量</p>
+<ul>
+<li>C语言中的<code>const</code>变量是<strong>只读变量</strong>，会<strong>分配存储空间</strong></li>
+</ul>
+</li>
+<li>
+<p>C++中的<code>const</code>常量</p>
+<ul>
+<li><strong>可能分配存储空间</strong>
+<ul>
+<li>当<code>const</code>常量为全局，并且<strong>需要在其它文件中使用</strong></li>
+<li>当使用<code>&amp;</code>操作符对<code>const</code>常量取地址</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>C++中的<code>const</code>常量类似于宏定义</p>
+<pre><code class="language-c++">  
+const int c = 5; // define c 5
+</code></pre>
+</li>
+<li>
+<p>C++中的<code>const</code>常量与宏定义不同</p>
+<ul>
+<li><code>const</code>常量是由<strong>编译器处理</strong></li>
+<li>编译器对<code>const</code>常量进行<strong>类型检查</strong>和<strong>作用域检查</strong></li>
+<li>宏定义由<strong>预处理器</strong>处理，<strong>单纯地文本替换</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>编程实验：const 与宏</strong></p>
+<pre><code class="language-c++">
+#include&lt;iostream&gt;
+using namespace std;
+
+void f(){
+	#define a 3		//此处为预处理，在编译之前已经将所有a都进行了替换
+	const int b = 4;
+}
+
+void g(){
+	printf(&quot;a = %d\n&quot;,a); //此处a已经进行了替换
+	//printf(&quot;b = %d\n&quot;,b);
+}
+
+int main(){
+	const int A = 1;
+	const int B = 1;
+	int array[A + B] = {0};//此处若用C语言编译器，则报错。因为数组大小定义使用变量
+	int i = 0;
+	for(i = 0;i &lt; (A + B);++i)
+		printf(&quot;array[%d] = %d\n&quot;,i,array[i]);
+	f();
+	g();
+	return 0;
+}
+</code></pre>
+<p>打印结果：</p>
+<pre><code>
+array[0] = 0
+array[1] = 0
+a = 3
+</code></pre>
+<hr>
+<h3 id="三-总结">三、总结</h3>
+<ul>
+<li>与C语言不同，C++中的<code>const</code><strong>不是只读变量</strong></li>
+<li>C++中的<code>const</code>是一个<strong>真正意义上的常量</strong></li>
+<li>C++编译器<strong>可能</strong>会为<code>const</code>常量分配空间（但不会使用，只是为了兼容C）</li>
+<li>C++<strong>完全兼容C语言中的<code>const</code>常量的语法特性</strong></li>
+</ul>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/GP-INSAC-Algorithms">
+              <h3 class="post-title">
+                下一篇：基于增量高斯分布的Lidar点云分割算法
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">个人知识记录，学习～</div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/qiaoxu123" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
