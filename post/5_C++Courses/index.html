@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>狄泰C++第5课-引用的本质分析 | Blog</title>
+<meta name="description" content="个人知识记录，学习～">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1565098219403">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144014551-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-144014551-1');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1565098219403" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a class="menu purple-link" href="https://qiaoxu123.github.io" class="menu" target="_blank">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">狄泰C++第5课-引用的本质分析</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-08-02</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/6gpyLRVQ_">
+                    C++编程
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <!-- more -->
+<h3 id="一-引用的意义">一、引用的意义</h3>
+<ul>
+<li>引用作为<strong>变量别名</strong>而存在，因此在一些场合<strong>可以代替指针</strong></li>
+<li>引用<strong>相对于指针</strong>来说具有更好的<strong>可读性</strong>和<strong>实用性</strong></li>
+</ul>
+<p><code>swap</code>函数的实现对比</p>
+<pre><code class="language-c++">
+//引用
+void swap(int&amp; a,int&amp; b){
+  int t = a;
+  a = b;
+  b = t;
+}
+
+//指针
+void swap(int* a,int* b){
+  int t = *a;
+  *a = *b;
+  *b = t;
+}
+</code></pre>
+<p><strong>注意：函数中的引用形参不需要进行初始化！在函数调用的时候已经进行了初始化</strong></p>
+<h3 id="二-特殊的引用">二、特殊的引用</h3>
+<ul>
+<li><code>const</code>引用
+<ul>
+<li>在C++中可以声明<code>const</code>引用</li>
+<li><code>const Type&amp;name =var</code>;</li>
+<li><code>const</code> 引用让变量拥有<strong>只读属性</strong>，但通过指针仍然可以修改</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-c++">
+int a = 4;
+const int&amp; b = a;
+int* p = (int*)&amp;b;
+
+b = 5;	//Error，只读变量
+*p = 5; //OK，修改变量a的值
+</code></pre>
+<ul>
+<li>当使用<strong>常量</strong>对<code>const</code>引用<strong>进行初始化</strong>时，C++编译器会为常量值分配空间，并将引用名作为这段空间的别名</li>
+</ul>
+<pre><code class="language-c++">
+const int&amp; b = 1; //OK
+int* p = (int*)&amp;b;
+b = 5;  //Error，只读变量
+*p = 5; //OK，修改变量a的值
+</code></pre>
+<p><strong>结论：使用常量对<code>const</code>引用初始化后将生成一个只读变量</strong></p>
+<p><strong>实例分析：引用的特殊意义</strong></p>
+<pre><code class="language-c++">
+#include&lt;stdio.h&gt;
+
+void Example(){
+	printf(&quot;Example:\n&quot;);
+	
+	int a = 4;
+	const int&amp; b = a;
+	int* p = (int*)&amp;b;
+	
+	//b = 5;
+	*p = 5;
+	printf(&quot;a = %d\n&quot;,a);
+	printf(&quot;b = %d\n&quot;,b);
+}
+
+void Demo(){
+	printf(&quot;Demo:\n&quot;);
+	const int&amp; c = 1;
+	int* p = (int*)&amp;c;
+	
+	//c = 5;
+	*p = 5;
+	printf(&quot;c = %d\n&quot;,c);
+}
+
+int main(int argc,char *argv[]){
+	Example();
+	printf(&quot;\n&quot;);
+	Demo();
+	return 0;
+} 
+</code></pre>
+<p>打印结果：</p>
+<pre><code>
+Example:
+a = 5
+b = 5
+
+Demo:
+c = 5
+</code></pre>
+<p><strong>编程实验：引用的思考</strong></p>
+<pre><code class="language-c++">
+#include&lt;stdio.h&gt;
+
+struct TRef{
+	char&amp; r;
+};
+
+int main(int argc,char *argv[]){
+	char c = 'c';
+	char&amp; rc = c;
+	TRef ref = { c };
+	
+	printf(&quot;sizeof(char&amp;) = %d\n&quot;,sizeof(char&amp;));
+	printf(&quot;sizeof(rc) = %d\n&quot;,sizeof(rc));
+	
+	printf(&quot;sizeof(TRef) = %d\n&quot;,sizeof(TRef));
+	printf(&quot;sizeof(ref.r) = %d\n&quot;,sizeof(ref.r));
+	
+	return 0;
+}
+</code></pre>
+<p>打印结果：</p>
+<pre><code>
+sizeof(char&amp;) = 1
+sizeof(rc) = 1
+sizeof(TRef) = 8  //引用所占空间
+sizeof(ref.r) = 1
+</code></pre>
+<h3 id="三-引用的本质">三、引用的本质</h3>
+<ul>
+<li>引用在C++中的内部实现是一个常量指针</li>
+</ul>
+<p><img src="https://img-blog.csdn.net/20180405220400281?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>
+<strong>注意：</strong></p>
+<ol>
+<li>C++编译器在编译过程中<strong>使用常量指针</strong>作为引用的<strong>内部实现</strong>，因此<strong>引用所占用的空间大小与指针相同</strong>。</li>
+<li>从使用的角度，<strong>引用只是一个别名</strong>，<strong>C++为了实用性而隐藏了引用的存储空间这一细节</strong></li>
+</ol>
+<p><strong>编程实验：引用的存储空间</strong></p>
+<pre><code class="language-c++">
+#include&lt;stdio.h&gt;
+
+struct TRef{
+	char* before;
+	char&amp; ref;
+	char* after;
+};
+
+int main(int argc,char *argv[]){
+	char a = 'a';
+	char&amp; b = a;
+	char c = 'c';
+	
+	TRef r = {&amp;a,b,&amp;c};
+	
+	printf(&quot;sizeof(r) = %d\n&quot;,sizeof(r));
+	printf(&quot;sizeof(r.before) = %d\n&quot;,sizeof(r.before));
+	printf(&quot;sizeof(r.after) = %d\n&quot;,sizeof(r.after));
+	printf(&quot;&amp;r.before = %p\n&quot;,&amp;r.before);
+	printf(&quot;&amp;r.after = %p\n&quot;,&amp;r.after);
+	return 0;
+}
+</code></pre>
+<p>打印结果：</p>
+<pre><code>
+sizeof(r) = 24
+sizeof(r.before) = 8
+sizeof(r.after) = 8
+&amp;r.before = 000000000062FE20
+&amp;r.after = 000000000062FE30
+</code></pre>
+<h3 id="四-引用的意义">四、引用的意义</h3>
+<p>C++中的<strong>引用</strong>旨在大多数的情况下<strong>代替指针</strong></p>
+<ul>
+<li>功能性：可以<strong>满足</strong>多数需要<strong>使用指针的场合</strong></li>
+<li>安全性：可以<strong>避开</strong>由于指针操作不当而带来的<strong>内存错误</strong></li>
+<li>操作性：<strong>简单易用</strong>，又不失<strong>功能强大</strong></li>
+</ul>
+<p><strong>实例分析：函数返回引用</strong></p>
+<pre><code class="language-c++">
+#include&lt;stdio.h&gt;
+
+int&amp; demo(){
+	int d = 0;
+	printf(&quot;demo: d = %d\n&quot;,d);
+	return d;
+}
+
+int&amp; func(){
+	static int s = 0;  //存储在全局静态存储区，可以改变
+	printf(&quot;func:s = %d\n&quot;,s);
+	return s;
+}
+
+int main(int argc,char *argv[]){
+	int&amp; rd = demo();
+	int&amp; rs = func();
+	
+	printf(&quot;\n&quot;);
+	printf(&quot;main : rd = %d\n&quot;,rd);
+	printf(&quot;main : rs = %d\n&quot;,rs);
+	printf(&quot;\n&quot;);
+	
+	rd = 10;
+	rs = 11;
+	
+	demo();
+	func();
+	
+	printf(&quot;\n&quot;);
+	printf(&quot;main : rd = %d\n&quot;,rd);
+	printf(&quot;main : rs = %d\n&quot;,rs);
+	printf(&quot;\n&quot;);
+	
+	return 0;
+}
+</code></pre>
+<p>打印结果：</p>
+<pre><code>
+demo: d = 0
+func:s = 0
+
+main : rd = 0
+main : rs = 0
+
+demo: d = 0
+func:s = 11
+
+main : rd = 0
+main : rs = 11
+</code></pre>
+<h3 id="五-总结">五、总结</h3>
+<ul>
+<li>引用作为<strong>变量别名</strong>而存在旨在<strong>代替指针</strong></li>
+<li><code>const</code>引用可以使得<strong>变量具有只读属性</strong></li>
+<li><strong>引用</strong>在编译器内部使用<strong>常量指针</strong>实现</li>
+<li><strong>引用</strong>的最<strong>终本质为指针</strong></li>
+<li>引用可以尽可能地避开内存错误</li>
+</ul>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/4_C++Courses">
+              <h3 class="post-title">
+                下一篇：狄泰C++第4课-布尔类型和引用
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">个人知识记录，学习～</div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/qiaoxu123" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
