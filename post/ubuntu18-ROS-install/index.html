@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1565098219403">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1566651622459">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
 
@@ -39,7 +39,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://qiaoxu123.github.io">
-        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1565098219403" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1566651622459" alt="" width="32px" height="32px">
       </a>
       <a href="https://qiaoxu123.github.io">
         <h1 class="site-title">Blog</h1>
@@ -108,6 +108,13 @@
           <div class="post-content">
             <p>最近几天因为项目需要，在Ubuntu下安装了ROS和PCL，中间遇到了各种问题，花了一天多时间终于搞定了，在这记录总结下。另外，最后做了一份<a href="https://ytueducn-my.sharepoint.com/:u:/g/personal/201457506105_ytu_edu_cn/Ec6tEBKagYlGnJPRpCjaHy0BysP5GqzUUUUUIoy-oExdQw?e=fnDguP">镜像</a>作为备份，用户：Ubuntu，密码：123  ，希望能帮到大家</p>
  <!-- more -->
+<h3 id="分割线-2019年8月8日更新">分割线 -- 2019年8月8日更新</h3>
+<p>最近又重新安装了Linux mint系统，从这两周的使用感受来看，比Ubuntu更加简洁和便利。回到正题，又需要重新安装一次ROS。经过前两次安装，经验丰富多了，在这重新整理下。</p>
+<p>第一，查看<a href="http://wiki.ros.org/melodic/Installation/Ubuntu">官网安装教程</a>。其中存在问题，<code>apt update</code>检索不到，意料之中。</p>
+<p>第二，查找相应命令，找到该<a href="https://forums.linuxmint.com/viewtopic.php?f=47&amp;t=286659">地址</a>，按照步骤轻松解决。之后回到官网教程，完成后面的步骤。</p>
+<p>命令如下：</p>
+<p><code>sudo sh -c 'echo &quot;deb http://packages.ros.org/ros/ubuntu bionic main&quot; &gt; /etc/apt/sources.list.d/ros-latest.list'</code></p>
+<hr>
 <h3 id="分割线-2019年7月1日更新">分割线 - - 2019年7月1日更新</h3>
 <p>最近重新安装了一次，系统版本改为Ubuntu18.04， 照例安装<code>ros</code>以及<code>pcl</code>。发现只需要完整安装<code>ROS</code>，<code>pcl1.8</code>就会自带，不需要安装。(如有问题请指出，没有从网上找到根据，仅个人经验）</p>
 <p><code>ROS</code>最新安装方法是根据<a href="http://wiki.ros.org/melodic/Installation/Ubuntu">官网WIKI</a>进行的，过程中可能需要改源，否则龟速下载。</p>

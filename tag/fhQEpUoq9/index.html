@@ -5,14 +5,14 @@
     
 <meta charset="utf-8" >
 
-<title>自动驾驶中Planning总结2 -- 动态对象交互 | Blog</title>
+<title>日常工具 | Blog</title>
 <meta name="description" content="个人知识记录，学习～">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1565098219403">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1566651622459">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
 
@@ -39,7 +39,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://qiaoxu123.github.io">
-        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1565098219403" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1566651622459" alt="" width="32px" height="32px">
       </a>
       <a href="https://qiaoxu123.github.io">
         <h1 class="site-title">Blog</h1>
@@ -81,44 +81,49 @@
 
 
       <div class="content-container">
-        <div class="post-detail">
-          
-          <h2 class="post-title">自动驾驶中Planning总结2 -- 动态对象交互</h2>
-          <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2019-08-05</span>
-            
-              <span>
-                <i class="icon-pricetags-outline"></i>
-                
-                  <a href="https://qiaoxu123.github.io/tag/FpZd9d6flZ">
-                    自动驾驶
-                    
-                      ，
-                    
-                  </a>
-                
-                  <a href="https://qiaoxu123.github.io/tag/ztTnDoO9f">
-                    个人总结
-                    
-                  </a>
-                
-              </span>
-            
-          </div>
-          <div class="post-content">
-            <p>对于自动驾驶而言，静态障碍物的规划较为简单，在原有的图搜索基础上产生路径即可。但对于动态障碍物的规划，或者称为动态对象交互(Dynamic Object Interactions)，是一件非常困难的事情。在这细致总结下。</p>
-<!-- more -->
-<h3 id="1-动作预测">1. 动作预测</h3>
-<p>与静态障碍物的规划不通，动态障碍物的情况下，对于障碍物运动状况的预测变得尤为重要。在无法较为精准预测动态障碍物情况下，自动驾驶车辆的未来轨迹也无法生成。举个例子，拿静态障碍物的规划来说，如果没有高精度地图的话，自动驾驶车辆在行进过程中，也会把一些道路固有的障碍物(如路边建筑物，道路旁边的树木等)考虑进去。因为，高精度地图作为车辆自动驾驶的先验知识而存在。</p>
-<p>通过高精度地图排除掉感知范围内的静态障碍物后，把车辆行进的“兴趣区域”限定在道路上，极大地减少了车辆的运算成本。此时车辆需要感知的障碍物便限定在常见的几种类型上，如自行车，行人，汽车等等。需要注意的是，由于每种类型的障碍物的运动都是不同的，所以对于障碍物感知识别的要求便非常高，一旦识别错误生成车辆的路径及行为错误，变回发生不可弥补的问题。</p>
 
-          </div>
+        <div class="current-tag-container">
+          <h2 class="title">
+            <i class="icon icon-pricetags-outline"></i> 日常工具
+          </h2> 
         </div>
 
         
-      </div>
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/fanqiang-note">
+        <h2 class="post-title">使用倚天剑ss实现科学上网</h2>
+      </a>
+      <div class="post-abstract">
+        <p>因为科研和工作原因，使用过各种科学上网工具，就目前使用而言，倚天剑ss算是性价比超高的，每个月5元的费用比任何个人搭建都显得亲民很多。在这笔记记录推荐下，方便个人及大家配置使用。</p>
 
-      
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-08-24</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/fhQEpUoq9">
+                日常工具
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
+    
+  </section>
+
+
+<div class="pagination-container">
+  
+  
+</div>
+
+
+      </div>
 
       <div class="site-footer">
   <div class="slogan">个人知识记录，学习～</div>
