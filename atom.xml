@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qiaoxu123.github.io</id>
     <title>Blog</title>
-    <updated>2019-08-24T13:01:18.641Z</updated>
+    <updated>2019-08-29T09:24:35.678Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qiaoxu123.github.io"/>
     <link rel="self" href="https://qiaoxu123.github.io/atom.xml"/>
@@ -10,6 +10,21 @@
     <logo>https://qiaoxu123.github.io/images/avatar.png</logo>
     <icon>https://qiaoxu123.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[Baidu Apollo 决策规划学习资源汇总]]></title>
+        <id>https://qiaoxu123.github.io/post/baidu-apollo-planning</id>
+        <link href="https://qiaoxu123.github.io/post/baidu-apollo-planning">
+        </link>
+        <updated>2019-08-29T08:41:40.000Z</updated>
+        <summary type="html"><![CDATA[<p>因为个人在学习过程中经常需要参考查阅相关资料，逐一转载太过繁琐，在这简单汇总整理下网上已有的资源，方便个人及大家查阅学习.</p>
+<p><strong>Apollo开发者社区</strong>资源更全面，关注微信公众号即可。</p>
+<p>后续更新中..</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>因为个人在学习过程中经常需要参考查阅相关资料，逐一转载太过繁琐，在这简单汇总整理下网上已有的资源，方便个人及大家查阅学习.</p>
+<p><strong>Apollo开发者社区</strong>资源更全面，关注微信公众号即可。</p>
+<p>后续更新中..</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[使用倚天剑ss实现科学上网]]></title>
         <id>https://qiaoxu123.github.io/post/fanqiang-note</id>
@@ -91,17 +106,6 @@
         <summary type="html"><![CDATA[<p>最近调试工程，ARM开发板开机自启问题，困扰了一周左右，现在终于解决，整理记录！</p>
 ]]></summary>
         <content type="html"><![CDATA[<p>最近调试工程，ARM开发板开机自启问题，困扰了一周左右，现在终于解决，整理记录！</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Ubuntu 16/18下ROS和PCL点云库安装]]></title>
-        <id>https://qiaoxu123.github.io/post/ubuntu18-ROS-install</id>
-        <link href="https://qiaoxu123.github.io/post/ubuntu18-ROS-install">
-        </link>
-        <updated>2019-07-17T05:13:38.000Z</updated>
-        <summary type="html"><![CDATA[<p>最近几天因为项目需要，在Ubuntu下安装了ROS和PCL，中间遇到了各种问题，花了一天多时间终于搞定了，在这记录总结下。另外，最后做了一份<a href="https://ytueducn-my.sharepoint.com/:u:/g/personal/201457506105_ytu_edu_cn/Ec6tEBKagYlGnJPRpCjaHy0BysP5GqzUUUUUIoy-oExdQw?e=fnDguP">镜像</a>作为备份，用户：Ubuntu，密码：123  ，希望能帮到大家</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>最近几天因为项目需要，在Ubuntu下安装了ROS和PCL，中间遇到了各种问题，花了一天多时间终于搞定了，在这记录总结下。另外，最后做了一份<a href="https://ytueducn-my.sharepoint.com/:u:/g/personal/201457506105_ytu_edu_cn/Ec6tEBKagYlGnJPRpCjaHy0BysP5GqzUUUUUIoy-oExdQw?e=fnDguP">镜像</a>作为备份，用户：Ubuntu，密码：123  ，希望能帮到大家</p>
 ]]></content>
     </entry>
 </feed>

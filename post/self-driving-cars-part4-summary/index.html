@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>Self-Driving Cars Part4 - Motion Planning 总结 | Blog</title>
+<meta name="description" content="个人知识记录，学习～">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1567070671200">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144014551-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-144014551-1');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1567070671200" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a class="menu purple-link" href="https://qiaoxu123.github.io" class="menu" target="_blank">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">Self-Driving Cars Part4 - Motion Planning 总结</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-08-27</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/lf5YaPaZFG">
+                    课程笔记
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>用时一个多月，终于结束了这门课程。作为Self-Driving Cars 系列课程的最后一门，依然延续了整个课程的高水准。笔记已整理完毕见下方链接，在这简单整理总结下，方便以后回忆巩固。<br>
+<a href="https://qiaoxu123.github.io/Self-Driving-Cars/#/">笔记链接</a></p>
+<!-- more -->
+<h2 id="1-概念和脉络">1. 概念和脉络</h2>
+<p>关于Motion Planning的概念网上有各种纷杂的解释，特别是与trajectory planning 的比较。虽然课程题目是这个，但内容中并没有特别体现，主要还是就mission planning，behavior planning以及local planning进行的了介绍。 如果所示，可以对脉络进行一个简单了解，下面分别进行阐述。<br>
+<img src="https://qiaoxu123.github.io/post-images/1566910805363.png" alt=""></p>
+<p><strong>mission planning</strong><br>
+简单翻译为任务规划。主要进行全局的路径最短查找，算法主要包括BFS，Dijkstra以及A*算法。理解起来很容易，我们日常生活中的导航，就可以称之为mission，使用最短路径搜索算法进行实现。谈及算法必先提数据结构，在这将整个地图构建成图结构进行组织，每条路径都有相应的路权。在该课程中大作业中未能体现，但在module3的作业本中有相应的习题供练习。</p>
+<p><strong>behavior planning</strong><br>
+行为规划，相比于任务规划而言格局就小的多了。可以理解为我们地图导航后，到达任意地点，语音告知我们左转或者变道等行为。该部分使用有限状态机实现。因为规划的概念太大，通过将整体的mission planning划分为behavior planning，对问题进行降维落实到场景中，从而有针对性的解决。人类驾驶很大程度上就是behavior planning，不断进行状态估计从而采取行动。</p>
+<p><strong>local planning</strong><br>
+该部分内容很充实，具体细致的讲解了车辆的每一个动作的实现。在这之前，还重点说明了collision free算法。用到了多项式生成样条，避障判断以及目标方程优化等概念。其中，主要分为Path和Velocity两部分进行组织。</p>
+<hr>
+<h2 id="2-关键要点">2. 关键要点</h2>
+<h3 id="21-定位">2.1 定位</h3>
+<p>规划模块作为自动驾驶系统的核心，与其他模块的衔接也很紧密。其中，高精度地图的重要性在该课程中不断被强调。高精度地图的一大作用是，减少车辆感知端的负担。车辆在行驶中不断与周围环境进行交互，受到车载平台运算能力的限制，只能对一定区域的环境进行实时感知与交互。通过高精度地图，将车辆的兴趣聚焦在道路上，并对道路的交规，周边的静态障碍物进行了细致描绘，从而极大地减少了对车辆的感知端的要求。<br>
+高精度地图的另一大作用是，指引车辆的行进。通过对道路环境的细致描绘，尽可能保障车辆能够行驶在符合交规的道路上。在课程中通过参考的waypoints进行循迹前行，每个轨迹点分为x,y,v三部分，这要求车辆拥有很高的定位精准度才能实现。</p>
+<h3 id="22-环境交互">2.2 环境交互</h3>
+<p>对于车辆而言，环境可以统一理解为障碍物，并进一步分为静态和动态。对于静态障碍物，主要通过occupancy grid map来感知，使用collision checking来判断车辆实际面临的状况。对于动态障碍物，则使用预测来进行判断。</p>
+
+          </div>
+        </div>
+
+        
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">个人知识记录，学习～</div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/qiaoxu123" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
