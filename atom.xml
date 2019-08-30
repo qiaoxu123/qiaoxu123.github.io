@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qiaoxu123.github.io</id>
     <title>Blog</title>
-    <updated>2019-08-29T09:24:35.678Z</updated>
+    <updated>2019-08-30T03:24:12.418Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qiaoxu123.github.io"/>
     <link rel="self" href="https://qiaoxu123.github.io/atom.xml"/>
@@ -10,6 +10,17 @@
     <logo>https://qiaoxu123.github.io/images/avatar.png</logo>
     <icon>https://qiaoxu123.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[Apollo轨迹规划分享--问答]]></title>
+        <id>https://qiaoxu123.github.io/post/baidu-apollo-share</id>
+        <link href="https://qiaoxu123.github.io/post/baidu-apollo-share">
+        </link>
+        <updated>2019-08-29T14:02:03.000Z</updated>
+        <summary type="html"><![CDATA[<p>转载自：<a href="https://zhuanlan.zhihu.com/p/69878689">知乎平台</a></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>转载自：<a href="https://zhuanlan.zhihu.com/p/69878689">知乎平台</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Baidu Apollo 决策规划学习资源汇总]]></title>
         <id>https://qiaoxu123.github.io/post/baidu-apollo-planning</id>
@@ -95,17 +106,6 @@
         <summary type="html"><![CDATA[<p>2019马上就要到了，回顾2018年，好多好多事情都历历在目。生活很单调，世界很美好，我，还在路上</p>
 ]]></summary>
         <content type="html"><![CDATA[<p>2019马上就要到了，回顾2018年，好多好多事情都历历在目。生活很单调，世界很美好，我，还在路上</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[ARM开发板开机自启]]></title>
-        <id>https://qiaoxu123.github.io/post/arm-boot</id>
-        <link href="https://qiaoxu123.github.io/post/arm-boot">
-        </link>
-        <updated>2019-07-17T05:16:36.000Z</updated>
-        <summary type="html"><![CDATA[<p>最近调试工程，ARM开发板开机自启问题，困扰了一周左右，现在终于解决，整理记录！</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>最近调试工程，ARM开发板开机自启问题，困扰了一周左右，现在终于解决，整理记录！</p>
 ]]></content>
     </entry>
 </feed>
