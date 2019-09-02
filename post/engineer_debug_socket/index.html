@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>总结 | Blog</title>
+<title>Socket编程中send函数引发线程退出 | Blog</title>
 <meta name="description" content="个人知识记录，学习～">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -81,55 +81,54 @@
 
 
       <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">Socket编程中send函数引发线程退出</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-09-02</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/5HMxWRPZ1">
+                    工程调试
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>在调试过程中烦恼已久的问题，终于找到了，在这转载记录下。</p>
+<!-- more -->
+<blockquote>
+<p><a href="https://blog.csdn.net/boshuzhang/article/details/88408062">参考博客</a></p>
+</blockquote>
+<p>Socket编程中，几乎是不可避免地会用到多线程，最简单的情况是分别建立两个线程实现收发。而作为服务器端，当客户端断开后，服务器端应继续保持监听状态等待连接。个人在调试过程中，当客户端断开后，服务器端立刻断开，调试好久也没有发现问题。现在终于找到了。进入主题。</p>
+<p>在多线程编程中其中一个使用一个线程来accept要连接的客户端，在接受client的请求之后新建一个线程来进行具体的操作。其操作包括想client端发送一定字节的数据，使用send()函数来进行操作。但在发送过程中出现任何一个client端的断线，则整个程序都会退出。</p>
+<pre><code>ssize_t send(int sockfd, const void *buff, size_t nbytes, int flags);
+</code></pre>
+<p>上面为send函数原型，在通常的使用中<code>flags</code>参数一般设置为0，此时如果客户端断开，继续往里写数据的话，会引发一个信号<code>SIGPIPE</code>，此信号会引发线程的退出。</p>
+<p>解决的方法：1. 可以将<code>flags</code>参数设置为<code>MSG_NOSIGNAL</code>；2. 设置<code>SIG_IGN</code>信号处理函数。</p>
+<p><a href="http://www.ideawu.net/blog/archives/413.html">参考文档</a></p>
+<hr>
+<p>在这我简单地将flags设置为MSG_NOSIGNAL即可解决。</p>
 
-        <div class="current-tag-container">
-          <h2 class="title">
-            <i class="icon icon-pricetags-outline"></i> 总结
-          </h2> 
+          </div>
         </div>
 
         
-<section class="post-item">
-    <div class="content">
-      <a href="https://qiaoxu123.github.io/post/zhihu-live-note1">
-        <h2 class="post-title">研究生留德及研修——知乎live记录</h2>
-      </a>
-      <div class="post-abstract">
-        
+          <div class="next-post">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/baidu-apollo-share">
+              <h3 class="post-title">
+                下一篇：Apollo轨迹规划分享--问答
+              </h3>
+            </a>
+          </div>
+          
       </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2019-07-30</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://qiaoxu123.github.io/tag/E1TAHXjHG">
-                留学
-                
-                  ，
-                
-              </a>
-            
-              <a href="https://qiaoxu123.github.io/tag/BT5uUgUqKt">
-                总结
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-  </section>
 
-
-<div class="pagination-container">
-  
-  
-</div>
-
-
-      </div>
+      
 
       <div class="site-footer">
   <div class="slogan">个人知识记录，学习～</div>
