@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qiaoxu123.github.io</id>
     <title>Blog</title>
-    <updated>2019-09-02T07:55:58.471Z</updated>
+    <updated>2019-09-03T15:08:16.473Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qiaoxu123.github.io"/>
     <link rel="self" href="https://qiaoxu123.github.io/atom.xml"/>
@@ -10,6 +10,17 @@
     <logo>https://qiaoxu123.github.io/images/avatar.png</logo>
     <icon>https://qiaoxu123.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[ThinkPad E480 Linux WIFI 问题解决]]></title>
+        <id>https://qiaoxu123.github.io/post/thinkpad-e480-linux-wifi</id>
+        <link href="https://qiaoxu123.github.io/post/thinkpad-e480-linux-wifi">
+        </link>
+        <updated>2019-09-03T14:42:17.000Z</updated>
+        <summary type="html"><![CDATA[<p>因为工作需要在个人笔记本上安装Linux，目前使用的版本是Linux mint19.2。但ThinkPad E480 因为自带的8821ce无线网卡太“新”，导致无法直接识别，测试过网上各种方案后，终于找到一个比较稳定的方案。在这笔记记录下。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>因为工作需要在个人笔记本上安装Linux，目前使用的版本是Linux mint19.2。但ThinkPad E480 因为自带的8821ce无线网卡太“新”，导致无法直接识别，测试过网上各种方案后，终于找到一个比较稳定的方案。在这笔记记录下。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Socket编程中send函数引发线程退出]]></title>
         <id>https://qiaoxu123.github.io/post/engineer_debug_socket</id>
@@ -96,16 +107,5 @@
         <link href="https://qiaoxu123.github.io/post/zhihu-live-note1">
         </link>
         <updated>2019-07-30T06:06:51.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[狄泰C++第2课-C到C++的升级]]></title>
-        <id>https://qiaoxu123.github.io/post/2-C++Courses</id>
-        <link href="https://qiaoxu123.github.io/post/2-C++Courses">
-        </link>
-        <updated>2019-07-29T09:20:35.000Z</updated>
-        <summary type="html"><![CDATA[<p>对C语言和C++语言中的语法特性进行对照分析</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>对C语言和C++语言中的语法特性进行对照分析</p>
-]]></content>
     </entry>
 </feed>

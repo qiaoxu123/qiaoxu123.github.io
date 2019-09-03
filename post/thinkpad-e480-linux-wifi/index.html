@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>高斯分布 | Blog</title>
+<title>ThinkPad E480 Linux WIFI 问题解决 | Blog</title>
 <meta name="description" content="个人知识记录，学习～">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -81,63 +81,53 @@
 
 
       <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">ThinkPad E480 Linux WIFI 问题解决</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-09-03</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr">
+                    工程实现
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>因为工作需要在个人笔记本上安装Linux，目前使用的版本是Linux mint19.2。但ThinkPad E480 因为自带的8821ce无线网卡太“新”，导致无法直接识别，测试过网上各种方案后，终于找到一个比较稳定的方案。在这笔记记录下。</p>
+<!-- more -->
+<p>下载该文件，具体来源已忘记，是某个github仓库提供的。<a href="https://ytueducn-my.sharepoint.com/:u:/g/personal/201457506105_ytu_edu_cn/EdtfWOSiJUlFrcIZV1ezt-cBLp7kNLDCdwauCTo8Pm-SdA?e=xWFY4Z">下载链接</a></p>
+<p>下载完成后，放置在任意目录下解压。然后执行下面代码即可：</p>
+<pre><code>make
+sudo make install
+sudo modprobe -a 8821ce
+</code></pre>
+<p>注意：</p>
+<ol>
+<li>目前仅在Ubuntu16.04， Ubuntu18.04，以及Linux mint19版本上测试没有问题，网络上有各种说内核存在问题，暂时还没有遇到。</li>
+<li>目录尽可能避开工作环境，因为一旦删除wifi又会识别不到。</li>
+</ol>
 
-        <div class="current-tag-container">
-          <h2 class="title">
-            <i class="icon icon-pricetags-outline"></i> 高斯分布
-          </h2> 
+          </div>
         </div>
 
         
-<section class="post-item">
-    <div class="content">
-      <a href="https://qiaoxu123.github.io/post/GP-INSAC-Algorithms">
-        <h2 class="post-title">基于增量高斯分布的Lidar点云分割算法</h2>
-      </a>
-      <div class="post-abstract">
-        <p>论文：On the Segmentation of 3D LIDAR Point Clouds</p>
-
+          <div class="next-post">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/engineer_debug_socket">
+              <h3 class="post-title">
+                下一篇：Socket编程中send函数引发线程退出
+              </h3>
+            </a>
+          </div>
+          
       </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2019-07-30</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://qiaoxu123.github.io/tag/H1zRlHhoN">
-                激光雷达
-                
-                  ，
-                
-              </a>
-            
-              <a href="https://qiaoxu123.github.io/tag/_5yMHFGsPi">
-                高斯分布
-                
-                  ，
-                
-              </a>
-            
-              <a href="https://qiaoxu123.github.io/tag/Dt5i19HDw">
-                机器学习
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-  </section>
 
-
-<div class="pagination-container">
-  
-  
-</div>
-
-
-      </div>
+      
 
       <div class="site-footer">
   <div class="slogan">个人知识记录，学习～</div>
