@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qiaoxu123.github.io</id>
     <title>Blog</title>
-    <updated>2019-09-03T15:08:16.473Z</updated>
+    <updated>2019-09-18T09:40:40.133Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qiaoxu123.github.io"/>
     <link rel="self" href="https://qiaoxu123.github.io/atom.xml"/>
@@ -10,6 +10,28 @@
     <logo>https://qiaoxu123.github.io/images/avatar.png</logo>
     <icon>https://qiaoxu123.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[ROS仿真实现1--使用rviz显示小车]]></title>
+        <id>https://qiaoxu123.github.io/post/ros-note1-rviz</id>
+        <link href="https://qiaoxu123.github.io/post/ros-note1-rviz">
+        </link>
+        <updated>2019-09-18T08:17:40.000Z</updated>
+        <summary type="html"><![CDATA[<p>花了半天时间查找各种资料，终于实现了，在这整理记录下，方便后续参考。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>花了半天时间查找各种资料，终于实现了，在这整理记录下，方便后续参考。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Linux下使用select实现精确定时器]]></title>
+        <id>https://qiaoxu123.github.io/post/linux-socket-select-note</id>
+        <link href="https://qiaoxu123.github.io/post/linux-socket-select-note">
+        </link>
+        <updated>2019-09-05T05:30:16.000Z</updated>
+        <summary type="html"><![CDATA[<p>依旧是项目需求，在Linux平台下实现延时。使用系统自定义的sleep函数总是无效，无奈下尝试使用select函数实现，效果很好，在这先占坑后续查找sleep函数无效的原因。转载自<a href="https://www.cnblogs.com/jjdiaries/p/3404380.html">博客</a></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>依旧是项目需求，在Linux平台下实现延时。使用系统自定义的sleep函数总是无效，无奈下尝试使用select函数实现，效果很好，在这先占坑后续查找sleep函数无效的原因。转载自<a href="https://www.cnblogs.com/jjdiaries/p/3404380.html">博客</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[ThinkPad E480 Linux WIFI 问题解决]]></title>
         <id>https://qiaoxu123.github.io/post/thinkpad-e480-linux-wifi</id>
@@ -89,23 +111,5 @@
         <link href="https://qiaoxu123.github.io/post/3-C++Courses">
         </link>
         <updated>2019-07-31T05:20:13.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[基于增量高斯分布的Lidar点云分割算法]]></title>
-        <id>https://qiaoxu123.github.io/post/GP-INSAC-Algorithms</id>
-        <link href="https://qiaoxu123.github.io/post/GP-INSAC-Algorithms">
-        </link>
-        <updated>2019-07-30T06:13:39.000Z</updated>
-        <summary type="html"><![CDATA[<p>论文：On the Segmentation of 3D LIDAR Point Clouds</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>论文：On the Segmentation of 3D LIDAR Point Clouds</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[研究生留德及研修——知乎live记录]]></title>
-        <id>https://qiaoxu123.github.io/post/zhihu-live-note1</id>
-        <link href="https://qiaoxu123.github.io/post/zhihu-live-note1">
-        </link>
-        <updated>2019-07-30T06:06:51.000Z</updated>
     </entry>
 </feed>

@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>ROS仿真实现1--使用rviz显示小车 | Blog</title>
+<meta name="description" content="个人知识记录，学习～">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1568797172051">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144014551-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-144014551-1');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1568797172051" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a class="menu purple-link" href="https://qiaoxu123.github.io" class="menu" target="_blank">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">ROS仿真实现1--使用rviz显示小车</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-09-18</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/5HFkONYVv">
+                    ROS
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://qiaoxu123.github.io/tag/N-5DhIgGPS">
+                    仿真
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>花了半天时间查找各种资料，终于实现了，在这整理记录下，方便后续参考。</p>
+<!-- more -->
+<h2 id="一-初始化工程">一、初始化工程</h2>
+<blockquote>
+<p>不熟悉的同学请参考这篇<a href="https://blog.csdn.net/yake827/article/details/44564057">博客</a></p>
+</blockquote>
+<h4 id="1-在谈到rviz显示之前首先建立工程初始化">1. 在谈到rviz显示之前，首先建立工程，初始化</h4>
+<pre><code>mkdir -p /catkin_ws/src
+cd src
+catkin_init_workspace
+</code></pre>
+<h4 id="2进入工程进行编译然后进行环境注册">2.进入工程进行编译，然后进行环境注册。</h4>
+<pre><code>cd ../
+catkin_make
+source devel/setup.bash
+</code></pre>
+<h4 id="3创建节点">3.创建节点</h4>
+<pre><code>cd src
+catkin_create_pkg self-driving-car roscpp rospy std_msgs
+</code></pre>
+<h4 id="4返回工作区重新进行编译">4.返回工作区重新进行编译</h4>
+<pre><code>cd ..
+catkin_make
+</code></pre>
+<p>到这为止最简单的ros节点工程初始化就完成了，下一步要参考别人的工程进行修改适配。</p>
+<hr>
+<h2 id="二-添加小车仿真文件">二、添加小车仿真文件</h2>
+<p>在这简单解释下为什么参考别人工程。<br>
+看了网上大部分教程，很多都是自己购买ROS小车或者基于树莓派直接进行实体通信控制。由于资源有限只能通过仿真实现。但在rviz中进行仿真需要建立小车的urdf文件(具体参考网上介绍)，也就是小车的3D文件，所以对新手不是很友好。在这参考网上开源的文件进行利用，后期熟练后再自己进行修改。</p>
+<h4 id="1-下载工程">1. 下载工程</h4>
+<blockquote>
+<p>参考链接：<a href="https://blog.csdn.net/autolabor/article/details/78502285">链接1</a>.<a href="https://blog.csdn.net/autolabor/article/details/85121400">链接2</a></p>
+</blockquote>
+<p>在这只取参考工程中的<code>autolabor_description</code>文件夹进行修改。根据其中的目录，分别在<code>self-driving-car</code>下建立子目录，然后拷贝下面的文件。</p>
+<h4 id="2-文件说明">2. 文件说明</h4>
+<p>在这基于文件夹分别简单说明下文件的作用：</p>
+<ul>
+<li>launch:负责节点的启动。从文件中可以看出，通过launch文件启动了两个发布节点和rviz显示节点。</li>
+</ul>
+<pre><code>&lt;node name=&quot;joint_state_publisher&quot; pkg=&quot;joint_state_publisher&quot;
+    type=&quot;joint_state_publisher&quot; /&gt;
+    &lt;node name=&quot;robot_state_publisher&quot; pkg=&quot;robot_state_publisher&quot;
+    type=&quot;state_publisher&quot; /&gt;
+    &lt;node name=&quot;rviz&quot; pkg=&quot;rviz&quot; type=&quot;rviz&quot; args=&quot;-d $(find self-driving-car)/rviz/urdf.rviz&quot; /&gt;
+</code></pre>
+<ul>
+<li>meshes:存储建模后的3D车辆建模文件</li>
+<li>rviz: rviz配置文件，读入和存储相应的配置</li>
+<li>urdf: 小车的模型参数</li>
+</ul>
+<p>通过这几个文件就可以大体描述rviz显示小车的所有参数，同时发布小车在仿真环境中的信息供其他节点进行参考控制。</p>
+<h4 id="3-注意">3. 注意</h4>
+<p>务必注意根据自己工程修改文件中的节点名称。主要有两个：launch文件以及urdf文件，讲其中的节点修改为自定义的节点名。在这我修改为：<code>self-driving-car</code>。</p>
+<p>另外，还需要修改<code>CMakeLists.txt</code>中的包文件，还有package.xml中的引用依赖。这个根据开源项目中进行修改即可，或者直接复制文件。通过自己修改可以记忆更深刻些。</p>
+<hr>
+<h2 id="三-编译显示">三、编译显示</h2>
+<p>经过上述步骤修改即可，不需要自己写代码，只需要修改对应的节点名称保证编译通过即可。回到工作区</p>
+<pre><code>cd catkin_ws
+catkin_make
+source devel/setup.bash
+roslaunch self-driving-car display-car.launch
+</code></pre>
+<p>之后系统会自动启动rviz，然后就可以看到小车了。<br>
+<img src="https://qiaoxu123.github.io/post-images/1568796624341.png" alt=""></p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/linux-socket-select-note">
+              <h3 class="post-title">
+                下一篇：Linux下使用select实现精确定时器
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">个人知识记录，学习～</div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/qiaoxu123" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>Linux下使用select实现精确定时器 | Blog</title>
+<meta name="description" content="个人知识记录，学习～">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1568797172051">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144014551-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-144014551-1');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1568797172051" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a class="menu purple-link" href="https://qiaoxu123.github.io" class="menu" target="_blank">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">Linux下使用select实现精确定时器</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-09-05</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/BqCd0A5YE">
+                    转载
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr">
+                    工程实现
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>依旧是项目需求，在Linux平台下实现延时。使用系统自定义的sleep函数总是无效，无奈下尝试使用select函数实现，效果很好，在这先占坑后续查找sleep函数无效的原因。转载自<a href="https://www.cnblogs.com/jjdiaries/p/3404380.html">博客</a></p>
+<!-- more -->
+<hr>
+<p>在编写程序时，我们经常回用到定时器。本文讲述如何使用select实现超级时钟。使用select函数，我们能实现微妙级别精度的定时器。同时，select函数也是我们在编写非阻塞程序时经常用到的一个函数。</p>
+<p>首先看看select函数原型如下：</p>
+<pre><code>int select(int nfds, fd_set *readfds, fd_set *writefds,
+                  fd_set *exceptfds, struct timeval *timeout);
+</code></pre>
+<p>参数说明：</p>
+<ul>
+<li>slect的第一个参数nfds为fdset集合中最大描述符值加1，fdset是一个位数组，其大小限制为__FD_SETSIZE（1024），位数组的每一位代表其对应的描述符是否需要被检查。</li>
+<li>select的第二三四个参数表示需要关注读、写、错误事件的文件描述符位数组，这些参数既是输入参数也是输出参数，可能会被内核修改用于标示哪些描述符上发生了关注的事件。所以每次调用select前都需重新初始化fdset。</li>
+<li>timeout参数为超时时间，该结构会被内核修改，其值为超时剩余的时间。<br>
+利用select实现定时器，需要利用其timeout参数,注意到：</li>
+</ul>
+<p>1）select函数使用了一个结构体timeval作为其参数。</p>
+<p>2）select函数会更新timeval的值，timeval保持的值为剩余时间。</p>
+<p>如果我们指定了参数timeval的值，而将其他参数都置为0或者NULL，那么在时间耗尽后，select函数便返回，基于这一点，我们可以利用select实现精确定时。</p>
+<p>timeval的结构如下：</p>
+<pre><code class="language-c">struct timeval{
+long tv_sec；/*secons*
+long tv_usec;/*microseconds*/
+}
+</code></pre>
+<h2 id="我们可以看出其精确到microseconds也即微秒">我们可以看出其精确到microseconds也即微秒。</h2>
+<p>一、秒级定时器</p>
+<pre><code class="language-c">void seconds_sleep(unsigned seconds){
+    struct timeval tv;
+    tv.tv_sec=seconds;
+    tv.tv_usec=0;
+    int err;
+    do{
+       err=select(0,NULL,NULL,NULL,&amp;tv);
+    }while(err&lt;0 &amp;&amp; errno==EINTR);
+}
+</code></pre>
+<p>二、毫秒级别定时器</p>
+<pre><code class="language-c">void milliseconds_sleep(unsigned long mSec){
+    struct timeval tv;
+    tv.tv_sec=mSec/1000;
+    tv.tv_usec=(mSec%1000)*1000;
+    int err;
+    do{
+       err=select(0,NULL,NULL,NULL,&amp;tv);
+    }while(err&lt;0 &amp;&amp; errno==EINTR);
+}
+</code></pre>
+<p>三、微秒级别定时器</p>
+<pre><code class="language-c">void microseconds_sleep(unsigned long uSec){
+   struct timeval tv;
+   tv.tv_sec=uSec/1000000;
+   tv.tv_usec=uSec%1000000;
+   int err;
+   do{
+       err=select(0,NULL,NULL,NULL,&amp;tv);
+   }while(err&lt;0 &amp;&amp; errno==EINTR);
+}
+</code></pre>
+<p>测试用例：</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;sys/time.h&gt;
+#include &lt;errno.h&gt;
+int main()
+{
+    int i;
+    for(i=0;i&lt;5;++i){
+    printf(&quot;%d\n&quot;,i);
+    //seconds_sleep(1);
+    //milliseconds_sleep(1500);
+    microseconds_sleep(1900000);
+    }
+}
+</code></pre>
+<p>注：timeval结构体中虽然指定了一个微妙级别的分辨率，但内核支持的分别率往往没有这么高，很多unix内核将超时值向上舍入成10ms的倍数。此外，加上内核调度延时现象，即定时器时间到后，内核还需要花一定时间调度相应进程的运行。因此，定时器的精度，最终还是由内核支持的分别率决定。</p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/thinkpad-e480-linux-wifi">
+              <h3 class="post-title">
+                下一篇：ThinkPad E480 Linux WIFI 问题解决
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">个人知识记录，学习～</div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/qiaoxu123" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
