@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>自动驾驶中Planning总结4 -- 搜索算法 | Blog</title>
+<title>面经 | Blog</title>
 <meta name="description" content="个人知识记录，学习～">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -81,68 +81,56 @@
 
 
       <div class="content-container">
-        <div class="post-detail">
-          
-          <h2 class="post-title">自动驾驶中Planning总结4 -- 搜索算法</h2>
-          <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2019-08-04</span>
-            
-              <span>
-                <i class="icon-pricetags-outline"></i>
-                
-                  <a href="https://qiaoxu123.github.io/tag/ltvVS5IGJ">
-                    规划
-                    
-                      ，
-                    
-                  </a>
-                
-                  <a href="https://qiaoxu123.github.io/tag/FpZd9d6flZ">
-                    自动驾驶
-                    
-                  </a>
-                
-              </span>
-            
-          </div>
-          <div class="post-content">
-            <p>对于自动驾驶中的Planning部分，仍然存在很多的疑惑，最近在看教程以及网上资料分享的时候，有些心得，在这尽可能归纳整理下，方便以后查找温习。</p>
-<!-- more -->
-<h2 id="1-图搜索算法">1. 图搜索算法</h2>
-<blockquote>
-<ul>
-<li><a href="https://www.redblobgames.com/pathfinding/a-star/implementation.html#cplusplus">参考链接1：算法实现</a></li>
-<li><a href="https://www.redblobgames.com/pathfinding/a-star/introduction.html">参考链接2：算法原理</a></li>
-</ul>
-</blockquote>
-<p>谈到自动驾驶Planning这个话题，最先提及到的，一定是BFS、Dijkstra以及A* 这些算法。不可否认，无论多么复杂的系统，根据系统特性进行有效分层，也可以简化问题。对于规划部分的分层，暂时放在后面进行总结。在这先主要介绍以上几种搜索算法的作用以及实现。</p>
-<p>Graph结构是自动驾驶规划中最基本的结构，也是这几种算法的主要用武之地。快速说明下这几种算法：</p>
-<ul>
-<li>BFS：宽度优先搜索算法。主要应用在无权图，只考虑节点之间相邻的关系，不考虑节点之间路径的权值，同时遍历时会搜索到所有节点。</li>
-<li>Dijkstra算法：可以应用到正有权图中。是应用最广的搜索算法之一，但算法不考虑环境中的启发信息，效率很低。</li>
-<li>A* 算法：考虑到环境中的启发信息，可以根据环境状况设计启发函数，选择找到最优解或者时间更短的次优解。</li>
-</ul>
-<p>关于每个算法的原理与实现，网上有很多资料(参考资料列举)。在这仅罗列算法中最重要的一些改变。对于BFS算法到Dijkstra算法，主要实现了以下几个改变：</p>
-<ul>
-<li>Graph with weights(更改为有权图)</li>
-<li>Queue with priorities(队列以不同的顺序返回节点，而不是简单的 &quot;first in, first out&quot;)</li>
-<li>算法从图表中跟踪这些成本并将其提供给队列</li>
-</ul>
-<p>其中算法最核心的地方是第二点的实现，因为权值的增加使得选择代价最小的节点变得有意义。主要通过以下步骤实现：<br>
-<strong>insert</strong><br>
-Add item to queue<br>
-<strong>remove</strong><br>
-Remove item with the lowest number<br>
-<strong>reprioritize</strong><br>
-(optional) Change an existing item’s priority to a lower number</p>
 
-          </div>
+        <div class="current-tag-container">
+          <h2 class="title">
+            <i class="icon icon-pricetags-outline"></i> 面经
+          </h2> 
         </div>
 
         
-      </div>
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/momenta-interview">
+        <h2 class="post-title">Momenta面试记录</h2>
+      </a>
+      <div class="post-abstract">
+        <p>终于结束了，虽然总共时长不超过一周。但对我影响真的很大，从中明白了很多，借此机会激励下自己，继续加油！</p>
 
-      
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-09-26</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/lD70VXZAT">
+                面经
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/cw9LvfpIV">
+                个人感悟
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
+    
+  </section>
+
+
+<div class="pagination-container">
+  
+  
+</div>
+
+
+      </div>
 
       <div class="site-footer">
   <div class="slogan">个人知识记录，学习～</div>

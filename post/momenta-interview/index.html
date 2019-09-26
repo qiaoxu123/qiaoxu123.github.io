@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>Momenta面试记录 | Blog</title>
+<meta name="description" content="个人知识记录，学习～">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1569501417899">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144014551-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-144014551-1');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1569501417899" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="https://qiaoxu123.github.io" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">Momenta面试记录</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-09-26</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/lD70VXZAT">
+                    面经
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://qiaoxu123.github.io/tag/cw9LvfpIV">
+                    个人感悟
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>终于结束了，虽然总共时长不超过一周。但对我影响真的很大，从中明白了很多，借此机会激励下自己，继续加油！</p>
+<!-- more -->
+<h2 id="1-前言">1. 前言</h2>
+<p>Momenta在国内算是一线的自动驾驶独角兽公司，也是我一直心向往之的公司。这次投递实习也是太仓促了，并不是没有心理准备，而是因为始终存在侥幸心理导致的。结果惨败挂在了二面coding上，不出意外。投递岗位是<strong>自动驾驶规划实习</strong>，时间是2019年9月份。在这记录下自己的经历，勉励自己。</p>
+<hr>
+<h3 id="2-一面">2. 一面</h3>
+<p>找人内推后，大约过了一周左右便有HR电话咨询意向。Momenta的面试向来严格，而且对实习的要求比较紧，如能接受申请需要大约一个月内入职。在这需要注意。</p>
+<p>一面时间是电话后第二天晚上，时间是晚上8点，面试总时长大约半小时左右。第一面是项目技术面，主要是针对你的简历以及项目实习经历进行询问。在这次面试中我主要犯了三个错误，下面我想一一总结下。</p>
+<p>第一个错误，因为简历上的项目以及实习经历写的太过粗糙，因为很多地方面试官都不知所以然，不知道从哪个地方入手，所以会随性发挥。这样的做法明显弊大于利，其中问到的关于规划方向的两个项目中的内容，大都是我最近以及不突出的部分，而我并没有针对性地进行准备，以为只要是自己真的做过就会无惧问题。（注意，面试官一定会重点问你意向岗位相关的项目，一定要有深度，能扩展）</p>
+<p>第二个错误，也算是承接了第一个问题中的“大意”。面试官想要得到的，应该是丰富清晰的信息，告诉他你有经验。这一点在错误一中指出了。另外就是，面试官想要知道你对于这个领域是有自己的认识的，而不是仅仅做过就够了。虽然我个人感觉在一面中我对于做过项目的描述是比较清晰的，但是缺乏深度，仅仅是网页上能搜到的泛泛而谈，其中规划中的原理实现，场景以及算法的问题所在，都说的太浅，就连我说起来都觉得无力。</p>
+<p>因此，关于这个，有必要自己写一个稿子，不断丰富和复述，甚至有必要重新针对这个问题去查阅论文或者资料，力争在问道实现原理以及细节时候能对答如流。</p>
+<p>第三个错误，也算是最重要的一个，就是不要太多废话。经过两次面试，我能感觉出虽然自己对答还算从容，但其中很多废话让人烦的不行。废话的原因就在于自己没有熟练去准备，当问道细节时候两眼抹黑脱口而出，甚至还思考了一会。这让我真的很烦。</p>
+<hr>
+<h3 id="二面">二面</h3>
+<p>二面是coding，公司的效率很高，一面结束后第二天上午通知，问明天晚上是否时间合适。没有过多考虑就同意了，事实上应该拖下时间多练习下。时间仍然是第二天晚上8点，形式是电话联系，通过邮件给你发送链接，点开链接后是共享编辑器的网页。题目和代码在一个文本上。不能编译。</p>
+<p>题目很简单，估计大部分人都可以秒刷，但自己真的没有太多练习，准备两天动态规划也没有考到。猜测如果早点通过，会继续给出下一道题目。</p>
+<pre><code>Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+
+You may assume no duplicates in the array.
+
+Example 1:
+Input: [1,3,5,6], 5
+Output: 2
+
+Example 2:
+Input: [1,3,5,6], 2
+Output: 1
+
+Example 3:
+Input: [1,3,5,6], 7
+Output: 4
+
+Example 4:
+Input: [1,3,5,6], 0
+Output: 0
+</code></pre>
+<p>很简单的一道二分查找题目，leetcode上应该有原题。因为是第一次面试，手抖的不行，写起来多次卡顿。需要注意一点就是题目中提到有序，但是没有说是正序还是逆序，因此需要判断。除此之外毫无难点。写完后面试官针对代码说出问题，更改，重复这个操作。。</p>
+<p>半小时后结束，之后大约说了下部门情况，然后等待通知。</p>
+<hr>
+<h3 id="3-总结">3. 总结</h3>
+<p>综上，已经描述的很详细了，个人的体会比较多，具体的细节因人而异不一一描述了。问题很简单，就两个：一是没有用心去准备面试材料，二是coding能力没有认真提高。<strong>在这立下flag，明年我一定要拿下这个公司的实习！！！</strong></p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/ros-nav_msgs">
+              <h3 class="post-title">
+                下一篇：ROS中nav_msgs消息
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">个人知识记录，学习～</div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/qiaoxu123" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>

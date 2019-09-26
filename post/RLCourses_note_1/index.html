@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1568797172051">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1569501417899">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
 
@@ -39,7 +39,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://qiaoxu123.github.io">
-        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1568797172051" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1569501417899" alt="" width="32px" height="32px">
       </a>
       <a href="https://qiaoxu123.github.io">
         <h1 class="site-title">Blog</h1>
@@ -58,20 +58,20 @@
     <div class="menu-list">
       
         
-          <a class="menu purple-link" href="https://qiaoxu123.github.io" class="menu" target="_blank">
+          <a href="https://qiaoxu123.github.io" class="menu purple-link">
             首页
-          </a>
-        
-      
-        
-          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
-            归档
           </a>
         
       
         
           <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
             标签
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
           </a>
         
       
@@ -133,12 +133,12 @@
 </ul>
 <p><strong>例子：监督学习和赌博机问题</strong></p>
 <p><strong>赌博机(bandit) 问题</strong>：（非正式定义）单步优化问题，每一个时刻都有奖励，每次决策跟后续状态没有关系。一般来说认为赌博机问题不考虑状态。</p>
-<p><img src="assets/1566102845359.png" alt="1566102845359"></p>
+<figure data-type="image" tabindex="1"><img src="assets/1566102845359.png" alt="1566102845359"></figure>
 <p>赌博机问题和监督学习的区别是给标签还是给奖励。当赌博机问题拓展到多步时会变成强化学习问题。在这可以更明显地感受到强化学习的特征，其主要是针对对象来进行学习的。有点类似于C语言的函数，以及C++语言的面向对象的区别。</p>
 <hr>
 <h2 id="二-强化学习的组成">二、强化学习的组成</h2>
 <h3 id="1-整体结构">1. 整体结构</h3>
-<p><img src="assets/1566103021210.png" alt="1566103021210"></p>
+<figure data-type="image" tabindex="2"><img src="assets/1566103021210.png" alt="1566103021210"></figure>
 <p>每个时刻 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span> :</p>
 <ul>
 <li>智能体(agent)：执行<strong>动作</strong> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>A</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">A_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，并在环境中得到<strong>观测 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>O</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">O_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 和奖励 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>R</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">R_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></strong></li>

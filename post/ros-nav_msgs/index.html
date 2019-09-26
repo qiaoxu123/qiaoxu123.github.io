@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>我的2018书单 | Blog</title>
+<title>ROS中nav_msgs消息 | Blog</title>
 <meta name="description" content="个人知识记录，学习～">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -83,22 +83,29 @@
       <div class="content-container">
         <div class="post-detail">
           
-          <h2 class="post-title">我的2018书单</h2>
+          <h2 class="post-title">ROS中nav_msgs消息</h2>
           <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2019-07-27</span>
+            <span><i class="icon-calendar-outline"></i> 2019-09-26</span>
             
               <span>
                 <i class="icon-pricetags-outline"></i>
                 
-                  <a href="https://qiaoxu123.github.io/tag/O6S3O2y2P">
-                    生活感悟
+                  <a href="https://qiaoxu123.github.io/tag/5HFkONYVv">
+                    ROS
                     
                       ，
                     
                   </a>
                 
-                  <a href="https://qiaoxu123.github.io/tag/esAW0fpiEj">
-                    阅读
+                  <a href="https://qiaoxu123.github.io/tag/N-5DhIgGPS">
+                    仿真
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://qiaoxu123.github.io/tag/BqCd0A5YE">
+                    转载
                     
                   </a>
                 
@@ -106,91 +113,76 @@
             
           </div>
           <div class="post-content">
-            <p>2019马上就要到了，回顾2018年，好多好多事情都历历在目。生活很单调，世界很美好，我，还在路上</p>
+            <p>最近在对ROS的深度使用中，发现<code>nav_msgs</code>消息在包通信中出现频率超高。在这特地转载记录补充下，方便以后查找巩固。<br>
+<a href="https://blog.csdn.net/ji0525084/article/details/14125119">参考博客</a></p>
 <!-- more -->
-<blockquote>
-<p>1 ~ 3月：还在北京实习的日子，还在准备毕设的日子，当时，还很迷茫~</p>
-</blockquote>
+<h3 id="一-消息类型">一、消息类型</h3>
+<ol>
+<li><code>GridCells</code> 栅格单元</li>
+</ol>
 <ul>
-<li>《平凡的世界》</li>
-<li>《未来简史》</li>
-<li>《人类简史》<br>
-···</li>
+<li><code>std_msgs/Header header</code> 时间戳与坐标系</li>
+<li><code>float32 cell_width，float32 cell_height</code>  宽度与高度</li>
+<li><code>geometry_msgs/Point[] cells</code> 数组</li>
 </ul>
-<blockquote>
-<p>4月：知道考上后，觉得自己的人生光明起来。大学也接近了尾声~</p>
-</blockquote>
+<p>通过该消息类型，对场景地图进行表征</p>
+<hr>
+<ol start="2">
+<li>MapMetaData 占有率栅格地图数据</li>
+</ol>
 <ul>
-<li>《刺杀骑士团长》</li>
-<li>《你一定爱读的极简欧洲史》</li>
+<li><code>time map_load_time</code> 地图被加载的时间</li>
+<li><code>float32 resolution</code> 分辨率（m/cell）</li>
+<li><code>uint32 width，uint32 height</code></li>
+<li><code>geometry_msgs/Pose origin</code> 真实世界中的原点 (m,m,rad) 图像中的(0,0)点</li>
 </ul>
-<blockquote>
-<p>5月：回到学校，和四年的老友们最后相聚~</p>
-</blockquote>
+<hr>
+<ol start="3">
+<li><code>OccupancyGrid</code> 2d栅格地图</li>
+</ol>
 <ul>
-<li>《小王子》</li>
-<li>《当我谈跑步的时候，我在谈些什么》</li>
+<li><code>Header header</code></li>
+<li><code>nav_msgs/MapMetaData info</code> 地图信息</li>
+<li><code>int8[] data</code> 占有率地图数据序列，概率为【0-100】，未知为-1</li>
 </ul>
-<blockquote>
-<p>6月：告别四年的老友们，度过了四年时光，终于回到“真新镇”，我的家</p>
-</blockquote>
+<hr>
+<ol start="4">
+<li><code>Odometry</code> 估计的位姿与速度</li>
+</ol>
 <ul>
-<li>《学会提问》</li>
-<li>《贝多芬传》</li>
-<li>《把时间当作朋友》</li>
-<li>《世界尽头与冷酷仙境》</li>
-<li>《放学后》</li>
-<li>《皮囊》</li>
-<li>《尼罗河上的惨案》</li>
+<li><code>std_msgs/Header header</code> 位姿所在坐标系</li>
+<li><code>string child_frame_id</code> 速度所在坐标系</li>
+<li><code>geometry_msgs/PoseWithCovariance pose</code> 位姿</li>
+<li><code>geometry_msgs/TwistWithCovariance twist</code> 速度</li>
 </ul>
-<blockquote>
-<p>7月：在家百无聊赖，每天陪伴着爸妈，炒菜，读书，做项目，看论文，平凡的世界~ - - -</p>
-</blockquote>
+<hr>
+<ol start="5">
+<li><code>Path</code> 路径</li>
+</ol>
 <ul>
-<li>《舞！舞！舞！》 -</li>
-<li>《被嫌弃的松子的一生》 -</li>
-<li>《动物庄园》 -</li>
-<li>《了不起的盖茨比》 -</li>
-<li>《1973年的弹子球》</li>
+<li><code>Header header</code></li>
+<li><code>geometry_msgs/PoseStamped[] poses</code> 代表路径的三维点坐标数组</li>
 </ul>
-<blockquote>
-<p>8月：又到了分别的时候，迈向生命中又一重要的一站，等待我的，又会是什么~</p>
-</blockquote>
+<hr>
+<h3 id="二-服务">二、服务</h3>
+<ol>
+<li><code>GetMap.srv</code> 接收地图</li>
+</ol>
 <ul>
-<li>《寻羊冒险记》</li>
-<li>《且听风吟》</li>
-<li>《我的职业是小说家》</li>
+<li>不发送数据<br>
+接受</li>
+<li><code>nav_msgs/OccupancyGrid map</code></li>
 </ul>
-<blockquote>
-<p>9月：重新安顿好自己，命运很眷顾我，让我遇到他们，真的好幸福~</p>
-</blockquote>
+<ol>
+<li><code>GetPlan.srv</code> 规划当前位置到目标位置的路径<br>
+发送</li>
+</ol>
 <ul>
-<li>《高效能人士的七个习惯》</li>
-<li>《挪威的森林》</li>
-<li>《假面山庄》</li>
-<li>《假面饭店》</li>
-</ul>
-<blockquote>
-<p>10月：生活重新归于平淡，每天重复上课，看论文，做项目，紧张有序~</p>
-</blockquote>
-<ul>
-<li>《追风筝的人》</li>
-<li>《海边的卡夫卡》</li>
-<li>《简·爱》</li>
-</ul>
-<blockquote>
-<p>11月：迷茫又一次开始了，总是摸不清自己的想要，想要脚踏实地，但远方，在哪里~</p>
-</blockquote>
-<ul>
-<li>《情书》</li>
-<li>《金字塔原理》</li>
-</ul>
-<blockquote>
-<p>12月：又要结束一年了，感谢命运，让我遇见了她，生活很枯燥，梦想在远方。有什么大不了，重新启程~</p>
-</blockquote>
-<ul>
-<li>《金庸传》</li>
-<li>《假如真有时光机》</li>
+<li><code>geometry_msgs/PoseStamped start</code> 起始点</li>
+<li><code>geometry_msgs/PoseStamped goal</code> 目标点</li>
+<li><code>float32 tolerance</code> 如果不能到达目标，最近可到的约束<br>
+接受</li>
+<li><code>nav_msgs/Path plan</code> 路径</li>
 </ul>
 
           </div>
@@ -198,9 +190,9 @@
 
         
           <div class="next-post">
-            <a class="purple-link" href="https://qiaoxu123.github.io/post/arm-boot">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/ros-note1-rviz">
               <h3 class="post-title">
-                下一篇：ARM开发板开机自启
+                下一篇：ROS仿真实现1--使用rviz显示小车
               </h3>
             </a>
           </div>
