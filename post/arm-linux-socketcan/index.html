@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>ARM Linux SocketCAN驱动编译记录 | Blog</title>
+<meta name="description" content="个人知识记录，学习～">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1570096675636">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144014551-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-144014551-1');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1570096675636" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="https://qiaoxu123.github.io" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">ARM Linux SocketCAN驱动编译记录</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2018-07-01</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/4DMar1rT6">
+                    嵌入式
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr">
+                    工程实现
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://qiaoxu123.github.io/tag/5HMxWRPZ1">
+                    工程调试
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>最近调试时使用了相关工具，参考了相关博客终于编译通过。特此汇总各博客内容进行整理</p>
+<!-- more -->
+<h3 id="1编译环境所需工具">1.编译环境所需工具：</h3>
+<ul>
+<li><a href="https://public.pengutronix.de/software/libsocketcan/">libsocketcan-0.0.10.tar.bz2</a></li>
+<li><a href="https://public.pengutronix.de/software/socket-can/canutils/v4.0/">canutils-4.0.6.tar.bz2 </a></li>
+</ul>
+<p>交叉编译工具链根据每个开发板所提供的类型进行设置，我的工具链名称为</p>
+<pre><code class="language-c">arm-fsl-linux-gnueabi-gcc
+</code></pre>
+<p>后面实际配置时请注意</p>
+<hr>
+<h3 id="2参考博客">2.参考博客</h3>
+<p>https://www.cnblogs.com/eaggle/p/7641526.html<br>
+https://blog.csdn.net/sinat_35706094/article/details/79537749<br>
+https://blog.csdn.net/sno_guo/article/details/17029295</p>
+<hr>
+<h3 id="3具体配置">3.具体配置</h3>
+<h4 id="第一步配置交叉编译工具链">第一步：配置交叉编译工具链</h4>
+<p>配置好交叉编译工具链为全局环境，也就是将其添加到环境变量中，具体因人而异。在这不具体说明，请自行查找资料</p>
+<pre><code class="language-shell">export ARCH=arm
+export CROSS_COMPILE=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl
+-linaro-toolchain/bin/arm-none-linux-gnueabi-
+export PATH=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl-linaro-toolch
+ain/bin:$PATH
+</code></pre>
+<h4 id="第二步-交叉编译libsocketcan">第二步 交叉编译libsocketcan</h4>
+<pre><code class="language-shell">cd libsocketcan-0.0.10  //进入目录
+mkdir out              //创建文件夹，放置生成文件
+./configure --prefix=/文件夹路径/libsocketcan-0.0.10/out --host=arm-fsl-linux-gnueabi
+make
+make install
+</code></pre>
+<p>此时生成文件会出现在<code>out/lib</code>文件夹下，将这些生成的库复制到开发板的文件系统内，可以放在lib目录下，也可以放在<code>usr/lib</code>里面<br>
+（每篇博客的设置都不同，该步的生成文件我没有拷贝到开发板。以防后面配置出现问题，可以设置上）</p>
+<hr>
+<h4 id="第三步-编译安装canutils-406tarbz2">第三步 编译安装<code>canutils-4.0.6.tar.bz2</code></h4>
+<p>先将 libsocketcan 里面的头文件 <code>libsocketcan.h</code>， <code>can_netlink.h</code> 复制到 canutils 的 <code>include</code> 里面。这些文件在<code>out/include</code>目录下</p>
+<pre><code class="language-shell">cd canutils-4.0.6/
+mkdir out
+//进行实际配置,可直接复制下面代码，务必仔细修改文件夹路径和交叉编译工具链
+./configure --host=arm-fsl-linux-gnueabi   \
+--prefix=/文件夹路径/canutils-4.0.6/out li   \
+bsocketcan_LIBS=-lsocketcan LDFLAGS=&quot;-L/   \
+文件夹路径/libsocketcan-0.0.10/out/lib/&quot; l   \  
+ibsocketcan_CFLAGS=&quot;-I/文件夹路径/libsocke   \ 
+tcan-0.0.10/out/include&quot;
+
+make
+make install
+</code></pre>
+<p>最后在 <code>out/sbin</code> 下能见到 <code>canconfig</code> 命令，在<code>out/bin</code> 下面 <code>candump/canecho/cansend/cansequence</code><br>
+将这些文件拷贝到开发板<code>/usr</code>目录下即可。</p>
+<p>具体请看参考博客</p>
+<hr>
+<h3 id="4高级设置">4.高级设置</h3>
+<p>关键词：Linux SocketCAN工具<code>can-utils</code>中多线程设置</p>
+<p>实际使用时，将接收到的CAN数据发送到远程，同时远程服务器会再发送数据过来，所以需要多线程的需求。写好编译时，会出现这样的报错</p>
+<pre><code class="language-shell">undefined reference to `pthread_create'
+</code></pre>
+<p>很明显是由于设置多进程导致的，添加相应库后无效。经搜索发现需要在编译时进行相应设置，问题如下：</p>
+<p><strong>问题：</strong> <code>pthread</code> 库不是 Linux 系统默认的库，连接时需要使用静态库 <code>libpthread.a</code>，所以在使用<code>pthread_create()</code>创建线程，以及调用 <code>pthread_atfork()</code>函数建立fork处理程序时，需要链接该库。</p>
+<p>**解决：**在编译中要加 <code>-lpthread</code>参数（最好加在最后面，我到貌似就是这样才行）</p>
+<pre><code class="language-shell">gcc thread.c -o thread -lpthread
+</code></pre>
+<p><code>thread.c</code>为你些的源文件，不要忘了加上头文件<code>#include&lt;pthread.h&gt;</code></p>
+<p>但由于<code>can-utils</code>是通过Makefile管理，因此需要找到相关的编译设置。摸索一小时终于找到~</p>
+<p>在工具链<code>\src\GNUmakefile</code>中，第96行添加<code>-lpthread</code>，效果如下</p>
+<pre><code class="language-shell">CFLAGS = -Wall -g -lpthread -O2
+</code></pre>
+<p>同时在第365行添加<code>-lpthread</code>，效果如下：</p>
+<pre><code class="language-shell">.c.o:
+	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -lpthread -c -o $@ $&lt;
+	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+</code></pre>
+<p>之后执行<code>make</code>,<code>make install</code>编译即可。</p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/my-road">
+              <h3 class="post-title">
+                下一篇：本科毕业总结
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">个人知识记录，学习～</div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/qiaoxu123" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>

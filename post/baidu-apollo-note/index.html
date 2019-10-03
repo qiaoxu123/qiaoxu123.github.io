@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>Baidu Apollo代码笔记 | Blog</title>
+<meta name="description" content="个人知识记录，学习～">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1570096675636">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144014551-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-144014551-1');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1570096675636" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="https://qiaoxu123.github.io" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">Baidu Apollo代码笔记</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-09-29</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/weT98JPlY">
+                    工程
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://qiaoxu123.github.io/tag/toOCbbHpkO">
+                    算法
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>最近重新开始研读Baidu Apollo的代码，从中学到了很多新的工程使用的技巧和方法，在这集中整理下，做下记录，方便以后查找。</p>
+<!-- more -->
+<h2 id="1-google-glog的使用">1. google glog的使用</h2>
+<blockquote>
+<p><a href="https://blog.csdn.net/u012203028/article/details/79493067">参考博客</a></p>
+</blockquote>
+<p>在代码中经常可以看到<code>CHECK_GE</code>函数的使用，如<code>CHECK_GE(v, 0.0)</code>。另外还有其他一些语法，这些语法属于google glog库的使用。通过该库的使用，使得程序运行可以记录log信息，方便后期调试。</p>
+<h3 id="11-安装过程">1.1 安装过程：</h3>
+<ol>
+<li>下载google-glog代码，<a href="https://code.google.com/archive/p/google-glog/downloads">下载地址</a></li>
+<li>解压后进入目录，安装配置</li>
+</ol>
+<pre><code>./configure
+sudo make
+sudo make install
+</code></pre>
+<p>在这我遇到一个问题，Ubuntu18下，如果大家遇到可以参考下：<br>
+<img src="https://qiaoxu123.github.io/post-images/1569724661788.png" alt=""></p>
+<p>是在第二部<code>sudo make</code>出现的，网上没有直接搜到，参考相关答案自己尝试改了下，然后通过编译。<br>
+按照报错信息，gedit打开文件，然后把<strong>对应行</strong>中<code>'0'</code>改为<code>&quot;0&quot;</code>即可。</p>
+<h3 id="12-调试">1.2 调试</h3>
+<p>在Ubuntu下使用，需要配置下库的环境。运行 vim ~/.bashrc，添加如下内容，以配置库的路径</p>
+<pre><code>LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
+</code></pre>
+<p>之后运行 <code>sudo ldconfig</code>。</p>
+<p>测试代码：</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;glog/logging.h&gt;
+
+int main(int argc, char** argv) {
+  google::InitGoogleLogging(argv[0]);
+
+  FLAGS_log_dir = &quot;./log&quot;;
+
+  LOG(INFO) &lt;&lt; &quot;Hello World&quot;;
+
+  return 0;
+}
+</code></pre>
+<p>需要注意的是，要现在目录下创建log文件夹，否则会报错。创建好之后，输入命令进行编译即可：</p>
+<pre><code>g++ test.cpp -lglog
+</code></pre>
+<p>然后就可以从log文件夹下看到生成的日志信息了。</p>
+<hr>
+<h2 id="2-google-gflags-使用">2. google gflags 使用</h2>
+<blockquote>
+<p><a href="https://blog.csdn.net/jcjc918/article/details/50876613">参考博客</a></p>
+</blockquote>
+<p>在Apollo代码中可以经常看到这样子的变量：<code>FLAGS_longitudinal_acceleration_lower_bound</code><br>
+变量名前带FLAGS，网上查找资料后得知是google gflags的规范。参考博客中写的很详细，运行测试没问题，在这就不赘述实现过程了。</p>
+<p>（补充：Baidu Apollo中对google规范和工具用的真的很多，可以通过该工程对代码规范和工具使用进行很好的学习）</p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/momenta-interview">
+              <h3 class="post-title">
+                下一篇：Momenta面试记录
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">个人知识记录，学习～</div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/qiaoxu123" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
