@@ -1,0 +1,421 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>Ubuntu18下ROS使用Protobuf 共享内存的节点通信实现 | Blog</title>
+<meta name="description" content="个人知识记录，学习～">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1571923313236">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144014551-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-144014551-1');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1571923313236" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="https://qiaoxu123.github.io" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">Ubuntu18下ROS使用Protobuf 共享内存的节点通信实现</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-10-24</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/KUvEXNYC1">
+                    个人学习
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://qiaoxu123.github.io/tag/5HFkONYVv">
+                    ROS
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>最近在折腾ROS两个节点之间的通信实现，每个的功能都很简单，需要解决的地方在于两个之间的通信量很大，延迟要很低才行。确定使用protobuf共享内存后，网上查阅了好多资料才最终实现。在这实现一个最小的demo作为记录，希望能对后来者有帮助！<br>
+<a href="https://github.com/qiaoxu123/demo_project/tree/master/work_ws">github链接</a></p>
+<!-- more -->
+<h2 id="1-protobuf与共享内存">1. protobuf与共享内存</h2>
+<p>关于二者的概念，网上资料很多，在这最基本的说明下。ROS中传统的通信方式是socket实现，通过订阅和发布信息实现通信，另外服务和参数服务器因为暂未涉及在这不进行比较。这种方式虽然延时也很低但当数据量比较大，对传输稳定性要求高或者更高传输速率时，便显得不那么合适了。</p>
+<p>共享内存指的是通过对一块固定内存进行映射，使得不同程序或线程可以异步访问。通过这种数据拷贝的方式实现通信，速率和稳定性上有极大的提升。另外介绍下protobuf，可以简单理解为一种数据封装通信协议，可以实现不同语言之间的数据通信，而且可以离线更改和扩展，具体请查阅资料。</p>
+<ul>
+<li><a href="https://blog.csdn.net/xiexievv/article/details/47396725">protohuf安装</a></li>
+<li><a href="https://www.cnblogs.com/cv-pr/p/6296587.html">proto文件编写</a></li>
+</ul>
+<p>关于安装的具体步骤以及具体语法在这不一一细谈了，可以查看参考链接自行安装。在过程中，个人感觉有几点需要注意的在这说明下：</p>
+<ol>
+<li>Ubuntu自身带有protobuf，最好提前卸载，替换成成官方最新的，网上有资料自行查阅</li>
+<li>关于protobuf的安装路径说法不一，个人倾向于默认安装也就是官方安装，如自己指定安装目录后面程序运行还需要自己配置环境变量，有点麻烦</li>
+</ol>
+<hr>
+<h2 id="2-实现细节">2. 实现细节</h2>
+<p>下面通过client和server两个节点之间最简单通信，来比较详细的说明protobuf与共享内存结合实现通信的过程。</p>
+<h3 id="21-创建工程">2.1 创建工程</h3>
+<p>创建ros工作空间，并创建server和client两个节点</p>
+<pre><code class="language-shell">mkdir work_ws
+cd work_ws &amp; mkdir src
+catkin_init_workspace
+cd ..
+catkin_make
+cd src
+catkin_create_pkg server roscpp
+catkin create_pkg client roscpp
+</code></pre>
+<p>下面分别在两个节点下创建文件，最后创建完结构如下：</p>
+<pre><code>src
+├── client
+│   ├── CMakeLists.txt
+│   ├── include
+│   │   └── client
+│   │       ├── client.cc
+│   │       └── client.h
+│   ├── package.xml
+│   ├── proto
+│   │   └── agreement.proto
+│   └── src
+│       └── client_node.cc
+├── CMakeLists.txt 
+└── server
+    ├── CMakeLists.txt
+    ├── include
+    │   └── server
+    │       ├── server.cc
+    │       └── server.h
+    ├── package.xml
+    └── src
+        └── server_node.cc
+
+</code></pre>
+<h4 id="22-proto文件编写">2.2 proto文件编写</h4>
+<p>个人在client节点中单独创建了一个proto文件夹，用于存放proto文件。关于期具体语法请自行查阅，在这使用protobuf3版本，与版本2相比有些许不同。程序为一个最简单的message信息</p>
+<pre><code class="language-c">syntax = &quot;proto3&quot;;
+
+message agreement {
+  double id = 1;
+  double x = 2;
+  double y = 3;
+  double z = 4;
+
+  bool flag = 5;
+}
+</code></pre>
+<p>下面是最复杂的地方，也就是<code>CMakeLists.txt</code>文件的编写，网上资料很少，在这给出一个<a href="https://blog.csdn.net/weixin_40528417/article/details/89374397">参考链接</a>。可以结合我工程中的代码仔细理解下(我也不是很理解。。。)</p>
+<pre><code class="language-shell">cmake_minimum_required(VERSION 2.8.3)
+
+project(client)
+
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+)
+
+## System dependencies are found with CMake's conventions
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+include(FindProtobuf)
+find_package(Protobuf REQUIRED)
+
+set(proto_dir ${PROJECT_SOURCE_DIR}/proto)
+file(GLOB proto_files &quot;${proto_dir}/*.proto&quot;)
+
+# Set up destination directories
+catkin_destinations()
+set(proto_gen_dir ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_INCLUDE_DESTINATION}/proto)
+set(proto_gen_cpp_dir ${proto_gen_dir})
+file(MAKE_DIRECTORY ${proto_gen_dir})
+file(MAKE_DIRECTORY ${proto_gen_cpp_dir})
+set(protogen_include_dirs ${proto_gen_cpp_dir}/../ ${proto_gen_python_dir})
+
+# Create lists of files to be generated
+set(proto_gen_cpp_files &quot;&quot;)
+foreach(proto_file ${proto_files})  
+  get_filename_component(proto_name ${proto_file} NAME_WE)
+  list(APPEND proto_gen_cpp_files 
+       ${proto_gen_cpp_dir}/${proto_name}.pb.h 
+       ${proto_gen_cpp_dir}/${proto_name}.pb.cc
+  )
+endforeach(proto_file ${proto_files}) 
+
+# Run protoc and generate language-specific headers.
+add_custom_command(
+  OUTPUT ${proto_gen_cpp_files}
+  COMMAND ${PROTOBUF_PROTOC_EXECUTABLE} --proto_path=${proto_dir} --cpp_out=${proto_gen_cpp_dir} ${proto_files}
+  DEPENDS ${PROTOBUF_PROTOC_EXECUTABLE} ${proto_files}
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+set_source_files_properties(${proto_gen_cpp_files} PROPERTIES GENERATED TRUE)
+
+add_custom_target(${PROJECT_NAME}_generate_headers
+  DEPENDS ${proto_gen_cpp_files} 
+) 
+
+# Create proto library for lining.
+include_directories(${PROTOBUF_INCLUDE_DIR} ${PROTOBUF_INCLUDE_DIR}/../../)
+add_library(${PROJECT_NAME}_proto ${proto_gen_cpp_files})
+target_link_libraries(${PROJECT_NAME}_proto ${PROTOBUF_LIBRARY})
+add_dependencies(${PROJECT_NAME}_proto ${PROJECT_NAME}_generate_headers)
+
+catkin_package(
+  INCLUDE_DIRS ${protogen_include_dirs}
+  LIBRARIES ${PROJECT_NAME}_proto
+)
+
+install(TARGETS ${PROJECT_NAME}_proto
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(DIRECTORY ${proto_gen_cpp_dir}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN &quot;*.h&quot;
+)
+
+catkin_package(
+  INCLUDE_DIRS include 
+)
+
+include_directories(
+  ${catkin_INCLUDE_DIRS}
+  ${PROTOBUF_INCLUDE_DIR}
+  ${CATKIN_DEVEL_PREFIX}
+  include
+)
+
+add_library(${PROJECT_NAME}
+  include/${PROJECT_NAME}/client.cc
+)
+
+add_executable(client_node src/client_node.cc include/${PROJECT_NAME}/client.cc)
+
+target_link_libraries(${PROJECT_NAME}_node 
+  ${catkin_LIBRARIES}
+  ${PROTOBUF_LIBRARIES}
+  ${Boost_FILESYSTEM_LIBRARY}
+  ${Boost_SYSTEM_LIBRARY}
+)
+</code></pre>
+<p>最后实现效果是在<code>work_ws</code>工作空间的devel文件夹下创建include文件夹放置生成的proto头文件。因为关于ROS中使用protobuf没有足够的参考的资料，所以就随性发挥了。也想过参考Apollo放置在节点的proto文件夹下，但是节点之间message的引用也很麻烦，细想放在devel文件夹下引用可能会更方便，所以就没有再花费时间更改。生成文件效果如下：</p>
+<pre><code>include/
+└── proto
+    ├── agreement.pb.cc
+    └── agreement.pb.h
+</code></pre>
+<p>大家可以对照<code>CMakeLists.txt</code>文件理解其中的实现过程。需要注意的是，如果其他节点想要调用生成的proto头文件，需要在其本身的<code>CMakeLists.txt</code>中的<code>include_directories</code>中包含<code>devel</code>文件夹的位置变量，否则引用会报错，如下</p>
+<pre><code class="language-shell">include_directories(
+  ${catkin_INCLUDE_DIRS} 
+  ${PROTOBUF_INCLUDE_DIR}
+  ${CATKIN_DEVEL_PREFIX}  # this should be added
+  include
+)
+</code></pre>
+<hr>
+<h4 id="23-主程序编写">2.3 主程序编写</h4>
+<p>下面以client节点为例说明下主程序的实现，并介绍共享内存的调用实现。整个工程代码已上传github，请自行查阅<br>
+<code>client.h</code>文件</p>
+<pre><code class="language-c">#ifndef CLIENT_H_
+#define CLIENT_H_
+
+#include &lt;sys/types.h&gt;
+#include &lt;sys/ipc.h&gt;
+#include &lt;sys/shm.h&gt;
+#include &lt;ros/ros.h&gt;
+#include &lt;iostream&gt;
+
+#include &quot;include/proto/agreement.pb.h&quot;
+
+namespace Client {
+
+class client {
+ public: 
+  client();
+  ~client();
+
+  void sendMessage();
+ private:
+  int shmID;              // 共享内存标识符
+  void *shm = nullptr;    // 与进程内存连接地址
+  agreement *mem = nullptr;
+};
+} // namespace Client
+
+#endif
+</code></pre>
+<p>关于共享内存只需要记住三个头文件，四个函数即可，理解起来比多进程容易多了。详细查阅<a href="https://blog.csdn.net/mybelief321/article/details/9170041">参考资料</a>。下面是<code>client.cc</code>文件</p>
+<pre><code class="language-c">#include &quot;client/client.h&quot;
+
+using namespace Client;
+
+client::client() {
+  shmID = shmget((key_t)1933, sizeof(agreement), 0666 | IPC_CREAT);
+  if (shmID != -1) {
+    shm = shmat(shmID, NULL, 0);
+  } else {
+    ROS_ERROR(&quot;Cann't get shared memory,error num is %d, for %s\n&quot;, errno,
+              strerror(errno));
+  }
+  mem = (agreement *)shm
+}
+
+void client::sendMessage() {
+  std::cout &lt;&lt; &quot;Ready to send message to client &quot; &lt;&lt; std::endl;
+  double id = 1, x = 2, y = 3, z = 4;
+
+  while (true) {
+    mem-&gt;set_flag(true);
+    mem-&gt;set_id(id++);
+    mem-&gt;set_x(x++);
+    mem-&gt;set_y(y++);
+    mem-&gt;set_z(z++);
+    sleep(1);
+  }
+}
+
+client::~client() {
+  if (shmdt(shm) == -1) {
+    ROS_ERROR(&quot;Error is %d, cann't not release shared memory. for %s\n&quot;, errno,
+              strerror(errno));
+  }
+}
+</code></pre>
+<p>对照参考资料，代码很容易理解，需要注意的是，在这直接指定了共享内存标识符，目的是方便后面的节点直接访问。</p>
+<hr>
+<h4 id="24-程序运行">2.4 程序运行</h4>
+<p>最后程序运行效果如下：<br>
+<img src="https://qiaoxu123.github.io/post-images/1571922361478.png" alt=""><br>
+client节点计数，server节点读取打印。</p>
+<hr>
+<h3 id="3-总结">3. 总结</h3>
+<p>综上，在ros环境下实现了<code>protobuf</code>共享内存的节点通信，复杂之处主要在于包含了<code>protobuf</code>文件的<code>Cmaklsit</code>文件的编写，后面就简单多了。</p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/coursera-self-driving-cars">
+              <h3 class="post-title">
+                下一篇：推荐：可能是目前最好的自动驾驶教程
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">个人知识记录，学习～</div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/qiaoxu123" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>

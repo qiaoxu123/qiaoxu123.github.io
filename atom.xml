@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qiaoxu123.github.io</id>
     <title>Blog</title>
-    <updated>2019-10-03T09:58:39.512Z</updated>
+    <updated>2019-10-24T13:24:15.148Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qiaoxu123.github.io"/>
     <link rel="self" href="https://qiaoxu123.github.io/atom.xml"/>
@@ -10,6 +10,19 @@
     <logo>https://qiaoxu123.github.io/images/avatar.png</logo>
     <icon>https://qiaoxu123.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[Ubuntu18下ROS使用Protobuf 共享内存的节点通信实现]]></title>
+        <id>https://qiaoxu123.github.io/post/ubuntu18-protobuf-memory-share-note</id>
+        <link href="https://qiaoxu123.github.io/post/ubuntu18-protobuf-memory-share-note">
+        </link>
+        <updated>2019-10-24T02:30:35.000Z</updated>
+        <summary type="html"><![CDATA[<p>最近在折腾ROS两个节点之间的通信实现，每个的功能都很简单，需要解决的地方在于两个之间的通信量很大，延迟要很低才行。确定使用protobuf共享内存后，网上查阅了好多资料才最终实现。在这实现一个最小的demo作为记录，希望能对后来者有帮助！<br>
+<a href="https://github.com/qiaoxu123/demo_project/tree/master/work_ws">github链接</a></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>最近在折腾ROS两个节点之间的通信实现，每个的功能都很简单，需要解决的地方在于两个之间的通信量很大，延迟要很低才行。确定使用protobuf共享内存后，网上查阅了好多资料才最终实现。在这实现一个最小的demo作为记录，希望能对后来者有帮助！<br>
+<a href="https://github.com/qiaoxu123/demo_project/tree/master/work_ws">github链接</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[推荐：可能是目前最好的自动驾驶教程]]></title>
         <id>https://qiaoxu123.github.io/post/coursera-self-driving-cars</id>
@@ -111,21 +124,6 @@
         <summary type="html"><![CDATA[<p>转载自：<a href="https://zhuanlan.zhihu.com/p/69878689">知乎平台</a></p>
 ]]></summary>
         <content type="html"><![CDATA[<p>转载自：<a href="https://zhuanlan.zhihu.com/p/69878689">知乎平台</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Baidu Apollo 决策规划学习资源汇总]]></title>
-        <id>https://qiaoxu123.github.io/post/baidu-apollo-planning</id>
-        <link href="https://qiaoxu123.github.io/post/baidu-apollo-planning">
-        </link>
-        <updated>2019-08-29T08:41:40.000Z</updated>
-        <summary type="html"><![CDATA[<p>因为个人在学习过程中经常需要参考查阅相关资料，逐一转载太过繁琐，在这简单汇总整理下网上已有的资源，方便个人及大家查阅学习.</p>
-<p><strong>Apollo开发者社区</strong>资源更全面，关注微信公众号即可。</p>
-<p>后续更新中..</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>因为个人在学习过程中经常需要参考查阅相关资料，逐一转载太过繁琐，在这简单汇总整理下网上已有的资源，方便个人及大家查阅学习.</p>
-<p><strong>Apollo开发者社区</strong>资源更全面，关注微信公众号即可。</p>
-<p>后续更新中..</p>
 ]]></content>
     </entry>
 </feed>
