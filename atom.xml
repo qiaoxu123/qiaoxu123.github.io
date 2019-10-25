@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qiaoxu123.github.io</id>
     <title>Blog</title>
-    <updated>2019-10-24T13:24:15.148Z</updated>
+    <updated>2019-10-25T03:36:11.753Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qiaoxu123.github.io"/>
     <link rel="self" href="https://qiaoxu123.github.io/atom.xml"/>
@@ -11,7 +11,7 @@
     <icon>https://qiaoxu123.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Blog</rights>
     <entry>
-        <title type="html"><![CDATA[Ubuntu18下ROS使用Protobuf 共享内存的节点通信实现]]></title>
+        <title type="html"><![CDATA[Ubuntu18下ROS使用Protobuf 共享内存实现节点通信]]></title>
         <id>https://qiaoxu123.github.io/post/ubuntu18-protobuf-memory-share-note</id>
         <link href="https://qiaoxu123.github.io/post/ubuntu18-protobuf-memory-share-note">
         </link>
