@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qiaoxu123.github.io</id>
     <title>Blog</title>
-    <updated>2019-10-25T03:36:11.753Z</updated>
+    <updated>2019-10-29T05:37:48.811Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qiaoxu123.github.io"/>
     <link rel="self" href="https://qiaoxu123.github.io/atom.xml"/>
@@ -10,6 +10,17 @@
     <logo>https://qiaoxu123.github.io/images/avatar.png</logo>
     <icon>https://qiaoxu123.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[个人在ROS工程使用Protobuf的模板和一点心得]]></title>
+        <id>https://qiaoxu123.github.io/post/ros-personal-note</id>
+        <link href="https://qiaoxu123.github.io/post/ros-personal-note">
+        </link>
+        <updated>2019-10-28T03:30:57.000Z</updated>
+        <summary type="html"><![CDATA[<p>从上周搞定ROS工程下使用Protbuf的问题后，陆续对原有工程进行了更改，在这一过程中，探索了下Protobuf与ROS工程结合的不同方式，暂时总结了一份模板，并在此记录下心得。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>从上周搞定ROS工程下使用Protbuf的问题后，陆续对原有工程进行了更改，在这一过程中，探索了下Protobuf与ROS工程结合的不同方式，暂时总结了一份模板，并在此记录下心得。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Ubuntu18下ROS使用Protobuf 共享内存实现节点通信]]></title>
         <id>https://qiaoxu123.github.io/post/ubuntu18-protobuf-memory-share-note</id>
@@ -113,17 +124,6 @@
         <summary type="html"><![CDATA[<p>在调试过程中烦恼已久的问题，终于找到了，在这转载记录下。</p>
 ]]></summary>
         <content type="html"><![CDATA[<p>在调试过程中烦恼已久的问题，终于找到了，在这转载记录下。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Apollo轨迹规划分享--问答]]></title>
-        <id>https://qiaoxu123.github.io/post/baidu-apollo-share</id>
-        <link href="https://qiaoxu123.github.io/post/baidu-apollo-share">
-        </link>
-        <updated>2019-08-29T14:02:03.000Z</updated>
-        <summary type="html"><![CDATA[<p>转载自：<a href="https://zhuanlan.zhihu.com/p/69878689">知乎平台</a></p>
-]]></summary>
-        <content type="html"><![CDATA[<p>转载自：<a href="https://zhuanlan.zhihu.com/p/69878689">知乎平台</a></p>
 ]]></content>
     </entry>
 </feed>
