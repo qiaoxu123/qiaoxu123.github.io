@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qiaoxu123.github.io</id>
     <title>Blog</title>
-    <updated>2019-10-29T05:37:48.811Z</updated>
+    <updated>2019-11-25T09:24:54.129Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qiaoxu123.github.io"/>
     <link rel="self" href="https://qiaoxu123.github.io/atom.xml"/>
@@ -10,6 +10,28 @@
     <logo>https://qiaoxu123.github.io/images/avatar.png</logo>
     <icon>https://qiaoxu123.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[Ubuntu 18/16 下 TP-LINK 5500无线网卡驱动问题]]></title>
+        <id>https://qiaoxu123.github.io/post/ubuntu-18-16-tp-link 5500 </id>
+        <link href="https://qiaoxu123.github.io/post/ubuntu-18-16-tp-link 5500 ">
+        </link>
+        <updated>2019-11-12T07:39:19.000Z</updated>
+        <summary type="html"><![CDATA[<p>今天刚花了半小时时间调了一下公司的主机，因为有线网络一直连接不上，一气之下找了一个无线网卡直接怼上试试，结果因为是Ubuntu系统还不适配，哎，只好耐心找了下驱动，费了些时间搞定了，在这简单记录下。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>今天刚花了半小时时间调了一下公司的主机，因为有线网络一直连接不上，一气之下找了一个无线网卡直接怼上试试，结果因为是Ubuntu系统还不适配，哎，只好耐心找了下驱动，费了些时间搞定了，在这简单记录下。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[C++算法常用STL函数整理]]></title>
+        <id>https://qiaoxu123.github.io/post/C++_STL_Note</id>
+        <link href="https://qiaoxu123.github.io/post/C++_STL_Note">
+        </link>
+        <updated>2019-10-29T08:09:19.000Z</updated>
+        <summary type="html"><![CDATA[<p>最近在听Acwing算法基础课，其中提到了一些算法常用的STL函数，个人感觉很全面，在这整理复习下。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>最近在听Acwing算法基础课，其中提到了一些算法常用的STL函数，个人感觉很全面，在这整理复习下。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[个人在ROS工程使用Protobuf的模板和一点心得]]></title>
         <id>https://qiaoxu123.github.io/post/ros-personal-note</id>
@@ -102,28 +124,6 @@
         <summary type="html"><![CDATA[<p>依旧是项目需求，在Linux平台下实现延时。使用系统自定义的sleep函数总是无效，无奈下尝试使用select函数实现，效果很好，在这先占坑后续查找sleep函数无效的原因。转载自<a href="https://www.cnblogs.com/jjdiaries/p/3404380.html">博客</a></p>
 ]]></summary>
         <content type="html"><![CDATA[<p>依旧是项目需求，在Linux平台下实现延时。使用系统自定义的sleep函数总是无效，无奈下尝试使用select函数实现，效果很好，在这先占坑后续查找sleep函数无效的原因。转载自<a href="https://www.cnblogs.com/jjdiaries/p/3404380.html">博客</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[ThinkPad E480 Linux WIFI 问题解决]]></title>
-        <id>https://qiaoxu123.github.io/post/thinkpad-e480-linux-wifi</id>
-        <link href="https://qiaoxu123.github.io/post/thinkpad-e480-linux-wifi">
-        </link>
-        <updated>2019-09-03T14:42:17.000Z</updated>
-        <summary type="html"><![CDATA[<p>因为工作需要在个人笔记本上安装Linux，目前使用的版本是Linux mint19.2。但ThinkPad E480 因为自带的8821ce无线网卡太“新”，导致无法直接识别，测试过网上各种方案后，终于找到一个比较稳定的方案。在这笔记记录下。</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>因为工作需要在个人笔记本上安装Linux，目前使用的版本是Linux mint19.2。但ThinkPad E480 因为自带的8821ce无线网卡太“新”，导致无法直接识别，测试过网上各种方案后，终于找到一个比较稳定的方案。在这笔记记录下。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Socket编程中send函数引发线程退出]]></title>
-        <id>https://qiaoxu123.github.io/post/engineer_debug_socket</id>
-        <link href="https://qiaoxu123.github.io/post/engineer_debug_socket">
-        </link>
-        <updated>2019-09-02T07:38:44.000Z</updated>
-        <summary type="html"><![CDATA[<p>在调试过程中烦恼已久的问题，终于找到了，在这转载记录下。</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>在调试过程中烦恼已久的问题，终于找到了，在这转载记录下。</p>
 ]]></content>
     </entry>
 </feed>

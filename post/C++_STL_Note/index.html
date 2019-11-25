@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>C++算法常用STL函数整理 | Blog</title>
+<meta name="description" content="个人知识记录，学习～">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1574672020085">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144014551-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-144014551-1');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1574672020085" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="https://qiaoxu123.github.io" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">C++算法常用STL函数整理</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-10-29</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/BGI4X2Ir8">
+                    STL
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://qiaoxu123.github.io/tag/lJwUcvxsaz">
+                    C++
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://qiaoxu123.github.io/tag/toOCbbHpkO">
+                    算法
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>最近在听Acwing算法基础课，其中提到了一些算法常用的STL函数，个人感觉很全面，在这整理复习下。</p>
+<!-- more -->
+<h3 id="1-vector">1. vector</h3>
+<p>变长数组，使用倍增的思想来实现。需要注意一点，在计算机程序中，申请内存所需要的时间与空间大小无关，只与申请的次数有关。所以vector通过倍增的思想来实现，每次倍增一定的大小，来实现扩展存储。时间复杂度相当于O(1)。</p>
+<p>常用的函数：</p>
+<ul>
+<li>size() 返回数组中元素的个数</li>
+<li>empty() 判断数组当前是否为kong</li>
+<li>clear() 清空数组</li>
+<li>front()/back()</li>
+<li>push_back() / pop_back() 插入，弹出数组元素</li>
+<li>begin()/end() 相当于STL中的迭代器，分别指向数组头和尾部后一个节点</li>
+<li>[]</li>
+</ul>
+<p>vector支持比较运算，按照字典序进行</p>
+<hr>
+<h3 id="2-pairint-int">2. pair&lt;int, int&gt;</h3>
+<p>first , 第一个元素；<br>
+second， 第二个元素；<br>
+支持比较运算，以first为第一关键字，以second为第二关键字</p>
+<hr>
+<h3 id="3-string-字符串">3. string 字符串</h3>
+<p>C语言字符串数组存在很多不足之处，C++使用string进行升级</p>
+<p>常用函数：</p>
+<ul>
+<li>size()/length() 返回字符串的长度</li>
+<li>empty()</li>
+<li>clear()</li>
+<li>substr(起始坐标，子串的长度) 返回string类型的子串</li>
+<li>c_str() 返回字符串所在字符数组的起始地址</li>
+</ul>
+<hr>
+<h3 id="4-queue-队列">4. queue 队列</h3>
+<p>常用函数：</p>
+<ul>
+<li>size()</li>
+<li>empty()</li>
+<li>push() 向队尾插入一个元素</li>
+<li>front() 返回队头元素</li>
+<li>back() 返回队尾元素</li>
+<li>pop() 弹出队头元素</li>
+</ul>
+<hr>
+<h3 id="5-priority_queue">5. priority_queue</h3>
+<p>优先队列，默认是大根堆</p>
+<p>常用函数：</p>
+<ul>
+<li>push() 插入一个元素</li>
+<li>top() 返回堆顶元素</li>
+<li>pop() 弹出堆顶元素</li>
+</ul>
+<p>注意：定义成小根堆的方式：priority_queue&lt;int, vector<int>, greater<int>&gt; q;</p>
+<hr>
+<h3 id="6-stack-栈">6. stack 栈</h3>
+<p>常用函数：</p>
+<ul>
+<li>size()</li>
+<li>empty()</li>
+<li>push() 向栈顶插入一个元素</li>
+<li>top() 返回栈顶元素</li>
+<li>pop() 弹出栈顶元素</li>
+</ul>
+<hr>
+<h3 id="7-deque-双端队列">7. deque 双端队列</h3>
+<p>常用函数：</p>
+<ul>
+<li>size()</li>
+<li>empty()</li>
+<li>clear()</li>
+<li>front()/back()</li>
+<li>push_back()/pop_back()</li>
+<li>push_front()/pop_back()</li>
+<li>begin()/end()</li>
+<li>[]</li>
+</ul>
+<hr>
+<h3 id="8-setmapmultisetmultimap">8. set,map,multiset,multimap</h3>
+<p>基于平衡二叉树（红黑树），动态维护有序序列</p>
+<p>常用函数：</p>
+<ul>
+<li>size()</li>
+<li>empty()</li>
+<li>clear()</li>
+<li>begin()/end()</li>
+<li>++, -- 返回前驱和后继，时间复杂度O(logn)</li>
+</ul>
+<p>set/multiset</p>
+<ul>
+<li>insert() 插入一个数</li>
+<li>find() 查找一个数</li>
+<li>count() 返回某一个数的个数</li>
+<li>erese()
+<ul>
+<li>输入是一个数x，删除所有x（时间复杂度是O(k + logn))</li>
+<li>输入一个迭代器，删除这个迭代器</li>
+</ul>
+</li>
+<li>lower_bound()/upper_bound()
+<ul>
+<li>lower_bound(x) 返回大于等于x的最小的数的迭代器</li>
+<li>upper_bound(x) 返回大于x的最小的数的迭代器</li>
+</ul>
+</li>
+</ul>
+<p>map/multimap</p>
+<ul>
+<li>insert() 插入的数是一个pair</li>
+<li>erase() 输入的参数是pair或者迭代器</li>
+<li>find()</li>
+<li>[] 注意multimap不支持此操作，时间复杂度是O(logn)</li>
+<li>lower_bound()/upper_bound()</li>
+</ul>
+<p>unordered_set, unordered_map, unordered_multiset, unordered_multimap, 哈希表<br>
+和上面类似，增删改查的时间复杂度是O(1)<br>
+不支持lower_bound()/upper_bound()， 迭代器的++， --</p>
+<hr>
+<h3 id="9-bitset-压位">9. bitset 压位</h3>
+<p>常用函数：<br>
+bitset&lt;10000&gt; s;</p>
+<ul>
+<li>~, &amp;, |, ^</li>
+<li>&gt;&gt;, &lt;&lt;</li>
+<li>==, !=</li>
+<li>[]</li>
+<li>count()  返回有多少个1</li>
+<li>any()  判断是否至少有一个1</li>
+<li>none()  判断是否全为0</li>
+<li>set()  把所有位置成1</li>
+<li>set(k, v)  将第k位变成v</li>
+<li>reset()  把所有位变成0</li>
+<li>flip()  等价于~</li>
+<li>flip(k) 把第k位取反</li>
+</ul>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/ros-personal-note">
+              <h3 class="post-title">
+                下一篇：个人在ROS工程使用Protobuf的模板和一点心得
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">个人知识记录，学习～</div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/qiaoxu123" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
