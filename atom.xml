@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qiaoxu123.github.io</id>
     <title>Blog</title>
-    <updated>2019-11-25T09:31:02.283Z</updated>
+    <updated>2019-11-26T14:05:48.147Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qiaoxu123.github.io"/>
     <link rel="self" href="https://qiaoxu123.github.io/atom.xml"/>
@@ -10,6 +10,17 @@
     <logo>https://qiaoxu123.github.io/images/avatar.png</logo>
     <icon>https://qiaoxu123.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[第二次面试心得 -- 商汤自动驾驶实习]]></title>
+        <id>https://qiaoxu123.github.io/post/interview2-note</id>
+        <link href="https://qiaoxu123.github.io/post/interview2-note">
+        </link>
+        <updated>2019-11-26T11:36:34.000Z</updated>
+        <summary type="html"><![CDATA[<p>昨天下午刚刚结束面试，心情一度很抑郁，不过还是趁现在记忆比较深来总结下吧。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>昨天下午刚刚结束面试，心情一度很抑郁，不过还是趁现在记忆比较深来总结下吧。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Ubuntu 18/16 下 TP-LINK 5500无线网卡驱动问题]]></title>
         <id>https://qiaoxu123.github.io/post/tp-link-wireless-problem</id>
@@ -113,17 +124,6 @@
         <summary type="html"><![CDATA[<p>花了半天时间查找各种资料，终于实现了，在这整理记录下，方便后续参考。</p>
 ]]></summary>
         <content type="html"><![CDATA[<p>花了半天时间查找各种资料，终于实现了，在这整理记录下，方便后续参考。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Linux下使用select实现精确定时器]]></title>
-        <id>https://qiaoxu123.github.io/post/linux-socket-select-note</id>
-        <link href="https://qiaoxu123.github.io/post/linux-socket-select-note">
-        </link>
-        <updated>2019-09-05T05:30:16.000Z</updated>
-        <summary type="html"><![CDATA[<p>依旧是项目需求，在Linux平台下实现延时。使用系统自定义的sleep函数总是无效，无奈下尝试使用select函数实现，效果很好，在这先占坑后续查找sleep函数无效的原因。转载自<a href="https://www.cnblogs.com/jjdiaries/p/3404380.html">博客</a></p>
-]]></summary>
-        <content type="html"><![CDATA[<p>依旧是项目需求，在Linux平台下实现延时。使用系统自定义的sleep函数总是无效，无奈下尝试使用select函数实现，效果很好，在这先占坑后续查找sleep函数无效的原因。转载自<a href="https://www.cnblogs.com/jjdiaries/p/3404380.html">博客</a></p>
 ]]></content>
     </entry>
 </feed>

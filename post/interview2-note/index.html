@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>第二次面试心得 -- 商汤自动驾驶实习 | Blog</title>
+<meta name="description" content="个人知识记录，学习～">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1574777143007">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1574777143007" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="https://qiaoxu123.github.io" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">第二次面试心得 -- 商汤自动驾驶实习</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-11-26</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/5Tfh9kMMH">
+                    工作招聘
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>昨天下午刚刚结束面试，心情一度很抑郁，不过还是趁现在记忆比较深来总结下吧。</p>
+<!-- more -->
+<p>具体信息：</p>
+<ul>
+<li>岗位来源：实习僧</li>
+<li>岗位名称：商汤科技自动驾驶见习研究员</li>
+<li>实地地点：深圳</li>
+<li>面试时间：下午两点，时长一小时左右</li>
+</ul>
+<h3 id="1-面试环节">1. 面试环节</h3>
+<p>在面试之前还是准备了比较多的，距离上一次面试过去差不多2个月左右，中间开始看 Acwing 的面试算法题，每天都会背一点写一点。同时开始看深蓝学院的《运动规划课程》。</p>
+<p>与第一次盲目的和临时的刷题不同，经过两个月的水题，对于算法题目不再那么抵触，笔试平台也不再那么陌生。在面试前两天，把剑指offer上的题目刷了20多道，反复刷了几遍，几个重点题目记忆了一下。同时对比简历认真总结了一下项目和个人亮点，整理成文字部分，在面试过程前半部分还是挺顺利的，问到的知识点心里有了一个大致的准备。另外，桌面环境也换成windows，虽然面试过程中仍然出现编辑器虚影情况，但相比第一次好多了。下面回忆下面试提问的内容：</p>
+<ol>
+<li>
+<p><strong>自我介绍</strong></p>
+<p>因为提前写好了稿子，所以并没有那么盲目，把握大体时长，分工程项目和理论研究两个部分介绍了下。</p>
+</li>
+<li>
+<p><strong>做过的激光雷达项目中用到的算法都有哪些？</strong></p>
+<p>这个也提前准备了下，但因为考虑问的可能性不大，所以没有细致准备算法的名称，原理等，只大概介绍了下为什么使用等。这个位置后面需要加强下。即个人认为比较重要的项目，都应该细致描述整个项目过程中的算法。</p>
+</li>
+<li>
+<p><strong>用过的路径规划算法都有哪些？</strong></p>
+<p>因为意向岗位是路径规划，这次的面试官也是对口的，着重问了下我这方面用过哪些算法。我主要描述了之前基于Carla做的仿真，虽然准备了些，但是只是描述算法的过程看来是远远不够的，面试官很感兴趣的是你在测试过程中发现了什么问题，以及是怎么解决的。中间瞎编了一些情况，有点太扯了。哎，果然得多积累下才行。</p>
+</li>
+<li>
+<p><strong>你知道<code>RRT</code>算法吗？<code>RRT*</code>算法呢？卡尔曼滤波算法呢？请说明下他们的原理</strong></p>
+<p>从面试官的问题中真的可以感受到面试官是很认真的，很耐心地询问你这些算法的原理。</p>
+</li>
+</ol>
+<hr>
+<h3 id="2-笔试环节">2. 笔试环节</h3>
+<p>笔试的形式依旧是和第一次面试一样，只是共享编辑器，然后手写代码。</p>
+<blockquote>
+<p>题目一：给定一个乱序的数组，然后求其中位数。</p>
+</blockquote>
+<p>中位数是所有数中按大小排序后中间的数。最基本的思路就是排好序后找中间数即可，因此这道题目排序算法实现及其特性是考察的核心。面试官首先问能想到的实现算法有几种，复杂度是怎么样的。果然是太年轻，事先并没有熟记复杂度的内容，只隐约记得堆排序和快排是比较快的，冒泡是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><msup><mi>n</mi><mn>2</mn></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 的。但具体说不上来是为什么。接着是要求实现，如何在未排完序前找到中位数。</p>
+<p>算法<a href="https://www.cnblogs.com/shizhh/p/5746151.html">参考链接</a></p>
+<p>中间面试官给了各种提示，但最终还是没有理解应该如何实现，后来说到你也可以用大堆和小堆一起实现，但堆也是我的知识盲点，因此面试官无语只好换题了。。</p>
+<blockquote>
+<p>题目二：每个数阶乘后的数，末尾都包含几个0，如5! = 120， 后面有一个0</p>
+</blockquote>
+<p>很显然不能先求出来后再判断，而是查找阶乘运算与0的个数的规律。自己在思考时候发现5的个数与0是有关系的，但具体关系也没有给出，时间就到了。</p>
+<hr>
+<h3 id="3-总结">3. 总结</h3>
+<p>这次面试的面试官真的非常nice，中间很耐心而且给出了各种提示，只是因为自己太笨所以没有领会到。下面总结下这次面试的经验教训，以及后面如何提高更改。</p>
+<ol>
+<li>
+<p><strong>简历要重新做</strong></p>
+<p>虽然项目经历和实习写的满满的，但写的太笼统，让面试官感觉到无从下手，这样的后果是面试官只好让你重新自我介绍，或者随机地从你的描述中抽取问题，最坏的情况就是根据自己的需求来问你问题。这样很不好，合理的简历应该是丰富但又条理，说明项目的细节，实习的内容以及能力的侧重等，让面试官有的放矢从而简化自己的压力。</p>
+</li>
+<li>
+<p><strong>准备要更充足</strong></p>
+<p>这次面试充分感受到了提前准备的好处，因为事情写了回答稿，所以很多问题都提前想到了。这样回答就很精致，不会拖泥带水，这个也是我一直的毛病。应该对问题进行直截了当地回答，穿插自己的感受，而不是随机发挥。下次一定要根据这次的问题完善稿子，对面试官关心的侧重点进行总结，对项目的不足进行描述，使经历变得更丰满。</p>
+</li>
+<li>
+<p><strong>刷题既要保量，又要保质</strong></p>
+<p>之前刷了很多题，也背了一些模板，但这次面试后还是感觉到自己知识体系的不足。比如各种排序的复杂度，最好最坏情况，以及每种排序的特性，适用的情况等等。都需要熟练掌握。从思路总结，到实现，要更加流畅。简单说，理解的题目多重复思考，为什么用这个。做题时多总结思路的原理和方法，不应该背过就好。</p>
+</li>
+<li>
+<p><strong>专业领域需要继续精进</strong></p>
+<p>专业领域的东西仍然了解太少，应该更加细致去做才行，也需要多花些心思去背，多花些时间去实现。</p>
+</li>
+</ol>
+<p>希望下次顺利，继续加油！！！</p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/tp-link-wireless-problem">
+              <h3 class="post-title">
+                下一篇：Ubuntu 18/16 下 TP-LINK 5500无线网卡驱动问题
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">个人知识记录，学习～</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
