@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>Linux下C++ Socket通信 | Blog</title>
+<title>轻松生活 | Blog</title>
 <meta name="description" content="个人知识记录，学习～">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -72,53 +72,49 @@
 
 
       <div class="content-container">
-        <div class="post-detail">
-          
-          <h2 class="post-title">Linux下C++ Socket通信</h2>
-          <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2019-08-28</span>
-            
-              <span>
-                <i class="icon-pricetags-outline"></i>
-                
-                  <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr">
-                    工程实现
-                    
-                      ，
-                    
-                  </a>
-                
-                  <a href="https://qiaoxu123.github.io/tag/r-obVdFCs">
-                    笔记
-                    
-                  </a>
-                
-              </span>
-            
-          </div>
-          <div class="post-content">
-            <p>个人在实际项目开发中对于socket通信应用很多，就资源来讲，入门级别的socket通信实现太多了，包括TCP，UDP通信。在这个人整理下实际开发中遇到的功能实现问题，也算是socket通信的进阶学习之路。</p>
-<p>平台：Linux Mint 19.2<br>
-编译器：g++</p>
-<h2 id="-more-"><!-- more --></h2>
-<blockquote>
-<p>socket实现的最基本原理，可以参考下图。具体概念和实现在这都不一一赘述，网络资源汗牛充栋。在这开门见山，简单记录下笔者开发过程中遇到的功能实现问题，并一一进行说明。</p>
-</blockquote>
-<figure data-type="image" tabindex="1"><img src="https://qiaoxu123.github.io/post-images/1566962986233.png" alt=""></figure>
-<ol>
-<li><strong>基本实现</strong>：使用TCP或UDP分别实现服务器端和客户端。因为项目需要，最基本的实现是必要的，而且项目初期很多时候是自己一个人调试，所以需要同时准备服务器端和客户端，在同一台PC上进行单独调试。一般通过字符串收发来进行调试。</li>
-<li><strong>多线程实现</strong>：这在主要指服务器端的实现，因为TCP连接中服务器端要时刻保持连接，对通信接入进行监听。所以使用多线程来实现。网络资源也超多，在这使用C++来实现，也算是实现过程中的难点，见下一部分。</li>
-<li><strong>模块封装</strong>：socket通信通常作为一个模块实现，调用该模块传递或接收数据，在这封装成类进行实现。而类的封装过程中存在众多的问题，后面一一解释。其中就包括多线程作为成员函数情况下的封装实现。</li>
-<li><strong>通信协议</strong>：socket通信作为底层实现，负责进行不同主体复杂数据之间的传递，而通信协议保证了二者的信息交互。常用结构体进行实现。二者通过相同的头文件进行数据的组织，进而实现数据的封装和解析。</li>
-</ol>
 
-          </div>
+        <div class="current-tag-container">
+          <h2 class="title">
+            <i class="icon icon-pricetags-outline"></i> 轻松生活
+          </h2> 
         </div>
 
         
-      </div>
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/qiao-swimming-note1">
+        <h2 class="post-title">小乔的游泳日记1</h2>
+      </a>
+      <div class="post-abstract">
+        <p>已经开始练习有用快两周了，感觉进步还是有一些的。当然啦，痛苦伴随这乐趣，为了不让这“苦涩”的回忆淡忘掉，小记一下嘻嘻。</p>
 
-      
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-12-21</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/96zX9kJvp">
+                轻松生活
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
+    
+  </section>
+
+
+<div class="pagination-container">
+  
+  
+</div>
+
+
+      </div>
 
       <div class="site-footer">
   <div class="slogan">个人知识记录，学习～</div>

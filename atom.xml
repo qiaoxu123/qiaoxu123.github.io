@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qiaoxu123.github.io</id>
     <title>Blog</title>
-    <updated>2019-12-21T08:58:17.388Z</updated>
+    <updated>2019-12-21T14:05:08.123Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qiaoxu123.github.io"/>
     <link rel="self" href="https://qiaoxu123.github.io/atom.xml"/>
@@ -10,6 +10,17 @@
     <logo>https://qiaoxu123.github.io/images/avatar.png</logo>
     <icon>https://qiaoxu123.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[小乔的游泳日记1]]></title>
+        <id>https://qiaoxu123.github.io/post/qiao-swimming-note1</id>
+        <link href="https://qiaoxu123.github.io/post/qiao-swimming-note1">
+        </link>
+        <updated>2019-12-21T11:43:42.000Z</updated>
+        <summary type="html"><![CDATA[<p>已经开始练习有用快两周了，感觉进步还是有一些的。当然啦，痛苦伴随这乐趣，为了不让这“苦涩”的回忆淡忘掉，小记一下嘻嘻。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>已经开始练习有用快两周了，感觉进步还是有一些的。当然啦，痛苦伴随这乐趣，为了不让这“苦涩”的回忆淡忘掉，小记一下嘻嘻。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Linux下程序运行时延以及网络通信时延的测试方法]]></title>
         <id>https://qiaoxu123.github.io/post/delay_test</id>
@@ -111,19 +122,6 @@
         <summary type="html"><![CDATA[<p>终于结束了，虽然总共时长不超过一周。但对我影响真的很大，从中明白了很多，借此机会激励下自己，继续加油！</p>
 ]]></summary>
         <content type="html"><![CDATA[<p>终于结束了，虽然总共时长不超过一周。但对我影响真的很大，从中明白了很多，借此机会激励下自己，继续加油！</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[ROS中nav_msgs消息]]></title>
-        <id>https://qiaoxu123.github.io/post/ros-nav_msgs</id>
-        <link href="https://qiaoxu123.github.io/post/ros-nav_msgs">
-        </link>
-        <updated>2019-09-26T06:38:04.000Z</updated>
-        <summary type="html"><![CDATA[<p>最近在对ROS的深度使用中，发现<code>nav_msgs</code>消息在包通信中出现频率超高。在这特地转载记录补充下，方便以后查找巩固。<br>
-<a href="https://blog.csdn.net/ji0525084/article/details/14125119">参考博客</a></p>
-]]></summary>
-        <content type="html"><![CDATA[<p>最近在对ROS的深度使用中，发现<code>nav_msgs</code>消息在包通信中出现频率超高。在这特地转载记录补充下，方便以后查找巩固。<br>
-<a href="https://blog.csdn.net/ji0525084/article/details/14125119">参考博客</a></p>
 ]]></content>
     </entry>
 </feed>
