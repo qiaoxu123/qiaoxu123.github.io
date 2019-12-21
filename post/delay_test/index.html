@@ -12,9 +12,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1576937078204">
+<link rel="shortcut icon" href="https://qiaoxu.coding.me/favicon.ico?v=1576940181325">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+<link rel="stylesheet" href="https://qiaoxu.coding.me/styles/main.css">
 
 
 
@@ -29,10 +29,10 @@
       <div class="site-header-container">
   <div class="site-header">
     <div class="left">
-      <a href="https://qiaoxu123.github.io">
-        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1576937078204" alt="" width="32px" height="32px">
+      <a href="https://qiaoxu.coding.me">
+        <img class="avatar" src="https://qiaoxu.coding.me/images/avatar.png?v=1576940181325" alt="" width="32px" height="32px">
       </a>
-      <a href="https://qiaoxu123.github.io">
+      <a href="https://qiaoxu.coding.me">
         <h1 class="site-title">Blog</h1>
       </a>
     </div>
@@ -81,7 +81,7 @@
               <span>
                 <i class="icon-pricetags-outline"></i>
                 
-                  <a href="https://qiaoxu123.github.io/tag/5HMxWRPZ1">
+                  <a href="https://qiaoxu.coding.me/tag/5HMxWRPZ1">
                     工程调试
                     
                   </a>
@@ -138,7 +138,7 @@ std::cout &lt;&lt; &quot;-----------------------\n&quot;
 <p>在本次工程中，使用的TCP方式建立通信。一端连接5G基站，一端连接千兆光纤。项目预期实现很简单美好，但到实际测试中遇到的难题也是层出不穷，其中第一个就是如何解决通信延时测试问题。仍然是经过各种摸索，最后无奈使用<code>ping + wireshark</code>测试方案。</p>
 <p>众所周知，ping命令使用网络层的ICMP协议来实现，通过收发包来测试网络通信时延。不能简单使用ping命令来实现的原因主要是无法测试在数据量大而且发送时间间隔短的情况下的时延。正常情况下数据发送速率都要远远高于ping的发包速率。因此实际应用中，结合wireshark来辅助测试时延情况。</p>
 <p>wireshark作为业内最优秀的网络协议分析软件，功能非常强大。通过在建立socket通信后，对该通信链路进行监听测试，从而得到包包之间的间隔，配合程序处理间隔以及ping得到的链路时延，从而比较准确得通信时延和丢包重传情况。实际实现效果大体如下：</p>
-<figure data-type="image" tabindex="1"><img src="https://qiaoxu123.github.io/post-images/1576918413609.png" alt=""></figure>
+<figure data-type="image" tabindex="1"><img src="https://qiaoxu.coding.me/post-images/1576918413609.png" alt=""></figure>
 <p>在这Time一列需要进行下设置，可以参考<a href="https://blog.csdn.net/u010599211/article/details/88187210">博客</a>。</p>
 
           </div>
@@ -146,7 +146,7 @@ std::cout &lt;&lt; &quot;-----------------------\n&quot;
 
         
           <div class="next-post">
-            <a class="purple-link" href="https://qiaoxu123.github.io/post/interview2-note">
+            <a class="purple-link" href="https://qiaoxu.coding.me/post/interview2-note">
               <h3 class="post-title">
                 下一篇：第二次面试心得 -- 商汤自动驾驶实习
               </h3>
@@ -172,7 +172,7 @@ std::cout &lt;&lt; &quot;-----------------------\n&quot;
       
     
   </div>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu.coding.me/atom.xml" target="_blank">RSS</a>
 </div>
 
 

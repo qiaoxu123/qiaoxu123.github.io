@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://qiaoxu123.github.io</id>
+    <id>https://qiaoxu.coding.me</id>
     <title>Blog</title>
-    <updated>2019-12-21T14:05:08.123Z</updated>
+    <updated>2019-12-21T14:57:00.631Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://qiaoxu123.github.io"/>
-    <link rel="self" href="https://qiaoxu123.github.io/atom.xml"/>
+    <link rel="alternate" href="https://qiaoxu.coding.me"/>
+    <link rel="self" href="https://qiaoxu.coding.me/atom.xml"/>
     <subtitle>个人知识记录，学习～</subtitle>
-    <logo>https://qiaoxu123.github.io/images/avatar.png</logo>
-    <icon>https://qiaoxu123.github.io/favicon.ico</icon>
+    <logo>https://qiaoxu.coding.me/images/avatar.png</logo>
+    <icon>https://qiaoxu.coding.me/favicon.ico</icon>
     <rights>All rights reserved 2019, Blog</rights>
     <entry>
         <title type="html"><![CDATA[小乔的游泳日记1]]></title>
-        <id>https://qiaoxu123.github.io/post/qiao-swimming-note1</id>
-        <link href="https://qiaoxu123.github.io/post/qiao-swimming-note1">
+        <id>https://qiaoxu.coding.me/post/qiao-swimming-note1</id>
+        <link href="https://qiaoxu.coding.me/post/qiao-swimming-note1">
         </link>
         <updated>2019-12-21T11:43:42.000Z</updated>
         <summary type="html"><![CDATA[<p>已经开始练习有用快两周了，感觉进步还是有一些的。当然啦，痛苦伴随这乐趣，为了不让这“苦涩”的回忆淡忘掉，小记一下嘻嘻。</p>
@@ -23,8 +23,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Linux下程序运行时延以及网络通信时延的测试方法]]></title>
-        <id>https://qiaoxu123.github.io/post/delay_test</id>
-        <link href="https://qiaoxu123.github.io/post/delay_test">
+        <id>https://qiaoxu.coding.me/post/delay_test</id>
+        <link href="https://qiaoxu.coding.me/post/delay_test">
         </link>
         <updated>2019-12-20T09:32:03.000Z</updated>
         <summary type="html"><![CDATA[<p>最近在工程应用中，需要测试程序的运行时延，作为程序性能的评价指标之一。另外，因为要完成一个5G应用项目，需要对基于TCP/IP的网络通信时延也要进行测试，作为工程应用的重要指标。网上搜罗了各种方案，最后勉强找到一些可以应用的，在这总结下吧。</p>
@@ -34,8 +34,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[第二次面试心得 -- 商汤自动驾驶实习]]></title>
-        <id>https://qiaoxu123.github.io/post/interview2-note</id>
-        <link href="https://qiaoxu123.github.io/post/interview2-note">
+        <id>https://qiaoxu.coding.me/post/interview2-note</id>
+        <link href="https://qiaoxu.coding.me/post/interview2-note">
         </link>
         <updated>2019-11-26T11:36:34.000Z</updated>
         <summary type="html"><![CDATA[<p>昨天下午刚刚结束面试，心情一度很抑郁，不过还是趁现在记忆比较深来总结下吧。</p>
@@ -45,8 +45,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Ubuntu 18/16 下 TP-LINK 5500无线网卡驱动问题]]></title>
-        <id>https://qiaoxu123.github.io/post/tp-link-wireless-problem</id>
-        <link href="https://qiaoxu123.github.io/post/tp-link-wireless-problem">
+        <id>https://qiaoxu.coding.me/post/tp-link-wireless-problem</id>
+        <link href="https://qiaoxu.coding.me/post/tp-link-wireless-problem">
         </link>
         <updated>2019-11-25T09:29:30.000Z</updated>
         <summary type="html"><![CDATA[<p>今天刚花了半小时时间调了一下公司的主机，因为有线网络一直连接不上，一气之下找了一个无线网卡直接怼上试试，结果因为是Ubuntu系统还不适配，哎，只好耐心找了下驱动，费了些时间搞定了，在这简单记录下。</p>
@@ -56,8 +56,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[C++算法常用STL函数整理]]></title>
-        <id>https://qiaoxu123.github.io/post/C++_STL_Note</id>
-        <link href="https://qiaoxu123.github.io/post/C++_STL_Note">
+        <id>https://qiaoxu.coding.me/post/C++_STL_Note</id>
+        <link href="https://qiaoxu.coding.me/post/C++_STL_Note">
         </link>
         <updated>2019-10-29T08:09:19.000Z</updated>
         <summary type="html"><![CDATA[<p>最近在听Acwing算法基础课，其中提到了一些算法常用的STL函数，个人感觉很全面，在这整理复习下。</p>
@@ -67,8 +67,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[个人在ROS工程使用Protobuf的模板和一点心得]]></title>
-        <id>https://qiaoxu123.github.io/post/ros-personal-note</id>
-        <link href="https://qiaoxu123.github.io/post/ros-personal-note">
+        <id>https://qiaoxu.coding.me/post/ros-personal-note</id>
+        <link href="https://qiaoxu.coding.me/post/ros-personal-note">
         </link>
         <updated>2019-10-28T03:30:57.000Z</updated>
         <summary type="html"><![CDATA[<p>从上周搞定ROS工程下使用Protbuf的问题后，陆续对原有工程进行了更改，在这一过程中，探索了下Protobuf与ROS工程结合的不同方式，暂时总结了一份模板，并在此记录下心得。</p>
@@ -78,8 +78,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Ubuntu18下ROS使用Protobuf 共享内存实现节点通信]]></title>
-        <id>https://qiaoxu123.github.io/post/ubuntu18-protobuf-memory-share-note</id>
-        <link href="https://qiaoxu123.github.io/post/ubuntu18-protobuf-memory-share-note">
+        <id>https://qiaoxu.coding.me/post/ubuntu18-protobuf-memory-share-note</id>
+        <link href="https://qiaoxu.coding.me/post/ubuntu18-protobuf-memory-share-note">
         </link>
         <updated>2019-10-24T02:30:35.000Z</updated>
         <summary type="html"><![CDATA[<p>最近在折腾ROS两个节点之间的通信实现，每个的功能都很简单，需要解决的地方在于两个之间的通信量很大，延迟要很低才行。确定使用protobuf共享内存后，网上查阅了好多资料才最终实现。在这实现一个最小的demo作为记录，希望能对后来者有帮助！<br>
@@ -91,8 +91,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[推荐：可能是目前最好的自动驾驶教程]]></title>
-        <id>https://qiaoxu123.github.io/post/coursera-self-driving-cars</id>
-        <link href="https://qiaoxu123.github.io/post/coursera-self-driving-cars">
+        <id>https://qiaoxu.coding.me/post/coursera-self-driving-cars</id>
+        <link href="https://qiaoxu.coding.me/post/coursera-self-driving-cars">
         </link>
         <updated>2019-10-02T13:02:59.000Z</updated>
         <summary type="html"><![CDATA[<p>从年初到现在，终于搞定了这个专项。Coursera平台推出的自动驾驶教程：<strong>Self-Driving Cars</strong>。在这对四期课程做个比较全面的总结，同时向大家推荐下，希望帮大家在自动驾驶学习路上添砖加瓦。</p>
@@ -104,8 +104,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Baidu Apollo代码笔记]]></title>
-        <id>https://qiaoxu123.github.io/post/baidu-apollo-note</id>
-        <link href="https://qiaoxu123.github.io/post/baidu-apollo-note">
+        <id>https://qiaoxu.coding.me/post/baidu-apollo-note</id>
+        <link href="https://qiaoxu.coding.me/post/baidu-apollo-note">
         </link>
         <updated>2019-09-29T01:57:34.000Z</updated>
         <summary type="html"><![CDATA[<p>最近重新开始研读Baidu Apollo的代码，从中学到了很多新的工程使用的技巧和方法，在这集中整理下，做下记录，方便以后查找。</p>
@@ -115,8 +115,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Momenta面试记录]]></title>
-        <id>https://qiaoxu123.github.io/post/momenta-interview</id>
-        <link href="https://qiaoxu123.github.io/post/momenta-interview">
+        <id>https://qiaoxu.coding.me/post/momenta-interview</id>
+        <link href="https://qiaoxu.coding.me/post/momenta-interview">
         </link>
         <updated>2019-09-26T12:00:17.000Z</updated>
         <summary type="html"><![CDATA[<p>终于结束了，虽然总共时长不超过一周。但对我影响真的很大，从中明白了很多，借此机会激励下自己，继续加油！</p>
