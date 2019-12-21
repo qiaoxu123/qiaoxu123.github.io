@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>Linux下程序运行时延以及网络通信时延的测试方法 | Blog</title>
+<meta name="description" content="个人知识记录，学习～">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1576918694079">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1576918694079" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="https://qiaoxu123.github.io" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">Linux下程序运行时延以及网络通信时延的测试方法</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-12-20</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/5HMxWRPZ1">
+                    工程调试
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>最近在工程应用中，需要测试程序的运行时延，作为程序性能的评价指标之一。另外，因为要完成一个5G应用项目，需要对基于TCP/IP的网络通信时延也要进行测试，作为工程应用的重要指标。网上搜罗了各种方案，最后勉强找到一些可以应用的，在这总结下吧。</p>
+<!-- more -->
+<h3 id="1-程序运行时延">1. 程序运行时延</h3>
+<p>从网上已有的方案来看，大体上有两种：一种是应用系统的绝对时间来做，确定当前的系统时间如年月日时秒毫秒，然后二者之间相减即可；另一种是基于chrono实现的，作为C++11的特性之一，目前应用的比较多，主要是取系统当前的运行时间进行统计，算是使用相对时间进行计算。两种方法大体相当，并不是绝对的使用“相对”或者“绝对”。比如chrono库中也有计算系统的时间的，相比C++98中一些函数稍微简短一些，功能基本相同。</p>
+<p>因为程序运行时延基本都是在毫秒级或微秒级别，因此需要使用高精度的计时。在这放下后来采取的方案。</p>
+<pre><code class="language-c++">#include &lt;sys/time.h&gt;
+#include &lt;chrono&gt;
+#include &lt;iomanip&gt;
+
+vector&lt;double&gt; avg_cpu_time;
+
+/************************************************************/
+// 开始计算时间
+auto t_start = std::chrono::steady_clock::now();
+std::clock_t c_start = std::clock();
+
+//-------------------//
+// 测试程序
+//-------------------//
+
+auto t_end = std::chrono::steady_clock::now();
+std::clock_t c_end = std::clock();
+
+avg_cpu_time.push_back(
+                        std::chrono::duration_cast&lt;std::chrono::microseconds&gt;
+                        (t_end - t_start).count());
+std::cout &lt;&lt; &quot;-----------------------\n&quot;
+          &lt;&lt; std::fixed &lt;&lt; std::setprecision(2) &lt;&lt; &quot;CPU time used:&quot;
+          &lt;&lt; 1000.0 * (c_end - c_start) / CLOCKS_PER_SEC &lt;&lt; &quot; us &quot;
+          &lt;&lt; &quot;Delay time passed: &quot;
+          &lt;&lt; std::chrono::duration_cast&lt;std::chrono::microseconds&gt;(
+                          t_end - t_start)
+                          .count()
+          &lt;&lt; &quot; us\n&quot;
+          &lt;&lt; &quot;Average delay time: &quot;
+          &lt;&lt; std::accumulate(avg_cpu_time.begin(),
+                             avg_cpu_time.end(),0) /
+                             avg_cpu_time.size()
+          &lt;&lt; &quot; ms\n&quot;
+          &lt;&lt; &quot;-----------------------\n&quot;;
+
+</code></pre>
+<p>注意，最后测试的单位是us，因为一般来说，系统的运行时延是非常低的。在这里使用到的<code>std::chrono::steady_clock::now()</code>函数，主要作用是表示当前时间的时间点。具体请参考<a href="https://zh.cppreference.com/w/cpp/chrono/steady_clock/now">文章</a>，里面有相应的示例程序。<code>clock()</code>函数作用主要是返回从“开启这个程序进程”到“程序中调用<code>clock()</code>函数”时之间的CPU时钟计时单元（clock tick）数。因此精度还是很高的。</p>
+<hr>
+<h3 id="2-通信时延测试">2. 通信时延测试</h3>
+<p>在本次工程中，使用的TCP方式建立通信。一端连接5G基站，一端连接千兆光纤。项目预期实现很简单美好，但到实际测试中遇到的难题也是层出不穷，其中第一个就是如何解决通信延时测试问题。仍然是经过各种摸索，最后无奈使用<code>ping + wireshark</code>测试方案。</p>
+<p>众所周知，ping命令使用网络层的ICMP协议来实现，通过收发包来测试网络通信时延。不能简单使用ping命令来实现的原因主要是无法测试在数据量大而且发送时间间隔短的情况下的时延。正常情况下数据发送速率都要远远高于ping的发包速率。因此实际应用中，结合wireshark来辅助测试时延情况。</p>
+<p>wireshark作为业内最优秀的网络协议分析软件，功能非常强大。通过在建立socket通信后，对该通信链路进行监听测试，从而得到包包之间的间隔，配合程序处理间隔以及ping得到的链路时延，从而比较准确得通信时延和丢包重传情况。实际实现效果大体如下：</p>
+<figure data-type="image" tabindex="1"><img src="https://qiaoxu123.github.io/post-images/1576918413609.png" alt=""></figure>
+<p>在这Time一列需要进行下设置，可以参考<a href="https://blog.csdn.net/u010599211/article/details/88187210">博客</a>。</p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/interview2-note">
+              <h3 class="post-title">
+                下一篇：第二次面试心得 -- 商汤自动驾驶实习
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">个人知识记录，学习～</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
