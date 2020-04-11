@@ -1,43 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://qiaoxu.coding.me</id>
+    <id>https://qiaoxu123.github.io</id>
     <title>Blog</title>
-    <updated>2019-12-27T15:43:00.563Z</updated>
+    <updated>2020-04-11T01:15:33.116Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://qiaoxu.coding.me"/>
-    <link rel="self" href="https://qiaoxu.coding.me/atom.xml"/>
-    <subtitle>个人知识记录，学习～</subtitle>
-    <logo>https://qiaoxu.coding.me/images/avatar.png</logo>
-    <icon>https://qiaoxu.coding.me/favicon.ico</icon>
-    <rights>All rights reserved 2019, Blog</rights>
+    <link rel="alternate" href="https://qiaoxu123.github.io"/>
+    <link rel="self" href="https://qiaoxu123.github.io/atom.xml"/>
+    <subtitle>个人生活，学习记录</subtitle>
+    <logo>https://qiaoxu123.github.io/images/avatar.png</logo>
+    <icon>https://qiaoxu123.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2020, Blog</rights>
     <entry>
-        <title type="html"><![CDATA[我的2019年书单]]></title>
-        <id>https://qiaoxu.coding.me/post/2019-booklist</id>
-        <link href="https://qiaoxu.coding.me/post/2019-booklist">
+        <title type="html"><![CDATA[Ubuntu环境下OOQP优化库的基本使用]]></title>
+        <id>https://qiaoxu123.github.io/post/ubuntu-ooqp-useguide/</id>
+        <link href="https://qiaoxu123.github.io/post/ubuntu-ooqp-useguide/">
         </link>
-        <updated>2019-12-26T13:03:43.000Z</updated>
-        <summary type="html"><![CDATA[<p>研究生的第一年，和本科的时光有彻彻底底的不同。经历了好多，虽然无奈，还是被生活抽走了几分稚气。竭尽全力，总算是读了几本闲书，认识了一些有趣的人，做了一点踏实事。</p>
-<p>和去年比起来数量上已经差很多了，质量上也不敢说上浮多少。向社会走出一小步，在外呆了差不多整一年后，才对自己的稚嫩和单纯有了更进一步的认识。不安和躁动成了2019年的代表词。直到最后一个月，重新拿起kindle，放下那股浮躁重新开始读，才终于感觉到自己又往前迈出了一步。</p>
+        <updated>2020-01-06T05:07:29.000Z</updated>
+        <summary type="html"><![CDATA[<p>OOQP是一个强大的开源凸优化库，支持C++, Maltab调用。学习过程中发现网上的参考资料寥寥无几，在这根据官方的指导手册和Example简单介绍说明下。</p>
 ]]></summary>
-        <content type="html"><![CDATA[<p>研究生的第一年，和本科的时光有彻彻底底的不同。经历了好多，虽然无奈，还是被生活抽走了几分稚气。竭尽全力，总算是读了几本闲书，认识了一些有趣的人，做了一点踏实事。</p>
-<p>和去年比起来数量上已经差很多了，质量上也不敢说上浮多少。向社会走出一小步，在外呆了差不多整一年后，才对自己的稚嫩和单纯有了更进一步的认识。不安和躁动成了2019年的代表词。直到最后一个月，重新拿起kindle，放下那股浮躁重新开始读，才终于感觉到自己又往前迈出了一步。</p>
+        <content type="html"><![CDATA[<p>OOQP是一个强大的开源凸优化库，支持C++, Maltab调用。学习过程中发现网上的参考资料寥寥无几，在这根据官方的指导手册和Example简单介绍说明下。</p>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Crash Course Computer Science总结(1，2课)]]></title>
-        <id>https://qiaoxu.coding.me/post/crash-course-computer-science-note1</id>
-        <link href="https://qiaoxu.coding.me/post/crash-course-computer-science-note1">
+        <title type="html"><![CDATA[我的2019总结--错过的生活与糟糕的性格]]></title>
+        <id>https://qiaoxu123.github.io/post/my-2019/</id>
+        <link href="https://qiaoxu123.github.io/post/my-2019/">
         </link>
-        <updated>2019-12-22T11:51:16.000Z</updated>
-        <summary type="html"><![CDATA[<p>Crash Course Computer Science是一套热度非常高，也是内容非常精良的计算机入门课程，今天闲逛b站中无意看到了该课程，很适合吃饭无聊时打发时间来看。因为内容并没有传统计算机课程那样晦涩难懂，而且时间较短，每集大约10分钟左右。对于没有计算机基础的我来说，还挺适合的。在这稍微整理下每集的心得，不知道这次临时起意能坚持多久呢。</p>
+        <updated>2020-01-01T01:01:59.000Z</updated>
+        <summary type="html"><![CDATA[<p>明天就是2020年了，抓紧2019年的最后一天，反思和检讨下自己匆匆过去的一天。和之前应付的总结不一样，我觉得用心了很多，这次总结是先手写完成，然后整理汇总出来。这也是年末总结琢磨出的一个方法，锻炼自己的耐心。作为一个好的开端，来鼓励明年的自己。</p>
 ]]></summary>
-        <content type="html"><![CDATA[<p>Crash Course Computer Science是一套热度非常高，也是内容非常精良的计算机入门课程，今天闲逛b站中无意看到了该课程，很适合吃饭无聊时打发时间来看。因为内容并没有传统计算机课程那样晦涩难懂，而且时间较短，每集大约10分钟左右。对于没有计算机基础的我来说，还挺适合的。在这稍微整理下每集的心得，不知道这次临时起意能坚持多久呢。</p>
+        <content type="html"><![CDATA[<p>明天就是2020年了，抓紧2019年的最后一天，反思和检讨下自己匆匆过去的一天。和之前应付的总结不一样，我觉得用心了很多，这次总结是先手写完成，然后整理汇总出来。这也是年末总结琢磨出的一个方法，锻炼自己的耐心。作为一个好的开端，来鼓励明年的自己。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[20个经典的C++面试题(转载)]]></title>
+        <id>https://qiaoxu123.github.io/post/50-C++-interview-problem/</id>
+        <link href="https://qiaoxu123.github.io/post/50-C++-interview-problem/">
+        </link>
+        <updated>2019-12-28T15:18:15.000Z</updated>
+        <summary type="html"><![CDATA[<p>捡起已经忘记的C++。。。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>捡起已经忘记的C++。。。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[小乔的游泳日记(第四周）]]></title>
+        <id>https://qiaoxu123.github.io/post/qiao-swimming-note3/</id>
+        <link href="https://qiaoxu123.github.io/post/qiao-swimming-note3/">
+        </link>
+        <updated>2019-12-28T13:44:17.000Z</updated>
+        <summary type="html"><![CDATA[<p>这周感觉自己真的废掉了，拖延症又犯了，只有周六去了一次，也就是今天。不过收货还是有一些的，在这简单记录下，同时个人深刻检讨。。。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>这周感觉自己真的废掉了，拖延症又犯了，只有周六去了一次，也就是今天。不过收货还是有一些的，在这简单记录下，同时个人深刻检讨。。。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[我的2019年书单]]></title>
+        <id>https://qiaoxu123.github.io/post/2019-booklist/</id>
+        <link href="https://qiaoxu123.github.io/post/2019-booklist/">
+        </link>
+        <updated>2019-12-26T13:03:43.000Z</updated>
+        <summary type="html"><![CDATA[<p>研究生的第一年，和本科的时光有彻彻底底的不同。经历了好多，虽然无奈，还是被生活抽走了几分稚气。竭尽全力，总算是读了几本闲书，认识了一些有趣的人，做了一点踏实事。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>研究生的第一年，和本科的时光有彻彻底底的不同。经历了好多，虽然无奈，还是被生活抽走了几分稚气。竭尽全力，总算是读了几本闲书，认识了一些有趣的人，做了一点踏实事。</p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[小乔的游泳日记(第三周)]]></title>
-        <id>https://qiaoxu.coding.me/post/qiao-swimming-note2</id>
-        <link href="https://qiaoxu.coding.me/post/qiao-swimming-note2">
+        <id>https://qiaoxu123.github.io/post/qiao-swimming-note2/</id>
+        <link href="https://qiaoxu123.github.io/post/qiao-swimming-note2/">
         </link>
         <updated>2019-12-22T11:35:14.000Z</updated>
         <summary type="html"><![CDATA[<p>痛苦地，挣扎着，开始了第三周的游泳练习。。。</p>
@@ -47,8 +78,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[小乔的游泳日记(第一，二周)]]></title>
-        <id>https://qiaoxu.coding.me/post/qiao-swimming-note1</id>
-        <link href="https://qiaoxu.coding.me/post/qiao-swimming-note1">
+        <id>https://qiaoxu123.github.io/post/qiao-swimming-note1/</id>
+        <link href="https://qiaoxu123.github.io/post/qiao-swimming-note1/">
         </link>
         <updated>2019-12-21T11:43:42.000Z</updated>
         <summary type="html"><![CDATA[<p>已经开始练习有用快两周了，感觉进步还是有一些的。当然啦，痛苦伴随这乐趣，为了不让这“苦涩”的回忆淡忘掉，小记一下嘻嘻。</p>
@@ -58,8 +89,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Linux下程序运行时延以及网络通信时延的测试方法]]></title>
-        <id>https://qiaoxu.coding.me/post/delay_test</id>
-        <link href="https://qiaoxu.coding.me/post/delay_test">
+        <id>https://qiaoxu123.github.io/post/delay_test/</id>
+        <link href="https://qiaoxu123.github.io/post/delay_test/">
         </link>
         <updated>2019-12-20T09:32:03.000Z</updated>
         <summary type="html"><![CDATA[<p>最近在工程应用中，需要测试程序的运行时延，作为程序性能的评价指标之一。另外，因为要完成一个5G应用项目，需要对基于TCP/IP的网络通信时延也要进行测试，作为工程应用的重要指标。网上搜罗了各种方案，最后勉强找到一些可以应用的，在这总结下吧。</p>
@@ -69,8 +100,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[第二次面试心得 -- 商汤自动驾驶实习]]></title>
-        <id>https://qiaoxu.coding.me/post/interview2-note</id>
-        <link href="https://qiaoxu.coding.me/post/interview2-note">
+        <id>https://qiaoxu123.github.io/post/interview2-note/</id>
+        <link href="https://qiaoxu123.github.io/post/interview2-note/">
         </link>
         <updated>2019-11-26T11:36:34.000Z</updated>
         <summary type="html"><![CDATA[<p>昨天下午刚刚结束面试，心情一度很抑郁，不过还是趁现在记忆比较深来总结下吧。</p>
@@ -80,48 +111,13 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Ubuntu 18/16 下 TP-LINK 5500无线网卡驱动问题]]></title>
-        <id>https://qiaoxu.coding.me/post/tp-link-wireless-problem</id>
-        <link href="https://qiaoxu.coding.me/post/tp-link-wireless-problem">
+        <id>https://qiaoxu123.github.io/post/tp-link-wireless-problem/</id>
+        <link href="https://qiaoxu123.github.io/post/tp-link-wireless-problem/">
         </link>
         <updated>2019-11-25T09:29:30.000Z</updated>
         <summary type="html"><![CDATA[<p>今天刚花了半小时时间调了一下公司的主机，因为有线网络一直连接不上，一气之下找了一个无线网卡直接怼上试试，结果因为是Ubuntu系统还不适配，哎，只好耐心找了下驱动，费了些时间搞定了，在这简单记录下。</p>
 ]]></summary>
         <content type="html"><![CDATA[<p>今天刚花了半小时时间调了一下公司的主机，因为有线网络一直连接不上，一气之下找了一个无线网卡直接怼上试试，结果因为是Ubuntu系统还不适配，哎，只好耐心找了下驱动，费了些时间搞定了，在这简单记录下。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[C++算法常用STL函数整理]]></title>
-        <id>https://qiaoxu.coding.me/post/C++_STL_Note</id>
-        <link href="https://qiaoxu.coding.me/post/C++_STL_Note">
-        </link>
-        <updated>2019-10-29T08:09:19.000Z</updated>
-        <summary type="html"><![CDATA[<p>最近在听Acwing算法基础课，其中提到了一些算法常用的STL函数，个人感觉很全面，在这整理复习下。</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>最近在听Acwing算法基础课，其中提到了一些算法常用的STL函数，个人感觉很全面，在这整理复习下。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[个人在ROS工程使用Protobuf的模板和一点心得]]></title>
-        <id>https://qiaoxu.coding.me/post/ros-personal-note</id>
-        <link href="https://qiaoxu.coding.me/post/ros-personal-note">
-        </link>
-        <updated>2019-10-28T03:30:57.000Z</updated>
-        <summary type="html"><![CDATA[<p>从上周搞定ROS工程下使用Protbuf的问题后，陆续对原有工程进行了更改，在这一过程中，探索了下Protobuf与ROS工程结合的不同方式，暂时总结了一份模板，并在此记录下心得。</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>从上周搞定ROS工程下使用Protbuf的问题后，陆续对原有工程进行了更改，在这一过程中，探索了下Protobuf与ROS工程结合的不同方式，暂时总结了一份模板，并在此记录下心得。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Ubuntu18下ROS使用Protobuf共享内存实现节点通信]]></title>
-        <id>https://qiaoxu.coding.me/post/ubuntu18-protobuf-memory-share-note</id>
-        <link href="https://qiaoxu.coding.me/post/ubuntu18-protobuf-memory-share-note">
-        </link>
-        <updated>2019-10-24T02:30:35.000Z</updated>
-        <summary type="html"><![CDATA[<p>最近在折腾ROS两个节点之间的通信实现，每个的功能都很简单，需要解决的地方在于两个之间的通信量很大，延迟要很低才行。确定使用protobuf共享内存后，网上查阅了好多资料才最终实现。在这实现一个最小的demo作为记录，希望能对后来者有帮助！<br>
-<a href="https://github.com/qiaoxu123/demo_project/tree/master/work_ws">github链接</a></p>
-]]></summary>
-        <content type="html"><![CDATA[<p>最近在折腾ROS两个节点之间的通信实现，每个的功能都很简单，需要解决的地方在于两个之间的通信量很大，延迟要很低才行。确定使用protobuf共享内存后，网上查阅了好多资料才最终实现。在这实现一个最小的demo作为记录，希望能对后来者有帮助！<br>
-<a href="https://github.com/qiaoxu123/demo_project/tree/master/work_ws">github链接</a></p>
 ]]></content>
     </entry>
 </feed>

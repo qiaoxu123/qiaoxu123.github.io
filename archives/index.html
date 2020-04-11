@@ -1,608 +1,794 @@
 <html>
   <head>
-    
-<meta charset="utf-8" >
-
+      <meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Blog</title>
-<meta name="description" content="个人知识记录，学习～">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1586567689636">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+<meta name="description" content="个人生活，学习记录" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://qiaoxu.coding.me/favicon.ico?v=1577461363174">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-<link rel="stylesheet" href="https://qiaoxu.coding.me/styles/main.css">
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
 
-
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
   </head>
   <body>
-    <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="https://qiaoxu.coding.me">
-        <img class="avatar" src="https://qiaoxu.coding.me/images/avatar.png?v=1577461363174" alt="" width="32px" height="32px">
-      </a>
-      <a href="https://qiaoxu.coding.me">
-        <h1 class="site-title">Blog</h1>
-      </a>
-    </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
-    </div>
-  </div>
-</div>
-
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
-      
-        
-          <a href="https://qiaoxu123.github.io" class="menu purple-link">
-            首页
-          </a>
-        
-      
-        
-          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
-            标签
-          </a>
-        
-      
-        
-          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
-            归档
-          </a>
-        
-      
-    </div>
-  </div>
-</transition>
-
-
-        <div class="content-container">
-          
-          
-
-<div class="archives-container">
-  
-    <h2 class="year">2019</h2>
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/2019-booklist">
-            <h2 class="post-title">
-              我的2019年书单
-              <small>2019-12-26</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/crash-course-computer-science-note1">
-            <h2 class="post-title">
-              Crash Course Computer Science总结(1，2课)
-              <small>2019-12-22</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/qiao-swimming-note2">
-            <h2 class="post-title">
-              小乔的游泳日记(第三周)
-              <small>2019-12-22</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/qiao-swimming-note1">
-            <h2 class="post-title">
-              小乔的游泳日记(第一，二周)
-              <small>2019-12-21</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/delay_test">
-            <h2 class="post-title">
-              Linux下程序运行时延以及网络通信时延的测试方法
-              <small>2019-12-20</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/interview2-note">
-            <h2 class="post-title">
-              第二次面试心得 -- 商汤自动驾驶实习
-              <small>2019-11-26</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/tp-link-wireless-problem">
-            <h2 class="post-title">
-              Ubuntu 18/16 下 TP-LINK 5500无线网卡驱动问题
-              <small>2019-11-25</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/C++_STL_Note">
-            <h2 class="post-title">
-              C++算法常用STL函数整理
-              <small>2019-10-29</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/ros-personal-note">
-            <h2 class="post-title">
-              个人在ROS工程使用Protobuf的模板和一点心得
-              <small>2019-10-28</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/ubuntu18-protobuf-memory-share-note">
-            <h2 class="post-title">
-              Ubuntu18下ROS使用Protobuf共享内存实现节点通信
-              <small>2019-10-24</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/coursera-self-driving-cars">
-            <h2 class="post-title">
-              推荐：可能是目前最好的自动驾驶教程
-              <small>2019-10-02</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/baidu-apollo-note">
-            <h2 class="post-title">
-              Baidu Apollo代码笔记
-              <small>2019-09-29</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/momenta-interview">
-            <h2 class="post-title">
-              Momenta面试记录
-              <small>2019-09-26</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/ros-nav_msgs">
-            <h2 class="post-title">
-              ROS中nav_msgs消息
-              <small>2019-09-26</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/ros-note1-rviz">
-            <h2 class="post-title">
-              ROS仿真实现1--使用rviz显示小车
-              <small>2019-09-18</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/linux-socket-select-note">
-            <h2 class="post-title">
-              Linux下使用select实现精确定时器
-              <small>2019-09-05</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/thinkpad-e480-linux-wifi">
-            <h2 class="post-title">
-              ThinkPad E480 Linux WIFI 问题解决
-              <small>2019-09-03</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/engineer_debug_socket">
-            <h2 class="post-title">
-              Socket编程中send函数引发线程退出
-              <small>2019-09-02</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/baidu-apollo-share">
-            <h2 class="post-title">
-              Apollo轨迹规划分享--问答
-              <small>2019-08-29</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/baidu-apollo-planning">
-            <h2 class="post-title">
-              Baidu Apollo 决策规划学习资源汇总
-              <small>2019-08-29</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/fanqiang-note">
-            <h2 class="post-title">
-              使用倚天剑ss实现科学上网
-              <small>2019-08-24</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/5_C++Courses">
-            <h2 class="post-title">
-              狄泰C++第5课-引用的本质分析
-              <small>2019-08-02</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/4_C++Courses">
-            <h2 class="post-title">
-              狄泰C++第4课-布尔类型和引用
-              <small>2019-08-01</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/3-C++Courses">
-            <h2 class="post-title">
-              狄泰C++第3课-进化后的const分析
-              <small>2019-07-31</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/GP-INSAC-Algorithms">
-            <h2 class="post-title">
-              基于增量高斯分布的Lidar点云分割算法
-              <small>2019-07-30</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/zhihu-live-note1">
-            <h2 class="post-title">
-              研究生留德及研修——知乎live记录
-              <small>2019-07-30</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/2-C++Courses">
-            <h2 class="post-title">
-              狄泰C++第2课-C到C++的升级
-              <small>2019-07-29</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/2018-book">
-            <h2 class="post-title">
-              我的2018书单
-              <small>2019-07-27</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/arm-boot">
-            <h2 class="post-title">
-              ARM开发板开机自启
-              <small>2019-07-17</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/ubuntu18-ROS-install">
-            <h2 class="post-title">
-              Ubuntu 16/18下ROS和PCL点云库安装
-              <small>2019-07-17</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/scan-line-run">
-            <h2 class="post-title">
-              Scan Line Run 聚簇算法原理与实现
-              <small>2019-07-17</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/gaussian-processes">
-            <h2 class="post-title">
-              可视化高斯过程--超详细入门(转载)
-              <small>2019-07-16</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/arm-TBOX">
-            <h2 class="post-title">
-              车载T-BOX开发记录 1-- 软硬件配置
-              <small>2019-07-12</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/C-V2X-share">
-            <h2 class="post-title">
-              车路协同领域C-V2X的应用
-              <small>2019-07-12</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/gp-insac">
-            <h2 class="post-title">
-              基于GP-INSAC算法的激光点云分割
-              <small>2019-07-12</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-    
-      
-    
-  
-    <h2 class="year">2018</h2>
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/arm-linux-socketcan">
-            <h2 class="post-title">
-              ARM Linux SocketCAN驱动编译记录
-              <small>2018-07-01</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://qiaoxu.coding.me/post/my-road">
-            <h2 class="post-title">
-              本科毕业总结
-              <small>2018-04-10</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-  
-</div>
-
-
+    <div class="head-top-line"></div>
+    <div class="header-box">
+      
+<header class="header">
+  <div class="blog-header" id="header">
+    <div class="site-meta">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
         </div>
+      </div>
+      <div class="site-title">
+        <a href="/" class="brand">
+          <span>Blog</span>
+        </a>
+      </div>
+      <p class="subtitle">Quick notes</p>
+    </div>
+    <nav class="site-nav" id="site_nav">
+      <ul id="nav_ul">
+        
+          <li class="nav-item ">
+            
+              <a href="https://qiaoxu.coding.me">
+                <i class="fa fa-"></i> 首页
+              </a>
+            
+          </li>
+        
+          <li class="nav-item ">
+            
+              <a href="https://qiaoxu.coding.me/archives">
+                <i class="fa fa-"></i> 归档
+              </a>
+            
+          </li>
+        
+          <li class="nav-item ">
+            
+              <a href="https://qiaoxu.coding.me/tags">
+                <i class="fa fa-"></i> 标签
+              </a>
+            
+          </li>
+        
+        <li class="nav-item">
+          <a>
+            <i class="fa fa-search"></i> 搜索
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<script type="text/javascript"> 
+ 
+  let showNav = true;
 
-        <div class="site-footer">
-  <div class="slogan">个人知识记录，学习～</div>
-  <div class="social-container">
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+    </div>
+    <div class="main-continer">
+      <div class="section-layout">
+        <div class="section-layout-wrapper">
+          <div class="sidebar">
+    <div class="sidebar-wrapper">
+  <div class="sidebar-item">
+    <img class="site-author-image" src="https://qiaoxu123.github.io/images/avatar.png"/>
+    <p class="site-author-name">Blog</p>
+    <p class="site-description">个人生活，学习记录</p>
+  </div>
+  <div class="sidebar-item side-item-stat">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        
+        <span class="site-item-stat-count">40</span>
+        <span class="site-item-stat-name">文章</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="">
+        <span class="site-item-stat-count">39</span>
+        <span class="site-item-stat-name">分类</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">39</span>
+        <span class="site-item-stat-name">标签</span>
+      </a>
+    </div>
+  </div>
+  <div class="sidebar-item">
+    <span class="site-item-rss">
+        <i class="fa fa-rss"></i>
+        <a href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+    </span>
+  </div>
+  <div class="sidebar-item sidebar-item-social">
+    <div class="social-item">
+      <a href="https://www.github.com/hsxyhao">
+        <i class="fa fa-github"></i> GitHub
+      </a>
+      <a href="">
+        <i class="fa fa-twitter"></i> Twitter
+      </a>
+    </div>
+    <div class="social-item">
+      <a href="">
+        <i class="fa fa-globe"></i> 豆瓣
+      </a>
+      <a href="">
+        <i class="fa fa-globe"></i> 知乎
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+          <div class="section-box">
+            <section class="section posts-expand">
+              
+<div class="archive-timeline-box">
+  <div class="archive-timeline-title">
     
-      
-    
-      
-    
-      
-    
-      
-    
-      
+      <h2>非常好！目前共计53篇日志，继续努力！</h2>
     
   </div>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu.coding.me/atom.xml" target="_blank">RSS</a>
+  
+    
+    
+      <div class="node-title">
+        <h2 class="tag-year">2020</h2>
+      </div>    
+      
+    
+    <a href="https://qiaoxu123.github.io/post/ubuntu-ooqp-useguide/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            01-06
+            <small>Ubuntu环境下OOQP优化库的基本使用</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/my-2019/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            01-01
+            <small>我的2019总结--错过的生活与糟糕的性格</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+      <div class="node-title">
+        <h2 class="tag-year">2019</h2>
+      </div>    
+      
+    
+    <a href="https://qiaoxu123.github.io/post/50-C++-interview-problem/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            12-28
+            <small>20个经典的C++面试题(转载)</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/qiao-swimming-note3/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            12-28
+            <small>小乔的游泳日记(第四周）</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/2019-booklist/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            12-26
+            <small>我的2019年书单</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/qiao-swimming-note2/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            12-22
+            <small>小乔的游泳日记(第三周)</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/qiao-swimming-note1/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            12-21
+            <small>小乔的游泳日记(第一，二周)</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/delay_test/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            12-20
+            <small>Linux下程序运行时延以及网络通信时延的测试方法</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/interview2-note/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            11-26
+            <small>第二次面试心得 -- 商汤自动驾驶实习</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/tp-link-wireless-problem/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            11-25
+            <small>Ubuntu 18/16 下 TP-LINK 5500无线网卡驱动问题</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/C++_STL_Note/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            10-29
+            <small>C++算法常用STL函数整理</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/ros-personal-note/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            10-28
+            <small>个人在ROS工程使用Protobuf的模板和一点心得</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/ubuntu18-protobuf-memory-share-note/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            10-24
+            <small>Ubuntu18下ROS使用Protobuf共享内存实现节点通信</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/coursera-self-driving-cars/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            10-02
+            <small>推荐：可能是目前最好的自动驾驶教程</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/baidu-apollo-note/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            09-29
+            <small>Baidu Apollo代码笔记</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/momenta-interview/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            09-26
+            <small>Momenta面试记录</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/ros-nav_msgs/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            09-26
+            <small>ROS中nav_msgs消息</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/ros-note1-rviz/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            09-18
+            <small>ROS仿真实现1--使用rviz显示小车</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/linux-socket-select-note/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            09-05
+            <small>Linux下使用select实现精确定时器</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/thinkpad-e480-linux-wifi/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            09-03
+            <small>ThinkPad E480 Linux WIFI 问题解决</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/engineer_debug_socket/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            09-02
+            <small>Socket编程中send函数引发线程退出</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/baidu-apollo-share/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            08-29
+            <small>Apollo轨迹规划分享--问答</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/baidu-apollo-planning/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            08-29
+            <small>Baidu Apollo 决策规划学习资源汇总</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/fanqiang-note/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            08-24
+            <small>使用倚天剑ss实现科学上网</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/5_C++Courses/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            08-02
+            <small>狄泰C++第5课-引用的本质分析</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/4_C++Courses/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            08-01
+            <small>狄泰C++第4课-布尔类型和引用</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/3-C++Courses/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            07-31
+            <small>狄泰C++第3课-进化后的const分析</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/GP-INSAC-Algorithms/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            07-30
+            <small>基于增量高斯分布的Lidar点云分割算法</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/zhihu-live-note1/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            07-30
+            <small>研究生留德及研修——知乎live记录</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/2-C++Courses/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            07-29
+            <small>狄泰C++第2课-C到C++的升级</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/2018-book/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            07-27
+            <small>我的2018书单</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/arm-boot/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            07-17
+            <small>ARM开发板开机自启</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/ubuntu18-ROS-install/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            07-17
+            <small>Ubuntu 16/18下ROS和PCL点云库安装</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/scan-line-run/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            07-17
+            <small>Scan Line Run 聚簇算法原理与实现</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/gaussian-processes/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            07-16
+            <small>可视化高斯过程--超详细入门(转载)</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/arm-TBOX/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            07-12
+            <small>车载T-BOX开发记录 1-- 软硬件配置</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/C-V2X-share/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            07-12
+            <small>车路协同领域C-V2X的应用</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/gp-insac/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            07-12
+            <small>基于GP-INSAC算法的激光点云分割</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+      <div class="node-title">
+        <h2 class="tag-year">2018</h2>
+      </div>    
+      
+    
+    <a href="https://qiaoxu123.github.io/post/arm-linux-socketcan/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            07-01
+            <small>ARM Linux SocketCAN驱动编译记录</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
+    
+    
+    <a href="https://qiaoxu123.github.io/post/my-road/">
+      <div class="motion-warpper tag-archive-node">
+        <div class="tag-node">
+          <h1>
+            04-10
+            <small>本科毕业总结</small>
+          </h1>
+        </div>  
+    </div>
+    </a>
+  
 </div>
 
 
+<div class="page">
+  <ul class="pagination-ul">
+    
+    
+      
+        <li class="pagination-li pagination-active">
+            <a href="/archives/page/../">
+              1
+            </a>
+        </li>
+      
+    
+    
+  </ul>
+</div>
+
+            </section>
+          </div>
+        </div>
       </div>
-      <script type="application/javascript">
+      <div class="footer-box">
+  <footer class="footer">
+    <div class="copyright">
+      © 2019-2020 <i class="fa fa-heart"></i> HsxyHao
+    </div>
+    <div class="poweredby">
+      <div class="power-left">Power By<a href="https://github.com/hsxyhao"> HsxyHao</a></div>
+      <div>Copy<a href="https://github.com/iissnan/hexo-theme-next"> Hexo Next Theme</a></div>
+    </div>
+  </footer>
+  <div class="back-to-top" id="back_to_top">
+    <i class="fa fa-arrow-up"></i>
+    <span class="scrollpercent">
+      <span id="back_to_top_text">100</span>%
+    </span>
+  </div>
+</div>
 
-hljs.initHighlightingOnLoad()
+<script>
 
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
+  let body = document.body;
 
+  let back2Top = document.querySelector('#back_to_top'),
+  back2TopText = document.querySelector('#back_to_top_text');
+
+  function scrollAnimation(currentY, targetY) {
+   
+    let needScrollTop = targetY - currentY
+    let _currentY = currentY
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10)
+      _currentY += dist
+      window.scrollTo(_currentY, currentY)
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY)
+      } else {
+        window.scrollTo(_currentY, targetY)
+      }
+    }, 1)
+  }
+
+  back2Top.addEventListener("click", function(e) {
+    scrollAnimation(body.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+  
+  window.addEventListener('scroll', function(e) {
+    let percent = body.scrollTop / (body.scrollHeight - body.clientHeight) * 100;
+    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
+      back2Top.classList.add('back-top-active');
+    }
+    if (percent == 0) {
+      back2Top.classList.remove('back-top-active');
+    }
+    back2TopText.textContent = Math.floor(percent);
+  });
+
+  // 动态调整站点概览高度
+  let sideBar = document.querySelector('.sidebar');
+  let navUl = document.querySelector('#nav_ul');
+  sideBar.style = 'margin-top:' + (navUl.children.length * 42 + 162) + 'px; opacity: 1;';
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
 </script>
-
-
-
-
     </div>
   </body>
+  <script src="/media/js/motion.js"></script>
 </html>

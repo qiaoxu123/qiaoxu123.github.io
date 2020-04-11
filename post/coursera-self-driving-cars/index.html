@@ -1,121 +1,490 @@
-
-<!DOCTYPE html>
 <html>
   <head>
-    
-<meta charset="utf-8" >
+      <meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Blog</title>
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1586567689636">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+<meta name="description" content="个人生活，学习记录" />
 
-<title>推荐：可能是目前最好的自动驾驶教程 | Blog</title>
-<meta name="description" content="个人知识记录，学习～">
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://qiaoxu.coding.me/favicon.ico?v=1577461363174">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-<link rel="stylesheet" href="https://qiaoxu.coding.me/styles/main.css">
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
 
-
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
   </head>
   <body>
-    <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="https://qiaoxu.coding.me">
-        <img class="avatar" src="https://qiaoxu.coding.me/images/avatar.png?v=1577461363174" alt="" width="32px" height="32px">
-      </a>
-      <a href="https://qiaoxu.coding.me">
-        <h1 class="site-title">Blog</h1>
+    <div class="head-top-line"></div>
+    <div class="header-box">
+      
+<header class="header">
+  <div class="blog-header" id="header">
+    <div class="site-meta">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-title">
+        <a href="/" class="brand">
+          <span>Blog</span>
+        </a>
+      </div>
+      <p class="subtitle">Quick notes</p>
+    </div>
+    <nav class="site-nav" id="site_nav">
+      <ul id="nav_ul">
+        
+          <li class="nav-item ">
+            
+              <a href="https://qiaoxu.coding.me">
+                <i class="fa fa-"></i> 首页
+              </a>
+            
+          </li>
+        
+          <li class="nav-item ">
+            
+              <a href="https://qiaoxu.coding.me/archives">
+                <i class="fa fa-"></i> 归档
+              </a>
+            
+          </li>
+        
+          <li class="nav-item ">
+            
+              <a href="https://qiaoxu.coding.me/tags">
+                <i class="fa fa-"></i> 标签
+              </a>
+            
+          </li>
+        
+        <li class="nav-item">
+          <a>
+            <i class="fa fa-search"></i> 搜索
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+    </div>
+    <div class="main-continer">
+      <div class="section-layout">
+        <div class="section-layout-wrapper">
+          
+<div class="sidebar">
+    <div class="sidebar-wrapper" id="sidebar">
+      
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body" id="sidebar_body">
+        
+          <div class="post-side-meta" id="post_side_meta">
+            <div class="sidebar-wrapper">
+  <div class="sidebar-item">
+    <img class="site-author-image" src="https://qiaoxu123.github.io/images/avatar.png"/>
+    <p class="site-author-name">Blog</p>
+    <p class="site-description">个人生活，学习记录</p>
+  </div>
+  <div class="sidebar-item side-item-stat">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        
+        <span class="site-item-stat-count">40</span>
+        <span class="site-item-stat-name">文章</span>
       </a>
     </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
+    <div class="sidebar-item-box">
+      <a href="">
+        <span class="site-item-stat-count">39</span>
+        <span class="site-item-stat-name">分类</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">39</span>
+        <span class="site-item-stat-name">标签</span>
+      </a>
+    </div>
+  </div>
+  <div class="sidebar-item">
+    <span class="site-item-rss">
+        <i class="fa fa-rss"></i>
+        <a href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+    </span>
+  </div>
+  <div class="sidebar-item sidebar-item-social">
+    <div class="social-item">
+      <a href="https://www.github.com/hsxyhao">
+        <i class="fa fa-github"></i> GitHub
+      </a>
+      <a href="">
+        <i class="fa fa-twitter"></i> Twitter
+      </a>
+    </div>
+    <div class="social-item">
+      <a href="">
+        <i class="fa fa-globe"></i> 豆瓣
+      </a>
+      <a href="">
+        <i class="fa fa-globe"></i> 知乎
+      </a>
     </div>
   </div>
 </div>
-
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
-      
-        
-          <a href="https://qiaoxu123.github.io" class="menu purple-link">
-            首页
-          </a>
-        
-      
-        
-          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
-            标签
-          </a>
-        
-      
-        
-          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
-            归档
-          </a>
-        
-      
-    </div>
-  </div>
-</transition>
-
-
-      <div class="content-container">
-        <div class="post-detail">
-          
-          <h2 class="post-title">推荐：可能是目前最好的自动驾驶教程</h2>
-          <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2019-10-02</span>
-            
-              <span>
-                <i class="icon-pricetags-outline"></i>
-                
-                  <a href="https://qiaoxu.coding.me/tag/KUvEXNYC1">
-                    个人学习
-                    
-                      ，
-                    
-                  </a>
-                
-                  <a href="https://qiaoxu.coding.me/tag/FpZd9d6flZ">
-                    自动驾驶
-                    
-                  </a>
-                
-              </span>
-            
           </div>
-          <div class="post-content">
-            <p>从年初到现在，终于搞定了这个专项。Coursera平台推出的自动驾驶教程：<strong>Self-Driving Cars</strong>。在这对四期课程做个比较全面的总结，同时向大家推荐下，希望帮大家在自动驾驶学习路上添砖加瓦。</p>
+          <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+            <div class="toc-box">
+  <div class="toc-wrapper" id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#1-%E5%89%8D%E8%A8%80">1. 前言</a></li>
+<li><a href="#2-%E8%AF%BE%E7%A8%8B%E5%86%85%E5%AE%B9%E4%BB%8B%E7%BB%8D">2. 课程内容介绍</a></li>
+<li><a href="#3-%E4%B8%AA%E4%BA%BA%E5%AD%A6%E4%B9%A0%E4%BD%93%E4%BC%9A">3. 个人学习体会</a></li>
+<li><a href="#3-%E8%B5%84%E6%96%99%E6%95%B4%E7%90%86">3. 资料整理</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1; 
+let active = 'active-show', activeClass = 'active-current';
+let tocWrapper = document.querySelector('#toc_wrapper');
+let tocContent = tocWrapper.children[0];
+
+function addTocNumber(elem, deep) {
+  if (!elem) {
+    return;
+  }
+  let prop = elem.__proto__;
+
+  if (prop === HTMLUListElement.prototype) {
+    for (let i = 0; i < elem.children.length; i++) {
+      addTocNumber(elem.children[i], deep + (i + 1) + '.');
+    }
+  } else if (prop === HTMLLIElement.prototype) {
+    // 保存li元素
+    lList.push(elem);
+    for (let i = 0; i < elem.children.length; i++) {
+      let cur = elem.children[i];
+      if (cur.__proto__ === HTMLAnchorElement.prototype) {
+        cur.text =  deep + ' ' + cur.text;
+      } else if (cur.__proto__ === HTMLUListElement.prototype) {
+        addTocNumber(cur, deep);
+      }
+    }
+  }
+}
+
+
+document.addEventListener('scroll', function(e) {
+  if (lList.length <= 0) {
+    return;
+  }
+  let scrollTop = document.body.scrollTop;
+  let dir;
+
+  if (lastTop - scrollTop > 0) {
+    dir = 'up';
+  } else {
+    dir = 'down';
+  }
+
+  lastTop = scrollTop;
+  if (scrollTop <= 0) {
+    if (lastIndex >= 0 && lastIndex < hList.length) {
+      lList[lastIndex].classList.remove(activeClass);
+    }
+    return;
+  }
+
+  let current = 0, hasFind = false;
+  for (let i = 0; i < hList.length; i++) {
+    if (hList[i].offsetTop > scrollTop) {
+      current = i;
+      hasFind = true;
+      break;
+    }
+  }
+  if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+    current = hList.length - 1;
+  } else {
+    current--;
+  }
+  if (dir === 'down') {
+    if (current > lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex) 
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  } else {
+    if (current < lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex);
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  }
+});
+
+function removeParentActiveClass() {
+  let parents = tocContent.querySelectorAll('.'+active)
+  parents.forEach(function(elem) {
+    elem.classList.remove(active);
+  });
+}
+
+function addActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.add(activeClass);
+  }
+}
+
+function removeActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.remove(activeClass);
+  }
+}
+
+function addActiveLiElemment(elem, parent) {
+  if (!elem || elem === parent) {
+    return;
+  } else {
+    if (elem.__proto__ === HTMLLIElement.prototype) {
+      elem.classList.add(active);
+    }
+    addActiveLiElemment(elem.parentElement, parent);
+  }
+}
+
+function showToc() {
+  if (tocWrapper) {
+    postBody = document.querySelector('#post_body');
+    for (let i = 0; i < postBody.children.length; i++) {
+      if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+        hList.push(postBody.children[i]);
+      }
+    }
+
+    if (hList.length > 10) {
+      active = 'active-hidden'
+      tocContent.classList.add('closed');
+    } else {
+      tocContent.classList.add('expanded');
+    }
+  }
+}
+addTocNumber(tocContent, '');
+
+window.addEventListener('load', function() {
+  showToc();
+  document.querySelector('#sidebar').style='display: block;';
+  tocWrapper.classList.add('toc-active');
+  setTimeout(function() {
+    if ("createEvent" in document) {
+      let evt = document.createEvent("HTMLEvents");
+      evt.initEvent("scroll", false, true);
+      document.dispatchEvent(evt);
+    }
+    else {
+      document.fireEvent("scroll");
+    }
+  }, 500)
+})
+
+</script>
+          </div>
+        
+      </div>
+    </div>
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+
+  }
+
+  postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+  let hasFix = false;
+  window.addEventListener('scroll', function(e) {
+    if (document.body.scrollTop >= limitTop) {
+      if (!hasFix) {
+        sidebar.classList.add('sidebar-fixed');
+        hasFix = true;
+      }
+    } else {
+      if (hasFix) {
+        sidebar.classList.remove('sidebar-fixed');
+        hasFix = false;
+      }
+    }
+  });
+</script>
+          <div class="section-box">
+            <div class="section post">
+              <div class="article-box">
+    <header class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://qiaoxu123.github.io/post/coursera-self-driving-cars/">
+      推荐：可能是目前最好的自动驾驶教程
+    </a>
+  </h1>
+  <div class="post-meta">
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span>发布于</span>
+      <span>2019-10-02</span>
+    </span>
+    
+      <span class="meta-item">
+        <span class="post-meta-divider pc-show">|</span>
+        <i class="fa fa-folder-o"></i>
+        <span class="pc-show">分类于</span>
+        
+          
+            <a href="https://qiaoxu123.github.io/tag/KUvEXNYC1/">
+              <span>个人学习</span>
+            </a>、
+          
+        
+          
+            <a href="https://qiaoxu123.github.io/tag/FpZd9d6flZ/">
+              <span>自动驾驶</span>
+            </a>
+          
+        
+      </span>
+    
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-clock-o"></i>
+      <span>6分钟</span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>1535<span class="pc-show">字数</span></span>
+    </span>
+  </div>
+</header>
+</div>
+              <div class="post-body next-md-body" id="post_body">
+                <p>从年初到现在，终于搞定了这个专项。Coursera平台推出的自动驾驶教程：<strong>Self-Driving Cars</strong>。在这对四期课程做个比较全面的总结，同时向大家推荐下，希望帮大家在自动驾驶学习路上添砖加瓦。</p>
 <p>课程github整理：<a href="https://github.com/qiaoxu123/Self-Driving-Cars">链接</a></p>
 <!-- more -->
 <h3 id="1-前言">1. 前言</h3>
 <p><a href="">Coursera</a>是国际上很著名的付费学习平台，其中耳熟能详的课程包括吴恩达的《机器学习教程》，《算法》等，该平台由国外内知名大学在线推出课程供大家学习。在2018年中由多伦多大学推出了一套自动驾驶专项，<a href="https://www.coursera.org/specializations/self-driving-cars">链接</a>。其中包括了四期课程，如图所示：<br>
-<img src="https://qiaoxu.coding.me/post-images/1570022244000.png" alt=""></p>
+<img src="https://qiaoxu123.github.io/post-images/1570022244000.png" alt="" loading="lazy"></p>
 <p>关于这套课程的具体信息和推荐，网上有很多，大家可以查阅下<a href="https://zhuanlan.zhihu.com/p/56167613">链接</a>。而在这我想以一个学习者的身份向大家重新介绍一下这个课程，以及从中收货的一些心得体会。</p>
 <hr>
 <h3 id="2-课程内容介绍">2. 课程内容介绍</h3>
 <p>课程总共分为四部分，因为个人方向关系，刚开始我把兴趣点放在了Part4:Motion Planning部分，考虑到尽可能体系化学习，同时仿真器环境直接上手可能不习惯，因此决定从Part1部分慢慢学起，从此一发不可收拾。</p>
 <p>目前网上能找到的资料，最多的是优达学城的自动驾驶教程，或者是麻省理工学院的强化学习自动驾驶教程。与上面提到的两个课程类似，多伦多大学这套课程很注重体系化的教学，从一开始的车辆控制部分课程入手，到最后的运动规划，循序过渡。进入课程中具体来看，每门课的理论知识点都有的放矢，不放过简单的知识点，让新手能成功上手，又在重点难点的部分多多着墨，让行业工作者也能耳目一新。放下Part4课程对比下（因为图片尺寸关系，只有部分，一共7课）<br>
-<img src="https://qiaoxu.coding.me/post-images/1570062786032.png" alt=""></p>
+<img src="https://qiaoxu123.github.io/post-images/1570062786032.png" alt="" loading="lazy"></p>
 <p>对于课程的内容，从制作的PPT中可以看出，主办方真的很用心去做，使用各种插图还有车辆仿真行驶的动态图来充分说明知识点，给出的公式一般也会一一说明，同时关键算法部分也会使用配图进行解释。对于新手而言真的很友好。<br>
-<img src="https://qiaoxu.coding.me/post-images/1570063202475.png" alt=""></p>
-<figure data-type="image" tabindex="1"><img src="https://qiaoxu.coding.me/post-images/1570063288877.png" alt=""></figure>
+<img src="https://qiaoxu123.github.io/post-images/1570063202475.png" alt="" loading="lazy"></p>
+<figure data-type="image" tabindex="1"><img src="https://qiaoxu123.github.io/post-images/1570063288877.png" alt="" loading="lazy"></figure>
 <p>在这就不一一列举了，大家具体可以去我整理的Github仓库看一下。</p>
 <p>想重点说明一下的是，课程中的实践部分对整个课程的理解帮助很大，在课程中间会不定地穿插使用jupyter notebook写好的练习题目，让大家在理解课程的基础上进行补充。课程全部使用python语言，要求对python的基本语法熟练掌握，同时了解并可以使用各种算法库。另外，在课程的最后，除了Part3外，都使用Carla仿真器作为作业平台。Carla是由Intel开源的自动驾驶仿真平台，其使用的广泛程度也不亚于优达学城的仿真器。想重点说明下，如果按照网上的安装方法，在电脑上进行完整安装，性能差的笔记本是很难搞定的，特别是显卡差的情况。在这出品方多伦多大学给出一个简易版安装方法，由其使用python进行适配，普通电脑也可以使用。</p>
 <p>在这放下我的Part4期末作业的效果图：</p>
-<figure data-type="image" tabindex="2"><img src="https://qiaoxu.coding.me/post-images/1570096672756.jpeg" alt=""></figure>
+<figure data-type="image" tabindex="2"><img src="https://qiaoxu123.github.io/post-images/1570096672756.jpeg" alt="" loading="lazy"></figure>
 <hr>
 <h3 id="3-个人学习体会">3. 个人学习体会</h3>
 <p>整个专项课程分为四部分，从官方的介绍中大家可以了解的更深入，在这不再赘述。根据个人学习过程的体会和感受，对于该课程，每个人需要根据个人情况合理划分下学习重心和分配精力，不应该简单地一概而论。既可以进行框架型的理解，也可以就某个部分进行深度研究学习（通过参考文献）。</p>
@@ -126,57 +495,117 @@
 <h3 id="3-资料整理">3. 资料整理</h3>
 <p>所有课程资源，视频，PPT以及字幕等均已更新到个人github，同时，根据字幕文件与PPT整理了一份笔记也同步在各个章节，大家可以看一下。<a href="https://github.com/qiaoxu123/Self-Driving-Cars">链接</a>。欢迎大家多多fork，有问题可以随时提issue，我会尽力去回答大家。字幕的译制在计划中，等时间充裕会提交到官方，大家可以期待下～。</p>
 
-          </div>
-        </div>
-
-        
-          <div class="next-post">
-            <a class="purple-link" href="https://qiaoxu.coding.me/post/baidu-apollo-note">
-              <h3 class="post-title">
-                下一篇：Baidu Apollo代码笔记
-              </h3>
-            </a>
-          </div>
-          
-      </div>
-
-      
-
-      <div class="site-footer">
-  <div class="slogan">个人知识记录，学习～</div>
-  <div class="social-container">
+              </div>
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      Blog
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://qiaoxu123.github.io/post/coursera-self-driving-cars/" title="推荐：可能是目前最好的自动驾驶教程">https://qiaoxu123.github.io/post/coursera-self-driving-cars/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外,转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
     
-      
+      <a href="https://qiaoxu123.github.io/tag/KUvEXNYC1/"># 个人学习</a>
     
-      
-    
-      
-    
-      
-    
-      
+      <a href="https://qiaoxu123.github.io/tag/FpZd9d6flZ/"># 自动驾驶</a>
     
   </div>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu.coding.me/atom.xml" target="_blank">RSS</a>
+  <div class="nav">
+    <div class="nav-prev">
+      
+        <i class="fa fa-angle-left"></i>
+        <a class="nav-pc-next" href="https://qiaoxu123.github.io/post/ubuntu18-protobuf-memory-share-note/">Ubuntu18下ROS使用Protobuf共享内存实现节点通信</a class="nav-pc-next">
+        <a class="nav-mobile-prev" href="https://qiaoxu123.github.io/post/ubuntu18-protobuf-memory-share-note/">上一篇</a>
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" href="https://qiaoxu123.github.io/post/baidu-apollo-note/">Baidu Apollo代码笔记</a>
+        <a class="nav-mobile-next" href="https://qiaoxu123.github.io/post/baidu-apollo-note/">下一篇</a>
+        <i class="fa fa-angle-right"></i>
+      
+    </div>
+  </div>
+</div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-box">
+  <footer class="footer">
+    <div class="copyright">
+      © 2019-2020 <i class="fa fa-heart"></i> HsxyHao
+    </div>
+    <div class="poweredby">
+      <div class="power-left">Power By<a href="https://github.com/hsxyhao"> HsxyHao</a></div>
+      <div>Copy<a href="https://github.com/iissnan/hexo-theme-next"> Hexo Next Theme</a></div>
+    </div>
+  </footer>
+  <div class="back-to-top" id="back_to_top">
+    <i class="fa fa-arrow-up"></i>
+    <span class="scrollpercent">
+      <span id="back_to_top_text">100</span>%
+    </span>
+  </div>
 </div>
 
+<script>
 
-    </div>
-    <script type="application/javascript">
+  let body = document.body;
 
-hljs.initHighlightingOnLoad()
+  let back2Top = document.querySelector('#back_to_top'),
+  back2TopText = document.querySelector('#back_to_top_text');
 
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
+  function scrollAnimation(currentY, targetY) {
+   
+    let needScrollTop = targetY - currentY
+    let _currentY = currentY
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10)
+      _currentY += dist
+      window.scrollTo(_currentY, currentY)
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY)
+      } else {
+        window.scrollTo(_currentY, targetY)
+      }
+    }, 1)
+  }
 
+  back2Top.addEventListener("click", function(e) {
+    scrollAnimation(body.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+  
+  window.addEventListener('scroll', function(e) {
+    let percent = body.scrollTop / (body.scrollHeight - body.clientHeight) * 100;
+    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
+      back2Top.classList.add('back-top-active');
+    }
+    if (percent == 0) {
+      back2Top.classList.remove('back-top-active');
+    }
+    back2TopText.textContent = Math.floor(percent);
+  });
+
+  // 动态调整站点概览高度
+  let sideBar = document.querySelector('.sidebar');
+  let navUl = document.querySelector('#nav_ul');
+  sideBar.style = 'margin-top:' + (navUl.children.length * 42 + 162) + 'px; opacity: 1;';
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
 </script>
-
-
-
-
+    </div>
   </body>
+  <script src="/media/js/motion.js"></script>
 </html>

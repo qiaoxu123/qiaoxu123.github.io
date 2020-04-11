@@ -1,0 +1,905 @@
+<html>
+  <head>
+      <meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Blog</title>
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1586567689636">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+<meta name="description" content="个人生活，学习记录" />
+
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+  </head>
+  <body>
+    <div class="head-top-line"></div>
+    <div class="header-box">
+      
+<header class="header">
+  <div class="blog-header" id="header">
+    <div class="site-meta">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-title">
+        <a href="/" class="brand">
+          <span>Blog</span>
+        </a>
+      </div>
+      <p class="subtitle">Quick notes</p>
+    </div>
+    <nav class="site-nav" id="site_nav">
+      <ul id="nav_ul">
+        
+          <li class="nav-item ">
+            
+              <a href="https://qiaoxu.coding.me">
+                <i class="fa fa-"></i> 首页
+              </a>
+            
+          </li>
+        
+          <li class="nav-item ">
+            
+              <a href="https://qiaoxu.coding.me/archives">
+                <i class="fa fa-"></i> 归档
+              </a>
+            
+          </li>
+        
+          <li class="nav-item ">
+            
+              <a href="https://qiaoxu.coding.me/tags">
+                <i class="fa fa-"></i> 标签
+              </a>
+            
+          </li>
+        
+        <li class="nav-item">
+          <a>
+            <i class="fa fa-search"></i> 搜索
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+    </div>
+    <div class="main-continer">
+      <div class="section-layout">
+        <div class="section-layout-wrapper">
+          
+<div class="sidebar">
+    <div class="sidebar-wrapper" id="sidebar">
+      
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body" id="sidebar_body">
+        
+          <div class="post-side-meta" id="post_side_meta">
+            <div class="sidebar-wrapper">
+  <div class="sidebar-item">
+    <img class="site-author-image" src="https://qiaoxu123.github.io/images/avatar.png"/>
+    <p class="site-author-name">Blog</p>
+    <p class="site-description">个人生活，学习记录</p>
+  </div>
+  <div class="sidebar-item side-item-stat">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        
+        <span class="site-item-stat-count">40</span>
+        <span class="site-item-stat-name">文章</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="">
+        <span class="site-item-stat-count">39</span>
+        <span class="site-item-stat-name">分类</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">39</span>
+        <span class="site-item-stat-name">标签</span>
+      </a>
+    </div>
+  </div>
+  <div class="sidebar-item">
+    <span class="site-item-rss">
+        <i class="fa fa-rss"></i>
+        <a href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+    </span>
+  </div>
+  <div class="sidebar-item sidebar-item-social">
+    <div class="social-item">
+      <a href="https://www.github.com/hsxyhao">
+        <i class="fa fa-github"></i> GitHub
+      </a>
+      <a href="">
+        <i class="fa fa-twitter"></i> Twitter
+      </a>
+    </div>
+    <div class="social-item">
+      <a href="">
+        <i class="fa fa-globe"></i> 豆瓣
+      </a>
+      <a href="">
+        <i class="fa fa-globe"></i> 知乎
+      </a>
+    </div>
+  </div>
+</div>
+          </div>
+          <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+            <div class="toc-box">
+  <div class="toc-wrapper" id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%981%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E%E5%92%8C%E5%AE%9A%E4%B9%89%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB">面试题1：变量的声明和定义有什么区别</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%982-%E5%86%99%E5%87%BAboolintfloat%E6%8C%87%E9%92%88%E5%8F%98%E9%87%8F%E4%B8%8E%E9%9B%B6%E5%80%BC%E6%AF%94%E8%BE%83%E7%9A%84if%E8%AF%AD%E5%8F%A5">面试题2 ：写出bool，int，float，指针变量与“零值”比较的if语句</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%983-sizeof%E5%92%8C-strlen%E7%9A%84%E5%8C%BA%E5%88%AB">面试题3 ：<code>sizeof</code>和 <code>strlen</code>的区别</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%984-c-%E8%AF%AD%E8%A8%80%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97-static-%E5%92%8C-c-%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97-static-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB">面试题4 ：C 语言的关键字 static 和 C++ 的关键字 static 有什么区别</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%985-c%E4%B8%AD%E7%9A%84malloc%E5%92%8Cc%E4%B8%AD%E7%9A%84new%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB">面试题5 ：Ｃ中的<code>malloc</code>和Ｃ++中的<code>new</code>有什么区别</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%986%E5%86%99%E4%B8%80%E4%B8%AA-%E6%A0%87%E5%87%86%E5%AE%8Fmin">面试题6：写一个 “标准”宏MIN</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%987-%E4%B8%80%E4%B8%AA%E6%8C%87%E9%92%88%E5%8F%AF%E4%BB%A5%E6%98%AFvolatile%E6%98%93%E5%8F%98%E7%9A%84-%E4%BC%98%E5%8C%96%E5%99%A8%E5%9C%A8%E7%94%A8%E5%88%B0%E8%BF%99%E4%B8%AA%E5%8F%98%E9%87%8F%E6%97%B6%E5%BF%85%E9%A1%BB%E6%AF%8F%E6%AC%A1%E9%83%BD%E5%B0%8F%E5%BF%83%E5%9C%B0%E9%87%8D%E6%96%B0%E8%AF%BB%E5%8F%96%E8%BF%99%E4%B8%AA%E5%8F%98%E9%87%8F%E7%9A%84%E5%80%BC%E4%B8%BB%E8%A6%81%E5%BA%94%E7%94%A8%E5%9C%BA%E5%90%88%E6%98%AF%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%AD">面试题7 ：一个指针可以是volatile(易变的: 优化器在用到这个变量时必须每次都小心地重新读取这个变量的值,主要应用场合是多线程中)</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%988a-%E5%92%8Ca-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB">面试题8：a 和&amp;a 有什么区别</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%989-%E7%AE%80%E8%BF%B0c-c%E7%A8%8B%E5%BA%8F%E7%BC%96%E8%AF%91%E7%9A%84%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%83%85%E5%86%B5">面试题9 ：简述C、C++程序编译的内存分配情况</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9810%E7%AE%80%E8%BF%B0strcpy-sprintf%E4%B8%8Ememcpy%E7%9A%84%E5%8C%BA%E5%88%AB">面试题10：简述<code>strcpy</code>、<code>sprintf</code>与<code>memcpy</code>的区别</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9811%E8%AE%BE%E7%BD%AE%E5%9C%B0%E5%9D%80%E4%B8%BA0x67a9%E7%9A%84%E6%95%B4%E5%9E%8B%E5%8F%98%E9%87%8F%E7%9A%84%E5%80%BC%E4%B8%BA0xaa66">面试题11：设置地址为0x67a9的整型变量的值为0xaa66</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9812-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E5%BE%81">面试题12 ：面向对象的三大特征</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9813c%E7%9A%84%E7%A9%BA%E7%B1%BB%E6%9C%89%E5%93%AA%E4%BA%9B%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0">面试题13：C++的空类有哪些成员函数</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9814-%E8%B0%88%E8%B0%88%E4%BD%A0%E5%AF%B9%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%92%8C%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD%E7%9A%84%E8%AE%A4%E8%AF%86">面试题14 ：谈谈你对拷贝构造函数和赋值运算符重载的认识</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9815%E7%94%A8c%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E4%B8%8D%E8%83%BD%E8%A2%AB%E7%BB%A7%E6%89%BF%E7%9A%84%E7%B1%BB">面试题15：用C++设计一个不能被继承的类</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9816%E8%AE%BF%E9%97%AE%E5%9F%BA%E7%B1%BB%E7%9A%84%E7%A7%81%E6%9C%89%E8%99%9A%E5%87%BD%E6%95%B0">面试题16：访问基类的私有虚函数</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9817%E7%AE%80%E8%BF%B0%E7%B1%BB%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E9%87%8D%E5%86%99-%E9%87%8D%E8%BD%BD%E5%92%8C%E9%9A%90%E8%97%8F%E7%9A%84%E5%8C%BA%E5%88%AB">面试题17：简述类成员函数的重写、重载和隐藏的区别</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9818%E7%AE%80%E8%BF%B0%E5%A4%9A%E6%80%81%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%8E%9F%E7%90%86">面试题18：简述多态实现的原理</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9819-%E9%93%BE%E8%A1%A8%E5%92%8C%E6%95%B0%E7%BB%84%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB">面试题19 ：链表和数组有什么区别</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9820-%E6%80%8E%E6%A0%B7%E6%8A%8A%E4%B8%80%E4%B8%AA%E5%8D%95%E9%93%BE%E8%A1%A8%E5%8F%8D%E5%BA%8F">面试题20 ：怎样把一个单链表反序</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1; 
+let active = 'active-show', activeClass = 'active-current';
+let tocWrapper = document.querySelector('#toc_wrapper');
+let tocContent = tocWrapper.children[0];
+
+function addTocNumber(elem, deep) {
+  if (!elem) {
+    return;
+  }
+  let prop = elem.__proto__;
+
+  if (prop === HTMLUListElement.prototype) {
+    for (let i = 0; i < elem.children.length; i++) {
+      addTocNumber(elem.children[i], deep + (i + 1) + '.');
+    }
+  } else if (prop === HTMLLIElement.prototype) {
+    // 保存li元素
+    lList.push(elem);
+    for (let i = 0; i < elem.children.length; i++) {
+      let cur = elem.children[i];
+      if (cur.__proto__ === HTMLAnchorElement.prototype) {
+        cur.text =  deep + ' ' + cur.text;
+      } else if (cur.__proto__ === HTMLUListElement.prototype) {
+        addTocNumber(cur, deep);
+      }
+    }
+  }
+}
+
+
+document.addEventListener('scroll', function(e) {
+  if (lList.length <= 0) {
+    return;
+  }
+  let scrollTop = document.body.scrollTop;
+  let dir;
+
+  if (lastTop - scrollTop > 0) {
+    dir = 'up';
+  } else {
+    dir = 'down';
+  }
+
+  lastTop = scrollTop;
+  if (scrollTop <= 0) {
+    if (lastIndex >= 0 && lastIndex < hList.length) {
+      lList[lastIndex].classList.remove(activeClass);
+    }
+    return;
+  }
+
+  let current = 0, hasFind = false;
+  for (let i = 0; i < hList.length; i++) {
+    if (hList[i].offsetTop > scrollTop) {
+      current = i;
+      hasFind = true;
+      break;
+    }
+  }
+  if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+    current = hList.length - 1;
+  } else {
+    current--;
+  }
+  if (dir === 'down') {
+    if (current > lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex) 
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  } else {
+    if (current < lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex);
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  }
+});
+
+function removeParentActiveClass() {
+  let parents = tocContent.querySelectorAll('.'+active)
+  parents.forEach(function(elem) {
+    elem.classList.remove(active);
+  });
+}
+
+function addActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.add(activeClass);
+  }
+}
+
+function removeActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.remove(activeClass);
+  }
+}
+
+function addActiveLiElemment(elem, parent) {
+  if (!elem || elem === parent) {
+    return;
+  } else {
+    if (elem.__proto__ === HTMLLIElement.prototype) {
+      elem.classList.add(active);
+    }
+    addActiveLiElemment(elem.parentElement, parent);
+  }
+}
+
+function showToc() {
+  if (tocWrapper) {
+    postBody = document.querySelector('#post_body');
+    for (let i = 0; i < postBody.children.length; i++) {
+      if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+        hList.push(postBody.children[i]);
+      }
+    }
+
+    if (hList.length > 10) {
+      active = 'active-hidden'
+      tocContent.classList.add('closed');
+    } else {
+      tocContent.classList.add('expanded');
+    }
+  }
+}
+addTocNumber(tocContent, '');
+
+window.addEventListener('load', function() {
+  showToc();
+  document.querySelector('#sidebar').style='display: block;';
+  tocWrapper.classList.add('toc-active');
+  setTimeout(function() {
+    if ("createEvent" in document) {
+      let evt = document.createEvent("HTMLEvents");
+      evt.initEvent("scroll", false, true);
+      document.dispatchEvent(evt);
+    }
+    else {
+      document.fireEvent("scroll");
+    }
+  }, 500)
+})
+
+</script>
+          </div>
+        
+      </div>
+    </div>
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+
+  }
+
+  postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+  let hasFix = false;
+  window.addEventListener('scroll', function(e) {
+    if (document.body.scrollTop >= limitTop) {
+      if (!hasFix) {
+        sidebar.classList.add('sidebar-fixed');
+        hasFix = true;
+      }
+    } else {
+      if (hasFix) {
+        sidebar.classList.remove('sidebar-fixed');
+        hasFix = false;
+      }
+    }
+  });
+</script>
+          <div class="section-box">
+            <div class="section post">
+              <div class="article-box">
+    <header class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://qiaoxu123.github.io/post/50-C++-interview-problem/">
+      20个经典的C++面试题(转载)
+    </a>
+  </h1>
+  <div class="post-meta">
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span>发布于</span>
+      <span>2019-12-28</span>
+    </span>
+    
+      <span class="meta-item">
+        <span class="post-meta-divider pc-show">|</span>
+        <i class="fa fa-folder-o"></i>
+        <span class="pc-show">分类于</span>
+        
+          
+            <a href="https://qiaoxu123.github.io/tag/dcW9tG6DF/">
+              <span>工作面试</span>
+            </a>、
+          
+        
+          
+            <a href="https://qiaoxu123.github.io/tag/lJwUcvxsaz/">
+              <span>C++</span>
+            </a>
+          
+        
+      </span>
+    
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-clock-o"></i>
+      <span>14分钟</span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>3796<span class="pc-show">字数</span></span>
+    </span>
+  </div>
+</header>
+</div>
+              <div class="post-body next-md-body" id="post_body">
+                <p>捡起已经忘记的C++。。。</p>
+<!-- more -->
+<hr>
+<h3 id="面试题1变量的声明和定义有什么区别">面试题1：变量的声明和定义有什么区别</h3>
+<p>为变量分配地址和存储空间的称为<strong>定义</strong>，不分配地址的称为<strong>声明</strong>。一个变量可以在多个地方声明，但是只在一个地方定义。加入<code>extern</code>修饰的是变量的声明，说明此变量将在文件以外或在文件后面部分<br>
+定义。</p>
+<p>**说明：**很多时候一个变量，只是声明不分配内存空间，直到具体使用时才初始化，分配内存空间，<br>
+如外部变量。</p>
+<hr>
+<h3 id="面试题2-写出boolintfloat指针变量与零值比较的if语句">面试题2 ：写出bool，int，float，指针变量与“零值”比较的if语句</h3>
+<ul>
+<li>bool 型数据：</li>
+</ul>
+<pre><code class="language-c">if( flag ) A
+else B ； 
+</code></pre>
+<ul>
+<li>int 型数据：</li>
+</ul>
+<pre><code class="language-c">if( 0 != flag ) A; 
+else B ； 
+</code></pre>
+<ul>
+<li>指针型数：</li>
+</ul>
+<pre><code class="language-c">if( NULL == flag ) A; 
+else B ； 
+</code></pre>
+<ul>
+<li>float 型数据：</li>
+</ul>
+<pre><code class="language-c">if ( ( flag &gt;= NORM ) &amp;&amp; ( flag &lt;= NORM ) ) 
+    A ； 
+</code></pre>
+<p>注意：应特别注意在int，指针型变量和“零值”比较的时候，把“零值”放在左边，这样当把“== ”<br>
+误写成“=”时，编译器可以报错，否则这种逻辑错误不容易发现，并且可能导致很严重的后果。</p>
+<hr>
+<h3 id="面试题3-sizeof和-strlen的区别">面试题3 ：<code>sizeof</code>和 <code>strlen</code>的区别</h3>
+<p><code>sizeof</code>和<code>strlen</code>有以下区别：</p>
+<ul>
+<li><code>sizeof</code>是一个操作符，<code>strlen</code>是库函数。</li>
+<li><code>sizeof</code>的参数可以是数据的类型，也可以是变量，而<code>strlen</code>只能以结尾为'\0'的字符串作参数。</li>
+<li>编译器在编译时就计算出了<code>sizeof</code>的结果。而<code>strlen</code>函数必须在运行时才能计算出来。并且 <code>sizeof</code>计算的是数据类型占内存的大小，而<code>strlen</code>计算的是字符串实际的长度。</li>
+<li>数组做<code>sizeof</code>的参数不退化，传递给<code>strlen</code>就退化为指针了。</li>
+</ul>
+<p>注意：有些是操作符看起来像是函数，而有些函数名看起来又像操作符，这类容易混淆的名称一定<br>
+要加以区分，否则遇到数组名这类特殊数据类型作参数时就很容易出错。最容易混淆为函数的操作符就<br>
+是<code>sizeof</code>。</p>
+<hr>
+<h3 id="面试题4-c-语言的关键字-static-和-c-的关键字-static-有什么区别">面试题4 ：C 语言的关键字 static 和 C++ 的关键字 static 有什么区别</h3>
+<p>在C 中static 用来修饰局部静态变量和外部静态变量、函数。而C++ 中除了上述功能外，还用来定<br>
+义类的成员变量和函数。即静态成员和静态成员函数。</p>
+<p>注意：编程时static的记忆性，和全局性的特点可以让在不同时期调用的函数进行通信，传递信息，<br>
+而C++的静态成员则可以在多个对象实例间进行通信，传递信息。</p>
+<hr>
+<h3 id="面试题5-c中的malloc和c中的new有什么区别">面试题5 ：Ｃ中的<code>malloc</code>和Ｃ++中的<code>new</code>有什么区别</h3>
+<p><code>malloc</code>和<code>new</code>有以下不同：</p>
+<ol>
+<li><code>new</code>，<code>delete</code> 是操作符，可以重载，只能在C++中使用；</li>
+<li><code>malloc</code>，<code>free</code> 是函数，可以覆盖，C，C++ 中都可以使用；</li>
+<li><code>new</code> 可以调用对象的构造函数，对应的<code>delete</code> 调用相应的析构函数；</li>
+<li><code>malloc</code> 仅仅分配内存，<code>free</code> 仅仅回收内存，并不执行构造和析构函数；</li>
+<li><code>new</code> ,<code>delete</code> 返回的是某种数据类型指针，<code>malloc</code>、<code>free</code> 返回的是void指针；</li>
+</ol>
+<p>注意：<code>malloc</code>申请的内存空间要用<code>free</code>释放，而<code>new</code> 申请的内存空间要用<code>delete</code> 释放，不要混用。因为两者实现的机理不同。</p>
+<hr>
+<h3 id="面试题6写一个-标准宏min">面试题6：写一个 “标准”宏MIN</h3>
+<pre><code class="language-c">#define min(a,b)((a)&lt;=(b)?(a):(b)) 
+</code></pre>
+<p>注意：在调用时一定要注意这个宏定义的副作用，如下调用： <code>((++*p)&lt;=(x)?(++*p):(x)</code>。<br>
+p 指针就自加了两次，违背了MIN的本意。</p>
+<hr>
+<h3 id="面试题7-一个指针可以是volatile易变的-优化器在用到这个变量时必须每次都小心地重新读取这个变量的值主要应用场合是多线程中">面试题7 ：一个指针可以是volatile(易变的: 优化器在用到这个变量时必须每次都小心地重新读取这个变量的值,主要应用场合是多线程中)</h3>
+<p>可以，因为指针和普通变量一样，有时也有变化程序的不可控性。常见例：子中断服务子程序修改一个指向一个buffer的指针时，必须用volatile来修饰这个指针。</p>
+<p>说明：指针是一种普通的变量，从访问上没有什么不同于其他变量的特性。其保存的数值是个<strong>整型<br>
+数据</strong>，和整型变量不同的是，这个整型数据指向的是一段内存地址。</p>
+<hr>
+<h3 id="面试题8a-和a-有什么区别">面试题8：a 和&amp;a 有什么区别</h3>
+<p>请写出以下代码的打印结果，主要目的是考察a 和&amp;a 的区别。</p>
+<pre><code class="language-c">#include&lt;stdio.h&gt; 
+
+int main() 
+{ 
+    int a[5]={1,2,3,4,5}; 
+    int *ptr=(int *)(&amp;a+1); 
+
+    printf(&quot;%d,%d\n&quot;,*(a+1),*(ptr-1)); 
+    return 0; 
+}
+</code></pre>
+<p>输出结果：2 ，5。<br>
+数组名a作为数组的首地址，而&amp;a是数组的指针，<code>int *ptr=(int *)(&amp;a+1);</code>这句话得到的<code>*ptr</code>指的是内存中数组这个变量地址的下一个地址。<br>
+注意，若将原式的<code>int *ptr=(int *)(&amp;a+1);</code>改为<code>int *ptr=(int *)(a+1);</code>时，输出结果是2，1。此时<code>(a + 1)</code>指的是数组中第二个元素的地址。</p>
+<hr>
+<h3 id="面试题9-简述c-c程序编译的内存分配情况">面试题9 ：简述C、C++程序编译的内存分配情况</h3>
+<p>C、C++ 中内存分配方式可以分为三种：</p>
+<ol>
+<li>
+<p>从<strong>静态存储区域</strong>分配：<br>
+内存在程序编译时就已经分配好，这块内存在程序的整个运行期间都存在。速度快、不容易出错，<br>
+因为有系统会善后。例如全局变量，static 变量，常量字符串等。</p>
+</li>
+<li>
+<p>在<strong>栈</strong>上分配：<br>
+在执行函数时，函数内局部变量的存储单元都在栈上创建，函数执行结束时这些存储单元自动被释<br>
+放。栈内存分配运算内置于处理器的指令集中，效率很高，但是分配的内存容量有限。大小为2M。</p>
+</li>
+<li>
+<p>从<strong>堆</strong>上分配：<br>
+即动态内存分配。程序在运行的时候用 malloc 或 new 申请任意大小的内存，程序员自己负责在何<br>
+时用 free 或 delete 释放内存。动态内存的生存期由程序员决定，使用非常灵活。如果在堆上分配了空间， 就有责任回收它，否则运行的程序会出现内存泄漏，另外频繁地分配和释放不同大小的堆空间将会产生堆内碎块。</p>
+</li>
+</ol>
+<p><strong>一个C、C++程序编译时内存分为5大存储区：堆区、栈区、全局区、文字常量区、程序代码区。</strong></p>
+<hr>
+<h3 id="面试题10简述strcpy-sprintf与memcpy的区别">面试题10：简述<code>strcpy</code>、<code>sprintf</code>与<code>memcpy</code>的区别</h3>
+<p>三者主要有以下不同之处：</p>
+<ol>
+<li>操作对象不同，<code>strcpy</code>的两个操作对象均为字符串，<code>sprintf</code>的操作源对象可以是多种数据类型，目的操作对象是字符串，<code>memcpy</code>的两个对象就是两个任意可操作的内存地址，并不限于何种数据类型。</li>
+<li>执行效率不同，<code>memcpy</code>最高，<code>strcpy</code>次之，<code>sprintf</code>的效率最低。</li>
+<li>实现功能不同，<code>strcpy</code>主要实现字符串变量间的拷贝，<code>sprintf</code>主要实现其他数据类型格式到字符串的转化，<code>memcpy</code>主要是内存块间的拷贝。</li>
+</ol>
+<p>说明：<code>strcpy</code>、<code>sprintf</code>与<code>memcpy</code>都可以实现拷贝的功能，但是针对的对象不同，根据实际需求，来选择合适的函数实现拷贝功能。</p>
+<hr>
+<h3 id="面试题11设置地址为0x67a9的整型变量的值为0xaa66">面试题11：设置地址为0x67a9的整型变量的值为0xaa66</h3>
+<pre><code class="language-c">int *ptr; 
+ptr = (int *)0x67a9; 
+*ptr = 0xaa66; 
+</code></pre>
+<p>说明：这道题就是强制类型转换的典型例子，<strong>无论在什么平台，地址长度和整型数据的长度是一样的</strong>，即一个整型数据可以强制转换成地址指针类型，只要有意义即可。</p>
+<hr>
+<h3 id="面试题12-面向对象的三大特征">面试题12 ：面向对象的三大特征</h3>
+<p>面向对象的三大特征是<strong>封装性、继承性和多态性</strong>：</p>
+<ul>
+<li><strong>封装性：</strong> 将客观事物抽象成类，每个类对自身的数据和方法实行<code>protection(private，protected，public)</code></li>
+<li><strong>继承性：</strong> 广义的继承有三种实现形式：
+<ul>
+<li>实现继承(使用基类的属性和方法而无需额外编码的能力)；</li>
+<li>可视继承(子窗体使用父窗体的外观和实现代码)；</li>
+<li>接口继承(仅使用属性和方法,实现滞后到子类实现)；</li>
+</ul>
+</li>
+<li><strong>多态性：</strong> 是将父类对象设置成为和一个或更多它的子对象相等的技术。用子类对象给父类对象赋值之后，父类对象就可以根据当前赋值给它的子对象的特性以不同的方式运作。</li>
+</ul>
+<p>说明：面向对象的三个特征是实现面向对象技术的关键，每一个特征的相关技术都非常的复杂，程序员应该多看、多练。</p>
+<hr>
+<h3 id="面试题13c的空类有哪些成员函数">面试题13：C++的空类有哪些成员函数</h3>
+<ul>
+<li>缺省构造函数</li>
+<li>缺省拷贝构造函数</li>
+<li>缺省析构函数</li>
+<li>缺省赋值运算符</li>
+<li>缺省取址运算符</li>
+<li>缺省取址运算符 const</li>
+</ul>
+<p>注意：有些书上只是简单的介绍了前四个函数。没有提及后面这两个函数。但后面这两个函数也是<br>
+空类的默认函数。另外需要注意的是，只有当实际使用这些函数的时候，编译器才会去定义它们。</p>
+<hr>
+<h3 id="面试题14-谈谈你对拷贝构造函数和赋值运算符重载的认识">面试题14 ：谈谈你对拷贝构造函数和赋值运算符重载的认识</h3>
+<p>拷贝构造函数和赋值运算符重载有以下两个不同之处：</p>
+<ol>
+<li>拷贝构造函数生成新的类对象，而赋值运算符不能。</li>
+<li>由于拷贝构造函数是直接构造一个新的类对象，所以在初始化这个对象之前不用检验源对象是否和新建对象相同。而赋值运算符则需要这个操作，另外赋值运算中如果原来的对象中有内存分配要先把内存释放掉</li>
+</ol>
+<p>注意：当有类中有指针类型的成员变量时，一定要重写拷贝构造函数和赋值运算符，不要使用默认的。</p>
+<h3 id="面试题15用c设计一个不能被继承的类">面试题15：用C++设计一个不能被继承的类</h3>
+<pre><code class="language-c">template &lt;typename T&gt; class A {
+  friend T;
+
+private:
+  A() {}
+  ~A() {}
+};
+
+class B : virtual public A&lt;B&gt; {
+public:
+  B() {}
+  ~B() {}
+};
+class C : virtual public B {
+public:
+  C() {}
+  ~C() {}
+};
+void main(void) {
+  B b;
+  // C c;
+  return;
+}
+</code></pre>
+<p>注意：构造函数是继承实现的关键，每次子类对象构造时，首先调用的是父类的构造函数，然后才<br>
+是自己的。</p>
+<hr>
+<h3 id="面试题16访问基类的私有虚函数">面试题16：访问基类的私有虚函数</h3>
+<p>写出以下程序的输出结果：</p>
+<pre><code class="language-c">#include &lt;iostream.h&gt;
+class A
+
+{
+  virtual void g() { cout &lt;&lt; &quot;A::g&quot; &lt;&lt; endl; }
+
+private:
+  virtual void f() { cout &lt;&lt; &quot;A::f&quot; &lt;&lt; endl; }
+};
+class B : public A {
+  void g() { cout &lt;&lt; &quot;B::g&quot; &lt;&lt; endl; }
+  virtual void h() { cout &lt;&lt; &quot;B::h&quot; &lt;&lt; endl; }
+};
+typedef void (*Fun)(void);
+void main() {
+  B b;
+  Fun pFun;
+  for (int i = 0; i &lt; 3; i++) {
+    pFun = (Fun) * ((int *)*(int *)(&amp;b) + i);
+    pFun();
+  }
+}
+</code></pre>
+<p>输出结果：</p>
+<pre><code>B::g 
+A::f 
+B::h 
+</code></pre>
+<p>注意：本题主要考察了面试者对虚函数的理解程度。一个对虚函数不了解的人很难正确的做出本题。<br>
+在学习面向对象的多态性时一定要深刻理解虚函数表的工作原理。</p>
+<hr>
+<h3 id="面试题17简述类成员函数的重写-重载和隐藏的区别">面试题17：简述类成员函数的重写、重载和隐藏的区别</h3>
+<ol>
+<li>重写和重载主要有以下几点不同。</li>
+</ol>
+<ul>
+<li>范围的区别：被重写的和重写的函数在两个类中，而重载和被重载的函数在同一个类中。</li>
+<li>参数的区别：被重写函数和重写函数的参数列表一定相同，而被重载函数和重载函数的参数列表一<br>
+定不同。</li>
+<li>virtual 的区别：重写的基类中被重写的函数必须要有virtual 修饰，而重载函数和被重载函数可以被 virtual 修饰，也可以没有。</li>
+</ul>
+<ol start="2">
+<li>隐藏和重写、重载有以下几点不同。</li>
+</ol>
+<ul>
+<li>与重载的范围不同：和重写一样，隐藏函数和被隐藏函数不在同一个类中。</li>
+<li>参数的区别：隐藏函数和被隐藏的函数的参数列表可以相同，也可不同，但是函数名肯定要相同。<br>
+当参数不相同时，无论基类中的参数是否被virtual 修饰，基类的函数都是被隐藏，而不是被重写。</li>
+</ul>
+<p>说明：虽然重载和覆盖都是实现多态的基础，但是两者实现的技术完全不相同，达到的目的也是完<br>
+全不同的，覆盖是动态态绑定的多态，而重载是静态绑定的多态。</p>
+<hr>
+<h3 id="面试题18简述多态实现的原理">面试题18：简述多态实现的原理</h3>
+<p>编译器发现一个类中有虚函数，便会立即为此类生成虚函数表<code>vtable</code> 。虚函数表的各表项为指向对<br>
+应虚函数的指针。编译器还会在此类中隐含插入一个指针<code>vptr</code>(对vc 编译器来说，它插在类的第一个位<br>
+置上)指向虚函数表。调用此类的构造函数时，在类的构造函数中，编译器会隐含执行<code>vptr</code>与<code>vtable</code>的关联代码，将<code>vptr</code>指向对应的<code>vtable</code> ，将类与此类的<code>vtable</code>联系了起来。另外在调用类的构造函数时,指向基础类的指针此时已经变成指向具体的类的this指针，这样依靠此this指针即可得到正确的<code>vtable</code>。如此才能真正与函数体进行连接，这就是动态联编，实现多态的基本原理。</p>
+<p>注意：一定要区分虚函数，纯虚函数、虚拟继承的关系和区别。牢记虚函数实现原理，因为多态是C++面试的重要考点之一，而虚函数是实现多态的基础。</p>
+<hr>
+<h3 id="面试题19-链表和数组有什么区别">面试题19 ：链表和数组有什么区别</h3>
+<p>数组和链表有以下几点不同：</p>
+<ol>
+<li>存储形式：数组是一块连续的空间，声明时就要确定长度。链表是一块可不连续的动态空间，<br>
+长度可变，每个结点要保存相邻结点指针。</li>
+<li>数据查找：数组的线性查找速度快，查找操作直接使用偏移地址。链表需要按顺序检索结点，<br>
+效率低。</li>
+<li>数据插入或删除：链表可以快速插入和删除结点，而数组则可能需要大量数据移动。</li>
+<li>越界问题：链表不存在越界问题，数组有越界问题。</li>
+</ol>
+<p>说明：在选择数组或链表数据结构时，一定要根据实际需要进行选择。数组便于查询，链表便于插<br>
+入删除。数组节省空间但是长度固定，链表虽然变长但是占了更多的存储空间。</p>
+<hr>
+<h3 id="面试题20-怎样把一个单链表反序">面试题20 ：怎样把一个单链表反序</h3>
+<blockquote>
+<p><a href="https://www.acwing.com/problem/content/33/">题目链接</a></p>
+</blockquote>
+<ol>
+<li>反转一个链表。循环算法</li>
+</ol>
+<pre><code class="language-c">class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* node = head;
+        ListNode* preNode = NULL;
+        
+        while (node) {
+            auto nextNode = node-&gt;next;
+            node-&gt;next = preNode;
+            preNode = node;
+            node = nextNode;
+        }
+        
+        return preNode;
+    }
+};
+</code></pre>
+<ol start="2">
+<li>反转一个链表。递归算法。</li>
+</ol>
+<pre><code class="language-c">class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if (!head || !head-&gt;next) return head;
+        
+        ListNode* tail = reverseList(head-&gt;next);
+        head-&gt;next-&gt;next = head;
+        head-&gt;next = nullptr;
+        
+        return tail;
+    }
+};
+</code></pre>
+
+              </div>
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      Blog
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://qiaoxu123.github.io/post/50-C++-interview-problem/" title="20个经典的C++面试题(转载)">https://qiaoxu123.github.io/post/50-C++-interview-problem/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外,转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+      <a href="https://qiaoxu123.github.io/tag/dcW9tG6DF/"># 工作面试</a>
+    
+      <a href="https://qiaoxu123.github.io/tag/lJwUcvxsaz/"># C++</a>
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+        <i class="fa fa-angle-left"></i>
+        <a class="nav-pc-next" href="https://qiaoxu123.github.io/post/my-2019/">我的2019总结--错过的生活与糟糕的性格</a class="nav-pc-next">
+        <a class="nav-mobile-prev" href="https://qiaoxu123.github.io/post/my-2019/">上一篇</a>
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" href="https://qiaoxu123.github.io/post/qiao-swimming-note3/">小乔的游泳日记(第四周）</a>
+        <a class="nav-mobile-next" href="https://qiaoxu123.github.io/post/qiao-swimming-note3/">下一篇</a>
+        <i class="fa fa-angle-right"></i>
+      
+    </div>
+  </div>
+</div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-box">
+  <footer class="footer">
+    <div class="copyright">
+      © 2019-2020 <i class="fa fa-heart"></i> HsxyHao
+    </div>
+    <div class="poweredby">
+      <div class="power-left">Power By<a href="https://github.com/hsxyhao"> HsxyHao</a></div>
+      <div>Copy<a href="https://github.com/iissnan/hexo-theme-next"> Hexo Next Theme</a></div>
+    </div>
+  </footer>
+  <div class="back-to-top" id="back_to_top">
+    <i class="fa fa-arrow-up"></i>
+    <span class="scrollpercent">
+      <span id="back_to_top_text">100</span>%
+    </span>
+  </div>
+</div>
+
+<script>
+
+  let body = document.body;
+
+  let back2Top = document.querySelector('#back_to_top'),
+  back2TopText = document.querySelector('#back_to_top_text');
+
+  function scrollAnimation(currentY, targetY) {
+   
+    let needScrollTop = targetY - currentY
+    let _currentY = currentY
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10)
+      _currentY += dist
+      window.scrollTo(_currentY, currentY)
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY)
+      } else {
+        window.scrollTo(_currentY, targetY)
+      }
+    }, 1)
+  }
+
+  back2Top.addEventListener("click", function(e) {
+    scrollAnimation(body.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+  
+  window.addEventListener('scroll', function(e) {
+    let percent = body.scrollTop / (body.scrollHeight - body.clientHeight) * 100;
+    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
+      back2Top.classList.add('back-top-active');
+    }
+    if (percent == 0) {
+      back2Top.classList.remove('back-top-active');
+    }
+    back2TopText.textContent = Math.floor(percent);
+  });
+
+  // 动态调整站点概览高度
+  let sideBar = document.querySelector('.sidebar');
+  let navUl = document.querySelector('#nav_ul');
+  sideBar.style = 'margin-top:' + (navUl.children.length * 42 + 162) + 'px; opacity: 1;';
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
+</script>
+    </div>
+  </body>
+  <script src="/media/js/motion.js"></script>
+</html>

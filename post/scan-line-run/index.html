@@ -1,103 +1,476 @@
-
-<!DOCTYPE html>
 <html>
   <head>
-    
-<meta charset="utf-8" >
+      <meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Blog</title>
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1586567689636">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+<meta name="description" content="个人生活，学习记录" />
 
-<title>Scan Line Run 聚簇算法原理与实现 | Blog</title>
-<meta name="description" content="个人知识记录，学习～">
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://qiaoxu.coding.me/favicon.ico?v=1577461363174">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-<link rel="stylesheet" href="https://qiaoxu.coding.me/styles/main.css">
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
 
-
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
   </head>
   <body>
-    <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="https://qiaoxu.coding.me">
-        <img class="avatar" src="https://qiaoxu.coding.me/images/avatar.png?v=1577461363174" alt="" width="32px" height="32px">
-      </a>
-      <a href="https://qiaoxu.coding.me">
-        <h1 class="site-title">Blog</h1>
+    <div class="head-top-line"></div>
+    <div class="header-box">
+      
+<header class="header">
+  <div class="blog-header" id="header">
+    <div class="site-meta">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-title">
+        <a href="/" class="brand">
+          <span>Blog</span>
+        </a>
+      </div>
+      <p class="subtitle">Quick notes</p>
+    </div>
+    <nav class="site-nav" id="site_nav">
+      <ul id="nav_ul">
+        
+          <li class="nav-item ">
+            
+              <a href="https://qiaoxu.coding.me">
+                <i class="fa fa-"></i> 首页
+              </a>
+            
+          </li>
+        
+          <li class="nav-item ">
+            
+              <a href="https://qiaoxu.coding.me/archives">
+                <i class="fa fa-"></i> 归档
+              </a>
+            
+          </li>
+        
+          <li class="nav-item ">
+            
+              <a href="https://qiaoxu.coding.me/tags">
+                <i class="fa fa-"></i> 标签
+              </a>
+            
+          </li>
+        
+        <li class="nav-item">
+          <a>
+            <i class="fa fa-search"></i> 搜索
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+    </div>
+    <div class="main-continer">
+      <div class="section-layout">
+        <div class="section-layout-wrapper">
+          
+<div class="sidebar">
+    <div class="sidebar-wrapper" id="sidebar">
+      
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body" id="sidebar_body">
+        
+          <div class="post-side-meta" id="post_side_meta">
+            <div class="sidebar-wrapper">
+  <div class="sidebar-item">
+    <img class="site-author-image" src="https://qiaoxu123.github.io/images/avatar.png"/>
+    <p class="site-author-name">Blog</p>
+    <p class="site-description">个人生活，学习记录</p>
+  </div>
+  <div class="sidebar-item side-item-stat">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        
+        <span class="site-item-stat-count">40</span>
+        <span class="site-item-stat-name">文章</span>
       </a>
     </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
+    <div class="sidebar-item-box">
+      <a href="">
+        <span class="site-item-stat-count">39</span>
+        <span class="site-item-stat-name">分类</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">39</span>
+        <span class="site-item-stat-name">标签</span>
+      </a>
+    </div>
+  </div>
+  <div class="sidebar-item">
+    <span class="site-item-rss">
+        <i class="fa fa-rss"></i>
+        <a href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+    </span>
+  </div>
+  <div class="sidebar-item sidebar-item-social">
+    <div class="social-item">
+      <a href="https://www.github.com/hsxyhao">
+        <i class="fa fa-github"></i> GitHub
+      </a>
+      <a href="">
+        <i class="fa fa-twitter"></i> Twitter
+      </a>
+    </div>
+    <div class="social-item">
+      <a href="">
+        <i class="fa fa-globe"></i> 豆瓣
+      </a>
+      <a href="">
+        <i class="fa fa-globe"></i> 知乎
+      </a>
     </div>
   </div>
 </div>
-
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
-      
-        
-          <a href="https://qiaoxu123.github.io" class="menu purple-link">
-            首页
-          </a>
-        
-      
-        
-          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
-            标签
-          </a>
-        
-      
-        
-          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
-            归档
-          </a>
-        
-      
-    </div>
-  </div>
-</transition>
-
-
-      <div class="content-container">
-        <div class="post-detail">
-          
-          <h2 class="post-title">Scan Line Run 聚簇算法原理与实现</h2>
-          <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2019-07-17</span>
-            
-              <span>
-                <i class="icon-pricetags-outline"></i>
-                
-                  <a href="https://qiaoxu.coding.me/tag/_laS77gYN">
-                    自动驾驶感知
-                    
-                      ，
-                    
-                  </a>
-                
-                  <a href="https://qiaoxu.coding.me/tag/V5KOvYNVz">
-                    激光点云
-                    
-                  </a>
-                
-              </span>
-            
           </div>
-          <div class="post-content">
-            <blockquote>
+          <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+            <div class="toc-box">
+  <div class="toc-wrapper" id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#1%E6%8F%90%E5%8F%96%E5%9C%B0%E9%9D%A2%E7%82%B9gpf%E7%AE%97%E6%B3%95">1．提取地面点(GPF算法)</a></li>
+<li><a href="#2-%E8%81%9A%E7%B1%BBslr%E7%AE%97%E6%B3%95">2.  聚类(SLR算法)</a>
+<ul>
+<li><a href="#21-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86">2.1 基本原理</a></li>
+<li><a href="#22-%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82">2.2 实现细节</a></li>
+<li><a href="#23-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C">2.3. 实验结果</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1; 
+let active = 'active-show', activeClass = 'active-current';
+let tocWrapper = document.querySelector('#toc_wrapper');
+let tocContent = tocWrapper.children[0];
+
+function addTocNumber(elem, deep) {
+  if (!elem) {
+    return;
+  }
+  let prop = elem.__proto__;
+
+  if (prop === HTMLUListElement.prototype) {
+    for (let i = 0; i < elem.children.length; i++) {
+      addTocNumber(elem.children[i], deep + (i + 1) + '.');
+    }
+  } else if (prop === HTMLLIElement.prototype) {
+    // 保存li元素
+    lList.push(elem);
+    for (let i = 0; i < elem.children.length; i++) {
+      let cur = elem.children[i];
+      if (cur.__proto__ === HTMLAnchorElement.prototype) {
+        cur.text =  deep + ' ' + cur.text;
+      } else if (cur.__proto__ === HTMLUListElement.prototype) {
+        addTocNumber(cur, deep);
+      }
+    }
+  }
+}
+
+
+document.addEventListener('scroll', function(e) {
+  if (lList.length <= 0) {
+    return;
+  }
+  let scrollTop = document.body.scrollTop;
+  let dir;
+
+  if (lastTop - scrollTop > 0) {
+    dir = 'up';
+  } else {
+    dir = 'down';
+  }
+
+  lastTop = scrollTop;
+  if (scrollTop <= 0) {
+    if (lastIndex >= 0 && lastIndex < hList.length) {
+      lList[lastIndex].classList.remove(activeClass);
+    }
+    return;
+  }
+
+  let current = 0, hasFind = false;
+  for (let i = 0; i < hList.length; i++) {
+    if (hList[i].offsetTop > scrollTop) {
+      current = i;
+      hasFind = true;
+      break;
+    }
+  }
+  if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+    current = hList.length - 1;
+  } else {
+    current--;
+  }
+  if (dir === 'down') {
+    if (current > lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex) 
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  } else {
+    if (current < lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex);
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  }
+});
+
+function removeParentActiveClass() {
+  let parents = tocContent.querySelectorAll('.'+active)
+  parents.forEach(function(elem) {
+    elem.classList.remove(active);
+  });
+}
+
+function addActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.add(activeClass);
+  }
+}
+
+function removeActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.remove(activeClass);
+  }
+}
+
+function addActiveLiElemment(elem, parent) {
+  if (!elem || elem === parent) {
+    return;
+  } else {
+    if (elem.__proto__ === HTMLLIElement.prototype) {
+      elem.classList.add(active);
+    }
+    addActiveLiElemment(elem.parentElement, parent);
+  }
+}
+
+function showToc() {
+  if (tocWrapper) {
+    postBody = document.querySelector('#post_body');
+    for (let i = 0; i < postBody.children.length; i++) {
+      if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+        hList.push(postBody.children[i]);
+      }
+    }
+
+    if (hList.length > 10) {
+      active = 'active-hidden'
+      tocContent.classList.add('closed');
+    } else {
+      tocContent.classList.add('expanded');
+    }
+  }
+}
+addTocNumber(tocContent, '');
+
+window.addEventListener('load', function() {
+  showToc();
+  document.querySelector('#sidebar').style='display: block;';
+  tocWrapper.classList.add('toc-active');
+  setTimeout(function() {
+    if ("createEvent" in document) {
+      let evt = document.createEvent("HTMLEvents");
+      evt.initEvent("scroll", false, true);
+      document.dispatchEvent(evt);
+    }
+    else {
+      document.fireEvent("scroll");
+    }
+  }, 500)
+})
+
+</script>
+          </div>
+        
+      </div>
+    </div>
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+
+  }
+
+  postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+  let hasFix = false;
+  window.addEventListener('scroll', function(e) {
+    if (document.body.scrollTop >= limitTop) {
+      if (!hasFix) {
+        sidebar.classList.add('sidebar-fixed');
+        hasFix = true;
+      }
+    } else {
+      if (hasFix) {
+        sidebar.classList.remove('sidebar-fixed');
+        hasFix = false;
+      }
+    }
+  });
+</script>
+          <div class="section-box">
+            <div class="section post">
+              <div class="article-box">
+    <header class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://qiaoxu123.github.io/post/scan-line-run/">
+      Scan Line Run 聚簇算法原理与实现
+    </a>
+  </h1>
+  <div class="post-meta">
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span>发布于</span>
+      <span>2019-07-17</span>
+    </span>
+    
+      <span class="meta-item">
+        <span class="post-meta-divider pc-show">|</span>
+        <i class="fa fa-folder-o"></i>
+        <span class="pc-show">分类于</span>
+        
+          
+            <a href="https://qiaoxu123.github.io/tag/_laS77gYN/">
+              <span>自动驾驶感知</span>
+            </a>、
+          
+        
+          
+            <a href="https://qiaoxu123.github.io/tag/V5KOvYNVz/">
+              <span>激光点云</span>
+            </a>
+          
+        
+      </span>
+    
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-clock-o"></i>
+      <span>11分钟</span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>2864<span class="pc-show">字数</span></span>
+    </span>
+  </div>
+</header>
+</div>
+              <div class="post-body next-md-body" id="post_body">
+                <blockquote>
 <p>参考论文：<br>
 <a href="https://ieeexplore.ieee.org/abstract/document/7989591">Fast segmentation of 3D point clouds: A paradigm on LiDAR data for autonomous vehicle applications</a><br>
 <a href="https://github.com/VincentCheungM/Run_based_segmentation/blob/master/nodes/clustering/scanlinerun.cpp">代码地址</a></p>
@@ -112,7 +485,7 @@
 </blockquote>
 <h4 id="21-基本原理">2.1 基本原理</h4>
 <p>不属于地面的剩余点<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><mrow><mi>n</mi><mi>g</mi></mrow></msub></mrow><annotation encoding="application/x-tex">P_{ng}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">g</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span>需要形成要使用的簇，用在更高级别的后处理方案中。 我们的目标是为每个点 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mi>k</mi><mo>∈</mo><msub><mi>P</mi><mrow><mi>n</mi><mi>g</mi></mrow></msub></mrow><annotation encoding="application/x-tex">pk∈P_{ng}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">g</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> 获取一个代表其集群标识的标签 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span>，同时使用简单的机制来确保过程的快速运行时间和低复杂性。伪算法如下<br>
-<img src="https://img-blog.csdnimg.cn/20190627132644404.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx,size_14,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/20190627132644404.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx,size_14,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"><br>
 从伪代码中可以提取这几个关键量，为了后面的理解方便：</p>
 <ul>
 <li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span></span></span></span> ：输入点云</li>
@@ -123,9 +496,9 @@
 </ul>
 <p>在360°LiDAR传感器数据的情况下，3D点云的多层结构很类似于2D图像的行方向结构，主要差异在于每层中的元素的不均匀数量及其圆形形式。 <strong>所提出的解决方案将3D点视为图像的像素，并且从二进制图像调整两次运行的连通分量标记技术以产生实时3D聚类算法。</strong></p>
 <p>我们将从同一个LiDAR环产生的一层点称为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>c</mi><mi>a</mi><mi>n</mi><mo>−</mo><mi>l</mi><mi>i</mi><mi>n</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">scan-line</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">c</span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">e</span></span></span></span> (扫描线）。 在每个扫描线中，其元素被组织在称为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>u</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">runs</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span> (运行)的连续点的向量中。 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>u</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">runs</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span> 中的元素共享相同的标签，并且是集群的主要构建块。<br>
-<img src="https://img-blog.csdnimg.cn/20190627112833993.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx,size_14,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/20190627112833993.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx,size_14,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"><br>
 根据图2，在不失一般性的情况下，我们假设点云 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><mrow><mi>n</mi><mi>g</mi></mrow></msub></mrow><annotation encoding="application/x-tex">P_{ng}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">g</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> 从顶部扫描线开始以光栅逆时针方式遍历。形成第一扫描线的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>u</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">runs</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span> 并且每个扫描线都接收其自己的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mi>e</mi><mi>w</mi><mi>l</mi><mi>a</mi><mi>b</mi><mi>e</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">new label</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">n</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span> ，该标签由其所有点元素继承。然后，第一条扫描线的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>u</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">runs</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span> 成为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>u</mi><mi>n</mi><mi>s</mi><mi>A</mi><mi>b</mi><mi>o</mi><mi>v</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">runsAbove</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span><span class="mord mathdefault">A</span><span class="mord mathdefault">b</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">e</span></span></span></span>，用于将其标签传播到后续扫描线中的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>u</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">runs</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span> 。当新运行点与上一扫描线中最近邻点之间的距离小于 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi><msub><mi>h</mi><mrow><mi>m</mi><mi>e</mi><mi>r</mi><mi>g</mi><mi>e</mi></mrow></msub></mrow><annotation encoding="application/x-tex">Th_{merge}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">g</span><span class="mord mathdefault mtight">e</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> 时，标签将传播到新 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>u</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">runs</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span> 。当同一 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>u</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">runs</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span> 中的多个点具有不同的可继承标签的最近邻居时，获胜标签是最小的。另一方面，当 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>u</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">runs</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span> 中的任何点都找不到合适的最近邻居时，它会收到一个新的标签。以上是通过点云单次执行的，当完成此操作时，执行第二次传递以最终更新点标签和提取簇。</p>
-<figure data-type="image" tabindex="1"><img src="https://img-blog.csdnimg.cn/20190627114351823.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx,size_14,color_FFFFFF,t_70" alt="在这里插入图片描述"></figure>
+<figure data-type="image" tabindex="1"><img src="https://img-blog.csdnimg.cn/20190627114351823.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx,size_14,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
 <p>附图1的以下示例覆盖了所提出的算法的主要实例，其中白色和彩色圆圈分别代表地面和非地面点。蓝色圆圈是尚未访问过的非地面点。</p>
 <ul>
 <li><strong>步骤 a</strong> 中，第一扫描线初始化为两次运行（橙色和绿色），每次运行接收新标签（三角形内的1和2）。</li>
@@ -136,7 +509,7 @@
 <hr>
 <h4 id="22-实现细节">2.2 实现细节</h4>
 <p>算法的概要是直截了当的，但为了有效实现，我们提出了（i）如何创建 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>u</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">runs</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span>，（ii）如何寻找最近邻居，以及（iii）当合并两个或多个连接组件如何解决标签冲突的解决方案。<br>
-<img src="https://img-blog.csdnimg.cn/20190627150142453.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx,size_14,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<img src="https://img-blog.csdnimg.cn/20190627150142453.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx,size_14,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></p>
 <p>i）在扫描线的第一次访问时创建 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>u</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">run</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span></span></span></span> 作为索引的向量，并且保持关于哪些连续点足够接近被认为是扫描线内的单个块的信息。 考虑到扫描线的圆形形式，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>u</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">run</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span></span></span></span> 可以桥接第一个和最后一个凹槽。 当检测到时，通过在第一次 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>u</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">run</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span></span></span></span> 的开始处附加扫描线末端的凹口来解决这种情况，如图3的示例所示。</p>
 <p>ii）当输入点云以圆柱坐标表示，其中点 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo>=</mo><mo>[</mo><mi>r</mi><mi>θ</mi><mi>z</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">x = [r θ z]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">]</span></span></span></span>，则可以将上面扫描线中最近邻居的索引视为简单地比较θ值。然而，在自动驾驶车辆应用中，聚类是更大的传感器和算法系统的一个小组件，并且出于兼容性原因，优选笛卡尔坐标系。在实现方面，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mi>a</mi><mi>i</mi><mi>v</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">naive</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">n</span><span class="mord mathdefault">a</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">e</span></span></span></span> 的解决方案是<strong>使用上面扫描线中的所有非接地点构建 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi><mi>d</mi><mi>t</mi><mi>r</mi><mi>e</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">kdtree</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">d</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">e</span></span></span></span> 结构，并使用它来查找每个最近邻居</strong>，从而产生可以进一步细化的次优但可行的解决方案。</p>
 <p>假设扫描线中的点沿整个扫描线均匀分布，我们采用智能索引方法，克服了不同扫描线中元素数量不均匀的问题，并大大减少了查询最近的邻居的数量。假设每个扫描线具有 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>N</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">N_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 个点，并且每个点具有两个空位;一个全局 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>n</mi><msub><mi>d</mi><mi>g</mi></msub></mrow><annotation encoding="application/x-tex">ind_g</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">g</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> 表示它在整个点云中的位置，一个本地 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>n</mi><msub><mi>d</mi><mi>l</mi></msub></mrow><annotation encoding="application/x-tex">ind_l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 表示扫描线内的点。可以通过以下方式轻松地在扫描线 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span></span></span></span> 的凹槽之间切换：</p>
@@ -150,71 +523,131 @@
 <p>放弃对最佳匹配的追求，考虑算法的开销提出解决方案</p>
 </blockquote>
 <p>根据扫描线内部点的分布，索引可能不会指示最近的邻居，而是指示足够接近的点。在这种情况下，可能需要在其周围的多个点中搜索最近的邻居，但是该数量远小于考虑整个扫描线。在运行中，识别潜在邻居并搜索其周围环境以获得最佳匹配会导致大量开销，从而破坏算法的性能。考虑到这一点，所提出的解决方案是通过<strong>智能索引</strong>找到 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>u</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">run</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span></span></span></span> 的第一个和最后一个点的最近邻居，形成具有该范围内的所有非地面点的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi><mi>d</mi><mi>t</mi><mi>r</mi><mi>e</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">kdtree</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">d</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">e</span></span></span></span> 结构，并使用它来搜索最近的邻居。<br>
-<img src="https://img-blog.csdnimg.cn/20190627151037303.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx,size_14,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/20190627151037303.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx,size_14,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"><br>
 智能索引的两个可视化示例可以在图4中看到。在a）中，虽然两条扫描线中的点数完全不同，但是随机选择的点在外部具有局部凹陷8,16,26和32扫描线表示为内部扫描线中分别具有局部凹陷5,9,15和18的点的最近邻居。此外，在b）点的分布非常不均匀，但智能索引仍然成功地表明适当的邻居。这些情况对于前几条扫描线是常见的，因为它们的一些激光束由于吸收或非常高的距离而永远不会返回。在极少数情况下，连续扫描线之间的点数差别很大或者扫描线的很大一部分缺失，智能索引很可能会失败。在这些情况下，将整个扫描线视为潜在最近邻居的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mi>a</mi><mi>i</mi><mi>v</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">naive</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">n</span><span class="mord mathdefault">a</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">e</span></span></span></span> 解决方案仍然可以产生良好的结果。</p>
 <p>iii）在[13]中引入了解决标签合并冲突的方法，其中提供了实施和深入理解的所有细节。下面简要介绍要点和简单示例。</p>
 <p>当两个或更多不同的标记组件需要合并时，出现标签合并冲突。据He等人说。通过在同一组 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span>  中累积它们的标签 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span> 并利用具有三个一维阵列的复杂方法来捕获它们的层次结构和连接来给出解决方案。所有三个向量都具有在第一次通过点云期间创建的总标签数量的大小。第一个向量 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">“</mi><mi>n</mi><mi>e</mi><mi>x</mi><mi>t</mi><mi mathvariant="normal">”</mi></mrow><annotation encoding="application/x-tex">“next”</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord">“</span><span class="mord mathdefault">n</span><span class="mord mathdefault">e</span><span class="mord mathdefault">x</span><span class="mord mathdefault">t</span><span class="mord">”</span></span></span></span> 的每个条目在其 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span> 中存储下一个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span> ，并且 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span> 中最后一个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span> 的条目为-1。接下来，向量 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">“</mi><mi>t</mi><mi>a</mi><mi>i</mi><mi>l</mi><mi mathvariant="normal">”</mi></mrow><annotation encoding="application/x-tex">“tail”</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord">“</span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">”</span></span></span></span> 将索引存储到 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span> 的最后一个。最后一个向量 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">“</mi><mi>r</mi><mi>t</mi><mi>a</mi><mi>b</mi><mi>l</mi><mi>e</mi><mi mathvariant="normal">”</mi></mrow><annotation encoding="application/x-tex">“rtable”</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord">“</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord">”</span></span></span></span> 具有报告每个l的最终标签在任何给定时刻将是什么的辅助作用。在第一次通过结束时，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>t</mi><mi>a</mi><mi>b</mi><mi>l</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">rtable</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span></span></span></span> 用作最终标签的查找表。</p>
 <p>让我们从三个向量的角度来看待图2的例子。在第一步a）中，创建两个标签（1和2）并填充 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">l1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">1</span></span></span></span>，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">l2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">2</span></span></span></span> 条目。两个集合中的每一个只有一个元素，因此下一个条目都是-1，尾部条目表示S中最后一个元素的索引，对于两个集合 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span> 分别是1和2，并且 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>t</mi><mi>a</mi><mi>b</mi><mi>l</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">rtable</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span></span></span></span> 表示最终的代表性标签。接下来，在b）中创建 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">l3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">3</span></span></span></span> 并且向量填充与之前相同的向量。最后，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">S1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord">1</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">S2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord">2</span></span></span></span> 合并，这意味着 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mi>e</mi><mi>x</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">next</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">n</span><span class="mord mathdefault">e</span><span class="mord mathdefault">x</span><span class="mord mathdefault">t</span></span></span></span> 的第一个条目将指向 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">S1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord">1</span></span></span></span> 中下一个元素的索引，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">S1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord">1</span></span></span></span> 中两个元素的尾部是相同的，并指向该集合的最后一个元素的索引，并更新 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>t</mi><mi>a</mi><mi>b</mi><mi>l</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">rtable</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span></span></span></span> 以正确描绘最终标签。</p>
 <hr>
 <h4 id="23-实验结果">2.3. 实验结果</h4>
-<p><img src="https://img-blog.csdnimg.cn/20190627161121793.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx,size_14,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>
+<p><img src="https://img-blog.csdnimg.cn/20190627161121793.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx,size_14,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"><br>
 得到的簇可以在图7中的黄色边界框内看到。 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mi>L</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">SLR</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span> 算法利用了点云的结构，并且比以不规则方式遍历点云的算法执行得快得多。 图5b中所示的图表示随着点数的增加，时间的线性增加。 相比之下，欧几里德群集提取 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">（</mi><mi>E</mi><mi>C</mi><mi>E</mi><mi mathvariant="normal">）</mi></mrow><annotation encoding="application/x-tex">（ECE）</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord cjk_fallback">（</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord cjk_fallback">）</span></span></span></span>算法随着点数的增加呈指数级增长。 需要在整个数据集中搜索邻居的聚类算法，其性能基于云的总点数。 另一方面，对 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mi>L</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">SLR</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span> 的搜索受其运行大小的限制，并且仅在一条扫描线上考虑邻居以实现更好的性能。<br>
-<img src="https://img-blog.csdnimg.cn/20190627160958727.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx,size_14,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/20190627160958727.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx,size_14,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"><br>
 如图8所示，点云中的点密度的降低影响 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mi>L</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">SLR</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span> 分割，其中过度分割的情况在8b中呈现。 该算法对于传感器附近的物体表现令人满意，因为相邻车辆已被正确分割。 在图9中提供了用于 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mi>L</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">SLR</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>E</mi><mi>C</mi><mi>E</mi></mrow><annotation encoding="application/x-tex">ECE</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span></span></span></span> 之间的比较的更多结果，其中注意到两种算法的类似行为。 由于阈值参数和3D点访问顺序的差异，存在小的变化。<br>
-<img src="https://img-blog.csdnimg.cn/20190627161313877.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>
-<img src="https://img-blog.csdnimg.cn/2019062716134594.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<img src="https://img-blog.csdnimg.cn/20190627161313877.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"><br>
+<img src="https://img-blog.csdnimg.cn/2019062716134594.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI3NTEzMjIx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></p>
 
-          </div>
-        </div>
-
-        
-          <div class="next-post">
-            <a class="purple-link" href="https://qiaoxu.coding.me/post/gaussian-processes">
-              <h3 class="post-title">
-                下一篇：可视化高斯过程--超详细入门(转载)
-              </h3>
-            </a>
-          </div>
-          
-      </div>
-
-      
-
-      <div class="site-footer">
-  <div class="slogan">个人知识记录，学习～</div>
-  <div class="social-container">
+              </div>
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      Blog
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://qiaoxu123.github.io/post/scan-line-run/" title="Scan Line Run 聚簇算法原理与实现">https://qiaoxu123.github.io/post/scan-line-run/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外,转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
     
-      
+      <a href="https://qiaoxu123.github.io/tag/_laS77gYN/"># 自动驾驶感知</a>
     
-      
-    
-      
-    
-      
-    
-      
+      <a href="https://qiaoxu123.github.io/tag/V5KOvYNVz/"># 激光点云</a>
     
   </div>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu.coding.me/atom.xml" target="_blank">RSS</a>
+  <div class="nav">
+    <div class="nav-prev">
+      
+        <i class="fa fa-angle-left"></i>
+        <a class="nav-pc-next" href="https://qiaoxu123.github.io/post/ubuntu18-ROS-install/">Ubuntu 16/18下ROS和PCL点云库安装</a class="nav-pc-next">
+        <a class="nav-mobile-prev" href="https://qiaoxu123.github.io/post/ubuntu18-ROS-install/">上一篇</a>
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" href="https://qiaoxu123.github.io/post/gaussian-processes/">可视化高斯过程--超详细入门(转载)</a>
+        <a class="nav-mobile-next" href="https://qiaoxu123.github.io/post/gaussian-processes/">下一篇</a>
+        <i class="fa fa-angle-right"></i>
+      
+    </div>
+  </div>
+</div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-box">
+  <footer class="footer">
+    <div class="copyright">
+      © 2019-2020 <i class="fa fa-heart"></i> HsxyHao
+    </div>
+    <div class="poweredby">
+      <div class="power-left">Power By<a href="https://github.com/hsxyhao"> HsxyHao</a></div>
+      <div>Copy<a href="https://github.com/iissnan/hexo-theme-next"> Hexo Next Theme</a></div>
+    </div>
+  </footer>
+  <div class="back-to-top" id="back_to_top">
+    <i class="fa fa-arrow-up"></i>
+    <span class="scrollpercent">
+      <span id="back_to_top_text">100</span>%
+    </span>
+  </div>
 </div>
 
+<script>
 
-    </div>
-    <script type="application/javascript">
+  let body = document.body;
 
-hljs.initHighlightingOnLoad()
+  let back2Top = document.querySelector('#back_to_top'),
+  back2TopText = document.querySelector('#back_to_top_text');
 
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
+  function scrollAnimation(currentY, targetY) {
+   
+    let needScrollTop = targetY - currentY
+    let _currentY = currentY
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10)
+      _currentY += dist
+      window.scrollTo(_currentY, currentY)
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY)
+      } else {
+        window.scrollTo(_currentY, targetY)
+      }
+    }, 1)
+  }
 
+  back2Top.addEventListener("click", function(e) {
+    scrollAnimation(body.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+  
+  window.addEventListener('scroll', function(e) {
+    let percent = body.scrollTop / (body.scrollHeight - body.clientHeight) * 100;
+    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
+      back2Top.classList.add('back-top-active');
+    }
+    if (percent == 0) {
+      back2Top.classList.remove('back-top-active');
+    }
+    back2TopText.textContent = Math.floor(percent);
+  });
+
+  // 动态调整站点概览高度
+  let sideBar = document.querySelector('.sidebar');
+  let navUl = document.querySelector('#nav_ul');
+  sideBar.style = 'margin-top:' + (navUl.children.length * 42 + 162) + 'px; opacity: 1;';
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
 </script>
-
-
-
-
+    </div>
   </body>
+  <script src="/media/js/motion.js"></script>
 </html>
