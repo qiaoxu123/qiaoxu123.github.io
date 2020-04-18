@@ -1,862 +1,300 @@
-<html>
-  <head>
-      <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Blog</title>
-<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1586567689636">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/media/css/tailwind.css">
 <link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
-<meta name="description" content="个人生活，学习记录" />
+<link rel="alternate" type="application/atom+xml" title="Blog - Atom Feed" href="https://qiaoxu123.github.io/atom.xml">
 
-<link rel="stylesheet" href="/media/fonts/font-awesome.css">
-<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    
 
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
+  <meta name="description" content="个人生活，学习记录" />
+</head>
+<body>
+  <div class="antialiased flex flex-col min-h-screen" id="app">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
-    onload="renderMathInElement(document.body);"></script>
-  </head>
-  <body>
-    <div class="head-top-line"></div>
-    <div class="header-box">
-      
-<header class="header">
-  <div class="blog-header" id="header">
-    <div class="site-meta">
-      <div class="nav-toggle" id="nav_toggle">
-        <div class="toggle-box">
-          <div class="line line-top"></div>
-          <div class="line line-center"></div>
-          <div class="line line-bottom"></div>
-        </div>
-      </div>
-      <div class="site-title">
-        <a href="/" class="brand">
-          <span>Blog</span>
-        </a>
-      </div>
-      <p class="subtitle">Quick notes</p>
+    <div class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300" :class="{ 'scroll': scrolled }">
+  <div class="flex justify-end px-4">
+    <div class="w-8 h-8 flex justify-center items-center rounded-full md:hidden" @click="showMenu = !showMenu">
+      <i class="ri-close-line" v-show="showMenu"></i>
+      <i class="ri-menu-3-line" v-show="!showMenu"></i>
     </div>
-    <nav class="site-nav" id="site_nav">
-      <ul id="nav_ul">
-        
-          <li class="nav-item ">
-            
-              <a href="https://qiaoxu.coding.me">
-                <i class="fa fa-"></i> 首页
-              </a>
-            
-          </li>
-        
-          <li class="nav-item ">
-            
-              <a href="https://qiaoxu.coding.me/archives">
-                <i class="fa fa-"></i> 归档
-              </a>
-            
-          </li>
-        
-          <li class="nav-item ">
-            
-              <a href="https://qiaoxu.coding.me/tags">
-                <i class="fa fa-"></i> 标签
-              </a>
-            
-          </li>
-        
-        <li class="nav-item">
-          <a>
-            <i class="fa fa-search"></i> 搜索
-          </a>
-        </li>
-      </ul>
-    </nav>
+  </div>
+  <nav class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block" :class="`${ showMenu ? 'block' : 'hidden' }`">
+    
+      <a href="https://qiaoxu123.github.io" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        首页
+      </a>
+    
+      <a href="https://qiaoxu123.github.io/archives" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        归档
+      </a>
+    
+      <a href="https://qiaoxu123.github.io/tags" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+        标签
+      </a>
+    
+    <a href="https://qiaoxu123.github.io/atom.xml" target="_blank" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      RSS
+    </a>
+  </nav>
+</div>
+
+    <div class="max-w-4xl w-full mx-auto ">
+      
+        <header class="flex py-16 md:py-32 mt-12 flex-col md:flex-row px-4 md:px-0 animated fadeIn">
+  <div class="flex-1 order-2 md:order-1 md:pr-16">
+    <div class="text-4xl font-bold text-center md:text-left">
+      Blog
+    </div>
+    <div class="text-xl text-gray-500 mt-4 text-center md:text-left">
+      个人生活，学习记录
+    </div>
+    
+      <div class="mt-8 text-center md:text-left">
+        <a
+          href="/post/about" 
+          arget="_blank"
+          class="text-sm bg-yellow-50 dark:bg-indigo-500 dark:text-gray-700 font-semibold px-4 py-2 inline-block yellow-btn transition-fast rounded"
+        >LET&#39;S TALK!</a>
+      </div>
+    
+    
+  </div>
+  <div class="md:mx-8 flex-shrink-0 self-start rounded-full border-4 border-dotted border-transparent hover:border-yellow-50 p-2 w-32 h-32 order-1 md:order-2 mx-auto s3-dotted">
+    <img class="rounded-full object-cover" src="https://qiaoxu123.github.io/images/avatar.png?v=1587212016885" alt="Blog" width="100%" height="100%">
   </div>
 </header>
-<script type="text/javascript"> 
- 
-  let showNav = true;
+      
 
-  let navToggle = document.querySelector('#nav_toggle'),
-  siteNav = document.querySelector('#site_nav');
+      <div class="shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
+        
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://qiaoxu123.github.io/post/ubuntu-ooqp-useguide/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          Ubuntu环境下OOQP优化库的基本使用
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2020-01-06</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        <p>OOQP是一个强大的开源凸优化库，支持C++, Maltab调用。学习过程中发现网上的参考资料寥寥无几，在这根据官方的指导手册和Example简单介绍说明下。</p>
+
+      </div>
+      <a href="https://qiaoxu123.github.io/post/ubuntu-ooqp-useguide/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://qiaoxu123.github.io/post/my-2019/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          我的2019总结--错过的生活与糟糕的性格
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2020-01-01</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        <p>明天就是2020年了，抓紧2019年的最后一天，反思和检讨下自己匆匆过去的一天。和之前应付的总结不一样，我觉得用心了很多，这次总结是先手写完成，然后整理汇总出来。这也是年末总结琢磨出的一个方法，锻炼自己的耐心。作为一个好的开端，来鼓励明年的自己。</p>
+
+      </div>
+      <a href="https://qiaoxu123.github.io/post/my-2019/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://qiaoxu123.github.io/post/50-C++-interview-problem/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          20个经典的C++面试题(转载)
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-12-28</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        <p>捡起已经忘记的C++。。。</p>
+
+      </div>
+      <a href="https://qiaoxu123.github.io/post/50-C++-interview-problem/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://qiaoxu123.github.io/post/qiao-swimming-note3/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          小乔的游泳日记(第四周）
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-12-28</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        <p>这周感觉自己真的废掉了，拖延症又犯了，只有周六去了一次，也就是今天。不过收货还是有一些的，在这简单记录下，同时个人深刻检讨。。。</p>
+
+      </div>
+      <a href="https://qiaoxu123.github.io/post/qiao-swimming-note3/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://qiaoxu123.github.io/post/2019-booklist/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          我的2019年书单
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-12-26</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        <p>研究生的第一年，和本科的时光有彻彻底底的不同。经历了好多，虽然无奈，还是被生活抽走了几分稚气。竭尽全力，总算是读了几本闲书，认识了一些有趣的人，做了一点踏实事。</p>
+
+      </div>
+      <a href="https://qiaoxu123.github.io/post/2019-booklist/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://qiaoxu123.github.io/post/qiao-swimming-note2/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          小乔的游泳日记(第三周)
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-12-22</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        <p>痛苦地，挣扎着，开始了第三周的游泳练习。。。</p>
+
+      </div>
+      <a href="https://qiaoxu123.github.io/post/qiao-swimming-note2/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://qiaoxu123.github.io/post/qiao-swimming-note1/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          小乔的游泳日记(第一，二周)
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-12-21</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        <p>已经开始练习有用快两周了，感觉进步还是有一些的。当然啦，痛苦伴随这乐趣，为了不让这“苦涩”的回忆淡忘掉，小记一下嘻嘻。</p>
+
+      </div>
+      <a href="https://qiaoxu123.github.io/post/qiao-swimming-note1/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://qiaoxu123.github.io/post/delay_test/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          Linux下程序运行时延以及网络通信时延的测试方法
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-12-20</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        <p>最近在工程应用中，需要测试程序的运行时延，作为程序性能的评价指标之一。另外，因为要完成一个5G应用项目，需要对基于TCP/IP的网络通信时延也要进行测试，作为工程应用的重要指标。网上搜罗了各种方案，最后勉强找到一些可以应用的，在这总结下吧。</p>
+
+      </div>
+      <a href="https://qiaoxu123.github.io/post/delay_test/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://qiaoxu123.github.io/post/interview2-note/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          第二次面试心得 -- 商汤自动驾驶实习
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-11-26</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        <p>昨天下午刚刚结束面试，心情一度很抑郁，不过还是趁现在记忆比较深来总结下吧。</p>
+
+      </div>
+      <a href="https://qiaoxu123.github.io/post/interview2-note/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+    
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-2xl font-semibold mb-4">
+        <a href="https://qiaoxu123.github.io/post/tp-link-wireless-problem/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+          Ubuntu 18/16 下 TP-LINK 5500无线网卡驱动问题
+        </a>
+      </h2>
+      <div class="mb-4 text-xs text-gray-500">2019-11-25</div>
+      <div class="mb-4 text-gray-500 dark:text-gray-300">
+        <p>今天刚花了半小时时间调了一下公司的主机，因为有线网络一直连接不上，一气之下找了一个无线网卡直接怼上试试，结果因为是Ubuntu系统还不适配，哎，只好耐心找了下驱动，费了些时间搞定了，在这简单记录下。</p>
+
+      </div>
+      <a href="https://qiaoxu123.github.io/post/tp-link-wireless-problem/" class="btn">
+        Read more
+      </a>
+    </div>
+    
+  </div>
   
-  function navClick() {
-    let sideBar = document.querySelector('.sidebar');
-    let navUl = document.querySelector('#nav_ul');
-    navToggle.classList.toggle('nav-toggle-active');
-    siteNav.classList.toggle('nav-menu-active');
-    if (siteNav.classList.contains('nav-menu-active')) {
-      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
-    } else {
-      siteNav.style = "";
-    }
-  }
+      </div>
 
-  navToggle.addEventListener('click',navClick);  
-</script>
-    </div>
-    <div class="main-continer">
-      <div class="section-layout">
-        <div class="section-layout-wrapper">
-          <div class="sidebar">
-    <div class="sidebar-wrapper">
-  <div class="sidebar-item">
-    <img class="site-author-image" src="https://qiaoxu123.github.io/images/avatar.png"/>
-    <p class="site-author-name">Blog</p>
-    <p class="site-description">个人生活，学习记录</p>
-  </div>
-  <div class="sidebar-item side-item-stat">
-    <div class="sidebar-item-box">
-      <a href="/archives/">
-        
-        <span class="site-item-stat-count">40</span>
-        <span class="site-item-stat-name">文章</span>
+      
+  <div class="my-4 flex justify-between px-4 md:px-0">
+    
+    
+      <a href="https://qiaoxu123.github.io/page/2" class="btn btn-white">
+        下一页
+        <i class="ri-arrow-right-line ml-4"></i>
       </a>
-    </div>
-    <div class="sidebar-item-box">
-      <a href="">
-        <span class="site-item-stat-count">39</span>
-        <span class="site-item-stat-name">分类</span>
-      </a>
-    </div>
-    <div class="sidebar-item-box">
-      <a href="/tags/">
-        <span class="site-item-stat-count">39</span>
-        <span class="site-item-stat-name">标签</span>
-      </a>
+    
+  </div>
+
+      <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+</footer>
+
     </div>
   </div>
-  <div class="sidebar-item">
-    <span class="site-item-rss">
-        <i class="fa fa-rss"></i>
-        <a href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
-    </span>
-  </div>
-  <div class="sidebar-item sidebar-item-social">
-    <div class="social-item">
-      <a href="https://www.github.com/hsxyhao">
-        <i class="fa fa-github"></i> GitHub
-      </a>
-      <a href="">
-        <i class="fa fa-twitter"></i> Twitter
-      </a>
-    </div>
-    <div class="social-item">
-      <a href="">
-        <i class="fa fa-globe"></i> 豆瓣
-      </a>
-      <a href="">
-        <i class="fa fa-globe"></i> 知乎
-      </a>
-    </div>
-  </div>
-</div>
-</div>
-          <div class="section-box">
-            <section class="section posts-expand slide-down-in">
-              
-  <article class="post-list-box post">
-    <header class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://qiaoxu123.github.io/post/ubuntu-ooqp-useguide/">
-      Ubuntu环境下OOQP优化库的基本使用
-    </a>
-  </h1>
-  <div class="post-meta">
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span>发布于</span>
-      <span>2020-01-06</span>
-    </span>
-    
-      <span class="meta-item">
-        <span class="post-meta-divider pc-show">|</span>
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
-        
-          
-            <a href="https://qiaoxu123.github.io/tag/fTtxablX7/">
-              <span>最优化</span>
-            </a>、
-          
-        
-          
-            <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr/">
-              <span>工程实现</span>
-            </a>
-          
-        
-      </span>
-    
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-clock-o"></i>
-      <span>11分钟</span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>2346<span class="pc-show">字数</span></span>
-    </span>
-  </div>
-</header>
-    <div class="post-body">
-      <p>OOQP是一个强大的开源凸优化库，支持C++, Maltab调用。学习过程中发现网上的参考资料寥寥无几，在这根据官方的指导手册和Example简单介绍说明下。</p>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://qiaoxu123.github.io/media/scripts/main.js"></script>
+</body>
 
-      <!--noindex-->
-      
-      <div class="post-button text-center">
-        <a class="btn" href="https://qiaoxu123.github.io/post/ubuntu-ooqp-useguide/" rel="contents">
-          阅读全文 »
-        </a>
-      </div>
-      <!--/noindex-->
-      
-    </div>
-    <footer class="post-footer">
-      <div class="post-eof"></div>
-    </footer>
-  </article>
-
-  <article class="post-list-box post">
-    <header class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://qiaoxu123.github.io/post/my-2019/">
-      我的2019总结--错过的生活与糟糕的性格
-    </a>
-  </h1>
-  <div class="post-meta">
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span>发布于</span>
-      <span>2020-01-01</span>
-    </span>
-    
-      <span class="meta-item">
-        <span class="post-meta-divider pc-show">|</span>
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
-        
-          
-            <a href="https://qiaoxu123.github.io/tag/O6S3O2y2P/">
-              <span>生活感悟</span>
-            </a>
-          
-        
-      </span>
-    
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-clock-o"></i>
-      <span>6分钟</span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>1498<span class="pc-show">字数</span></span>
-    </span>
-  </div>
-</header>
-    <div class="post-body">
-      <p>明天就是2020年了，抓紧2019年的最后一天，反思和检讨下自己匆匆过去的一天。和之前应付的总结不一样，我觉得用心了很多，这次总结是先手写完成，然后整理汇总出来。这也是年末总结琢磨出的一个方法，锻炼自己的耐心。作为一个好的开端，来鼓励明年的自己。</p>
-
-      <!--noindex-->
-      
-      <div class="post-button text-center">
-        <a class="btn" href="https://qiaoxu123.github.io/post/my-2019/" rel="contents">
-          阅读全文 »
-        </a>
-      </div>
-      <!--/noindex-->
-      
-    </div>
-    <footer class="post-footer">
-      <div class="post-eof"></div>
-    </footer>
-  </article>
-
-  <article class="post-list-box post">
-    <header class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://qiaoxu123.github.io/post/50-C++-interview-problem/">
-      20个经典的C++面试题(转载)
-    </a>
-  </h1>
-  <div class="post-meta">
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span>发布于</span>
-      <span>2019-12-28</span>
-    </span>
-    
-      <span class="meta-item">
-        <span class="post-meta-divider pc-show">|</span>
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
-        
-          
-            <a href="https://qiaoxu123.github.io/tag/dcW9tG6DF/">
-              <span>工作面试</span>
-            </a>、
-          
-        
-          
-            <a href="https://qiaoxu123.github.io/tag/lJwUcvxsaz/">
-              <span>C++</span>
-            </a>
-          
-        
-      </span>
-    
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-clock-o"></i>
-      <span>14分钟</span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>3796<span class="pc-show">字数</span></span>
-    </span>
-  </div>
-</header>
-    <div class="post-body">
-      <p>捡起已经忘记的C++。。。</p>
-
-      <!--noindex-->
-      
-      <div class="post-button text-center">
-        <a class="btn" href="https://qiaoxu123.github.io/post/50-C++-interview-problem/" rel="contents">
-          阅读全文 »
-        </a>
-      </div>
-      <!--/noindex-->
-      
-    </div>
-    <footer class="post-footer">
-      <div class="post-eof"></div>
-    </footer>
-  </article>
-
-  <article class="post-list-box post">
-    <header class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://qiaoxu123.github.io/post/qiao-swimming-note3/">
-      小乔的游泳日记(第四周）
-    </a>
-  </h1>
-  <div class="post-meta">
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span>发布于</span>
-      <span>2019-12-28</span>
-    </span>
-    
-      <span class="meta-item">
-        <span class="post-meta-divider pc-show">|</span>
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
-        
-          
-            <a href="https://qiaoxu123.github.io/tag/96zX9kJvp/">
-              <span>轻松生活</span>
-            </a>
-          
-        
-      </span>
-    
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-clock-o"></i>
-      <span>2分钟</span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>569<span class="pc-show">字数</span></span>
-    </span>
-  </div>
-</header>
-    <div class="post-body">
-      <p>这周感觉自己真的废掉了，拖延症又犯了，只有周六去了一次，也就是今天。不过收货还是有一些的，在这简单记录下，同时个人深刻检讨。。。</p>
-
-      <!--noindex-->
-      
-      <div class="post-button text-center">
-        <a class="btn" href="https://qiaoxu123.github.io/post/qiao-swimming-note3/" rel="contents">
-          阅读全文 »
-        </a>
-      </div>
-      <!--/noindex-->
-      
-    </div>
-    <footer class="post-footer">
-      <div class="post-eof"></div>
-    </footer>
-  </article>
-
-  <article class="post-list-box post">
-    <header class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://qiaoxu123.github.io/post/2019-booklist/">
-      我的2019年书单
-    </a>
-  </h1>
-  <div class="post-meta">
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span>发布于</span>
-      <span>2019-12-26</span>
-    </span>
-    
-      <span class="meta-item">
-        <span class="post-meta-divider pc-show">|</span>
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
-        
-          
-            <a href="https://qiaoxu123.github.io/tag/cw9LvfpIV/">
-              <span>个人感悟</span>
-            </a>、
-          
-        
-          
-            <a href="https://qiaoxu123.github.io/tag/E4iTOpEEbl/">
-              <span>日常生活</span>
-            </a>
-          
-        
-      </span>
-    
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-clock-o"></i>
-      <span>6分钟</span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>1514<span class="pc-show">字数</span></span>
-    </span>
-  </div>
-</header>
-    <div class="post-body">
-      <p>研究生的第一年，和本科的时光有彻彻底底的不同。经历了好多，虽然无奈，还是被生活抽走了几分稚气。竭尽全力，总算是读了几本闲书，认识了一些有趣的人，做了一点踏实事。</p>
-
-      <!--noindex-->
-      
-      <div class="post-button text-center">
-        <a class="btn" href="https://qiaoxu123.github.io/post/2019-booklist/" rel="contents">
-          阅读全文 »
-        </a>
-      </div>
-      <!--/noindex-->
-      
-    </div>
-    <footer class="post-footer">
-      <div class="post-eof"></div>
-    </footer>
-  </article>
-
-  <article class="post-list-box post">
-    <header class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://qiaoxu123.github.io/post/qiao-swimming-note2/">
-      小乔的游泳日记(第三周)
-    </a>
-  </h1>
-  <div class="post-meta">
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span>发布于</span>
-      <span>2019-12-22</span>
-    </span>
-    
-      <span class="meta-item">
-        <span class="post-meta-divider pc-show">|</span>
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
-        
-          
-            <a href="https://qiaoxu123.github.io/tag/96zX9kJvp/">
-              <span>轻松生活</span>
-            </a>
-          
-        
-      </span>
-    
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-clock-o"></i>
-      <span>3分钟</span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>596<span class="pc-show">字数</span></span>
-    </span>
-  </div>
-</header>
-    <div class="post-body">
-      <p>痛苦地，挣扎着，开始了第三周的游泳练习。。。</p>
-
-      <!--noindex-->
-      
-      <div class="post-button text-center">
-        <a class="btn" href="https://qiaoxu123.github.io/post/qiao-swimming-note2/" rel="contents">
-          阅读全文 »
-        </a>
-      </div>
-      <!--/noindex-->
-      
-    </div>
-    <footer class="post-footer">
-      <div class="post-eof"></div>
-    </footer>
-  </article>
-
-  <article class="post-list-box post">
-    <header class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://qiaoxu123.github.io/post/qiao-swimming-note1/">
-      小乔的游泳日记(第一，二周)
-    </a>
-  </h1>
-  <div class="post-meta">
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span>发布于</span>
-      <span>2019-12-21</span>
-    </span>
-    
-      <span class="meta-item">
-        <span class="post-meta-divider pc-show">|</span>
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
-        
-          
-            <a href="https://qiaoxu123.github.io/tag/96zX9kJvp/">
-              <span>轻松生活</span>
-            </a>
-          
-        
-      </span>
-    
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-clock-o"></i>
-      <span>2分钟</span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>466<span class="pc-show">字数</span></span>
-    </span>
-  </div>
-</header>
-    <div class="post-body">
-      <p>已经开始练习有用快两周了，感觉进步还是有一些的。当然啦，痛苦伴随这乐趣，为了不让这“苦涩”的回忆淡忘掉，小记一下嘻嘻。</p>
-
-      <!--noindex-->
-      
-      <div class="post-button text-center">
-        <a class="btn" href="https://qiaoxu123.github.io/post/qiao-swimming-note1/" rel="contents">
-          阅读全文 »
-        </a>
-      </div>
-      <!--/noindex-->
-      
-    </div>
-    <footer class="post-footer">
-      <div class="post-eof"></div>
-    </footer>
-  </article>
-
-  <article class="post-list-box post">
-    <header class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://qiaoxu123.github.io/post/delay_test/">
-      Linux下程序运行时延以及网络通信时延的测试方法
-    </a>
-  </h1>
-  <div class="post-meta">
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span>发布于</span>
-      <span>2019-12-20</span>
-    </span>
-    
-      <span class="meta-item">
-        <span class="post-meta-divider pc-show">|</span>
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
-        
-          
-            <a href="https://qiaoxu123.github.io/tag/5HMxWRPZ1/">
-              <span>工程调试</span>
-            </a>
-          
-        
-      </span>
-    
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-clock-o"></i>
-      <span>4分钟</span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>949<span class="pc-show">字数</span></span>
-    </span>
-  </div>
-</header>
-    <div class="post-body">
-      <p>最近在工程应用中，需要测试程序的运行时延，作为程序性能的评价指标之一。另外，因为要完成一个5G应用项目，需要对基于TCP/IP的网络通信时延也要进行测试，作为工程应用的重要指标。网上搜罗了各种方案，最后勉强找到一些可以应用的，在这总结下吧。</p>
-
-      <!--noindex-->
-      
-      <div class="post-button text-center">
-        <a class="btn" href="https://qiaoxu123.github.io/post/delay_test/" rel="contents">
-          阅读全文 »
-        </a>
-      </div>
-      <!--/noindex-->
-      
-    </div>
-    <footer class="post-footer">
-      <div class="post-eof"></div>
-    </footer>
-  </article>
-
-  <article class="post-list-box post">
-    <header class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://qiaoxu123.github.io/post/interview2-note/">
-      第二次面试心得 -- 商汤自动驾驶实习
-    </a>
-  </h1>
-  <div class="post-meta">
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span>发布于</span>
-      <span>2019-11-26</span>
-    </span>
-    
-      <span class="meta-item">
-        <span class="post-meta-divider pc-show">|</span>
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
-        
-          
-            <a href="https://qiaoxu123.github.io/tag/5Tfh9kMMH/">
-              <span>工作招聘</span>
-            </a>
-          
-        
-      </span>
-    
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-clock-o"></i>
-      <span>6分钟</span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>1643<span class="pc-show">字数</span></span>
-    </span>
-  </div>
-</header>
-    <div class="post-body">
-      <p>昨天下午刚刚结束面试，心情一度很抑郁，不过还是趁现在记忆比较深来总结下吧。</p>
-
-      <!--noindex-->
-      
-      <div class="post-button text-center">
-        <a class="btn" href="https://qiaoxu123.github.io/post/interview2-note/" rel="contents">
-          阅读全文 »
-        </a>
-      </div>
-      <!--/noindex-->
-      
-    </div>
-    <footer class="post-footer">
-      <div class="post-eof"></div>
-    </footer>
-  </article>
-
-  <article class="post-list-box post">
-    <header class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://qiaoxu123.github.io/post/tp-link-wireless-problem/">
-      Ubuntu 18/16 下 TP-LINK 5500无线网卡驱动问题
-    </a>
-  </h1>
-  <div class="post-meta">
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span>发布于</span>
-      <span>2019-11-25</span>
-    </span>
-    
-      <span class="meta-item">
-        <span class="post-meta-divider pc-show">|</span>
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
-        
-          
-            <a href="https://qiaoxu123.github.io/tag/5HMxWRPZ1/">
-              <span>工程调试</span>
-            </a>
-          
-        
-      </span>
-    
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-clock-o"></i>
-      <span>1分钟</span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>201<span class="pc-show">字数</span></span>
-    </span>
-  </div>
-</header>
-    <div class="post-body">
-      <p>今天刚花了半小时时间调了一下公司的主机，因为有线网络一直连接不上，一气之下找了一个无线网卡直接怼上试试，结果因为是Ubuntu系统还不适配，哎，只好耐心找了下驱动，费了些时间搞定了，在这简单记录下。</p>
-
-      <!--noindex-->
-      
-      <div class="post-button text-center">
-        <a class="btn" href="https://qiaoxu123.github.io/post/tp-link-wireless-problem/" rel="contents">
-          阅读全文 »
-        </a>
-      </div>
-      <!--/noindex-->
-      
-    </div>
-    <footer class="post-footer">
-      <div class="post-eof"></div>
-    </footer>
-  </article>
-  
-              
-              
-<div class="page">
-  <ul class="pagination-ul">
-    
-    
-      
-        <li class="pagination-li pagination-active">
-            <a href="/page/../">
-              1
-            </a>
-        </li>
-      
-        <li class="pagination-li ">
-            <a href="/page/2">
-              2
-            </a>
-        </li>
-      
-        <li class="pagination-li ">
-            <a href="/page/3">
-              3
-            </a>
-        </li>
-      
-        <li class="pagination-li ">
-            <a href="/page/4">
-              4
-            </a>
-        </li>
-      
-    
-    
-      <li class="pagination-dir">
-        <a href="/page/2">
-          <i class="fa fa-angle-right"></i>
-        </a>
-      </li>
-    
-  </ul>
-</div>
-            </section>
-          </div>
-        </div>
-      </div>
-      <div class="footer-box">
-  <footer class="footer">
-    <div class="copyright">
-      © 2019-2020 <i class="fa fa-heart"></i> HsxyHao
-    </div>
-    <div class="poweredby">
-      <div class="power-left">Power By<a href="https://github.com/hsxyhao"> HsxyHao</a></div>
-      <div>Copy<a href="https://github.com/iissnan/hexo-theme-next"> Hexo Next Theme</a></div>
-    </div>
-  </footer>
-  <div class="back-to-top" id="back_to_top">
-    <i class="fa fa-arrow-up"></i>
-    <span class="scrollpercent">
-      <span id="back_to_top_text">100</span>%
-    </span>
-  </div>
-</div>
-
-<script>
-
-  let body = document.body;
-
-  let back2Top = document.querySelector('#back_to_top'),
-  back2TopText = document.querySelector('#back_to_top_text');
-
-  function scrollAnimation(currentY, targetY) {
-   
-    let needScrollTop = targetY - currentY
-    let _currentY = currentY
-    setTimeout(() => {
-      const dist = Math.ceil(needScrollTop / 10)
-      _currentY += dist
-      window.scrollTo(_currentY, currentY)
-      if (needScrollTop > 10 || needScrollTop < -10) {
-        scrollAnimation(_currentY, targetY)
-      } else {
-        window.scrollTo(_currentY, targetY)
-      }
-    }, 1)
-  }
-
-  back2Top.addEventListener("click", function(e) {
-    scrollAnimation(body.scrollTop, 0);
-    e.stopPropagation();
-    return false;
-  });
-  
-  window.addEventListener('scroll', function(e) {
-    let percent = body.scrollTop / (body.scrollHeight - body.clientHeight) * 100;
-    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
-      back2Top.classList.add('back-top-active');
-    }
-    if (percent == 0) {
-      back2Top.classList.remove('back-top-active');
-    }
-    back2TopText.textContent = Math.floor(percent);
-  });
-
-  // 动态调整站点概览高度
-  let sideBar = document.querySelector('.sidebar');
-  let navUl = document.querySelector('#nav_ul');
-  sideBar.style = 'margin-top:' + (navUl.children.length * 42 + 162) + 'px; opacity: 1;';
-  // 代码高亮
-  hljs.initHighlightingOnLoad();
-</script>
-    </div>
-  </body>
-  <script src="/media/js/motion.js"></script>
 </html>
