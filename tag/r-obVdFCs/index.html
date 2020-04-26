@@ -1,149 +1,279 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Blog</title>
-<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
-<link rel="stylesheet" href="https://qiaoxu123.github.io/media/css/tailwind.css">
-<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Blog - Atom Feed" href="https://qiaoxu123.github.io/atom.xml">
 
+<!DOCTYPE html>
+<html>
+  <head>
     
+<meta charset="utf-8" >
 
-  <meta name="description" content="个人生活，学习记录" />
-</head>
-<body>
-  <div class="antialiased flex flex-col min-h-screen" id="app">
+<title>笔记 | Blog</title>
+<meta name="description" content="个人生活，学习记录">
 
-    <div class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300" :class="{ 'scroll': scrolled }">
-  <div class="flex justify-end px-4">
-    <div class="w-8 h-8 flex justify-center items-center rounded-full md:hidden" @click="showMenu = !showMenu">
-      <i class="ri-close-line" v-show="showMenu"></i>
-      <i class="ri-menu-3-line" v-show="!showMenu"></i>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1587907785787">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1587907785787" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
     </div>
   </div>
-  <nav class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block" :class="`${ showMenu ? 'block' : 'hidden' }`">
-    
-      <a href="https://qiaoxu123.github.io" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-        首页
-      </a>
-    
-      <a href="https://qiaoxu123.github.io/archives" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-        归档
-      </a>
-    
-      <a href="https://qiaoxu123.github.io/tags" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-        标签
-      </a>
-    
-    <a href="https://qiaoxu123.github.io/atom.xml" target="_blank" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-      RSS
-    </a>
-  </nav>
 </div>
 
-    <div class="max-w-4xl w-full mx-auto pt-32">
-      <h1 class="text-2xl font-bold pb-8 flex justify-center items-center">
-        <i class="ri-hashtag"></i>
-        笔记
-      </h1>
-      <div class="shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
         
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/linux-c++-socket-note/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          Linux下C++ Socket通信
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-08-28</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+          <a href="https://qiaoxu123.github.io" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+
+        <div class="current-tag-container">
+          <h2 class="title">
+            <i class="icon icon-pricetags-outline"></i> 笔记
+          </h2> 
+        </div>
+
+        
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/linux-c++-socket-note/">
+        <h2 class="post-title">Linux下C++ Socket通信</h2>
+      </a>
+      <div class="post-abstract">
         <p>个人在实际项目开发中对于socket通信应用很多，就资源来讲，入门级别的socket通信实现太多了，包括TCP，UDP通信。在这个人整理下实际开发中遇到的功能实现问题，也算是socket通信的进阶学习之路。</p>
 <p>平台：Linux Mint 19.2<br>
 编译器：g++</p>
 
       </div>
-      <a href="https://qiaoxu123.github.io/post/linux-c++-socket-note/" class="btn">
-        Read more
-      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-08-28</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr/">
+                工程实现
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/r-obVdFCs/">
+                笔记
+                
+              </a>
+            
+          </span>
+        
+      </div>
     </div>
     
-  </div>
+  </section>
 
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/Planning_Note3/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          自动驾驶Planning总结3 -- Behaviour Planning
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-08-09</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/Planning_Note3/">
+        <h2 class="post-title">自动驾驶Planning总结3 -- Behaviour Planning</h2>
+      </a>
+      <div class="post-abstract">
         <p>介绍Behavior Planning的相关概念，finite state machine的使用</p>
 
       </div>
-      <a href="https://qiaoxu123.github.io/post/Planning_Note3/" class="btn">
-        Read more
-      </a>
-    </div>
-    
-  </div>
-
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/apollo-control-note1/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          Apollo控制算法之汽车动力学模型
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-08-08</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
-        动力学主要研究作用于物体的力与物体运动的关系。
-车辆动力学模型一般用于分析车辆的平顺性和车辆操纵的稳定性。
-对于车来说，研究车辆动力学，主要是研究车辆轮胎及其相关部件的受力情况。比如纵向速度控制，通过控制轮胎转速实现，横向航向控制，通过控制...
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-08-09</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/r-obVdFCs/">
+                笔记
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/ltvVS5IGJ/">
+                规划
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/FpZd9d6flZ/">
+                自动驾驶
+                
+              </a>
+            
+          </span>
+        
       </div>
-      <a href="https://qiaoxu123.github.io/post/apollo-control-note1/" class="btn">
-        Read more
-      </a>
     </div>
     
-  </div>
+  </section>
 
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/gaussian_regresson_process_note/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          高斯回归过程笔记
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-08-08</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
-        高斯过程回归(GPR)和贝叶斯线性回归类似，区别在于高斯过程回归中用核函数代替了贝叶斯线性回归中的基函数（其实也是核函数，线性核），**在贝叶斯线性回归的基础上，把自变量空间通过核函数映射到高维空间。**采用核函数可以定义高斯过程回归是一个...
-      </div>
-      <a href="https://qiaoxu123.github.io/post/gaussian_regresson_process_note/" class="btn">
-        Read more
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/apollo-control-note1/">
+        <h2 class="post-title">Apollo控制算法之汽车动力学模型</h2>
       </a>
+      <div class="post-abstract">
+        
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-08-08</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/6kKIZdPBS/">
+                Apollo
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/7mU0ZBRaB-/">
+                Control
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/r-obVdFCs/">
+                笔记
+                
+              </a>
+            
+          </span>
+        
+      </div>
     </div>
     
-  </div>
+  </section>
+
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/gaussian_regresson_process_note/">
+        <h2 class="post-title">高斯回归过程笔记</h2>
+      </a>
+      <div class="post-abstract">
+        
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-08-08</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/r-obVdFCs/">
+                笔记
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/Dt5i19HDw/">
+                机器学习
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
+    
+  </section>
+
+
+<div class="pagination-container">
   
+  
+</div>
+
+
       </div>
 
+      <div class="site-footer">
+  <div class="slogan">个人生活，学习记录</div>
+  <div class="social-container">
+    
       
-      <footer class="py-12 text-center px-4 md:px-0" v-pre>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-</footer>
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
 
     </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://qiaoxu123.github.io/media/scripts/main.js"></script>
-</body>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
 </html>

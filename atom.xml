@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qiaoxu123.github.io</id>
     <title>Blog</title>
-    <updated>2020-04-18T12:14:33.111Z</updated>
+    <updated>2020-04-26T13:29:55.053Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qiaoxu123.github.io"/>
     <link rel="self" href="https://qiaoxu123.github.io/atom.xml"/>
@@ -10,6 +10,17 @@
     <logo>https://qiaoxu123.github.io/images/avatar.png</logo>
     <icon>https://qiaoxu123.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[将 Linux 上的 VSCode 改为 Consolas 字体]]></title>
+        <id>https://qiaoxu123.github.io/post/ubuntu-change-fonts/</id>
+        <link href="https://qiaoxu123.github.io/post/ubuntu-change-fonts/">
+        </link>
+        <updated>2020-04-26T06:48:59.000Z</updated>
+        <summary type="html"><![CDATA[<p>转载自<a href="https://blog.gloriousdays.pw/2018/08/29/change-font-within-vsc-to-consolas-on-linux/">博客</a></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>转载自<a href="https://blog.gloriousdays.pw/2018/08/29/change-font-within-vsc-to-consolas-on-linux/">博客</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Ubuntu环境下OOQP优化库的基本使用]]></title>
         <id>https://qiaoxu123.github.io/post/ubuntu-ooqp-useguide/</id>
@@ -107,17 +118,6 @@
         <summary type="html"><![CDATA[<p>昨天下午刚刚结束面试，心情一度很抑郁，不过还是趁现在记忆比较深来总结下吧。</p>
 ]]></summary>
         <content type="html"><![CDATA[<p>昨天下午刚刚结束面试，心情一度很抑郁，不过还是趁现在记忆比较深来总结下吧。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Ubuntu 18/16 下 TP-LINK 5500无线网卡驱动问题]]></title>
-        <id>https://qiaoxu123.github.io/post/tp-link-wireless-problem/</id>
-        <link href="https://qiaoxu123.github.io/post/tp-link-wireless-problem/">
-        </link>
-        <updated>2019-11-25T09:29:30.000Z</updated>
-        <summary type="html"><![CDATA[<p>今天刚花了半小时时间调了一下公司的主机，因为有线网络一直连接不上，一气之下找了一个无线网卡直接怼上试试，结果因为是Ubuntu系统还不适配，哎，只好耐心找了下驱动，费了些时间搞定了，在这简单记录下。</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>今天刚花了半小时时间调了一下公司的主机，因为有线网络一直连接不上，一气之下找了一个无线网卡直接怼上试试，结果因为是Ubuntu系统还不适配，哎，只好耐心找了下驱动，费了些时间搞定了，在这简单记录下。</p>
 ]]></content>
     </entry>
 </feed>

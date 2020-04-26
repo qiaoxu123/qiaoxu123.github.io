@@ -1,83 +1,103 @@
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>20个经典的C++面试题(转载) - Blog</title>
-<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
-<link rel="stylesheet" href="https://qiaoxu123.github.io/media/css/tailwind.css">
-<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="20个经典的C++面试题(转载) - Blog - Atom Feed" href="https://qiaoxu123.github.io/atom.xml">
-
+<!DOCTYPE html>
+<html>
+  <head>
     
+<meta charset="utf-8" >
 
-  <meta name="description" content="捡起已经忘记的C++。。。
+<title>20个经典的C++面试题(转载) | Blog</title>
+<meta name="description" content="个人生活，学习记录">
 
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
-面试题1：变量的声明和定义有什么区别
-为变量分配地址和存储空间的称为定义，不分配地址的称为声明。一个变量可以在多个地方声明，但是只在一个地方定义。加入extern修饰的是变量的声明，说明此变量将在文件以外或在..." />
-  <meta property="og:title" content="20个经典的C++面试题(转载) - Blog">
-  <meta property="og:description" content="捡起已经忘记的C++。。。
-
-
-面试题1：变量的声明和定义有什么区别
-为变量分配地址和存储空间的称为定义，不分配地址的称为声明。一个变量可以在多个地方声明，但是只在一个地方定义。加入extern修饰的是变量的声明，说明此变量将在文件以外或在..." />
-  <meta property="og:type" content="articles">
-  <meta property="og:url" content="https://qiaoxu123.github.io/post/50-C++-interview-problem/" />
-  <meta property="og:image" content="https://qiaoxu123.github.io/images/avatar.png">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:width" content="1200">
-  <meta name="twitter:title" content="20个经典的C++面试题(转载) - Blog">
-  <meta name="twitter:description" content="捡起已经忘记的C++。。。
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1587907785787">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
 
 
-面试题1：变量的声明和定义有什么区别
-为变量分配地址和存储空间的称为定义，不分配地址的称为声明。一个变量可以在多个地方声明，但是只在一个地方定义。加入extern修饰的是变量的声明，说明此变量将在文件以外或在...">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="canonical" href="https://qiaoxu123.github.io/post/50-C++-interview-problem/">
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
- 
-  
-    <link rel="stylesheet" href="https://qiaoxu123.github.io/media/css/prism-atom-dark.css">
-  
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
-  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-  
-</head>
 
-<body>
-  <div class="antialiased flex flex-col min-h-screen" id="app">
-    <a href="https://qiaoxu123.github.io" class="fixed top-0 left-0 mt-4 bg-black text-white dark:text-gray-700 dark:bg-yellow-50 dark:hover:bg-black dark:hover:text-white inline-flex p-2 pl-8 hover:text-gray-700 hover:bg-yellow-50 font-bold z-10 transition-fast animated fadeInLeft">
-      Blog
-    </a>
-    <div class="max-w-4xl w-full mx-auto">
-      <div class="shadow-box bg-white dark:bg-gray-600 rounded-lg pt-32 md:pt-64 px-4 md:px-8 pb-8 animated fadeIn mb-8">
-        <h1 class="text-5xl font-semibold leading-normal pb-8 mb-8 border-b-8 border-gray-700">
-          20个经典的C++面试题(转载)
-        </h1>
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1587907785787" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
         
-        <div class="mb-8 flex flex-wrap">
-          <div class="text-gray-400 text-sm mr-4">2019-12-28 · 14 min read</div>
+          <a href="https://qiaoxu123.github.io" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
           
-            <a href="https://qiaoxu123.github.io/tag/dcW9tG6DF/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
-              <i class="ri-hashtag"></i>
-              工作面试
-            </a>
-          
-            <a href="https://qiaoxu123.github.io/tag/lJwUcvxsaz/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
-              <i class="ri-hashtag"></i>
-              C++
-            </a>
-          
-        </div>
-        <div class="markdown mb-8" v-pre>
-          <p>捡起已经忘记的C++。。。</p>
+          <h2 class="post-title">20个经典的C++面试题(转载)</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-12-28</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/dcW9tG6DF/">
+                    工作面试
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://qiaoxu123.github.io/tag/lJwUcvxsaz/">
+                    C++
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>捡起已经忘记的C++。。。</p>
 <!-- more -->
 <hr>
 <h3 id="面试题1变量的声明和定义有什么区别">面试题1：变量的声明和定义有什么区别</h3>
@@ -384,237 +404,57 @@ public:
 };
 </code></pre>
 
-        </div>
-        <!-- Share to Twitter, Weibo, Telegram -->
-        <div class="flex items-center">
-          <div class="mr-4 flex items-center">
-            <i class="ri-share-forward-line text-gray-500"></i>
-          </div>
-          <div class="px-4 cursor-pointer text-blue-500 hover:bg-blue-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTwitter">
-            <i class="ri-twitter-line"></i>
-          </div>
-          <div class="px-4 cursor-pointer text-red-500 hover:bg-red-100 dark:hover:bg-gray-600 inline-flex" @click="shareToWeibo">
-            <i class="ri-weibo-line"></i>
-          </div>
-          <div class="px-4 cursor-pointer text-indigo-500 hover:bg-indigo-100 dark:hover:bg-gray-600 inline-flex" @click="shareToTelegram">
-            <i class="ri-telegram-line"></i>
           </div>
         </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/qiao-swimming-note3/">
+              <h3 class="post-title">
+                下一篇：小乔的游泳日记(第四周）
+              </h3>
+            </a>
+          </div>
+          
       </div>
 
       
 
+      <div class="site-footer">
+  <div class="slogan">个人生活，学习记录</div>
+  <div class="social-container">
+    
       
-
-      <footer class="py-12 text-center px-4 md:px-0" v-pre>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-</footer>
-    </div>
-
-    <!-- TOC Container -->
-    <div class="fixed right-0 bottom-0 mb-16 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white dark:bg-gray-500 dark:text-gray-200 hover:shadow-lg transition-all animated fadeInRight" @click="showToc = true">
-      <i class="ri-file-list-line"></i>
-    </div>
-
-    <div class="fixed right-0 top-0 bottom-0 overflow-y-auto w-64 bg-white dark:bg-gray-800 p-4 border-l border-gray-100 dark:border-gray-600 z-10 transition-fast" :class="{ '-mr-64': !showToc }">
-      <div class="flex mb-4 justify-end">
-        <div class="w-8 h-8 inline-flex justify-center items-center rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast" @click="showToc = false">
-          <i class="ri-close-line text-lg"></i>
-        </div>
-      </div>
-      <div class="post-toc-container">
-        <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%981%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E%E5%92%8C%E5%AE%9A%E4%B9%89%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB">面试题1：变量的声明和定义有什么区别</a></li>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%982-%E5%86%99%E5%87%BAboolintfloat%E6%8C%87%E9%92%88%E5%8F%98%E9%87%8F%E4%B8%8E%E9%9B%B6%E5%80%BC%E6%AF%94%E8%BE%83%E7%9A%84if%E8%AF%AD%E5%8F%A5">面试题2 ：写出bool，int，float，指针变量与“零值”比较的if语句</a></li>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%983-sizeof%E5%92%8C-strlen%E7%9A%84%E5%8C%BA%E5%88%AB">面试题3 ：<code>sizeof</code>和 <code>strlen</code>的区别</a></li>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%984-c-%E8%AF%AD%E8%A8%80%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97-static-%E5%92%8C-c-%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97-static-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB">面试题4 ：C 语言的关键字 static 和 C++ 的关键字 static 有什么区别</a></li>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%985-c%E4%B8%AD%E7%9A%84malloc%E5%92%8Cc%E4%B8%AD%E7%9A%84new%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB">面试题5 ：Ｃ中的<code>malloc</code>和Ｃ++中的<code>new</code>有什么区别</a></li>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%986%E5%86%99%E4%B8%80%E4%B8%AA-%E6%A0%87%E5%87%86%E5%AE%8Fmin">面试题6：写一个 “标准”宏MIN</a></li>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%987-%E4%B8%80%E4%B8%AA%E6%8C%87%E9%92%88%E5%8F%AF%E4%BB%A5%E6%98%AFvolatile%E6%98%93%E5%8F%98%E7%9A%84-%E4%BC%98%E5%8C%96%E5%99%A8%E5%9C%A8%E7%94%A8%E5%88%B0%E8%BF%99%E4%B8%AA%E5%8F%98%E9%87%8F%E6%97%B6%E5%BF%85%E9%A1%BB%E6%AF%8F%E6%AC%A1%E9%83%BD%E5%B0%8F%E5%BF%83%E5%9C%B0%E9%87%8D%E6%96%B0%E8%AF%BB%E5%8F%96%E8%BF%99%E4%B8%AA%E5%8F%98%E9%87%8F%E7%9A%84%E5%80%BC%E4%B8%BB%E8%A6%81%E5%BA%94%E7%94%A8%E5%9C%BA%E5%90%88%E6%98%AF%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%AD">面试题7 ：一个指针可以是volatile(易变的: 优化器在用到这个变量时必须每次都小心地重新读取这个变量的值,主要应用场合是多线程中)</a></li>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%988a-%E5%92%8Ca-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB">面试题8：a 和&amp;a 有什么区别</a></li>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%989-%E7%AE%80%E8%BF%B0c-c%E7%A8%8B%E5%BA%8F%E7%BC%96%E8%AF%91%E7%9A%84%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%83%85%E5%86%B5">面试题9 ：简述C、C++程序编译的内存分配情况</a></li>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9810%E7%AE%80%E8%BF%B0strcpy-sprintf%E4%B8%8Ememcpy%E7%9A%84%E5%8C%BA%E5%88%AB">面试题10：简述<code>strcpy</code>、<code>sprintf</code>与<code>memcpy</code>的区别</a></li>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9811%E8%AE%BE%E7%BD%AE%E5%9C%B0%E5%9D%80%E4%B8%BA0x67a9%E7%9A%84%E6%95%B4%E5%9E%8B%E5%8F%98%E9%87%8F%E7%9A%84%E5%80%BC%E4%B8%BA0xaa66">面试题11：设置地址为0x67a9的整型变量的值为0xaa66</a></li>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9812-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E5%BE%81">面试题12 ：面向对象的三大特征</a></li>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9813c%E7%9A%84%E7%A9%BA%E7%B1%BB%E6%9C%89%E5%93%AA%E4%BA%9B%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0">面试题13：C++的空类有哪些成员函数</a></li>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9814-%E8%B0%88%E8%B0%88%E4%BD%A0%E5%AF%B9%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%92%8C%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD%E7%9A%84%E8%AE%A4%E8%AF%86">面试题14 ：谈谈你对拷贝构造函数和赋值运算符重载的认识</a></li>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9815%E7%94%A8c%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E4%B8%8D%E8%83%BD%E8%A2%AB%E7%BB%A7%E6%89%BF%E7%9A%84%E7%B1%BB">面试题15：用C++设计一个不能被继承的类</a></li>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9816%E8%AE%BF%E9%97%AE%E5%9F%BA%E7%B1%BB%E7%9A%84%E7%A7%81%E6%9C%89%E8%99%9A%E5%87%BD%E6%95%B0">面试题16：访问基类的私有虚函数</a></li>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9817%E7%AE%80%E8%BF%B0%E7%B1%BB%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E9%87%8D%E5%86%99-%E9%87%8D%E8%BD%BD%E5%92%8C%E9%9A%90%E8%97%8F%E7%9A%84%E5%8C%BA%E5%88%AB">面试题17：简述类成员函数的重写、重载和隐藏的区别</a></li>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9818%E7%AE%80%E8%BF%B0%E5%A4%9A%E6%80%81%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%8E%9F%E7%90%86">面试题18：简述多态实现的原理</a></li>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9819-%E9%93%BE%E8%A1%A8%E5%92%8C%E6%95%B0%E7%BB%84%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB">面试题19 ：链表和数组有什么区别</a></li>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%9820-%E6%80%8E%E6%A0%B7%E6%8A%8A%E4%B8%80%E4%B8%AA%E5%8D%95%E9%93%BE%E8%A1%A8%E5%8F%8D%E5%BA%8F">面试题20 ：怎样把一个单链表反序</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-      </div>
-    </div>
-
-    <!-- Back to top -->
-    <div class="fixed right-0 bottom-0 mb-4 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white hover:shadow-lg transition-all dark:bg-gray-500 dark:text-gray-200" @click="backToUp" v-show="scrolled">
-      <i class="ri-arrow-up-line"></i>
-    </div>
+    
+      
+    
+      
+    
+      
+    
+      
+    
   </div>
-
-  <!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-  <!-- Background of PhotoSwipe. 
-        It's a separate element as animating opacity is faster than rgba(). -->
-  <div class="pswp__bg">
-  </div>
-  <!-- Slides wrapper with overflow:hidden. -->
-  <div class="pswp__scroll-wrap">
-    <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-    <div class="pswp__container">
-      <div class="pswp__item">
-      </div>
-      <div class="pswp__item">
-      </div>
-      <div class="pswp__item">
-      </div>
-    </div>
-    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-    <div class="pswp__ui pswp__ui--hidden">
-      <div class="pswp__top-bar">
-        <!--  Controls are self-explanatory. Order can be changed. -->
-        <div class="pswp__counter">
-        </div>
-        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-        <!-- element will get class pswp__preloader--active when preloader is running -->
-        <div class="pswp__preloader">
-          <div class="pswp__preloader__icn">
-            <div class="pswp__preloader__cut">
-              <div class="pswp__preloader__donut">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-        <div class="pswp__share-tooltip">
-        </div>
-      </div>
-      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-      </button>
-      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-      </button>
-      <div class="pswp__caption">
-        <div class="pswp__caption__center">
-        </div>
-      </div>
-    </div>
-  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
 </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://qiaoxu123.github.io/media/scripts/main.js"></script>
-  
-  <!-- Code Highlight -->
-  
-    <script src="https://qiaoxu123.github.io/media/prism.js"></script>
-    <script>
-      Prism.highlightAll()
-    </script>
-  
 
-  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
-  <script>
-    //拿到预览框架，也就是上面的html代码
-    var pswpElement = document.querySelectorAll('.pswp')[0];
-    //定义图片数组变量
-    var imgitems;
-    /**
-    * 用于显示预览界面
-    * @param index 图片数组下标
-    */
-    function viewImg(index) {
-      //其它选项这里不做过多阐述，详情见官网
-      var pswpoptions = {
-        index: parseInt(index, 10), // 开始幻灯片索引。0是第一张幻灯片。必须是整数，而不是字符串。
-        bgOpacity: 0.7, // 背景透明度，0-1
-        maxSpreadZoom: 3, // 缩放级别，不要太大
-      };
-      //初始化并打开PhotoSwipe，pswpElement对应上面预览框架，PhotoSwipeUI_Default为皮肤，imgitems为图片数组，pswpoptions为选项
-      var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, imgitems, pswpoptions);
-      gallery.init()
-    }
-    /**
-    * 用于添加图片点击事件
-    * @param img 图片元素
-    * @param index 所属下标（在imgitems中的位置）
-    */
-    function addImgClick(img, index) {
-      img.onclick = function() {
-        viewImg(index)
-      }
-    }
-    /**
-    * 轮询所有图片，获取src、width、height等数据，加入imgitems，并给图片元素添加事件
-    * 最好在onload中执行该方法，本站因放在最底部，所以直接初始化
-    * 异步加载图片可在图片元素创建完成后调用此方法
-    */
-    function initImg() {
-      //重置图片数组
-      imgitems = [];
-      //查找class:markdown 下的所有img元素并遍历
-      var imgs = document.querySelectorAll('.markdown img');
-      for (var i = 0; i < imgs.length; i++) {
-        var img = imgs[i];
-        //本站相册初始为loading图片，真实图片放在data-src
-        var ds = img.getAttribute("data-src");
-        //创建image对象，用于获取图片宽高
-        var imgtemp = new Image();
-        //判断是否存在data-src
-        if (ds != null && ds.length > 0) {
-          imgtemp.src = ds
-        } else {
-          imgtemp.src = img.src
-        }
-        //判断是否存在缓存
-        if (imgtemp.complete) {
-          var imgobj = {
-            "src": imgtemp.src,
-            "w": imgtemp.width,
-            "h": imgtemp.height,
-          };
-          imgitems[i] = imgobj;
-          addImgClick(img, i);
-        } else {
-          console.log('进来了2')
-          imgtemp.index = i;
-          imgtemp.img = img;
-          imgtemp.onload = function() {
-            var imgobj = {
-              "src": this.src,
-              "w": this.width,
-              "h": this.height,
-            };
-            //不要使用push，因为onload前后顺序会不同
-            imgitems[this.index] = imgobj
-            //添加点击事件
-            addImgClick(this.img, this.index);
-          }
-        }
-      }
-    }
-    //初始化
-    initImg();
-  </script>
-  
-  
-</body>
+    </div>
+    <script type="application/javascript">
 
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
 </html>

@@ -1,328 +1,429 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Blog</title>
-<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
-<link rel="stylesheet" href="https://qiaoxu123.github.io/media/css/tailwind.css">
-<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Blog - Atom Feed" href="https://qiaoxu123.github.io/atom.xml">
 
+<html>
+  <head>
     
+<meta charset="utf-8" >
 
-  <meta name="description" content="个人生活，学习记录" />
-</head>
-<body>
-  <div class="antialiased flex flex-col min-h-screen" id="app">
+<title>Blog</title>
+<meta name="description" content="个人生活，学习记录">
 
-    <div class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300" :class="{ 'scroll': scrolled }">
-  <div class="flex justify-end px-4">
-    <div class="w-8 h-8 flex justify-center items-center rounded-full md:hidden" @click="showMenu = !showMenu">
-      <i class="ri-close-line" v-show="showMenu"></i>
-      <i class="ri-menu-3-line" v-show="!showMenu"></i>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1587907785787">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1587907785787" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
     </div>
   </div>
-  <nav class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block" :class="`${ showMenu ? 'block' : 'hidden' }`">
-    
-      <a href="https://qiaoxu123.github.io" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-        首页
-      </a>
-    
-      <a href="https://qiaoxu123.github.io/archives" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-        归档
-      </a>
-    
-      <a href="https://qiaoxu123.github.io/tags" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-        标签
-      </a>
-    
-    <a href="https://qiaoxu123.github.io/atom.xml" target="_blank" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-      RSS
-    </a>
-  </nav>
 </div>
 
-    <div class="max-w-4xl w-full mx-auto pt-32">
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
       
-
-      <div class="shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
         
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+          <a href="https://qiaoxu123.github.io" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        
+        
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/thinkpad-e480-linux-wifi/">
+        <h2 class="post-title">ThinkPad E480 Linux WIFI 问题解决</h2>
+      </a>
+      <div class="post-abstract">
+        <p>因为工作需要在个人笔记本上安装Linux，目前使用的版本是Linux mint19.2。但ThinkPad E480 因为自带的8821ce无线网卡太“新”，导致无法直接识别，测试过网上各种方案后，终于找到一个比较稳定的方案。在这笔记记录下。</p>
+
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-09-03</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr/">
+                工程实现
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
     
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/engineer_debug_socket/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          Socket编程中send函数引发线程退出
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-09-02</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+  </section>
+
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/engineer_debug_socket/">
+        <h2 class="post-title">Socket编程中send函数引发线程退出</h2>
+      </a>
+      <div class="post-abstract">
         <p>在调试过程中烦恼已久的问题，终于找到了，在这转载记录下。</p>
 
       </div>
-      <a href="https://qiaoxu123.github.io/post/engineer_debug_socket/" class="btn">
-        Read more
-      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-09-02</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/5HMxWRPZ1/">
+                工程调试
+                
+              </a>
+            
+          </span>
+        
+      </div>
     </div>
     
-  </div>
+  </section>
 
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/baidu-apollo-share/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          Apollo轨迹规划分享--问答
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-08-29</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/baidu-apollo-share/">
+        <h2 class="post-title">Apollo轨迹规划分享--问答</h2>
+      </a>
+      <div class="post-abstract">
         <p>转载自：<a href="https://zhuanlan.zhihu.com/p/69878689">知乎平台</a></p>
 
       </div>
-      <a href="https://qiaoxu123.github.io/post/baidu-apollo-share/" class="btn">
-        Read more
-      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-08-29</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/BqCd0A5YE/">
+                转载
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/6kKIZdPBS/">
+                Apollo
+                
+              </a>
+            
+          </span>
+        
+      </div>
     </div>
     
-  </div>
+  </section>
 
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/baidu-apollo-planning/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          Baidu Apollo 决策规划学习资源汇总
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-08-29</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/baidu-apollo-planning/">
+        <h2 class="post-title">Baidu Apollo 决策规划学习资源汇总</h2>
+      </a>
+      <div class="post-abstract">
         <p>因为个人在学习过程中经常需要参考查阅相关资料，逐一转载太过繁琐，在这简单汇总整理下网上已有的资源，方便个人及大家查阅学习.</p>
 <p><strong>Apollo开发者社区</strong>资源更全面，关注微信公众号即可。</p>
 <p>后续更新中..</p>
 
       </div>
-      <a href="https://qiaoxu123.github.io/post/baidu-apollo-planning/" class="btn">
-        Read more
-      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-08-29</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/IapA2cJt6/">
+                决策规划
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/6kKIZdPBS/">
+                Apollo
+                
+              </a>
+            
+          </span>
+        
+      </div>
     </div>
     
-  </div>
+  </section>
 
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/fanqiang-note/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          使用倚天剑ss实现科学上网
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-08-24</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/fanqiang-note/">
+        <h2 class="post-title">使用倚天剑ss实现科学上网</h2>
+      </a>
+      <div class="post-abstract">
         <p>因为科研和工作原因，使用过各种科学上网工具，就目前使用而言，倚天剑ss算是性价比超高的，每个月5元的费用比任何个人搭建都显得亲民很多。在这笔记记录推荐下，方便个人及大家配置使用。</p>
 
       </div>
-      <a href="https://qiaoxu123.github.io/post/fanqiang-note/" class="btn">
-        Read more
-      </a>
-    </div>
-    
-  </div>
-
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/5_C++Courses/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          狄泰C++第5课-引用的本质分析
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-08-02</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-08-24</span>
         
-一、引用的意义
-
-引用作为变量别名而存在，因此在一些场合可以代替指针
-引用相对于指针来说具有更好的可读性和实用性
-
-swap函数的实现对比
-
-//引用
-void swap(int&amp; a,int&amp; b){
-  int t =...
-      </div>
-      <a href="https://qiaoxu123.github.io/post/5_C++Courses/" class="btn">
-        Read more
-      </a>
-    </div>
-    
-  </div>
-
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/4_C++Courses/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          狄泰C++第4课-布尔类型和引用
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-08-01</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/fhQEpUoq9/">
+                日常工具
+                
+              </a>
+            
+          </span>
         
-一、布尔类型
-C++中的布尔类型
-
-C++在C语言的基本类型系统之上增加了bool
-C++中的bool可取的值只有true和false
-理论上bool只占用一个字节
-
-注意：true代表真值，编译器内部用1来表示；false代表非真值，编...
       </div>
-      <a href="https://qiaoxu123.github.io/post/4_C++Courses/" class="btn">
-        Read more
-      </a>
     </div>
     
-  </div>
+  </section>
 
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/3-C++Courses/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          狄泰C++第3课-进化后的const分析
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-07-31</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/5_C++Courses/">
+        <h2 class="post-title">狄泰C++第5课-引用的本质分析</h2>
+      </a>
+      <div class="post-abstract">
         
-代码链接
-一、C语言中的const
-
-const修饰的变量是只读的，本质还是变量
-const修饰的局部变量在栈上分配空间
-const修饰的全局变量在只读存储区分配空间
-const只在编译器有用，在运行期无用
-
-const修饰的变量不是真的...
       </div>
-      <a href="https://qiaoxu123.github.io/post/3-C++Courses/" class="btn">
-        Read more
-      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-08-02</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/6gpyLRVQ_/">
+                C++编程
+                
+              </a>
+            
+          </span>
+        
+      </div>
     </div>
     
-  </div>
+  </section>
 
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/4_C++Courses/">
+        <h2 class="post-title">狄泰C++第4课-布尔类型和引用</h2>
+      </a>
+      <div class="post-abstract">
+        
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-08-01</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/6gpyLRVQ_/">
+                C++编程
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
     
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/GP-INSAC-Algorithms/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          基于增量高斯分布的Lidar点云分割算法
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-07-30</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+  </section>
+
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/3-C++Courses/">
+        <h2 class="post-title">狄泰C++第3课-进化后的const分析</h2>
+      </a>
+      <div class="post-abstract">
+        
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-07-31</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/6gpyLRVQ_/">
+                C++编程
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
+    
+  </section>
+
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/GP-INSAC-Algorithms/">
+        <h2 class="post-title">基于增量高斯分布的Lidar点云分割算法</h2>
+      </a>
+      <div class="post-abstract">
         <p>论文：On the Segmentation of 3D LIDAR Point Clouds</p>
 
       </div>
-      <a href="https://qiaoxu123.github.io/post/GP-INSAC-Algorithms/" class="btn">
-        Read more
-      </a>
-    </div>
-    
-  </div>
-
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/zhihu-live-note1/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          研究生留德及研修——知乎live记录
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-07-30</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-07-30</span>
         
-
-
-一、德国和英国博士全奖申请过程
-
-1.	前期准备
-2.	如何跟教授套词
-
-
-二、欧盟玛丽居里ITN项目简介和申请流程
-三、国家公派留学申请流程
-
-1.	基本情况
-2.	申请流程
-
-
-三、硕士期间科研
-
-
-
-
-
-一、德国和英国博士全奖申...
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/H1zRlHhoN/">
+                激光雷达
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/_5yMHFGsPi/">
+                高斯分布
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/Dt5i19HDw/">
+                机器学习
+                
+              </a>
+            
+          </span>
+        
       </div>
-      <a href="https://qiaoxu123.github.io/post/zhihu-live-note1/" class="btn">
-        Read more
-      </a>
     </div>
     
-  </div>
+  </section>
 
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/2-C++Courses/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          狄泰C++第2课-C到C++的升级
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-07-29</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
-        <p>对C语言和C++语言中的语法特性进行对照分析</p>
-
-      </div>
-      <a href="https://qiaoxu123.github.io/post/2-C++Courses/" class="btn">
-        Read more
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/zhihu-live-note1/">
+        <h2 class="post-title">研究生留德及研修——知乎live记录</h2>
       </a>
+      <div class="post-abstract">
+        
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-07-30</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/E1TAHXjHG/">
+                留学
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/BT5uUgUqKt/">
+                总结
+                
+              </a>
+            
+          </span>
+        
+      </div>
     </div>
     
-  </div>
+  </section>
+
+
+<div class="pagination-container">
   
+    <a href="https://qiaoxu123.github.io/page/2/" class="prev"><i class="icon-arrow-ios-back-outline"></i> 上一页</a>
+  
+  
+    <a href="https://qiaoxu123.github.io/page/4/" class="next">下一页 <i class="icon-arrow-ios-forward-outline"></i></a>
+  
+</div>
+
+
       </div>
 
+      <div class="site-footer">
+  <div class="slogan">个人生活，学习记录</div>
+  <div class="social-container">
+    
       
-  <div class="my-4 flex justify-between px-4 md:px-0">
     
-      <a href="https://qiaoxu123.github.io/page/2/" class="btn btn-white">
-        <i class="ri-arrow-left-line mr-4"></i>
-        上一页
-      </a>
+      
     
+      
     
-      <a href="https://qiaoxu123.github.io/page/4/" class="btn btn-white">
-        下一页
-        <i class="ri-arrow-right-line ml-4"></i>
-      </a>
+      
+    
+      
     
   </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+</div>
 
-      <footer class="py-12 text-center px-4 md:px-0" v-pre>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-</footer>
 
     </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://qiaoxu123.github.io/media/scripts/main.js"></script>
-</body>
+    <script type="application/javascript">
 
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
 </html>

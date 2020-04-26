@@ -1,284 +1,483 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Blog</title>
-<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
-<link rel="stylesheet" href="https://qiaoxu123.github.io/media/css/tailwind.css">
-<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Blog - Atom Feed" href="https://qiaoxu123.github.io/atom.xml">
 
+<html>
+  <head>
     
+<meta charset="utf-8" >
 
-  <meta name="description" content="个人生活，学习记录" />
-</head>
-<body>
-  <div class="antialiased flex flex-col min-h-screen" id="app">
+<title>Blog</title>
+<meta name="description" content="个人生活，学习记录">
 
-    <div class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300" :class="{ 'scroll': scrolled }">
-  <div class="flex justify-end px-4">
-    <div class="w-8 h-8 flex justify-center items-center rounded-full md:hidden" @click="showMenu = !showMenu">
-      <i class="ri-close-line" v-show="showMenu"></i>
-      <i class="ri-menu-3-line" v-show="!showMenu"></i>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1587907785787">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1587907785787" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
     </div>
   </div>
-  <nav class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block" :class="`${ showMenu ? 'block' : 'hidden' }`">
-    
-      <a href="https://qiaoxu123.github.io" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-        首页
-      </a>
-    
-      <a href="https://qiaoxu123.github.io/archives" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-        归档
-      </a>
-    
-      <a href="https://qiaoxu123.github.io/tags" target="" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-        标签
-      </a>
-    
-    <a href="https://qiaoxu123.github.io/atom.xml" target="_blank" class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
-      RSS
-    </a>
-  </nav>
 </div>
 
-    <div class="max-w-4xl w-full mx-auto pt-32">
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
       
-
-      <div class="shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
         
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+          <a href="https://qiaoxu123.github.io" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        
+        
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/tp-link-wireless-problem/">
+        <h2 class="post-title">Ubuntu 18/16 下 TP-LINK 5500无线网卡驱动问题</h2>
+      </a>
+      <div class="post-abstract">
+        <p>今天刚花了半小时时间调了一下公司的主机，因为有线网络一直连接不上，一气之下找了一个无线网卡直接怼上试试，结果因为是Ubuntu系统还不适配，哎，只好耐心找了下驱动，费了些时间搞定了，在这简单记录下。</p>
+
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-11-25</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/5HMxWRPZ1/">
+                工程调试
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
     
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/C++_STL_Note/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          C++算法常用STL函数整理
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-10-29</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+  </section>
+
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/C++_STL_Note/">
+        <h2 class="post-title">C++算法常用STL函数整理</h2>
+      </a>
+      <div class="post-abstract">
         <p>最近在听Acwing算法基础课，其中提到了一些算法常用的STL函数，个人感觉很全面，在这整理复习下。</p>
 
       </div>
-      <a href="https://qiaoxu123.github.io/post/C++_STL_Note/" class="btn">
-        Read more
-      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-10-29</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/BGI4X2Ir8/">
+                STL
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/lJwUcvxsaz/">
+                C++
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/toOCbbHpkO/">
+                算法
+                
+              </a>
+            
+          </span>
+        
+      </div>
     </div>
     
-  </div>
+  </section>
 
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/ros-personal-note/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          个人在ROS工程使用Protobuf的模板和一点心得
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-10-28</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/ros-personal-note/">
+        <h2 class="post-title">个人在ROS工程使用Protobuf的模板和一点心得</h2>
+      </a>
+      <div class="post-abstract">
         <p>从上周搞定ROS工程下使用Protbuf的问题后，陆续对原有工程进行了更改，在这一过程中，探索了下Protobuf与ROS工程结合的不同方式，暂时总结了一份模板，并在此记录下心得。</p>
 
       </div>
-      <a href="https://qiaoxu123.github.io/post/ros-personal-note/" class="btn">
-        Read more
-      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-10-28</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/9b8jYFcLb/">
+                Protobuf
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/KUvEXNYC1/">
+                个人学习
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/5HFkONYVv/">
+                ROS
+                
+              </a>
+            
+          </span>
+        
+      </div>
     </div>
     
-  </div>
+  </section>
 
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/ubuntu18-protobuf-memory-share-note/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          Ubuntu18下ROS使用Protobuf共享内存实现节点通信
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-10-24</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/ubuntu18-protobuf-memory-share-note/">
+        <h2 class="post-title">Ubuntu18下ROS使用Protobuf共享内存实现节点通信</h2>
+      </a>
+      <div class="post-abstract">
         <p>最近在折腾ROS两个节点之间的通信实现，每个的功能都很简单，需要解决的地方在于两个之间的通信量很大，延迟要很低才行。确定使用protobuf共享内存后，网上查阅了好多资料才最终实现。在这实现一个最小的demo作为记录，希望能对后来者有帮助！<br>
 <a href="https://github.com/qiaoxu123/demo_project/tree/master/work_ws">github链接</a></p>
 
       </div>
-      <a href="https://qiaoxu123.github.io/post/ubuntu18-protobuf-memory-share-note/" class="btn">
-        Read more
-      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-10-24</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/KUvEXNYC1/">
+                个人学习
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/5HFkONYVv/">
+                ROS
+                
+              </a>
+            
+          </span>
+        
+      </div>
     </div>
     
-  </div>
+  </section>
 
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/coursera-self-driving-cars/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          推荐：可能是目前最好的自动驾驶教程
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-10-02</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/coursera-self-driving-cars/">
+        <h2 class="post-title">推荐：可能是目前最好的自动驾驶教程</h2>
+      </a>
+      <div class="post-abstract">
         <p>从年初到现在，终于搞定了这个专项。Coursera平台推出的自动驾驶教程：<strong>Self-Driving Cars</strong>。在这对四期课程做个比较全面的总结，同时向大家推荐下，希望帮大家在自动驾驶学习路上添砖加瓦。</p>
 <p>课程github整理：<a href="https://github.com/qiaoxu123/Self-Driving-Cars">链接</a></p>
 
       </div>
-      <a href="https://qiaoxu123.github.io/post/coursera-self-driving-cars/" class="btn">
-        Read more
-      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-10-02</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/KUvEXNYC1/">
+                个人学习
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/FpZd9d6flZ/">
+                自动驾驶
+                
+              </a>
+            
+          </span>
+        
+      </div>
     </div>
     
-  </div>
+  </section>
 
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/baidu-apollo-note/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          Baidu Apollo代码笔记
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-09-29</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/baidu-apollo-note/">
+        <h2 class="post-title">Baidu Apollo代码笔记</h2>
+      </a>
+      <div class="post-abstract">
         <p>最近重新开始研读Baidu Apollo的代码，从中学到了很多新的工程使用的技巧和方法，在这集中整理下，做下记录，方便以后查找。</p>
 
       </div>
-      <a href="https://qiaoxu123.github.io/post/baidu-apollo-note/" class="btn">
-        Read more
-      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-09-29</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/weT98JPlY/">
+                工程
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/toOCbbHpkO/">
+                算法
+                
+              </a>
+            
+          </span>
+        
+      </div>
     </div>
     
-  </div>
+  </section>
 
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/momenta-interview/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          Momenta面试记录
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-09-26</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/momenta-interview/">
+        <h2 class="post-title">Momenta面试记录</h2>
+      </a>
+      <div class="post-abstract">
         <p>终于结束了，虽然总共时长不超过一周。但对我影响真的很大，从中明白了很多，借此机会激励下自己，继续加油！</p>
 
       </div>
-      <a href="https://qiaoxu123.github.io/post/momenta-interview/" class="btn">
-        Read more
-      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-09-26</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/lD70VXZAT/">
+                面经
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/cw9LvfpIV/">
+                个人感悟
+                
+              </a>
+            
+          </span>
+        
+      </div>
     </div>
     
-  </div>
+  </section>
 
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/ros-nav_msgs/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          ROS中nav_msgs消息
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-09-26</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/ros-nav_msgs/">
+        <h2 class="post-title">ROS中nav_msgs消息</h2>
+      </a>
+      <div class="post-abstract">
         <p>最近在对ROS的深度使用中，发现<code>nav_msgs</code>消息在包通信中出现频率超高。在这特地转载记录补充下，方便以后查找巩固。<br>
 <a href="https://blog.csdn.net/ji0525084/article/details/14125119">参考博客</a></p>
 
       </div>
-      <a href="https://qiaoxu123.github.io/post/ros-nav_msgs/" class="btn">
-        Read more
-      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-09-26</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/5HFkONYVv/">
+                ROS
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/N-5DhIgGPS/">
+                仿真
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/BqCd0A5YE/">
+                转载
+                
+              </a>
+            
+          </span>
+        
+      </div>
     </div>
     
-  </div>
+  </section>
 
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/ros-note1-rviz/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          ROS仿真实现1--使用rviz显示小车
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-09-18</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/ros-note1-rviz/">
+        <h2 class="post-title">ROS仿真实现1--使用rviz显示小车</h2>
+      </a>
+      <div class="post-abstract">
         <p>花了半天时间查找各种资料，终于实现了，在这整理记录下，方便后续参考。</p>
 
       </div>
-      <a href="https://qiaoxu123.github.io/post/ros-note1-rviz/" class="btn">
-        Read more
-      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-09-18</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/5HFkONYVv/">
+                ROS
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/N-5DhIgGPS/">
+                仿真
+                
+              </a>
+            
+          </span>
+        
+      </div>
     </div>
     
-  </div>
+  </section>
 
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/linux-socket-select-note/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          Linux下使用select实现精确定时器
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-09-05</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/linux-socket-select-note/">
+        <h2 class="post-title">Linux下使用select实现精确定时器</h2>
+      </a>
+      <div class="post-abstract">
         <p>依旧是项目需求，在Linux平台下实现延时。使用系统自定义的sleep函数总是无效，无奈下尝试使用select函数实现，效果很好，在这先占坑后续查找sleep函数无效的原因。转载自<a href="https://www.cnblogs.com/jjdiaries/p/3404380.html">博客</a></p>
 
       </div>
-      <a href="https://qiaoxu123.github.io/post/linux-socket-select-note/" class="btn">
-        Read more
-      </a>
-    </div>
-    
-  </div>
-
-  <div class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
-    
-    <div class="flex-1 order-2 md:order-1">
-      <h2 class="text-2xl font-semibold mb-4">
-        <a href="https://qiaoxu123.github.io/post/thinkpad-e480-linux-wifi/" class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
-          ThinkPad E480 Linux WIFI 问题解决
-        </a>
-      </h2>
-      <div class="mb-4 text-xs text-gray-500">2019-09-03</div>
-      <div class="mb-4 text-gray-500 dark:text-gray-300">
-        <p>因为工作需要在个人笔记本上安装Linux，目前使用的版本是Linux mint19.2。但ThinkPad E480 因为自带的8821ce无线网卡太“新”，导致无法直接识别，测试过网上各种方案后，终于找到一个比较稳定的方案。在这笔记记录下。</p>
-
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-09-05</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/BqCd0A5YE/">
+                转载
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr/">
+                工程实现
+                
+              </a>
+            
+          </span>
+        
       </div>
-      <a href="https://qiaoxu123.github.io/post/thinkpad-e480-linux-wifi/" class="btn">
-        Read more
-      </a>
     </div>
     
-  </div>
+  </section>
+
+
+<div class="pagination-container">
   
+    <a href="https://qiaoxu123.github.io/" class="prev"><i class="icon-arrow-ios-back-outline"></i> 上一页</a>
+  
+  
+    <a href="https://qiaoxu123.github.io/page/3/" class="next">下一页 <i class="icon-arrow-ios-forward-outline"></i></a>
+  
+</div>
+
+
       </div>
 
+      <div class="site-footer">
+  <div class="slogan">个人生活，学习记录</div>
+  <div class="social-container">
+    
       
-  <div class="my-4 flex justify-between px-4 md:px-0">
     
-      <a href="https://qiaoxu123.github.io/" class="btn btn-white">
-        <i class="ri-arrow-left-line mr-4"></i>
-        上一页
-      </a>
+      
     
+      
     
-      <a href="https://qiaoxu123.github.io/page/3/" class="btn btn-white">
-        下一页
-        <i class="ri-arrow-right-line ml-4"></i>
-      </a>
+      
+    
+      
     
   </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+</div>
 
-      <footer class="py-12 text-center px-4 md:px-0" v-pre>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-</footer>
 
     </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://qiaoxu123.github.io/media/scripts/main.js"></script>
-</body>
+    <script type="application/javascript">
 
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
 </html>
