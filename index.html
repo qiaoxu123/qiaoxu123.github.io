@@ -1,398 +1,415 @@
+
 <html>
-<head>
-    <meta charset="utf-8"/>
-<meta name="description" content=""/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <head>
+    
+<meta charset="utf-8" >
+
 <title>Blog</title>
-<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1589072561271">
-<link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
+<meta name="description" content="个人生活，学习记录">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1589072669553">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/go.min.js"></script>
-<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
-
-<!-- DEMO JS -->
-<!--<script src="media/scripts/index.js"></script>-->
 
 
 
-</head>
-<body>
-<div class="main gt-bg-theme-color-first">
-    <div class="main-content">
-        <nav class="navbar navbar-expand-lg">
-    <div class="navbar-brand">
-        <img class="user-avatar" src="/images/avatar.png" alt="头像">
-        <div class="site-name gt-c-content-color-first">
-            Blog
-        </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1589072669553" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
     </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="navbar-nav mr-auto" style="text-align: center">
-            
-                <div class="nav-item">
-                    
-                        <a href="https://qiaoxu123.github.io" class="menu gt-a-link">
-                            首页
-                        </a>
-                    
-                </div>
-            
-                <div class="nav-item">
-                    
-                        <a href="https://qiaoxu123.github.io/archives" class="menu gt-a-link">
-                            归档
-                        </a>
-                    
-                </div>
-            
-                <div class="nav-item">
-                    
-                        <a href="https://qiaoxu123.github.io/tags" class="menu gt-a-link">
-                            标签
-                        </a>
-                    
-                </div>
-            
-        </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
     </div>
-</nav>
-
-        <div class="post-list-container">
-    <div class="post-inner">
-        
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://qiaoxu123.github.io/post/C++_Road/">
-                            <span class="post-title gt-c-content-color-first">C++ 学习心得(更新中）</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <p>最近一直在看《C++ Primer》，实际接触这本圣经后真是爱恨有加，要是能早点静下心来阅读的话，想必现在水平也不至于此吧。好在现在还有机会，准备一口气读完。有点意外地是，虽然囫囵吞枣阅读，但在实际工程应用上，有很多技巧已经可见一斑了。过程中结合《Effective C++》的阅读，有了更深的体会。所以在这想陆续更新一些心得，一方面是作为自己的学习笔记，另一方面也算是督促自己反复思考，不能停止。路还很长，希望再接再厉吧~</p>
-
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2020-05-01 ·
-                        </time>
-                        
-                            <a href="https://qiaoxu123.github.io/tag/KUvEXNYC1/" class="post-tag">
-                                # 个人学习
-                            </a>
-                        
-                    </div>
-                </div>
-                
-            </div>
-        
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://qiaoxu123.github.io/post/ubuntu-change-fonts/">
-                            <span class="post-title gt-c-content-color-first">将 Linux 上的 VSCode 改为 Consolas 字体</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <p>转载自<a href="https://blog.gloriousdays.pw/2018/08/29/change-font-within-vsc-to-consolas-on-linux/">博客</a></p>
-
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2020-04-26 ·
-                        </time>
-                        
-                            <a href="https://qiaoxu123.github.io/tag/Uo0xtLaU1/" class="post-tag">
-                                # 效率提升
-                            </a>
-                        
-                    </div>
-                </div>
-                
-            </div>
-        
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://qiaoxu123.github.io/post/ubuntu-ooqp-useguide/">
-                            <span class="post-title gt-c-content-color-first">Ubuntu环境下OOQP优化库的基本使用</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <p>OOQP是一个强大的开源凸优化库，支持C++, Maltab调用。学习过程中发现网上的参考资料寥寥无几，在这根据官方的指导手册和Example简单介绍说明下。</p>
-
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2020-01-06 ·
-                        </time>
-                        
-                            <a href="https://qiaoxu123.github.io/tag/fTtxablX7/" class="post-tag">
-                                # 最优化
-                            </a>
-                        
-                            <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr/" class="post-tag">
-                                # 工程实现
-                            </a>
-                        
-                    </div>
-                </div>
-                
-            </div>
-        
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://qiaoxu123.github.io/post/my-2019/">
-                            <span class="post-title gt-c-content-color-first">我的2019总结--错过的生活与糟糕的性格</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <p>明天就是2020年了，抓紧2019年的最后一天，反思和检讨下自己匆匆过去的一天。和之前应付的总结不一样，我觉得用心了很多，这次总结是先手写完成，然后整理汇总出来。这也是年末总结琢磨出的一个方法，锻炼自己的耐心。作为一个好的开端，来鼓励明年的自己。</p>
-
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2020-01-01 ·
-                        </time>
-                        
-                            <a href="https://qiaoxu123.github.io/tag/O6S3O2y2P/" class="post-tag">
-                                # 生活感悟
-                            </a>
-                        
-                    </div>
-                </div>
-                
-            </div>
-        
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://qiaoxu123.github.io/post/50-C++-interview-problem/">
-                            <span class="post-title gt-c-content-color-first">20个经典的C++面试题(转载)</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <p>捡起已经忘记的C++。。。</p>
-
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2019-12-28 ·
-                        </time>
-                        
-                            <a href="https://qiaoxu123.github.io/tag/dcW9tG6DF/" class="post-tag">
-                                # 工作面试
-                            </a>
-                        
-                            <a href="https://qiaoxu123.github.io/tag/lJwUcvxsaz/" class="post-tag">
-                                # C++
-                            </a>
-                        
-                    </div>
-                </div>
-                
-            </div>
-        
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://qiaoxu123.github.io/post/qiao-swimming-note3/">
-                            <span class="post-title gt-c-content-color-first">小乔的游泳日记(第四周）</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <p>这周感觉自己真的废掉了，拖延症又犯了，只有周六去了一次，也就是今天。不过收货还是有一些的，在这简单记录下，同时个人深刻检讨。。。</p>
-
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2019-12-28 ·
-                        </time>
-                        
-                            <a href="https://qiaoxu123.github.io/tag/96zX9kJvp/" class="post-tag">
-                                # 轻松生活
-                            </a>
-                        
-                    </div>
-                </div>
-                
-            </div>
-        
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://qiaoxu123.github.io/post/2019-booklist/">
-                            <span class="post-title gt-c-content-color-first">我的2019年书单</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <p>研究生的第一年，和本科的时光有彻彻底底的不同。经历了好多，虽然无奈，还是被生活抽走了几分稚气。竭尽全力，总算是读了几本闲书，认识了一些有趣的人，做了一点踏实事。</p>
-
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2019-12-26 ·
-                        </time>
-                        
-                            <a href="https://qiaoxu123.github.io/tag/cw9LvfpIV/" class="post-tag">
-                                # 个人感悟
-                            </a>
-                        
-                            <a href="https://qiaoxu123.github.io/tag/E4iTOpEEbl/" class="post-tag">
-                                # 日常生活
-                            </a>
-                        
-                    </div>
-                </div>
-                
-            </div>
-        
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://qiaoxu123.github.io/post/qiao-swimming-note2/">
-                            <span class="post-title gt-c-content-color-first">小乔的游泳日记(第三周)</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <p>痛苦地，挣扎着，开始了第三周的游泳练习。。。</p>
-
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2019-12-22 ·
-                        </time>
-                        
-                            <a href="https://qiaoxu123.github.io/tag/96zX9kJvp/" class="post-tag">
-                                # 轻松生活
-                            </a>
-                        
-                    </div>
-                </div>
-                
-            </div>
-        
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://qiaoxu123.github.io/post/qiao-swimming-note1/">
-                            <span class="post-title gt-c-content-color-first">小乔的游泳日记(第一，二周)</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <p>已经开始练习有用快两周了，感觉进步还是有一些的。当然啦，痛苦伴随这乐趣，为了不让这“苦涩”的回忆淡忘掉，小记一下嘻嘻。</p>
-
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2019-12-21 ·
-                        </time>
-                        
-                            <a href="https://qiaoxu123.github.io/tag/96zX9kJvp/" class="post-tag">
-                                # 轻松生活
-                            </a>
-                        
-                    </div>
-                </div>
-                
-            </div>
-        
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://qiaoxu123.github.io/post/delay_test/">
-                            <span class="post-title gt-c-content-color-first">Linux下程序运行时延以及网络通信时延的测试方法</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <p>最近在工程应用中，需要测试程序的运行时延，作为程序性能的评价指标之一。另外，因为要完成一个5G应用项目，需要对基于TCP/IP的网络通信时延也要进行测试，作为工程应用的重要指标。网上搜罗了各种方案，最后勉强找到一些可以应用的，在这总结下吧。</p>
-
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2019-12-20 ·
-                        </time>
-                        
-                            <a href="https://qiaoxu123.github.io/tag/5HMxWRPZ1/" class="post-tag">
-                                # 工程调试
-                            </a>
-                        
-                    </div>
-                </div>
-                
-            </div>
-        
-    </div>
+  </div>
 </div>
 
-        <div class="pagination-container">
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="https://qiaoxu123.github.io" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        
+        
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/C++_Road/">
+        <h2 class="post-title">C++ 学习心得(更新中）</h2>
+      </a>
+      <div class="post-abstract">
+        <p>最近一直在看《C++ Primer》，实际接触这本圣经后真是爱恨有加，要是能早点静下心来阅读的话，想必现在水平也不至于此吧。好在现在还有机会，准备一口气读完。有点意外地是，虽然囫囵吞枣阅读，但在实际工程应用上，有很多技巧已经可见一斑了。过程中结合《Effective C++》的阅读，有了更深的体会。所以在这想陆续更新一些心得，一方面是作为自己的学习笔记，另一方面也算是督促自己反复思考，不能停止。路还很长，希望再接再厉吧~</p>
+
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2020-05-01</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/KUvEXNYC1/">
+                个人学习
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
     
+  </section>
+
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/ubuntu-change-fonts/">
+        <h2 class="post-title">将 Linux 上的 VSCode 改为 Consolas 字体</h2>
+      </a>
+      <div class="post-abstract">
+        <p>转载自<a href="https://blog.gloriousdays.pw/2018/08/29/change-font-within-vsc-to-consolas-on-linux/">博客</a></p>
+
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2020-04-26</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/Uo0xtLaU1/">
+                效率提升
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
     
-        <a href="https://qiaoxu123.github.io/page/2" class="prev-page gt-a-link">下一页</a>
+  </section>
+
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/ubuntu-ooqp-useguide/">
+        <h2 class="post-title">Ubuntu环境下OOQP优化库的基本使用</h2>
+      </a>
+      <div class="post-abstract">
+        <p>OOQP是一个强大的开源凸优化库，支持C++, Maltab调用。学习过程中发现网上的参考资料寥寥无几，在这根据官方的指导手册和Example简单介绍说明下。</p>
+
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2020-01-06</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/fTtxablX7/">
+                最优化
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr/">
+                工程实现
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
     
+  </section>
+
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/my-2019/">
+        <h2 class="post-title">我的2019总结--错过的生活与糟糕的性格</h2>
+      </a>
+      <div class="post-abstract">
+        <p>明天就是2020年了，抓紧2019年的最后一天，反思和检讨下自己匆匆过去的一天。和之前应付的总结不一样，我觉得用心了很多，这次总结是先手写完成，然后整理汇总出来。这也是年末总结琢磨出的一个方法，锻炼自己的耐心。作为一个好的开端，来鼓励明年的自己。</p>
+
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2020-01-01</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/O6S3O2y2P/">
+                生活感悟
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
+    
+  </section>
+
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/50-C++-interview-problem/">
+        <h2 class="post-title">20个经典的C++面试题(转载)</h2>
+      </a>
+      <div class="post-abstract">
+        <p>捡起已经忘记的C++。。。</p>
+
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-12-28</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/dcW9tG6DF/">
+                工作面试
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/lJwUcvxsaz/">
+                C++
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
+    
+  </section>
+
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/qiao-swimming-note3/">
+        <h2 class="post-title">小乔的游泳日记(第四周）</h2>
+      </a>
+      <div class="post-abstract">
+        <p>这周感觉自己真的废掉了，拖延症又犯了，只有周六去了一次，也就是今天。不过收货还是有一些的，在这简单记录下，同时个人深刻检讨。。。</p>
+
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-12-28</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/96zX9kJvp/">
+                轻松生活
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
+    
+  </section>
+
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/2019-booklist/">
+        <h2 class="post-title">我的2019年书单</h2>
+      </a>
+      <div class="post-abstract">
+        <p>研究生的第一年，和本科的时光有彻彻底底的不同。经历了好多，虽然无奈，还是被生活抽走了几分稚气。竭尽全力，总算是读了几本闲书，认识了一些有趣的人，做了一点踏实事。</p>
+
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-12-26</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/cw9LvfpIV/">
+                个人感悟
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://qiaoxu123.github.io/tag/E4iTOpEEbl/">
+                日常生活
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
+    
+  </section>
+
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/qiao-swimming-note2/">
+        <h2 class="post-title">小乔的游泳日记(第三周)</h2>
+      </a>
+      <div class="post-abstract">
+        <p>痛苦地，挣扎着，开始了第三周的游泳练习。。。</p>
+
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-12-22</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/96zX9kJvp/">
+                轻松生活
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
+    
+  </section>
+
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/qiao-swimming-note1/">
+        <h2 class="post-title">小乔的游泳日记(第一，二周)</h2>
+      </a>
+      <div class="post-abstract">
+        <p>已经开始练习有用快两周了，感觉进步还是有一些的。当然啦，痛苦伴随这乐趣，为了不让这“苦涩”的回忆淡忘掉，小记一下嘻嘻。</p>
+
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-12-21</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/96zX9kJvp/">
+                轻松生活
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
+    
+  </section>
+
+<section class="post-item">
+    <div class="content">
+      <a href="https://qiaoxu123.github.io/post/delay_test/">
+        <h2 class="post-title">Linux下程序运行时延以及网络通信时延的测试方法</h2>
+      </a>
+      <div class="post-abstract">
+        <p>最近在工程应用中，需要测试程序的运行时延，作为程序性能的评价指标之一。另外，因为要完成一个5G应用项目，需要对基于TCP/IP的网络通信时延也要进行测试，作为工程应用的重要指标。网上搜罗了各种方案，最后勉强找到一些可以应用的，在这总结下吧。</p>
+
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2019-12-20</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://qiaoxu123.github.io/tag/5HMxWRPZ1/">
+                工程调试
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
+    
+  </section>
+
+
+<div class="pagination-container">
+  
+  
+    <a href="https://qiaoxu123.github.io/page/2" class="next">下一页 <i class="icon-arrow-ios-forward-outline"></i></a>
+  
 </div>
 
 
-        <div class="site-footer gt-c-content-color-first">
-    <div class="slogan gt-c-content-color-first">个人生活，学习记录</div>
-    <div class="social-container">
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-    </div>
-    <div class="footer-info">
-        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-    </div>
-    <div>
-        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
-                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a></a>
-    </div>
+      </div>
+
+      <div class="site-footer">
+  <div class="slogan">个人生活，学习记录</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
 </div>
 
-<script>
-    hljs.initHighlightingOnLoad()
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
 </script>
 
-    </div>
-</div>
-</body>
+
+
+
+  </body>
 </html>

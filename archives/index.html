@@ -1,763 +1,760 @@
 <html>
-<head>
-    <meta charset="utf-8"/>
-<meta name="description" content=""/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <head>
+    
+<meta charset="utf-8" >
+
 <title>Blog</title>
-<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1589072561271">
-<link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
+<meta name="description" content="个人生活，学习记录">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1589072669553">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/go.min.js"></script>
-<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
-
-<!-- DEMO JS -->
-<!--<script src="media/scripts/index.js"></script>-->
 
 
 
-</head>
-<body>
-<div class="main gt-bg-theme-color-first">
-    <div class="main-content">
-        <nav class="navbar navbar-expand-lg">
-    <div class="navbar-brand">
-        <img class="user-avatar" src="/images/avatar.png" alt="头像">
-        <div class="site-name gt-c-content-color-first">
-            Blog
-        </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1589072669553" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
     </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="navbar-nav mr-auto" style="text-align: center">
-            
-                <div class="nav-item">
-                    
-                        <a href="https://qiaoxu123.github.io" class="menu gt-a-link">
-                            首页
-                        </a>
-                    
-                </div>
-            
-                <div class="nav-item">
-                    
-                        <a href="https://qiaoxu123.github.io/archives" class="menu gt-a-link">
-                            归档
-                        </a>
-                    
-                </div>
-            
-                <div class="nav-item">
-                    
-                        <a href="https://qiaoxu123.github.io/tags" class="menu gt-a-link">
-                            标签
-                        </a>
-                    
-                </div>
-            
-        </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
     </div>
-</nav>
+  </div>
+</div>
 
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
         
+          <a href="https://qiaoxu123.github.io" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+        <div class="content-container">
+          
+          
 
 <div class="archives-container">
+  
+    <h2 class="year">2020</h2>
     
-        <h2 class="year gt-c-cotent-color-first">2020</h2>
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/C++_Road/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2020-05-01&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            C++ 学习心得(更新中）
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/ubuntu-change-fonts/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2020-04-26&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            将 Linux 上的 VSCode 改为 Consolas 字体
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/ubuntu-ooqp-useguide/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2020-01-06&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            Ubuntu环境下OOQP优化库的基本使用
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/my-2019/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2020-01-01&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            我的2019总结--错过的生活与糟糕的性格
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/C++_Road/">
+            <h2 class="post-title">
+              C++ 学习心得(更新中）
+              <small>2020-05-01</small>
+            </h2>
+          </a>
+        </article>
+      
     
-        <h2 class="year gt-c-cotent-color-first">2019</h2>
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/50-C++-interview-problem/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-12-28&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            20个经典的C++面试题(转载)
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/qiao-swimming-note3/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-12-28&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            小乔的游泳日记(第四周）
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/2019-booklist/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-12-26&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            我的2019年书单
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/qiao-swimming-note2/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-12-22&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            小乔的游泳日记(第三周)
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/qiao-swimming-note1/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-12-21&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            小乔的游泳日记(第一，二周)
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/delay_test/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-12-20&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            Linux下程序运行时延以及网络通信时延的测试方法
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/interview2-note/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-11-26&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            第二次面试心得 -- 商汤自动驾驶实习
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/tp-link-wireless-problem/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-11-25&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            Ubuntu 18/16 下 TP-LINK 5500无线网卡驱动问题
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/C++_STL_Note/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-10-29&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            C++算法常用STL函数整理
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/ros-personal-note/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-10-28&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            个人在ROS工程使用Protobuf的模板和一点心得
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/ubuntu18-protobuf-memory-share-note/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-10-24&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            Ubuntu18下ROS使用Protobuf共享内存实现节点通信
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/coursera-self-driving-cars/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-10-02&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            推荐：可能是目前最好的自动驾驶教程
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/baidu-apollo-note/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-09-29&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            Baidu Apollo代码笔记
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/momenta-interview/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-09-26&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            Momenta面试记录
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/ros-nav_msgs/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-09-26&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            ROS中nav_msgs消息
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/ros-note1-rviz/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-09-18&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            ROS仿真实现1--使用rviz显示小车
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/linux-socket-select-note/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-09-05&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            Linux下使用select实现精确定时器
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/thinkpad-e480-linux-wifi/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-09-03&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            ThinkPad E480 Linux WIFI 问题解决
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/engineer_debug_socket/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-09-02&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            Socket编程中send函数引发线程退出
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/baidu-apollo-share/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-08-29&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            Apollo轨迹规划分享--问答
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/baidu-apollo-planning/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-08-29&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            Baidu Apollo 决策规划学习资源汇总
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/fanqiang-note/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-08-24&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            使用倚天剑ss实现科学上网
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/5_C++Courses/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-08-02&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            狄泰C++第5课-引用的本质分析
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/4_C++Courses/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-08-01&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            狄泰C++第4课-布尔类型和引用
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/3-C++Courses/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-07-31&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            狄泰C++第3课-进化后的const分析
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/GP-INSAC-Algorithms/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-07-30&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            基于增量高斯分布的Lidar点云分割算法
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/zhihu-live-note1/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-07-30&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            研究生留德及研修——知乎live记录
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/2-C++Courses/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-07-29&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            狄泰C++第2课-C到C++的升级
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/2018-book/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-07-27&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            我的2018书单
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/arm-boot/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-07-17&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            ARM开发板开机自启
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/ubuntu18-ROS-install/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-07-17&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            Ubuntu 16/18下ROS和PCL点云库安装
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/scan-line-run/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-07-17&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            Scan Line Run 聚簇算法原理与实现
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/gaussian-processes/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-07-16&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            可视化高斯过程--超详细入门(转载)
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/arm-TBOX/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-07-12&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            车载T-BOX开发记录 1-- 软硬件配置
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/C-V2X-share/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-07-12&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            车路协同领域C-V2X的应用
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/gp-insac/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2019-07-12&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            基于GP-INSAC算法的激光点云分割
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-        
-            
-        
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/ubuntu-change-fonts/">
+            <h2 class="post-title">
+              将 Linux 上的 VSCode 改为 Consolas 字体
+              <small>2020-04-26</small>
+            </h2>
+          </a>
+        </article>
+      
     
-        <h2 class="year gt-c-cotent-color-first">2018</h2>
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/arm-linux-socketcan/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2018-07-01&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            ARM Linux SocketCAN驱动编译记录
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://qiaoxu123.github.io/post/my-road/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2018-04-10&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            本科毕业总结
-                        </div>
-                    </a>
-                </article>
-            
-        
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/ubuntu-ooqp-useguide/">
+            <h2 class="post-title">
+              Ubuntu环境下OOQP优化库的基本使用
+              <small>2020-01-06</small>
+            </h2>
+          </a>
+        </article>
+      
     
-</div>
-
-        <div class="pagination-container">
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/my-2019/">
+            <h2 class="post-title">
+              我的2019总结--错过的生活与糟糕的性格
+              <small>2020-01-01</small>
+            </h2>
+          </a>
+        </article>
+      
     
+      
     
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    <h2 class="year">2019</h2>
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/50-C++-interview-problem/">
+            <h2 class="post-title">
+              20个经典的C++面试题(转载)
+              <small>2019-12-28</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/qiao-swimming-note3/">
+            <h2 class="post-title">
+              小乔的游泳日记(第四周）
+              <small>2019-12-28</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/2019-booklist/">
+            <h2 class="post-title">
+              我的2019年书单
+              <small>2019-12-26</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/qiao-swimming-note2/">
+            <h2 class="post-title">
+              小乔的游泳日记(第三周)
+              <small>2019-12-22</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/qiao-swimming-note1/">
+            <h2 class="post-title">
+              小乔的游泳日记(第一，二周)
+              <small>2019-12-21</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/delay_test/">
+            <h2 class="post-title">
+              Linux下程序运行时延以及网络通信时延的测试方法
+              <small>2019-12-20</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/interview2-note/">
+            <h2 class="post-title">
+              第二次面试心得 -- 商汤自动驾驶实习
+              <small>2019-11-26</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/tp-link-wireless-problem/">
+            <h2 class="post-title">
+              Ubuntu 18/16 下 TP-LINK 5500无线网卡驱动问题
+              <small>2019-11-25</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/C++_STL_Note/">
+            <h2 class="post-title">
+              C++算法常用STL函数整理
+              <small>2019-10-29</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/ros-personal-note/">
+            <h2 class="post-title">
+              个人在ROS工程使用Protobuf的模板和一点心得
+              <small>2019-10-28</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/ubuntu18-protobuf-memory-share-note/">
+            <h2 class="post-title">
+              Ubuntu18下ROS使用Protobuf共享内存实现节点通信
+              <small>2019-10-24</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/coursera-self-driving-cars/">
+            <h2 class="post-title">
+              推荐：可能是目前最好的自动驾驶教程
+              <small>2019-10-02</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/baidu-apollo-note/">
+            <h2 class="post-title">
+              Baidu Apollo代码笔记
+              <small>2019-09-29</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/momenta-interview/">
+            <h2 class="post-title">
+              Momenta面试记录
+              <small>2019-09-26</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/ros-nav_msgs/">
+            <h2 class="post-title">
+              ROS中nav_msgs消息
+              <small>2019-09-26</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/ros-note1-rviz/">
+            <h2 class="post-title">
+              ROS仿真实现1--使用rviz显示小车
+              <small>2019-09-18</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/linux-socket-select-note/">
+            <h2 class="post-title">
+              Linux下使用select实现精确定时器
+              <small>2019-09-05</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/thinkpad-e480-linux-wifi/">
+            <h2 class="post-title">
+              ThinkPad E480 Linux WIFI 问题解决
+              <small>2019-09-03</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/engineer_debug_socket/">
+            <h2 class="post-title">
+              Socket编程中send函数引发线程退出
+              <small>2019-09-02</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/baidu-apollo-share/">
+            <h2 class="post-title">
+              Apollo轨迹规划分享--问答
+              <small>2019-08-29</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/baidu-apollo-planning/">
+            <h2 class="post-title">
+              Baidu Apollo 决策规划学习资源汇总
+              <small>2019-08-29</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/fanqiang-note/">
+            <h2 class="post-title">
+              使用倚天剑ss实现科学上网
+              <small>2019-08-24</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/5_C++Courses/">
+            <h2 class="post-title">
+              狄泰C++第5课-引用的本质分析
+              <small>2019-08-02</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/4_C++Courses/">
+            <h2 class="post-title">
+              狄泰C++第4课-布尔类型和引用
+              <small>2019-08-01</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/3-C++Courses/">
+            <h2 class="post-title">
+              狄泰C++第3课-进化后的const分析
+              <small>2019-07-31</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/GP-INSAC-Algorithms/">
+            <h2 class="post-title">
+              基于增量高斯分布的Lidar点云分割算法
+              <small>2019-07-30</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/zhihu-live-note1/">
+            <h2 class="post-title">
+              研究生留德及研修——知乎live记录
+              <small>2019-07-30</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/2-C++Courses/">
+            <h2 class="post-title">
+              狄泰C++第2课-C到C++的升级
+              <small>2019-07-29</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/2018-book/">
+            <h2 class="post-title">
+              我的2018书单
+              <small>2019-07-27</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/arm-boot/">
+            <h2 class="post-title">
+              ARM开发板开机自启
+              <small>2019-07-17</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/ubuntu18-ROS-install/">
+            <h2 class="post-title">
+              Ubuntu 16/18下ROS和PCL点云库安装
+              <small>2019-07-17</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/scan-line-run/">
+            <h2 class="post-title">
+              Scan Line Run 聚簇算法原理与实现
+              <small>2019-07-17</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/gaussian-processes/">
+            <h2 class="post-title">
+              可视化高斯过程--超详细入门(转载)
+              <small>2019-07-16</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/arm-TBOX/">
+            <h2 class="post-title">
+              车载T-BOX开发记录 1-- 软硬件配置
+              <small>2019-07-12</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/C-V2X-share/">
+            <h2 class="post-title">
+              车路协同领域C-V2X的应用
+              <small>2019-07-12</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/gp-insac/">
+            <h2 class="post-title">
+              基于GP-INSAC算法的激光点云分割
+              <small>2019-07-12</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+    
+      
+    
+  
+    <h2 class="year">2018</h2>
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/arm-linux-socketcan/">
+            <h2 class="post-title">
+              ARM Linux SocketCAN驱动编译记录
+              <small>2018-07-01</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://qiaoxu123.github.io/post/my-road/">
+            <h2 class="post-title">
+              本科毕业总结
+              <small>2018-04-10</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+  
 </div>
 
 
-        <div class="site-footer gt-c-content-color-first">
-    <div class="slogan gt-c-content-color-first">个人生活，学习记录</div>
-    <div class="social-container">
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-    </div>
-    <div class="footer-info">
-        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-    </div>
-    <div>
-        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
-                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a></a>
-    </div>
+        </div>
+
+        <div class="site-footer">
+  <div class="slogan">个人生活，学习记录</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
 </div>
 
-<script>
-    hljs.initHighlightingOnLoad()
+
+      </div>
+      <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
 </script>
 
+
+
+
     </div>
-</div>
-</body>
+  </body>
 </html>

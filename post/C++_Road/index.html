@@ -1,98 +1,96 @@
+
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8"/>
-<meta name="description" content=""/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <head>
+    
+<meta charset="utf-8" >
+
 <title>C++ 学习心得(更新中） | Blog</title>
-<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1589072561271">
-<link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
+<meta name="description" content="个人生活，学习记录">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1589072669553">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/go.min.js"></script>
-<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
-
-<!-- DEMO JS -->
-<!--<script src="media/scripts/index.js"></script>-->
 
 
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-</head>
-<body>
-<div class="main gt-bg-theme-color-first">
-    <nav class="navbar navbar-expand-lg">
-    <div class="navbar-brand">
-        <img class="user-avatar" src="/images/avatar.png" alt="头像">
-        <div class="site-name gt-c-content-color-first">
-            Blog
-        </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qiaoxu123.github.io">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1589072669553" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qiaoxu123.github.io">
+        <h1 class="site-title">Blog</h1>
+      </a>
     </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="navbar-nav mr-auto" style="text-align: center">
-            
-                <div class="nav-item">
-                    
-                        <a href="https://qiaoxu123.github.io" class="menu gt-a-link">
-                            首页
-                        </a>
-                    
-                </div>
-            
-                <div class="nav-item">
-                    
-                        <a href="https://qiaoxu123.github.io/archives" class="menu gt-a-link">
-                            归档
-                        </a>
-                    
-                </div>
-            
-                <div class="nav-item">
-                    
-                        <a href="https://qiaoxu123.github.io/tags" class="menu gt-a-link">
-                            标签
-                        </a>
-                    
-                </div>
-            
-        </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
     </div>
-</nav>
-    <div class="post-container">
-        <div class="post-detail gt-bg-theme-color-second">
-            <article class="gt-post-content">
-                <h2 class="post-title">
-                    C++ 学习心得(更新中）
-                </h2>
-                <div class="post-info">
-                    <time class="post-time gt-c-content-color-first">
-                        · 2020-05-01 ·
-                    </time>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="https://qiaoxu123.github.io" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">C++ 学习心得(更新中）</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-05-01</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://qiaoxu123.github.io/tag/KUvEXNYC1/">
+                    个人学习
                     
-                        <a href="https://qiaoxu123.github.io/tag/KUvEXNYC1/" class="post-tags">
-                            # 个人学习
-                        </a>
-                    
-                </div>
-                <div class="post-content">
-                    <p>最近一直在看《C++ Primer》，实际接触这本圣经后真是爱恨有加，要是能早点静下心来阅读的话，想必现在水平也不至于此吧。好在现在还有机会，准备一口气读完。有点意外地是，虽然囫囵吞枣阅读，但在实际工程应用上，有很多技巧已经可见一斑了。过程中结合《Effective C++》的阅读，有了更深的体会。所以在这想陆续更新一些心得，一方面是作为自己的学习笔记，另一方面也算是督促自己反复思考，不能停止。路还很长，希望再接再厉吧~</p>
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>最近一直在看《C++ Primer》，实际接触这本圣经后真是爱恨有加，要是能早点静下心来阅读的话，想必现在水平也不至于此吧。好在现在还有机会，准备一口气读完。有点意外地是，虽然囫囵吞枣阅读，但在实际工程应用上，有很多技巧已经可见一斑了。过程中结合《Effective C++》的阅读，有了更深的体会。所以在这想陆续更新一些心得，一方面是作为自己的学习笔记，另一方面也算是督促自己反复思考，不能停止。路还很长，希望再接再厉吧~</p>
 <h2 id="-more-"><!-- more --></h2>
 <p>效仿瑞·达利欧的《原则》，也整理几条自己觉得超有用的C++使用原则，下面正式开始。</p>
 <h2 id="1-尽可能使用const">1. 尽可能使用const</h2>
@@ -203,53 +201,57 @@ for (auto iter = arr.cbegin(); iter != arr.cend(); ++ iter) {
 <h2 id="6-根据实际情况灵活使用auto">6. 根据实际情况，灵活使用auto</h2>
 <p>在前面几个条款中，已经多次使用过auto关键字了。一般是用在明确知道其类型，但因为类型太长不想写的时候。。。当然，范围for循环是例外</p>
 
-                </div>
-            </article>
+          </div>
         </div>
 
         
-            <div class="next-post">
-                <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://qiaoxu123.github.io/post/ubuntu-change-fonts/" class="post-title gt-a-link">
-                    将 Linux 上的 VSCode 改为 Consolas 字体
-                </a>
-            </div>
-        
+          <div class="next-post">
+            <a class="purple-link" href="https://qiaoxu123.github.io/post/ubuntu-change-fonts/">
+              <h3 class="post-title">
+                下一篇：将 Linux 上的 VSCode 改为 Consolas 字体
+              </h3>
+            </a>
+          </div>
+          
+      </div>
 
-        
+      
 
-        <div class="site-footer gt-c-content-color-first">
-    <div class="slogan gt-c-content-color-first">个人生活，学习记录</div>
-    <div class="social-container">
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-    </div>
-    <div class="footer-info">
-        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-    </div>
-    <div>
-        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
-                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a></a>
-    </div>
+      <div class="site-footer">
+  <div class="slogan">个人生活，学习记录</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
 </div>
 
-<script>
-    hljs.initHighlightingOnLoad()
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
 </script>
 
 
-    </div>
-</div>
-</body>
+
+
+  </body>
 </html>
