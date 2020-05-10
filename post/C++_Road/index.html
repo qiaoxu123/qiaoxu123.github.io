@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1588387984122">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1589070041517">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://qiaoxu123.github.io">
-        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1588387984122" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1589070041517" alt="" width="32px" height="32px">
       </a>
       <a href="https://qiaoxu123.github.io">
         <h1 class="site-title">Blog</h1>
@@ -95,7 +95,8 @@
 <p>效仿瑞·达利欧的《原则》，也整理几条自己觉得超有用的C++使用原则，下面正式开始。</p>
 <h2 id="1-尽可能使用const">1. 尽可能使用const</h2>
 <blockquote>
-<p>本条也是《Effective C++》第三版中条款3，具体可以参考原书。</p>
+<p>本条也是《Effective C++》第三版中条款3，具体可以参考原书。<br>
+补充参考<a href="https://light-city.club/sc/basic_content/const/">链接</a>，一个个人感觉很好的C++学习资料</p>
 </blockquote>
 <p>const作为限定符，在C++编程时用的非常多，基本已经上升到一种编程习惯的程度了，在我理解看来。也就是说，在定义类型，声明函数以及形参，返回值时，都尽可能定义为const。对我而言，习惯使用const意味着会时刻考虑到该变量是否需要改变，在其生存周期中。对于函数形参以及函数的返回值也是如此，下面举例说明下。</p>
 <pre><code class="language-c++">#include &lt;iostream&gt;
