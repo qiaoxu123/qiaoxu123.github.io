@@ -1,301 +1,278 @@
-
-<!DOCTYPE html>
 <html>
-  <head>
-    
-<meta charset="utf-8" >
-
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>工程实现 | Blog</title>
-<meta name="description" content="个人生活，学习记录">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1589070041517">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1589071873228">
+<link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/go.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-
-
-
-  </head>
-  <body>
-    <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="https://qiaoxu123.github.io">
-        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1589070041517" alt="" width="32px" height="32px">
-      </a>
-      <a href="https://qiaoxu123.github.io">
-        <h1 class="site-title">Blog</h1>
-      </a>
-    </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
-    </div>
-  </div>
-</div>
-
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
-      
-        
-          <a href="https://qiaoxu123.github.io" class="menu purple-link">
-            首页
-          </a>
-        
-      
-        
-          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
-            归档
-          </a>
-        
-      
-        
-          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
-            标签
-          </a>
-        
-      
-    </div>
-  </div>
-</transition>
-
-
-      <div class="content-container">
-
-        <div class="current-tag-container">
-          <h2 class="title">
-            <i class="icon icon-pricetags-outline"></i> 工程实现
-          </h2> 
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <div class="main-content">
+        <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Blog
         </div>
-
-        
-<section class="post-item">
-    <div class="content">
-      <a href="https://qiaoxu123.github.io/post/ubuntu-ooqp-useguide/">
-        <h2 class="post-title">Ubuntu环境下OOQP优化库的基本使用</h2>
-      </a>
-      <div class="post-abstract">
-        <p>OOQP是一个强大的开源凸优化库，支持C++, Maltab调用。学习过程中发现网上的参考资料寥寥无几，在这根据官方的指导手册和Example简单介绍说明下。</p>
-
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2020-01-06</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://qiaoxu123.github.io/tag/fTtxablX7/">
-                最优化
-                
-                  ，
-                
-              </a>
-            
-              <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr/">
-                工程实现
-                
-              </a>
-            
-          </span>
-        
-      </div>
     </div>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://qiaoxu123.github.io/post/linux-socket-select-note/">
-        <h2 class="post-title">Linux下使用select实现精确定时器</h2>
-      </a>
-      <div class="post-abstract">
-        <p>依旧是项目需求，在Linux平台下实现延时。使用系统自定义的sleep函数总是无效，无奈下尝试使用select函数实现，效果很好，在这先占坑后续查找sleep函数无效的原因。转载自<a href="https://www.cnblogs.com/jjdiaries/p/3404380.html">博客</a></p>
-
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2019-09-05</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
             
-              <a href="https://qiaoxu123.github.io/tag/BqCd0A5YE/">
-                转载
-                
-                  ，
-                
-              </a>
+                <div class="nav-item">
+                    
+                        <a href="https://qiaoxu123.github.io" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
             
-              <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr/">
-                工程实现
-                
-              </a>
+                <div class="nav-item">
+                    
+                        <a href="https://qiaoxu123.github.io/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
             
-          </span>
-        
-      </div>
+                <div class="nav-item">
+                    
+                        <a href="https://qiaoxu123.github.io/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+        </div>
     </div>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://qiaoxu123.github.io/post/thinkpad-e480-linux-wifi/">
-        <h2 class="post-title">ThinkPad E480 Linux WIFI 问题解决</h2>
-      </a>
-      <div class="post-abstract">
-        <p>因为工作需要在个人笔记本上安装Linux，目前使用的版本是Linux mint19.2。但ThinkPad E480 因为自带的8821ce无线网卡太“新”，导致无法直接识别，测试过网上各种方案后，终于找到一个比较稳定的方案。在这笔记记录下。</p>
-
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2019-09-03</span>
+</nav>
+        <div class="current-tag-container">
+            <h2 class="title gt-c-content-color-first">
+                #工程实现
+            </h2>
+        </div>
+        <div class="post-list-container">
+    <div class="post-inner">
         
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr/">
-                工程实现
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://qiaoxu123.github.io/post/ubuntu-ooqp-useguide/">
+                            <span class="post-title gt-c-content-color-first">Ubuntu环境下OOQP优化库的基本使用</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        <p>OOQP是一个强大的开源凸优化库，支持C++, Maltab调用。学习过程中发现网上的参考资料寥寥无几，在这根据官方的指导手册和Example简单介绍说明下。</p>
+
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2020-01-06 ·
+                        </time>
+                        
+                            <a href="https://qiaoxu123.github.io/tag/fTtxablX7/" class="post-tag">
+                                # 最优化
+                            </a>
+                        
+                            <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr/" class="post-tag">
+                                # 工程实现
+                            </a>
+                        
+                    </div>
+                </div>
                 
-              </a>
-            
-          </span>
+            </div>
         
-      </div>
-    </div>
-    
-  </section>
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://qiaoxu123.github.io/post/linux-socket-select-note/">
+                            <span class="post-title gt-c-content-color-first">Linux下使用select实现精确定时器</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        <p>依旧是项目需求，在Linux平台下实现延时。使用系统自定义的sleep函数总是无效，无奈下尝试使用select函数实现，效果很好，在这先占坑后续查找sleep函数无效的原因。转载自<a href="https://www.cnblogs.com/jjdiaries/p/3404380.html">博客</a></p>
 
-<section class="post-item">
-    <div class="content">
-      <a href="https://qiaoxu123.github.io/post/linux-c++-socket-note/">
-        <h2 class="post-title">Linux下C++ Socket通信</h2>
-      </a>
-      <div class="post-abstract">
-        <p>个人在实际项目开发中对于socket通信应用很多，就资源来讲，入门级别的socket通信实现太多了，包括TCP，UDP通信。在这个人整理下实际开发中遇到的功能实现问题，也算是socket通信的进阶学习之路。</p>
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2019-09-05 ·
+                        </time>
+                        
+                            <a href="https://qiaoxu123.github.io/tag/BqCd0A5YE/" class="post-tag">
+                                # 转载
+                            </a>
+                        
+                            <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr/" class="post-tag">
+                                # 工程实现
+                            </a>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://qiaoxu123.github.io/post/thinkpad-e480-linux-wifi/">
+                            <span class="post-title gt-c-content-color-first">ThinkPad E480 Linux WIFI 问题解决</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        <p>因为工作需要在个人笔记本上安装Linux，目前使用的版本是Linux mint19.2。但ThinkPad E480 因为自带的8821ce无线网卡太“新”，导致无法直接识别，测试过网上各种方案后，终于找到一个比较稳定的方案。在这笔记记录下。</p>
+
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2019-09-03 ·
+                        </time>
+                        
+                            <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr/" class="post-tag">
+                                # 工程实现
+                            </a>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://qiaoxu123.github.io/post/linux-c++-socket-note/">
+                            <span class="post-title gt-c-content-color-first">Linux下C++ Socket通信</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        <p>个人在实际项目开发中对于socket通信应用很多，就资源来讲，入门级别的socket通信实现太多了，包括TCP，UDP通信。在这个人整理下实际开发中遇到的功能实现问题，也算是socket通信的进阶学习之路。</p>
 <p>平台：Linux Mint 19.2<br>
 编译器：g++</p>
 
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2019-08-28</span>
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2019-08-28 ·
+                        </time>
+                        
+                            <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr/" class="post-tag">
+                                # 工程实现
+                            </a>
+                        
+                            <a href="https://qiaoxu123.github.io/tag/r-obVdFCs/" class="post-tag">
+                                # 笔记
+                            </a>
+                        
+                    </div>
+                </div>
+                
+            </div>
         
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr/">
-                工程实现
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://qiaoxu123.github.io/post/arm-linux-socketcan/">
+                            <span class="post-title gt-c-content-color-first">ARM Linux SocketCAN驱动编译记录</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        <p>最近调试时使用了相关工具，参考了相关博客终于编译通过。特此汇总各博客内容进行整理</p>
+
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2018-07-01 ·
+                        </time>
+                        
+                            <a href="https://qiaoxu123.github.io/tag/4DMar1rT6/" class="post-tag">
+                                # 嵌入式
+                            </a>
+                        
+                            <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr/" class="post-tag">
+                                # 工程实现
+                            </a>
+                        
+                            <a href="https://qiaoxu123.github.io/tag/5HMxWRPZ1/" class="post-tag">
+                                # 工程调试
+                            </a>
+                        
+                    </div>
+                </div>
                 
-                  ，
-                
-              </a>
-            
-              <a href="https://qiaoxu123.github.io/tag/r-obVdFCs/">
-                笔记
-                
-              </a>
-            
-          </span>
+            </div>
         
-      </div>
     </div>
+</div>
+        <div class="pagination-container">
     
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://qiaoxu123.github.io/post/arm-linux-socketcan/">
-        <h2 class="post-title">ARM Linux SocketCAN驱动编译记录</h2>
-      </a>
-      <div class="post-abstract">
-        <p>最近调试时使用了相关工具，参考了相关博客终于编译通过。特此汇总各博客内容进行整理</p>
-
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2018-07-01</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://qiaoxu123.github.io/tag/4DMar1rT6/">
-                嵌入式
-                
-                  ，
-                
-              </a>
-            
-              <a href="https://qiaoxu123.github.io/tag/YkNuCIEHr/">
-                工程实现
-                
-                  ，
-                
-              </a>
-            
-              <a href="https://qiaoxu123.github.io/tag/5HMxWRPZ1/">
-                工程调试
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
     
-  </section>
-
-
-<div class="pagination-container">
-  
-  
 </div>
 
-
-      </div>
-
-      <div class="site-footer">
-  <div class="slogan">个人生活，学习记录</div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">个人生活，学习记录</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a></a>
+    </div>
 </div>
 
-
-    </div>
-    <script type="application/javascript">
-
-hljs.initHighlightingOnLoad()
-
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
-
+<script>
+    hljs.initHighlightingOnLoad()
 </script>
 
-
-
-
-  </body>
+    </div>
+</div>
+</body>
 </html>

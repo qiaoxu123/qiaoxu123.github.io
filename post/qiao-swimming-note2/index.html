@@ -1,96 +1,98 @@
-
-<!DOCTYPE html>
 <html>
-  <head>
-    
-<meta charset="utf-8" >
-
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>小乔的游泳日记(第三周) | Blog</title>
-<meta name="description" content="个人生活，学习记录">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1589070041517">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="shortcut icon" href="https://qiaoxu123.github.io/favicon.ico?v=1589071873228">
+<link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://qiaoxu123.github.io/styles/main.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/go.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-
-
-
-  </head>
-  <body>
-    <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="https://qiaoxu123.github.io">
-        <img class="avatar" src="https://qiaoxu123.github.io/images/avatar.png?v=1589070041517" alt="" width="32px" height="32px">
-      </a>
-      <a href="https://qiaoxu123.github.io">
-        <h1 class="site-title">Blog</h1>
-      </a>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Blog
+        </div>
     </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
-    </div>
-  </div>
-</div>
-
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
-      
-        
-          <a href="https://qiaoxu123.github.io" class="menu purple-link">
-            首页
-          </a>
-        
-      
-        
-          <a href="https://qiaoxu123.github.io/archives" class="menu purple-link">
-            归档
-          </a>
-        
-      
-        
-          <a href="https://qiaoxu123.github.io/tags" class="menu purple-link">
-            标签
-          </a>
-        
-      
-    </div>
-  </div>
-</transition>
-
-
-      <div class="content-container">
-        <div class="post-detail">
-          
-          <h2 class="post-title">小乔的游泳日记(第三周)</h2>
-          <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2019-12-22</span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
             
-              <span>
-                <i class="icon-pricetags-outline"></i>
-                
-                  <a href="https://qiaoxu123.github.io/tag/96zX9kJvp/">
-                    轻松生活
+                <div class="nav-item">
                     
-                  </a>
-                
-              </span>
+                        <a href="https://qiaoxu123.github.io" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
             
-          </div>
-          <div class="post-content">
-            <p>痛苦地，挣扎着，开始了第三周的游泳练习。。。</p>
+                <div class="nav-item">
+                    
+                        <a href="https://qiaoxu123.github.io/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://qiaoxu123.github.io/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+        </div>
+    </div>
+</nav>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    小乔的游泳日记(第三周)
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2019-12-22 ·
+                    </time>
+                    
+                        <a href="https://qiaoxu123.github.io/tag/96zX9kJvp/" class="post-tags">
+                            # 轻松生活
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>痛苦地，挣扎着，开始了第三周的游泳练习。。。</p>
 <!-- more -->
 <h3 id="第8天">第8天</h3>
 <p>今天应该是第8天了，离上一次游泳已经过去了大约4天左右吧，因为项目紧张一直在家里偷懒不想动，今天鼓动自己好久终于出来了。😎</p>
@@ -101,57 +103,53 @@
 <p>到了后下水发现自己的腿还没有完全回复过来，大腿内侧仍然是酸痛，虽然从网上看教程说可能是动作不规范，但我自己总结可能身体素质和动作不规范，这两个原因应该都有吧。没办法，既然来了，那就开始吧。原地蹬腿换气练习做了好多次，不过一上手就动作全乱了。虽然说换气基本掌握了诀窍，但是结合腿，手一起动作就感觉身体僵硬的不行，每当头微微抬起再入水后，身体便会沉下去，多次尝试也无果。不过振奋精神的是，中途换气成功过几次。甚至能通过换气游一段距离了，但这个尝试也仅仅成功过几次，后面发现动作越来越乱。而且眼镜也一直添乱，一直是雾蒙蒙或者进水的状态，让过程变得更麻烦了。</p>
 <p>最后，大腿酸的不行，胳膊也变得好累。游泳果然没有那么简单啊，体力也要跟上才行。等下周稍晚些体力好点再来吧。</p>
 
-          </div>
+                </div>
+            </article>
         </div>
 
         
-          <div class="next-post">
-            <a class="purple-link" href="https://qiaoxu123.github.io/post/qiao-swimming-note1/">
-              <h3 class="post-title">
-                下一篇：小乔的游泳日记(第一，二周)
-              </h3>
-            </a>
-          </div>
-          
-      </div>
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://qiaoxu123.github.io/post/qiao-swimming-note1/" class="post-title gt-a-link">
+                    小乔的游泳日记(第一，二周)
+                </a>
+            </div>
+        
 
-      
+        
 
-      <div class="site-footer">
-  <div class="slogan">个人生活，学习记录</div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a>
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">个人生活，学习记录</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://qiaoxu123.github.io/atom.xml" target="_blank">RSS</a></a>
+    </div>
 </div>
 
-
-    </div>
-    <script type="application/javascript">
-
-hljs.initHighlightingOnLoad()
-
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
-
+<script>
+    hljs.initHighlightingOnLoad()
 </script>
 
 
-
-
-  </body>
+    </div>
+</div>
+</body>
 </html>
