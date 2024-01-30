@@ -1,0 +1,257 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Category: Unity | Blog</title><meta name="author" content="xqiao"><meta name="copyright" content="xqiao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="2023.07.15, 糊里糊涂开始了又开始了一段自学之旅，不知道这次能脑热多久呢。简单记录下目前所学备忘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity 学习笔记 0 - 动机 &amp; 环境 &amp; 坐标系 &amp; 生命周期函数">
+<meta property="og:url" content="http://qiaoxu123.github.io/posts/Unity/20230729-unity-learning-note-0.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="2023.07.15, 糊里糊涂开始了又开始了一段自学之旅，不知道这次能脑热多久呢。简单记录下目前所学备忘">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://qiaoxu123.github.io/img/avatar.png">
+<meta property="article:published_time" content="2023-07-29T02:39:30.000Z">
+<meta property="article:modified_time" content="2023-11-29T13:47:17.977Z">
+<meta property="article:author" content="xqiao">
+<meta property="article:tag" content="经验总结">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="Unity">
+<meta property="article:tag" content="C#">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qiaoxu123.github.io/img/avatar.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://qiaoxu123.github.io/posts/Unity/20230729-unity-learning-note-0.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Category: Unity',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-29 21:47:17'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/main.css"><meta name="generator" content="Hexo 7.0.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Blog"><span class="site-name">Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Unity 学习笔记 0 - 动机 &amp; 环境 &amp; 坐标系 &amp; 生命周期函数</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-07-29T02:39:30.000Z" title="Created 2023-07-29 10:39:30">2023-07-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-11-29T13:47:17.977Z" title="Updated 2023-11-29 21:47:17">2023-11-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Unity/">Unity</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Unity 学习笔记 0 - 动机 &amp; 环境 &amp; 坐标系 &amp; 生命周期函数"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h2 id="0-动机">0. 动机</h2>
+<p>进入 5 月份之后各种各样的新闻很多，其中特别吸人眼球的无外乎苹果刚出的 Vision Pro 眼镜。作为半个果粉自然是心向往之，这次更甚，居然萌生了参与其中开发的想法。顿时感觉仿佛发现了一片蓝海，进入了另一条赛道。（毕竟直到 7 月份底为止一直没有人拿到真机进行测试开发，更何况进行 VR 应用的开发呢。想当年 iphone 刚出时，各种各样的应用层出不穷，苹果开发者趋之若鹜，早入行者也捞了不知几桶金了。闲话说到这，那和 Unity 有什么关系呢？<br>
+主要原因在于苹果这次官宣和 Unity 进行合作来开发运行在 Vision Pro 上的 3D 应用，据我了解目前行业里只有 Unreal Engine 和 Untiy 两家 3D 引擎公司独大，这次合作无异于宣布了未来 Unity 可能成为未来 3D 应用开发的主流。虽然目前谷歌以及 Meta 售卖的 AR 眼镜并没有绑定某个平台进行创作，更多的是开放自己的 SDK 后由开发者后期来做集成。之前只是听过 UE4 的大名，了解业内用其制作了挺多的仿真器和游戏模拟以及影视创作，但 Unity 的应用却没有听说多少。而且 Unity 是使用 C# 开发，这也是一直劝退我的原因。<br>
+抱着试试看的态度，快速过完了苹果发布的 Vision Pro 的开发教程，然后迅速安装了 Unity ，在我的 Macbook Pro 2019 上。安装时确实有点犹豫，看过一些分享和评论说 Unity 很吃显卡性能。但想到只是试试看，目前顶多开发一个 2D 游戏玩玩看，应该也用不了多少性能。目前看起来也确实，只有运行时候风扇会疯狂转，其余时间还是挺安静的。当然，有条件还是建议配 Windows 开发吧，一步到位比较好。</p>
+<hr>
+<h2 id="1-环境">1. 环境</h2>
+<p>关于 Unity 最新版在 MacBook 上的安装配置，实测并没有踩多少坑，所以这里也不展开记录了。我这边是先安装的 Unity Hub，然后登录用户选择 Unity 版本之后自动进行安装。整个安装完空间大约要要 20G 左右吧，仅最基本的配置。<br>
+安装完成后的开发，网上绝大多数以及官方建议都是使用 VS 来进行，使用了几天没有感觉什么不适，联调也挺方便。不过因为长期使用 VS Code 的关系，更倾向于使用它来进行开发。从网上查找了一些资料，按照步骤安装了一些插件之后，基本实现了协同开发。在 VS Code 下进行代码编写之后，跳转到 Unity 下会自动加载代码，然后直接运行即可。唯一不适的可能是 Unity 中关键词的高亮和提示，比如 transform 之类。虽然安装了相关插件但仍然存在无法高亮的问题，无奈先暂时放下。</p>
+<hr>
+<h2 id="2-基本实现">2. 基本实现</h2>
+<p>对于入门学习，我选择了 B 站上一门 2D 坦克大战小游戏的制作来开始，见参考链接 1。老师讲得的很耐心，废话不多很直接，手把手实现了游戏基本功能的所有逻辑，使用 C# 编写脚本。课程也提供了相应的图片和声音素材，制作过程中成就感还是蛮高的，能够了解和熟悉童年游戏的每一步实现，还是挺有意思的。里面具体实现细节不再一一展开，仅借整理笔记机会简单做下复盘记录📝相关思考后面方便查看。</p>
+<p><img src="../../post-images/image-20230729152338212.png" alt="image-20230729152338212|1300"></p>
+<h3 id="a-基本逻辑">a. 基本逻辑</h3>
+<p>制作游戏的第一步一般都是要先导入图片资源，同时合理地设置文件夹的目录结构。大致分为以下几个部分：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── Animation							// 存放动画对象</span><br><span class="line">├── AnimationController		// 存放动画对象的控制器</span><br><span class="line">├── GameResource          // 存放游戏制作需要的静态资源</span><br><span class="line">├── Prefabs               // 存放制作好的预制体（prefab），可以理解为被操作的游戏对象，可以添加一系列相关的属性和功能</span><br><span class="line">├── Scenes								// 存放游戏场景，比如游戏开始画面，游戏画面以及游戏结束画面等</span><br><span class="line">├── Scripts								// 存放所有控制游戏相关脚本，如整个游戏的逻辑，游戏对象的控制等</span><br></pre></td></tr></table></figure>
+<p>具体细节有太多文档可以查看，这里仅简单记录作为初学者我自己的理解和思考。在我跟的这个教程中，老师是从预制体（prefab）的制作开始，完成一个个预制体的功能之后，再在其上将他们组合成场景，简单说就是从微观到宏观。预制体应该是整个游戏制作中极其重要的部分，按照我的理解 Unity 游戏制作的根本就是构建和组合这些预制体从而完成目标功能。”游戏引擎“这个概念我也是学习过程中逐渐理解，直观上看 Unity 只是编排各种游戏素材和场景，但实际上每个游戏素材背后都是游戏引擎在支撑实现。举个最简单的例子🌰，坦克撞上墙，是不能直接穿过的，那其中的逻辑如何实现呢。这里可以引出 Unity 中最常见的 Box Collider 属性，它可以自动帮你执行碰撞检测（需要注意 2D 和 3D 的区别）。如下图所示<br>
+<img src="../../post-images/image-20230729152310652.png" alt="image-20230729152310652|700"></p>
+<p>设想如果用纯 Python 来实现两个方形物体的碰撞检测，该有多复杂。同理如重力，弹跳以及武器击打，天气等，背后都有引擎在支撑实现。因此对于一个游戏来说，引擎的性能优劣直接影响到玩家的体验。</p>
+<h3 id="b-坐标系">b. 坐标系</h3>
+<p>在开发过程中参考别人的代码来实现自己的功能，但对于坐标系变换终归不得其解，期间遇到一位好友一起交流意外被点醒理解了不少。在此基础之上参考链接 5 的视频进行整理汇总，才算是有了阶段性的成果吧，总结笔记如下。</p>
+<p>首先 Unity 中只有如下四种坐标系，其他名称都是这四种坐标系的别名，这里把可能得叫法统一整理出来</p>
+<ul>
+<li>世界坐标系（全局坐标、左手坐标、绝对坐标)</li>
+<li>局部坐标系（物体坐标、本地坐标、相对坐标)</li>
+<li>屏幕坐标系（像素坐标）</li>
+<li>视口坐标系（视窗坐标）</li>
+<li>GUI坐标系</li>
+</ul>
+<p>首先世界坐标系和局部坐标系，对于在 Scene 根目录下新建的任何 GameObject，当没有父物体时其世界坐标系和局部坐标系就是相同的，即其 Transform componet 的 Position 属性都是局部坐标。所以如果给它添加一个父物体，当父物体坐标位置发生改变时，是不会影响子物体的 Transform.Position 属性的，但子物体的世界坐标位置是受到父物体的影响的<br>
+其次来说屏幕坐标系，是长这个样子的<br>
+<img src="../../post-images/image-20230807202326292.png" alt="image-20230807202326292|500"></p>
+<p>坐标系的原点位置位于屏幕的左下角，可以通过 <code>Screen.width</code> 和 <code>Screen.height</code> 来获取当前屏幕的宽高，其 x 和 y 的方向如图所示。另外，可以通过 <code>Input.mousePosition</code> 打印出当前鼠标位置，即鼠标位置是基于视口坐标系的。<br>
+再来说下视口坐标系(Viewport)，如下图可以看到，它其实是屏幕坐标系的归一化，这里不再细说，后面会提到其如何与屏幕坐标系之间进行变换。<br>
+<img src="../../post-images/image-20230807202548799.png" alt="image-20230807202548799|500"></p>
+<p>最后来说下 GUI 坐标系，其实它主要是服务于 2D 平面下 GUI 组件的显示的，如添加显示框啊，文字啊等等。如可以通过如下代码来实现文字在 GUI 界面的显示（<code>OnGUI()</code>也是官方提供的，每次刷新一次）</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Camera camera_;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnGUI</span>()</span> </span><br><span class="line">&#123;</span><br><span class="line">  GUI.contentColor = Color.black;</span><br><span class="line">  GUI.Label(<span class="keyword">new</span> Rect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">200</span>, <span class="number">20</span>), <span class="string">&quot;世界坐标&quot;</span> + transform.position)；</span><br><span class="line">  GUI.Label(<span class="keyword">new</span> Rect(<span class="number">10</span>, <span class="number">30</span>, <span class="number">200</span>, <span class="number">20</span>), <span class="string">&quot;局部坐标&quot;</span> + transform.localPosition);</span><br><span class="line">  GUI.Label(<span class="keyword">new</span> Rect(<span class="number">10</span>, <span class="number">50</span>, <span class="number">200</span>, <span class="number">20</span>), <span class="string">&quot;屏幕宽高&quot;</span> + Screen.width + <span class="string">&quot;x&quot;</span> + Screen.height);      </span><br><span class="line">  GUI.Label(<span class="keyword">new</span> Rect(<span class="number">10</span>, <span class="number">70</span>, <span class="number">200</span>, <span class="number">20</span>), <span class="string">&quot;鼠标位置&quot;</span> + Input.mousePosition);</span><br><span class="line">  GUI.Label(<span class="keyword">new</span> Rect(<span class="number">10</span>, <span class="number">90</span>, <span class="number">200</span>, <span class="number">20</span>), <span class="string">&quot;鼠标位置(视口坐标)&quot;</span> + camera_.ScreenToViewportPoint(Input.mousePosition));         </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="../../post-images/image-20230807204043988.png" alt="image-20230807204043988|426"></p>
+<p>讲完了以上的几种坐标系，下面来说下如何实现他们之间彼此的转换。这里注意相关实现的 API 都要用官方提供的 Camera 类型来实现，即定义类似 <code>public Camera camera_;</code> 这样的变量来进行相关转换函数的调用。<br>
+世界和屏幕互转</p>
+<ul>
+<li>屏幕转世界 -&gt; <code>Camera.ScreenToViewportPoint(Vector3 Pos);</code></li>
+<li>世界转屏幕 -&gt; <code>Camera.WorldToScreenPoint(Vector3 Pos);</code><br>
+世界和视口互转</li>
+<li>世界转视口 -&gt; <code>Camera.WorldToViewportPoint(Vector3 Pos);</code></li>
+<li>视口转世界 -&gt; <code>Camera.ViewportToWorldPoint(Vector3 Pos);</code><br>
+屏幕和视口互转</li>
+<li>屏幕转视口 -&gt; <code>Camera.ScreenToViewportPoint(Vector3 Pos);</code></li>
+<li>视口转屏幕 -&gt; <code>Camera.ViewportToScreenPoint(Vector3 Pos);</code><br>
+世界坐标与局部坐标互转</li>
+<li>世界转局部 -&gt; <code>transform.InverseTransformPoint(Vector3 Pos);</code> 或 <code>transform.worldToLocalMatrix</code></li>
+<li>局部转世界 -&gt; <code>transform.TransformPoint(Vector3 Pos);</code> 或 <code>transform.localToworldMatrix</code><br>
+对于屏幕转世界补充下，由于屏幕的三维坐标系的 z 轴是没有值的，所以如果直接进行转换的话得到的值其实是相机的位置。举例如果想准确地把一个鼠标位置得到一个世界位置的话，必须赋予 z 轴深度才行，如果没有这个深度信息的话是无法将二维坐标映射到三维空间上的。<br>
+另外需要注意的是，自身坐标系并不是局部坐标系，自身坐标系是一个隐藏的东西，其实是相对于自身的一个坐标系，而局部坐标系是相对于父物体的。</li>
+</ul>
+<h3 id="c-常用生命周期函数">c. 常用生命周期函数</h3>
+<blockquote>
+<p>主要参考链接 6 进行学习和记录笔记</p>
+</blockquote>
+<p>一个脚本必须绑定在游戏对象上才能被调用，才能开始这个 GameObject 的生命周期，直到因为触发某个逻辑被销毁时才结束它的生命周期。期间可能依次调用了 Awake, Start, OnDestroy 等生命周期函数，也可能一直循环执行 Update 或 FixedUpdate 等生命周期函数。</p>
+<p>常用的生命周期函数如下：</p>
+<ul>
+<li><code>Reset()</code> -&gt; 此函数会在用户首次添加该组件时或单击 Component <strong>Reset</strong> 按钮时被调用，且<strong>只在编辑器生效</strong>。其常应用于在编辑器内通过代码大批量生成修改 GameObject，来代替手工操作。</li>
+<li><code>Awake()</code> -&gt; 此函数在脚本实例被载入时调用，<strong>仅被调用一次</strong>。</li>
+<li><code>Start()</code> -&gt; 在 Awake() 之后和 Update() 之前被调用，<strong>仅被调用一次</strong>；</li>
+<li><code>FixedUpdate()</code> -&gt; 物理更新函数，循环执行，0.02s 执行一次（不受 FPS 帧率影响，时间可更改），所以和物理相关的更新都应在此函数处理（比如刚体运动）；</li>
+<li><code>Update()</code> -&gt; 更新函数，每帧执行一次，受 FPS 帧率影响；</li>
+<li><code>LateUpdate()</code> -&gt; 稍后更新函数，在所有 Update 执行完后调用，帧间隔时间和 Update 一样；</li>
+<li><code>OnGUI()</code> -&gt; 在渲染和处理 GUI 事件时被调用，每帧都执行；</li>
+<li><code>OnEnable()</code> -&gt; 当脚本被启用时调用一次，当游戏对象被禁用时，仅监听响应此函数；</li>
+<li><code>OnDisable()</code> -&gt; 当脚本被禁用时调用一次，当脚本反复被禁用或启用，则反复调用 OnDisable 和 OnEnable;</li>
+<li><code>OnDestroy()</code> -&gt; 当脚本被销毁时被调用，只会在被激活的物体上调用；</li>
+</ul>
+<p>对于这些生命周期函数之间的关系，在教程中只提到了如下三个区别</p>
+<ul>
+<li><strong>Awake 和 Start 的区别</strong>：在同一个游戏场景中可能存在若干个 GameObject，若每个 GameObject 都存在 Awake 和 Start 函数时，必定先执行所有 GameObject 的 Awake 函数，然后再执行 Start 函数，此时执行顺序是乱序的。推荐使用 Awake 创建游戏对象，Start 来获取对象，这样可以保证不会空指针报错。<br>
+还有一点需要注意的是，Awake 函数是脚本作为 Component 添加之后就会被调用（载入），无论是否选中 Active。而 Start 函数只有脚本被实例化时才会被调用，也就是说脚本 Component 必须是 Active 状态时才会被执行。</li>
+<li><strong>Update 和 FixedUpdate 的区别</strong>：不同机器甚至同一机器不同时刻每帧执行所用的时间都是不一样的，取决于机器性能等各种因素。因此在可以看到 Update 函数执行时间间隔并不是相同的，这样物体运动的动作会显的不稳定。而 FixedUpdate() 函数则于机器性能没有关系，执行的时间间隔是相同的，这对于刚体运动执行刷新来说尤为重要。<br>
+FixedUpdate 固定时间修改位置：Edit -&gt; Project Setting -&gt; Time -&gt; Fixed TimeStep<br>
+最先执行的一定是 FixedUpdate，最后执行的一定是 LateUpdate.</li>
+<li>禁用、启用、销毁的区别：
+<ul>
+<li>物体被禁用时，Start 不会被执行，Awake 仍然会被执行。当物体反复禁用启用时，Awake 和 Start 也仅执行一次；</li>
+<li>OnEnable 和 OnDisable 随着游戏对象的禁用启用而被调用；</li>
+<li>当程序退出时，若对象处于启用状态，则程序会先禁用(调用 OnDisable)，再销毁(调用 OnDestroy)；</li>
+</ul>
+</li>
+</ul>
+<p><img src="../../post-images/image-20230809202106342.png" alt="image-20230809202106342|700"></p>
+<hr>
+<h2 id="参考链接">参考链接</h2>
+<ol>
+<li><a href="https://www.bilibili.com/video/BV1PW41197Su/">【siki学院】Unity3D - Unity基础案例-教你如何做一个你儿时肯定玩过的坦克大战游戏【已完结】_哔哩哔哩_bilibili</a></li>
+<li><a href="https://www.cnblogs.com/linzheng/p/3979971.html">Unity2D]坐标体系 - linzheng - 博客园 (cnblogs.com)</a></li>
+<li><a href="https://docs.unity3d.com/cn/2018.2/Manual/QuaternionAndEulerRotationsInUnity.html">Unity 中的旋转和方向 - Unity 手册 (unity3d.com)</a></li>
+<li><a href="https://blog.csdn.net/qq_27719553/article/details/118571637">(152条消息) unity中的四元数，欧拉角，方向向量之间的相互转换方法。_转换欧拉角 向量_Mansutare的博客-CSDN博客</a></li>
+<li><a href="https://www.bilibili.com/video/BV1ES4y1i7H6/">【详解Unity】各种坐标系 | 世界坐标 | 屏幕坐标 | UI坐标_哔哩哔哩_bilibili</a></li>
+<li><a href="https://www.bilibili.com/video/BV1SB4y1X7X6/">【详解Unity】生命周期函数| Awake | Start | Update_哔哩哔哩_bilibili</a></li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://qiaoxu123.github.io">xqiao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://qiaoxu123.github.io/posts/Unity/20230729-unity-learning-note-0.html">http://qiaoxu123.github.io/posts/Unity/20230729-unity-learning-note-0.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/">经验总结</a><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><a class="post-meta__tags" href="/tags/Unity/">Unity</a><a class="post-meta__tags" href="/tags/C/">C#</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/Ceph/20230729-Ubuntu-20-04-ceph-quincy-installation-by-source-code.html" title="Ubuntu 20.04 下 Ceph quincy 源码安装"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">Ubuntu 20.04 下 Ceph quincy 源码安装</div></div></a></div><div class="next-post pull-right"><a href="/posts/System-development/20230309-vue-file-header-check.html" title="Vue 中文件校验功能实现"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">Vue 中文件校验功能实现</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">xqiao</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><a id="card-info-btn" href="https://github.com/qiaoxu123"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/qiaoxu123" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:george.x.qiao@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">个人的技术小站，随性记录问题或整理学习。文章内容如有疑问请邮件联系，备注关键字博客，会尽力解答，有的时间太长已不再维护，望理解，谢谢！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E5%8A%A8%E6%9C%BA"><span class="toc-text">0. 动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%8E%AF%E5%A2%83"><span class="toc-text">1. 环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0"><span class="toc-text">2. 基本实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#a-%E5%9F%BA%E6%9C%AC%E9%80%BB%E8%BE%91"><span class="toc-text">a. 基本逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#b-%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="toc-text">b. 坐标系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c-%E5%B8%B8%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0"><span class="toc-text">c. 常用生命周期函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/FPGA/20240130-FPGA-Architecture-Overview-for-Software-Engineer.html" title="HLS Learning P1 - FPGA Architecture Overview for Software Engineer">HLS Learning P1 - FPGA Architecture Overview for Software Engineer</a><time datetime="2024-01-29T16:00:00.000Z" title="Created 2024-01-30 00:00:00">2024-01-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/FPGA/20231210-fpga-learning-notes.html" title="从电路设计的角度入门 VerilogHDL 学习笔记">从电路设计的角度入门 VerilogHDL 学习笔记</a><time datetime="2023-12-09T16:00:00.000Z" title="Created 2023-12-10 00:00:00">2023-12-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/Ceph/20231207-cephfs-metadata-destroy-recovery-test.html" title="CephFS 元数据破坏 &amp; 恢复测试">CephFS 元数据破坏 &amp; 恢复测试</a><time datetime="2023-12-06T16:00:00.000Z" title="Created 2023-12-07 00:00:00">2023-12-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/Others/20231204-mac-power-error-fix.html" title="Mac电量耗尽关机后时间错误--三种解决方法">Mac电量耗尽关机后时间错误--三种解决方法</a><time datetime="2023-12-03T16:00:00.000Z" title="Created 2023-12-04 00:00:00">2023-12-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/Ceph/20231203-cephadm-problems-and-notes.html" title="Cephadm 使用相关问题 &amp; 笔记">Cephadm 使用相关问题 &amp; 笔记</a><time datetime="2023-12-03T01:39:13.455Z" title="Created 2023-12-03 09:39:13">2023-12-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By xqiao</div><div class="framework-info"><span>Framework </span><a href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

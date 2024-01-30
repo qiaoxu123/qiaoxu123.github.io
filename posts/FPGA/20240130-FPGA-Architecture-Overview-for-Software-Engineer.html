@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Category: FPGA | Blog</title><meta name="author" content="xqiao"><meta name="copyright" content="xqiao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Xilinx 官方 HLS 学习教程第一节学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HLS Learning P1 - FPGA Architecture Overview for Software Engineer">
+<meta property="og:url" content="http://qiaoxu123.github.io/posts/FPGA/20240130-FPGA-Architecture-Overview-for-Software-Engineer.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="Xilinx 官方 HLS 学习教程第一节学习笔记">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://qiaoxu123.github.io/img/avatar.png">
+<meta property="article:published_time" content="2024-01-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-30T13:59:41.927Z">
+<meta property="article:author" content="xqiao">
+<meta property="article:tag" content="FPGA">
+<meta property="article:tag" content="HLS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qiaoxu123.github.io/img/avatar.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://qiaoxu123.github.io/posts/FPGA/20240130-FPGA-Architecture-Overview-for-Software-Engineer.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Category: FPGA',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-01-30 21:59:41'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/main.css"><meta name="generator" content="Hexo 7.0.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Blog"><span class="site-name">Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">HLS Learning P1 - FPGA Architecture Overview for Software Engineer</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-01-29T16:00:00.000Z" title="Created 2024-01-30 00:00:00">2024-01-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-01-30T13:59:41.927Z" title="Updated 2024-01-30 21:59:41">2024-01-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/FPGA/">FPGA</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="HLS Learning P1 - FPGA Architecture Overview for Software Engineer"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>整个课程大纲，一共 25 节。这里补充一页来自最后一课的 Summay 方便看的更清楚</p>
+<img src="../../../post-images/Pasted%20image%2020240113150643.png" alt="1075" style="zoom:67%;" />
+<img src="../../../post-images/Pasted%20image%2020240128151300.png" alt="1075" style="zoom:67%;" />
+<p>FPGA 也被称为“Liquid Hardware”。从底层结构来看，FPGA、CPLD 和 SPLD 在逻辑单元的组织和连接方式上有所不同。</p>
+<p>FPGA通常由大量的可编程逻辑单元（PLU）组成，这些逻辑单元可以配置成各种不同的逻辑功能，如逻辑门、寄存器等。FPGA还包括大量的可编程连线（Interconnect）和存储单元（如查找表或存储器单元），这些单元可以用于存储逻辑功能的配置信息。</p>
+<p>CPLD通常由一系列可编程逻辑模块（PLM）组成，这些模块包含了逻辑门和触发器，以及连接这些模块的可编程连线。<strong>CPLD通常具有更快的时钟速度和更低的延迟，这是因为它们通常使用了静态逻辑技术，而不是动态逻辑技术</strong>。</p>
+<p>SPLD通常由少量的逻辑门和触发器组成，通常用于实现相对简单的逻辑功能，如组合逻辑或状态机。</p>
+<img src="../../../post-images/Pasted%20image%2020240113150651.png" alt="1075" style="zoom: 67%;" />
+<p>FPGA 与 GPU 谁是未来的趋势一直都争论不休，但其实和 CPU 一样，二者的架构不同各自擅长的领域也不同。</p>
+<p>GPU的优势之一是能够同时执行多个进程，以及对大块数据进行流处理。这使得GPU在处理需要大规模并行计算的应用中表现出色，比如图形渲染、科学计算、深度学习等。</p>
+<p>相比之下，FPGA（现场可编程门阵列）也可以执行并行计算,但其主要优势在于其灵活性和可定制性。FPGA可以根据特定的应用需求进行定制化设计（因为其总线位宽可以任意定制，因此可以定制特定位宽的数据处理，减少资源使用开销等）因此在某些特定的应用场景下，FPGA可以提供更高的性能和效率，功耗一般也更低。</p>
+<img src="../../../post-images/Pasted%20image%2020240113150701.png" alt="1075" style="zoom:67%;" />
+<p>Xilinx 嵌入 ARM 的 FPGA 系列有：Zynq-7000 和 UltraScale+ MPSoC。左侧描述的是 FPGA 的架构，由横竖交叉的 routing 将密密麻麻的 Programmable Logic 连接起来，四周则是 Programmable I/O。右侧则是 FPGA 一般包括的资源</p>
+<img src="../../../post-images/Pasted%20image%2020240113150714.png" alt="1075" style="zoom:67%;" />
+<p>上图右侧资源中，比较陌生的几个在这简单整理下起功能</p>
+<ul>
+<li>XADC（Xilinx Analog-to-Digital Converter）：XADC是赛灵思（Xilinx）FPGA系列中的模拟数字转换器模块，用于将模拟信号转换为数字信号。XADC可以用于采集和处理模拟信号，例如温度传感器、电压监测等</li>
+<li>Transceiver：Transceiver是FPGA中的高速收发器模块，通常用于支持高速串行通信协议，如PCIe、SATA、以太网等。这些模块可以实现高速数据传输，支持不同的协议和数据速率</li>
+<li>CMT（Clock Management Tile）：CMT是赛灵思FPGA中的时钟管理模块，用于生成、分配和管理时钟信号。CMT模块可以实现时钟频率的分频、倍频、延迟等功能，以满足不同的时序要求</li>
+</ul>
+<p>SliceM 和 SliceL 应该是最熟悉也是最重要的两个，这里也记录下：</p>
+<ul>
+<li>SLICEL（Slice LUT）：SLICEL是FPGA中的<strong>逻辑单元模块</strong>，通常包括查找表（LUT）、寄存器、算术逻辑单元（ALU）等。SLICEL通常用于实现逻辑功能和算术运算，是FPGA中的基本计算单元。</li>
+<li>SLICEM（Slice Memory）：SLICEM是FPGA中的<strong>存储单元模块</strong>，用于实现存储器和存储器相关的功能。SLICEM通常包括存储器单元、存储器控制器等，用于实现存储器的读写操作和存储器相关的逻辑功能。</li>
+</ul>
+<p>需要注意的是，当 LUTs 被用于组成存储器时，通常会消耗 SLICEM 而不是 SLICEL（如果组成 memory 所需的 SLICEM 不够，也不会消耗 SLICEL）。这是因为SLICEM（Slice Memory）专门用于实现存储器单元和存储器相关的功能，包括存储器单元、存储器控制器等。SLICEM通常包含更多的存储器资源和相关的控制逻辑，可以更好地支持存储器的读写操作和存储器相关的功能。相比之下，SLICEL（Slice LUT）通常用于实现逻辑功能和算术运算，包括查找表（LUT）、寄存器、算术逻辑单元（ALU）等。虽然LUT也可以用于实现存储器功能，但SLICEM更适合用于实现大规模的存储器单元和相关的存储器控制逻辑。</p>
+<p>另外还有一个没有提及的资源是 FF（Flip-Flop) 触发器资源，每个 FF 通常包含一个存储器单元，用于存储一个比特的信息，并且具有时钟信号控制的输入端，用于在时钟信号的上升沿或下降沿触发状态的更新。是的，FF 和时序逻辑直接相关，可以理解为每个使用类似 always @(posedge clk) 都会占用一个或多个 FF 资源。这是因为时序逻辑通常需要使用触发器来存储状态信息，以响应时钟信号的边沿触发状态更新。</p>
+<p>Logic Unit 包括 LUT、MUX 以及 carry chain。在实现加法器时可以使用 LUT 实现（其本质也是数字逻辑组成的），也可以通过 Arithmetic-logic Unit 如 DSP48 这样的资源来实现。<br>
+<img src="../../../post-images/Pasted%20image%2020240113150727.png" alt="1075" style="zoom:67%;" /></p>
+<p>图中的 ALU 模块能够实现很多算术运算，在 Xilinx FPGA 中，ALU 指的是 DSP48<br>
+<img src="../../../post-images/Pasted%20image%2020240113150752.png" alt="1075" style="zoom:67%;" /></p>
+<p>Memory Unit 中 LUT 位于 SliceM 中，主要用来存放一些小块的数据（&lt; 1kb）。<br>
+Block RAM 的结构如下<br>
+<img src="../../../post-images/Pasted%20image%2020240113150810.png" alt="1075" style="zoom:67%;" /></p>
+<p>在 T 系列的 FPGA 中，一个 Block RAM 是由两个 18Kb 组成，可以被拆分重组成如上图的几种形式。<br>
+另外，RAM  可以被配置成如下几种形式：</p>
+<ul>
+<li><strong>Single port RAM</strong>：只能通过一个端口进行读写操作</li>
+<li><strong>Simple-dual port RAM</strong>：具有两个独立的读写端口，但读操作和写操作不能同时进行。举个例子，如果一个端口正在进行读操作，那么同一时刻另一个端口就不能进行读操作，但可以进行写操作。</li>
+<li><strong>True-dual port RAM</strong>：具有两个完全独立的读写端口，端口彼此之间的读写操作不会影响，相比上面的 Simple-dual port RAM。这是因为在它内部的存储单元，每个都有两个独立的数据输出端口，分别连接到两个读写端口。这样，即使两个端口同时访问同一个存储单元，也不会发生冲突，因为每个端口都有自己的数据输出路径。作为代价，其需要复杂的控制逻辑来确保并发的读写操作不会相互影响，通常会使用时序控制和状态机来实现这一点。</li>
+<li><strong>Single port ROM</strong>：只能通过一个端口进行读取操作（仅读取）</li>
+<li><strong>Dual port ROM</strong>：具有两个独立的读写端口，可以同时进行两个独立的读取操作（仅读取）</li>
+<li><strong>FIFO</strong>：用在两个时钟域之间进行数据传输的存储器结构，可以实现数据的先进先出的顺序。</li>
+</ul>
+<p>在使用 C/C++ 进行开发时候，需要了解每个 function 的功能大致实现以及资源使用情况</p>
+<img src="../../../post-images/Pasted%20image%2020240113150820.png" alt="1075" style="zoom:67%;" />
+<img src="../../../post-images/Pasted%20image%2020240113150837.png" alt="1075" style="zoom:67%;" /></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://qiaoxu123.github.io">xqiao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://qiaoxu123.github.io/posts/FPGA/20240130-FPGA-Architecture-Overview-for-Software-Engineer.html">http://qiaoxu123.github.io/posts/FPGA/20240130-FPGA-Architecture-Overview-for-Software-Engineer.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/FPGA/">FPGA</a><a class="post-meta__tags" href="/tags/HLS/">HLS</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/posts/FPGA/20231210-fpga-learning-notes.html" title="从电路设计的角度入门 VerilogHDL 学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">从电路设计的角度入门 VerilogHDL 学习笔记</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">xqiao</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><a id="card-info-btn" href="https://github.com/qiaoxu123"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/qiaoxu123" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:george.x.qiao@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">个人的技术小站，随性记录问题或整理学习。文章内容如有疑问请邮件联系，备注关键字博客，会尽力解答，有的时间太长已不再维护，望理解，谢谢！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/FPGA/20240130-FPGA-Architecture-Overview-for-Software-Engineer.html" title="HLS Learning P1 - FPGA Architecture Overview for Software Engineer">HLS Learning P1 - FPGA Architecture Overview for Software Engineer</a><time datetime="2024-01-29T16:00:00.000Z" title="Created 2024-01-30 00:00:00">2024-01-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/FPGA/20231210-fpga-learning-notes.html" title="从电路设计的角度入门 VerilogHDL 学习笔记">从电路设计的角度入门 VerilogHDL 学习笔记</a><time datetime="2023-12-09T16:00:00.000Z" title="Created 2023-12-10 00:00:00">2023-12-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/Ceph/20231207-cephfs-metadata-destroy-recovery-test.html" title="CephFS 元数据破坏 &amp; 恢复测试">CephFS 元数据破坏 &amp; 恢复测试</a><time datetime="2023-12-06T16:00:00.000Z" title="Created 2023-12-07 00:00:00">2023-12-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/Others/20231204-mac-power-error-fix.html" title="Mac电量耗尽关机后时间错误--三种解决方法">Mac电量耗尽关机后时间错误--三种解决方法</a><time datetime="2023-12-03T16:00:00.000Z" title="Created 2023-12-04 00:00:00">2023-12-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/Ceph/20231203-cephadm-problems-and-notes.html" title="Cephadm 使用相关问题 &amp; 笔记">Cephadm 使用相关问题 &amp; 笔记</a><time datetime="2023-12-03T01:39:13.455Z" title="Created 2023-12-03 09:39:13">2023-12-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By xqiao</div><div class="framework-info"><span>Framework </span><a href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

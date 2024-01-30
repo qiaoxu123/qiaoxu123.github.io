@@ -1,0 +1,173 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Category: System-development | Blog</title><meta name="author" content="xqiao"><meta name="copyright" content="xqiao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="从上周搞定ROS工程下使用Protbuf的问题后，陆续对原有工程进行了更改，在这一过程中，探索了下Protobuf与ROS工程结合的不同方式，暂时总结了一份模板，并在此记录下心得。 1. 使用 Proto 的 ROS 节点 在这贴下个人使用的范例： 1234567891011.├── CMakeLists.txt├── include│   └── map│       ├── map.cpp│">
+<meta property="og:type" content="article">
+<meta property="og:title" content="个人在 ROS 工程使用Protobuf的模板和一点心得">
+<meta property="og:url" content="http://qiaoxu123.github.io/posts/System-development/20191127-ros-protobuf-template-insights.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="从上周搞定ROS工程下使用Protbuf的问题后，陆续对原有工程进行了更改，在这一过程中，探索了下Protobuf与ROS工程结合的不同方式，暂时总结了一份模板，并在此记录下心得。 1. 使用 Proto 的 ROS 节点 在这贴下个人使用的范例： 1234567891011.├── CMakeLists.txt├── include│   └── map│       ├── map.cpp│">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://qiaoxu123.github.io/img/avatar.png">
+<meta property="article:published_time" content="2019-11-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-06T01:18:52.943Z">
+<meta property="article:author" content="xqiao">
+<meta property="article:tag" content="ROS">
+<meta property="article:tag" content="Protobuf">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qiaoxu123.github.io/img/avatar.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://qiaoxu123.github.io/posts/System-development/20191127-ros-protobuf-template-insights.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Category: System-development',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-06 09:18:52'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/main.css"><meta name="generator" content="Hexo 7.0.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Blog"><span class="site-name">Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">个人在 ROS 工程使用Protobuf的模板和一点心得</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2019-11-26T16:00:00.000Z" title="Created 2019-11-27 00:00:00">2019-11-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-12-06T01:18:52.943Z" title="Updated 2023-12-06 09:18:52">2023-12-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/System-development/">System-development</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="个人在 ROS 工程使用Protobuf的模板和一点心得"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>从上周搞定ROS工程下使用Protbuf的问题后，陆续对原有工程进行了更改，在这一过程中，探索了下Protobuf与ROS工程结合的不同方式，暂时总结了一份模板，并在此记录下心得。</p>
+<h3 id="1-使用-proto-的-ros-节点">1. 使用 Proto 的 ROS 节点</h3>
+<p>在这贴下个人使用的范例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── CMakeLists.txt</span><br><span class="line">├── include</span><br><span class="line">│   └── map</span><br><span class="line">│       ├── map.cpp</span><br><span class="line">│       └── map.h</span><br><span class="line">├── package.xml</span><br><span class="line">├── proto</span><br><span class="line">│   └── map.proto</span><br><span class="line">└── src</span><br><span class="line">    └── map_node.cpp</span><br></pre></td></tr></table></figure>
+<p>个人在尝试不同的组织结构的过程中，也试过把proto文件单独设置一个节点，后续节点只需要添加即可，不需要都更改CmakeLists.txt文件。但对比Apollo工程发现，这样做会使工程目录不够清晰，不能直观地看到工程中是否引用了proto文件。再三考虑后还是决定每个节点单独设置proto文件夹来存在proto文件，这样更清晰直观。</p>
+<hr>
+<h3 id="2-cmakelists-txt模板">2. CmakeLists.txt模板</h3>
+<p>目前最终效果如下：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">2.8</span>.<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(map)</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(catkin REQUIRED COMPONENTS</span><br><span class="line">  roscpp</span><br><span class="line">  std_msgs</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">## System dependencies are found with CMake&#x27;s conventions</span></span><br><span class="line"><span class="keyword">list</span>(APPEND CMAKE_MODULE_PATH <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/cmake)</span><br><span class="line"><span class="keyword">include</span>(FindProtobuf)</span><br><span class="line"><span class="keyword">find_package</span>(Protobuf REQUIRED)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(proto_dir <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/proto)</span><br><span class="line"><span class="keyword">file</span>(GLOB proto_files <span class="string">&quot;$&#123;proto_dir&#125;/*.proto&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Set up destination directories</span></span><br><span class="line">catkin_destinations()</span><br><span class="line"><span class="keyword">set</span>(proto_gen_dir <span class="variable">$&#123;CATKIN_DEVEL_PREFIX&#125;</span>/<span class="variable">$&#123;CATKIN_GLOBAL_INCLUDE_DESTINATION&#125;</span>/<span class="variable">$&#123;PROJECT_NAME&#125;</span>)</span><br><span class="line"><span class="keyword">set</span>(proto_gen_cpp_dir <span class="variable">$&#123;proto_gen_dir&#125;</span>)</span><br><span class="line"><span class="keyword">file</span>(<span class="keyword">MAKE_DIRECTORY</span> <span class="variable">$&#123;proto_gen_dir&#125;</span>)</span><br><span class="line"><span class="keyword">file</span>(<span class="keyword">MAKE_DIRECTORY</span> <span class="variable">$&#123;proto_gen_cpp_dir&#125;</span>)</span><br><span class="line"><span class="keyword">set</span>(protogen_include_dirs <span class="variable">$&#123;proto_gen_cpp_dir&#125;</span>/../ <span class="variable">$&#123;proto_gen_python_dir&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create lists of files to be generated</span></span><br><span class="line"><span class="keyword">set</span>(proto_gen_cpp_files <span class="string">&quot;&quot;</span>)</span><br><span class="line"><span class="keyword">foreach</span>(proto_file <span class="variable">$&#123;proto_files&#125;</span>)  </span><br><span class="line">  <span class="keyword">get_filename_component</span>(proto_name <span class="variable">$&#123;proto_file&#125;</span> NAME_WE)</span><br><span class="line">  <span class="keyword">list</span>(APPEND proto_gen_cpp_files </span><br><span class="line">       <span class="variable">$&#123;proto_gen_cpp_dir&#125;</span>/<span class="variable">$&#123;proto_name&#125;</span>.pb.h </span><br><span class="line">       <span class="variable">$&#123;proto_gen_cpp_dir&#125;</span>/<span class="variable">$&#123;proto_name&#125;</span>.pb.cc</span><br><span class="line">  )</span><br><span class="line"><span class="keyword">endforeach</span>(proto_file <span class="variable">$&#123;proto_files&#125;</span>) </span><br><span class="line"></span><br><span class="line"><span class="comment"># Run protoc and generate language-specific headers.</span></span><br><span class="line"><span class="keyword">add_custom_command</span>(</span><br><span class="line">  OUTPUT <span class="variable">$&#123;proto_gen_cpp_files&#125;</span></span><br><span class="line">  <span class="keyword">COMMAND</span> <span class="variable">$&#123;PROTOBUF_PROTOC_EXECUTABLE&#125;</span> --proto_path=<span class="variable">$&#123;proto_dir&#125;</span> --cpp_out=<span class="variable">$&#123;proto_gen_cpp_dir&#125;</span> <span class="variable">$&#123;proto_files&#125;</span></span><br><span class="line">  DEPENDS <span class="variable">$&#123;PROTOBUF_PROTOC_EXECUTABLE&#125;</span> <span class="variable">$&#123;proto_files&#125;</span></span><br><span class="line">  WORKING_DIRECTORY <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set_source_files_properties</span>(<span class="variable">$&#123;proto_gen_cpp_files&#125;</span> PROPERTIES GENERATED <span class="keyword">TRUE</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_custom_target</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span>_generate_headers</span><br><span class="line">  DEPENDS <span class="variable">$&#123;proto_gen_cpp_files&#125;</span> </span><br><span class="line">) </span><br><span class="line"></span><br><span class="line"><span class="comment"># Create proto library for lining.</span></span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;PROTOBUF_INCLUDE_DIR&#125;</span> <span class="variable">$&#123;PROTOBUF_INCLUDE_DIR&#125;</span>/../../)</span><br><span class="line"><span class="keyword">add_library</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span>_proto <span class="variable">$&#123;proto_gen_cpp_files&#125;</span>)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span>_proto <span class="variable">$&#123;PROTOBUF_LIBRARY&#125;</span>)</span><br><span class="line"><span class="keyword">add_dependencies</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span>_proto <span class="variable">$&#123;PROJECT_NAME&#125;</span>_generate_headers)</span><br><span class="line"></span><br><span class="line">catkin_package(</span><br><span class="line">  INCLUDE_DIRS <span class="variable">$&#123;protogen_include_dirs&#125;</span></span><br><span class="line">  LIBRARIES <span class="variable">$&#123;PROJECT_NAME&#125;</span>_proto</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">install</span>(TARGETS <span class="variable">$&#123;PROJECT_NAME&#125;</span>_proto</span><br><span class="line">  ARCHIVE DESTINATION <span class="variable">$&#123;CATKIN_PACKAGE_LIB_DESTINATION&#125;</span></span><br><span class="line">  LIBRARY DESTINATION <span class="variable">$&#123;CATKIN_PACKAGE_LIB_DESTINATION&#125;</span></span><br><span class="line">  RUNTIME DESTINATION <span class="variable">$&#123;CATKIN_PACKAGE_BIN_DESTINATION&#125;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">install</span>(DIRECTORY <span class="variable">$&#123;proto_gen_cpp_dir&#125;</span>/</span><br><span class="line">  DESTINATION <span class="variable">$&#123;CATKIN_PACKAGE_INCLUDE_DESTINATION&#125;</span></span><br><span class="line">  FILES_MATCHING PATTERN <span class="string">&quot;*.h&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">catkin_package(</span><br><span class="line">  INCLUDE_DIRS <span class="keyword">include</span> </span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(</span><br><span class="line">  <span class="variable">$&#123;catkin_INCLUDE_DIRS&#125;</span></span><br><span class="line">  <span class="variable">$&#123;PROTOBUF_INCLUDE_DIR&#125;</span></span><br><span class="line">  <span class="variable">$&#123;CATKIN_DEVEL_PREFIX&#125;</span></span><br><span class="line">  <span class="keyword">include</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_library</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span></span><br><span class="line">  <span class="keyword">include</span>/<span class="variable">$&#123;PROJECT_NAME&#125;</span>/map.cpp</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(map_node </span><br><span class="line">  src/map_node.cpp</span><br><span class="line">  <span class="keyword">include</span>/<span class="variable">$&#123;PROJECT_NAME&#125;</span>/map.cpp</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span>_node </span><br><span class="line">  <span class="variable">$&#123;catkin_LIBRARIES&#125;</span></span><br><span class="line">  <span class="variable">$&#123;PROTOBUF_LIBRARIES&#125;</span></span><br><span class="line">  <span class="variable">$&#123;Boost_FILESYSTEM_LIBRARY&#125;</span></span><br><span class="line">  <span class="variable">$&#123;Boost_SYSTEM_LIBRARY&#125;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>在使用中，有以下几点需要注意：</p>
+<ol>
+<li>使用时必须保证节点根目录下存在proto文件夹，并放置好proto文件，否则会提示无目标文件错误；</li>
+<li>使用时需对应修改下与节点名称相关的变量</li>
+<li>注意：生成的proto文件存在于devel目录inlude文件夹下，对应生成节点名称的文件夹，下面存在生成的变量。</li>
+<li>include_directories目录中包含${CATKIN_DEVEL_PREFIX}宏，之后才可以引用devel文件目录中的proto生成文件；</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://qiaoxu123.github.io">xqiao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://qiaoxu123.github.io/posts/System-development/20191127-ros-protobuf-template-insights.html">http://qiaoxu123.github.io/posts/System-development/20191127-ros-protobuf-template-insights.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/ROS/">ROS</a><a class="post-meta__tags" href="/tags/Protobuf/">Protobuf</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/Automotive/20191127-reactive-planner.html" title="Reactive Planner的原理及实现"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">Reactive Planner的原理及实现</div></div></a></div><div class="next-post pull-right"><a href="/posts/Automotive/20191120-smooth-local-planning.html" title="Smooth Local Planning 实现"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">Smooth Local Planning 实现</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">xqiao</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><a id="card-info-btn" href="https://github.com/qiaoxu123"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/qiaoxu123" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:george.x.qiao@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">个人的技术小站，随性记录问题或整理学习。文章内容如有疑问请邮件联系，备注关键字博客，会尽力解答，有的时间太长已不再维护，望理解，谢谢！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BD%BF%E7%94%A8-proto-%E7%9A%84-ros-%E8%8A%82%E7%82%B9"><span class="toc-text">1. 使用 Proto 的 ROS 节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-cmakelists-txt%E6%A8%A1%E6%9D%BF"><span class="toc-text">2. CmakeLists.txt模板</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/FPGA/20240130-FPGA-Architecture-Overview-for-Software-Engineer.html" title="HLS Learning P1 - FPGA Architecture Overview for Software Engineer">HLS Learning P1 - FPGA Architecture Overview for Software Engineer</a><time datetime="2024-01-29T16:00:00.000Z" title="Created 2024-01-30 00:00:00">2024-01-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/FPGA/20231210-fpga-learning-notes.html" title="从电路设计的角度入门 VerilogHDL 学习笔记">从电路设计的角度入门 VerilogHDL 学习笔记</a><time datetime="2023-12-09T16:00:00.000Z" title="Created 2023-12-10 00:00:00">2023-12-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/Ceph/20231207-cephfs-metadata-destroy-recovery-test.html" title="CephFS 元数据破坏 &amp; 恢复测试">CephFS 元数据破坏 &amp; 恢复测试</a><time datetime="2023-12-06T16:00:00.000Z" title="Created 2023-12-07 00:00:00">2023-12-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/Others/20231204-mac-power-error-fix.html" title="Mac电量耗尽关机后时间错误--三种解决方法">Mac电量耗尽关机后时间错误--三种解决方法</a><time datetime="2023-12-03T16:00:00.000Z" title="Created 2023-12-04 00:00:00">2023-12-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/Ceph/20231203-cephadm-problems-and-notes.html" title="Cephadm 使用相关问题 &amp; 笔记">Cephadm 使用相关问题 &amp; 笔记</a><time datetime="2023-12-03T01:39:13.455Z" title="Created 2023-12-03 09:39:13">2023-12-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By xqiao</div><div class="framework-info"><span>Framework </span><a href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

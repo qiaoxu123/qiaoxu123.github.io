@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Category: Ceph | Blog</title><meta name="author" content="xqiao"><meta name="copyright" content="xqiao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="主要是参考《Ceph 之 RADOS 设计原理与实现》，《Linux 开源存储全栈详解》以及《Ceph设计原理与实现》这三本书，针对相关章节对比阅读。过程中有些知识点发人深省，又有些知识点自己平时不会注意到，而他们彼此之间又无多少关联，于是干脆放在一起胡乱记一番，后续有意再复习整理吧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ceph 学习随记">
+<meta property="og:url" content="http://qiaoxu123.github.io/posts/Ceph/20231125-Ceph-notes.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="主要是参考《Ceph 之 RADOS 设计原理与实现》，《Linux 开源存储全栈详解》以及《Ceph设计原理与实现》这三本书，针对相关章节对比阅读。过程中有些知识点发人深省，又有些知识点自己平时不会注意到，而他们彼此之间又无多少关联，于是干脆放在一起胡乱记一番，后续有意再复习整理吧。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://qiaoxu123.github.io/img/avatar.png">
+<meta property="article:published_time" content="2023-11-25T00:05:08.000Z">
+<meta property="article:modified_time" content="2023-12-09T11:36:39.578Z">
+<meta property="article:author" content="xqiao">
+<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="Ceph">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qiaoxu123.github.io/img/avatar.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://qiaoxu123.github.io/posts/Ceph/20231125-Ceph-notes.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Category: Ceph',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-09 19:36:39'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/main.css"><meta name="generator" content="Hexo 7.0.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Blog"><span class="site-name">Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Ceph 学习随记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-11-25T00:05:08.000Z" title="Created 2023-11-25 08:05:08">2023-11-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-12-09T11:36:39.578Z" title="Updated 2023-12-09 19:36:39">2023-12-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Ceph/">Ceph</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Ceph 学习随记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h2 id="1-notes">1. Notes</h2>
+<h3 id="a-存储">a. 存储</h3>
+<ul>
+<li>对象（必须通过 PG 间接地）归属于某个存储池，因此对象必须记忆其归属的存储池标识。</li>
+<li>作为文件系统中最经典的数据备份机制，快照和克隆对所有存储系统而言几乎都是必备功能。</li>
+<li>在 Ceph 中我们需要能够实现对 PG 中的每个对象进行严格排序，综合考虑这种排序使用的唯一标识需要使用哈希来实现。</li>
+<li>产生哈希冲突的概率一是取决于算法本身，而是取决于输出长度。在保证算法不变的前提下，增加输出长度可以不同程度地降低产出冲突的概率。</li>
+<li>使用命名空间加上对象名作为哈希输入而不是使用对象的全部特征值。基于这些排序算法可以对 PG 中的所有对象执行快速排序，这是实现 Backfill、Scrub 等复杂功能的理论基础。</li>
+<li>对象存储和我们常接触的硬盘和文件系统等存储形态不同，它有两个显著特征如下：
+<ul>
+<li>对象存储采用 Key/Value(K/V) 方式的 RESTful 数据读写接口，并且常以网络服务的形式提供数据的访问；</li>
+<li>扁平的数据组织结构。对比文件系统，对象存储采用扁平的数据组织结构，往往是两层或三层。例如 AWS S3 和华为的 UDS，每个用户可以把他的存储空间划分为”容器“，然后往容器里放对象，对象不能直接放到用户的根存储空间里，必须放到某个容器的下面，而且不能嵌套，也就是说，容器下面不能再放一层容器，只能放对象。</li>
+</ul>
+</li>
+</ul>
+<h3 id="b-crush">b. CRUSH</h3>
+<ul>
+<li>一致性哈希算法的出现解决了扩容带来的数据迁移问题，甚至能够接近理论上的最优解，但其模型仍过于简单，对于存储系统中的各种可能问题难以应对，其中最突出的就是数据失效问题。因为所有用户的数据都是均匀分布在系统重的，所以一个设备的失效将会影响所有用户数据的完整性。而且由于一致性哈希算法没有感知存储节点的实际物理分布的能力，如何合理地控制数据的失效域更是无从谈起。</li>
+<li>Ceph 只需要在集群中维护并同步少量的 CRUSH 元数据（CRUSH Map, OSD Map和 CRUSH Rule)，各个节点就能独立计算出所有数据的位置，并能保证数据结果对于同样的输入 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 是相同的。并且 CRUSH 算法的计算过程无须任何中心节点的介入，理论上可以承受任何节点的失效问题。<br>
+CRUSH 元数据包括如下几个：
+<ul>
+<li>CRUSH Map: 保存了集群中所有设备或 OSD 存储节点的位置信息和权重设置；</li>
+<li>OSD Map: 保存了各个 OSD 的运行时状态。能让 CRUSH 算法感知存储节点的失效、删除和加入情况，产生最小化的数据迁移，提高 Ceph 在各种情况下的可用性和稳定性；</li>
+<li>CRUSH Rule: 用户设置的规则；</li>
+</ul>
+</li>
+<li>关于数据备份策略，通常来说多个数据副本是不需要有顺序的，但是纠删码不一样，纠删码的各个分片之间是需要有顺序的，所以对于 CRUSH 算法而言需要了解各个关联的副本之间是否存在顺序性。</li>
+<li>Ceph 集群自动生成的默认规则只能保证集群数据备份在不同的主机中，实际情况更加复杂，需要用户根据失效域自行配置规则。</li>
+</ul>
+<h3 id="c-rados">c. RADOS</h3>
+<ul>
+<li>OSD 和 Monitor 之间互相传递节点的状态信息，共同得出系统的总体运行状态，并保存在一个全局的数据结构中，即所谓的 Cluster Map 里。由 Monitor 负责与客户端交互来提供 Cluster Map，在客户端本地直接进行计算得到对象的存储位置，然后直接与对应的 OSD 进行通信。OSD 可以利用本地节点的 CPU 和内存执行那些传统集群架构中高耗CPU的任务，充分发挥节点上的计算能力；</li>
+</ul>
+<h3 id="d-osd">d. OSD</h3>
+<ul>
+<li>在 RADOS 中每个 OSD 也有自己的一个 Daemon，这个 Daemon 负责完成 OSD 的所有逻辑功能。OSD 在扁平的命名空间内把所有的数据存储为对象（也就是没有目录层次）。<strong>对象包含一个标识符、二进制数和由名/值对组成的元数据</strong>，元数据语义完全取决于 Ceph 客户端。</li>
+<li>OSD 状态用两个维度表示：up 或 down（OSD Daemon 与 Monitor 连接是否正常）；in 或 out（OSD 是否含有 PG）。</li>
+<li>OSD 的状态检测使用心跳包，为了避免所有 OSD 都互相发送心跳包对集群性能产生影响，Ceph 选择 Peer OSD 发送心跳包。PeerOSD 是指该 OSD 上所有 PG 的副本所在的 OSD，根据 Public Network 和 Cluster Network 之分，Peer OSD 之间的心跳包也分为前端和后端，这样可最大限度地监测 OSD 及 Public Network 和 Cluster Network 的状态，及时上报 Monitor。</li>
+</ul>
+<h3 id="f-others">f. Others</h3>
+<ul>
+<li>充分发挥存储设备自身的计算能力是 Ceph 系统设计的核心思想。</li>
+<li>不同于传统文件系统提供的 open/read/write/close/lseek，对象存储只提供 put/get/delete，对象存储的逻辑单元就是对象而不是我们通常概念中的文件；</li>
+</ul>
+<h2 id="2-q-a">2. Q &amp; A</h2>
+<h3 id="q-ceph-中分割出存储池的作用以及可以进行的操作都有哪些？">Q : Ceph 中分割出存储池的作用以及可以进行的操作都有哪些？</h3>
+<p>Ceph 抽象出存储池这个概念之后，便可以针对存储池设计特定的 CRUSH 规则，举例如下：</p>
+<ul>
+<li>限制其只能使用某些规格相同的 OSD；</li>
+<li>尽可能将所有数据副本分布在物理上隔离的、不同的故障域；<br>
+也可以针对不同用途的存储池指定不同的副本策略，举例如下：</li>
+<li>若存储池承载的存储应用对时延敏感，则采用多副本备份策略；</li>
+<li>若存储的是一些对时延不敏感的数据（例如备份数据），为提升空间利用率则采用纠删码备份策略；</li>
+<li>其他还可以分别指定如独立的 Scrub、压缩、校验策略等</li>
+</ul>
+<h3 id="q-存储池的两次映射是什么？">Q : 存储池的两次映射是什么？</h3>
+<p>存储池以 PG 为基本单位进行管理，RADOS 并没有将数据一步到位地写入 OSD 的本地存储设备，而是通过 PG 这个中间结构执行两次映射。<br>
+第一次映射是静态的，将任意类型的客户端数据按照固定大小进行切割、编号，作为伪随机哈希函数输入，均匀映射至每个 PG，以实现负载均衡策略；<br>
+第二次映射仍然伪随机哈希函数，以保证 PG 在 OSD 之间分布的均匀性，实现 PG 到 OSD 映射。但其输入除了全局唯一的 PG 身份标识之外，还引入了集群拓扑，并且使用 CRUSH 规则对映射过程进行调整，以帮助 PG 在不同 OSD 之间灵活迁移，进而实现数据可靠性、自动平衡等高级特性。</p>
+<h2 id="reference">Reference</h2>
+<ol>
+<li><a href="https://ngwind.github.io/ceph%E5%AD%98%E5%82%A8/2019/07/17/Ceph%E5%AD%98%E5%82%A8-%E4%B8%83-CephFS%E8%AF%A6%E8%A7%A3/">Ceph存储（七）CephFS详解 | Andre’s Blogs (ngwind.github.io)</a></li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://qiaoxu123.github.io">xqiao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://qiaoxu123.github.io/posts/Ceph/20231125-Ceph-notes.html">http://qiaoxu123.github.io/posts/Ceph/20231125-Ceph-notes.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a><a class="post-meta__tags" href="/tags/Ceph/">Ceph</a><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/Ceph/20231125-Ceph%20cluster%20stop%20&amp;%20start.html" title="Ceph 源码编译集群正常关闭&amp;开启"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">Ceph 源码编译集群正常关闭&amp;开启</div></div></a></div><div class="next-post pull-right"><a href="/posts/Unity/20230812-Unity-learning-note-2-script-data-communication.html" title="Unity 学习笔记 2 - 脚本数据传递与事件通知"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">Unity 学习笔记 2 - 脚本数据传递与事件通知</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">xqiao</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><a id="card-info-btn" href="https://github.com/qiaoxu123"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/qiaoxu123" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:george.x.qiao@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">个人的技术小站，随性记录问题或整理学习。文章内容如有疑问请邮件联系，备注关键字博客，会尽力解答，有的时间太长已不再维护，望理解，谢谢！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-notes"><span class="toc-text">1. Notes</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#a-%E5%AD%98%E5%82%A8"><span class="toc-text">a. 存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#b-crush"><span class="toc-text">b. CRUSH</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c-rados"><span class="toc-text">c. RADOS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#d-osd"><span class="toc-text">d. OSD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#f-others"><span class="toc-text">f. Others</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-q-a"><span class="toc-text">2. Q &amp; A</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#q-ceph-%E4%B8%AD%E5%88%86%E5%89%B2%E5%87%BA%E5%AD%98%E5%82%A8%E6%B1%A0%E7%9A%84%E4%BD%9C%E7%94%A8%E4%BB%A5%E5%8F%8A%E5%8F%AF%E4%BB%A5%E8%BF%9B%E8%A1%8C%E7%9A%84%E6%93%8D%E4%BD%9C%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">Q : Ceph 中分割出存储池的作用以及可以进行的操作都有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#q-%E5%AD%98%E5%82%A8%E6%B1%A0%E7%9A%84%E4%B8%A4%E6%AC%A1%E6%98%A0%E5%B0%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">Q : 存储池的两次映射是什么？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reference"><span class="toc-text">Reference</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/FPGA/20240130-FPGA-Architecture-Overview-for-Software-Engineer.html" title="HLS Learning P1 - FPGA Architecture Overview for Software Engineer">HLS Learning P1 - FPGA Architecture Overview for Software Engineer</a><time datetime="2024-01-29T16:00:00.000Z" title="Created 2024-01-30 00:00:00">2024-01-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/FPGA/20231210-fpga-learning-notes.html" title="从电路设计的角度入门 VerilogHDL 学习笔记">从电路设计的角度入门 VerilogHDL 学习笔记</a><time datetime="2023-12-09T16:00:00.000Z" title="Created 2023-12-10 00:00:00">2023-12-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/Ceph/20231207-cephfs-metadata-destroy-recovery-test.html" title="CephFS 元数据破坏 &amp; 恢复测试">CephFS 元数据破坏 &amp; 恢复测试</a><time datetime="2023-12-06T16:00:00.000Z" title="Created 2023-12-07 00:00:00">2023-12-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/Others/20231204-mac-power-error-fix.html" title="Mac电量耗尽关机后时间错误--三种解决方法">Mac电量耗尽关机后时间错误--三种解决方法</a><time datetime="2023-12-03T16:00:00.000Z" title="Created 2023-12-04 00:00:00">2023-12-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/Ceph/20231203-cephadm-problems-and-notes.html" title="Cephadm 使用相关问题 &amp; 笔记">Cephadm 使用相关问题 &amp; 笔记</a><time datetime="2023-12-03T01:39:13.455Z" title="Created 2023-12-03 09:39:13">2023-12-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By xqiao</div><div class="framework-info"><span>Framework </span><a href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

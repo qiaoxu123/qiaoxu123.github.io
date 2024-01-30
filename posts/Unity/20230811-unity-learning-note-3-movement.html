@@ -1,0 +1,246 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Category: Unity | Blog</title><meta name="author" content="xqiao"><meta name="copyright" content="xqiao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="参考视频链接：【详解Unity】几种移动方式实现_哔哩哔哩_bilibili  1. Transform 类移动 a. transform.position 最基础的移动方式，每帧瞬移 speed * Time.deltaTime，注意这里是 +&#x3D; position 而不是 &#x3D; （即这里的输入是一帧内的相对运动距离） 1transform.position +&#x3D; new Vector3(0, 0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity 学习笔记 1 - 运动方式">
+<meta property="og:url" content="http://qiaoxu123.github.io/posts/Unity/20230811-unity-learning-note-3-movement.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="参考视频链接：【详解Unity】几种移动方式实现_哔哩哔哩_bilibili  1. Transform 类移动 a. transform.position 最基础的移动方式，每帧瞬移 speed * Time.deltaTime，注意这里是 +&#x3D; position 而不是 &#x3D; （即这里的输入是一帧内的相对运动距离） 1transform.position +&#x3D; new Vector3(0, 0">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://qiaoxu123.github.io/img/avatar.png">
+<meta property="article:published_time" content="2023-08-11T01:14:14.000Z">
+<meta property="article:modified_time" content="2023-11-29T13:49:16.862Z">
+<meta property="article:author" content="xqiao">
+<meta property="article:tag" content="Unity">
+<meta property="article:tag" content="运动规划">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qiaoxu123.github.io/img/avatar.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://qiaoxu123.github.io/posts/Unity/20230811-unity-learning-note-3-movement.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Category: Unity',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-29 21:49:16'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/main.css"><meta name="generator" content="Hexo 7.0.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Blog"><span class="site-name">Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Unity 学习笔记 1 - 运动方式</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-08-11T01:14:14.000Z" title="Created 2023-08-11 09:14:14">2023-08-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-11-29T13:49:16.862Z" title="Updated 2023-11-29 21:49:16">2023-11-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Unity/">Unity</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Unity 学习笔记 1 - 运动方式"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><blockquote>
+<p>参考视频链接：<a href="https://www.bilibili.com/video/BV1qZ4y147A3/">【详解Unity】几种移动方式实现_哔哩哔哩_bilibili</a></p>
+</blockquote>
+<h2 id="1-transform-类移动">1. Transform 类移动</h2>
+<h3 id="a-transform-position">a. transform.position</h3>
+<p>最基础的移动方式，每帧瞬移 <code>speed * Time.deltaTime</code>，注意这里是 <code>+= position</code> 而不是 <code>=</code> （即这里的输入是一帧内的相对运动距离）</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transform.position += <span class="keyword">new</span> Vector3(<span class="number">0</span>, <span class="number">0</span>, speed * Time.deltaTime);</span><br></pre></td></tr></table></figure>
+<h3 id="b-transform-translate">b. transform.Translate</h3>
+<p>实现：<code>Translate(V3向量， 坐标系)</code></p>
+<p>相较于 transform.position 的优点是 translate 可使用自身坐标移动，而 position 则永远以世界坐标为参照。举个例子，当把物体绕 z 轴旋转 45 度之后，让其沿着 x 轴进行运动。此时其自身坐标系的 x 和 z 平面与世界坐标系的平面之间有了夹角，默认情况下使用 Translte 运动时便会斜着进行运动。而不是与世界坐标系的平面平行运动。若想让其仍然沿着世界坐标系的 x 轴进行运动的话，修改下 Translate 的第三个参数为 <code>Space.World</code> 即可，默认值是 <code>Space.Self</code>。</p>
+<p>坐标系参数：</p>
+<ul>
+<li><code>Space.Self</code>(默认值)（参照自身坐标移动）</li>
+<li><code>Space.World</code>(参照世界坐标移动)</li>
+</ul>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.Self);</span><br></pre></td></tr></table></figure>
+<p>关于世界坐标系和自身坐标系的区别，可以在 Unity 左上角进行切换查看，或者按快捷键 x 进行切换。</p>
+<h2 id="2-vector3-类移动-渐变">2. Vector3 类移动（渐变）</h2>
+<p>这类移动相关的函数与其说是移动不如说是渐变更合适些，通过插值的形式得到一组渐变的位置点，然后进行赋值。</p>
+<h3 id="a-vector3-lerp">a. Vector3.Lerp</h3>
+<p>实现：<code>Lerp(当前位置(V3)，目标位置(V3)，时间(float))；</code></p>
+<p>这种方式实现的线性移动由时间参数控制，距离越近，运动越缓慢。主要应用在摄像机跟随上</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Vector3 lerp = Vector3.Lerp(transform.position, target.position, Time.deltaTime * speed);</span><br><span class="line">transform.position = lerp; <span class="comment">// 生成的插值进行赋值</span></span><br></pre></td></tr></table></figure>
+<h3 id="b-vector3-slerp">b. Vector3.Slerp</h3>
+<p>实现：<code>Slerp(当前位置(V3)，目标位置(V3)，时间(float))；</code></p>
+<p>相比 Lerp，其移动跟随时是以一个弧形轨迹来进行的，主要应用在旋转时过渡，或者抛物线。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Vector3 slerp = Vector3.Slerp(transform.position, target.position, Time.deltaTime * speed);</span><br><span class="line">transform.position = slerp;</span><br></pre></td></tr></table></figure>
+<h3 id="c-vector3-movetowards">c. Vector3.MoveTowards</h3>
+<p>实现：<code>MoveTowards(当前位置(V3)，目标位置(V3)，时间(float)) ；</code></p>
+<p>一个缓慢的，匀速运动的过程。速度参数：取正-&gt;靠近目标，取负-&gt;远离目标</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Vector3 movetowards = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * speed);</span><br><span class="line">transform.position = movetowards;</span><br></pre></td></tr></table></figure>
+<h3 id="d-vector3-smoothdamp">d. Vector3.SmoothDamp</h3>
+<p>实现：<code>SmoothDamp(当前位置(V3)，目标位置(V3)，当前速度(ref: V3), 所需时间(float), 最大速度(float))</code></p>
+<p>官方翻译为“平滑阻尼”，也就是移动过程中，逐渐变慢地抵达终点。</p>
+<p>注意：当前速度参数应为全局变量，因为是 ref 所以每次都会修改该值。而对于所需时间参数，该值越小，越快抵达目标。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Vector3 movetowards = Vector3.SmoothDamp(transform.position, target.position, <span class="keyword">ref</span> currentVelocity, smoothTime, maxSpeed);</span><br><span class="line">transform.position = movetowards;</span><br></pre></td></tr></table></figure>
+<h2 id="3-刚体-rigidbody-方式移动">3. 刚体 (Rigidbody) 方式移动</h2>
+<h3 id="a-addforce">a. AddForce</h3>
+<p>实现：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rig.AddForce(<span class="keyword">new</span> Vector3(<span class="number">0</span>, <span class="number">0</span>, <span class="number">20f</span>), ForceMode.Force); <span class="comment">// (力的方向，力的模式)</span></span><br></pre></td></tr></table></figure>
+<p>该实现建议放置在 FixedUpdate 函数下，此时移动物体需要添加刚体，适合<strong>模拟外力作用下</strong>的刚体运动。注意此力为累加的力，不适合重复施加力来模拟物体。</p>
+<p>力的模式（ForceMode) 有如下几种：</p>
+<ul>
+<li>Force -&gt; 可持续的力，受质量影响（默认）</li>
+<li>Acceleration -&gt; 可持续的加速度，不受质量影响</li>
+<li>Impulse -&gt; 一个瞬间冲击力，受质量的影响</li>
+<li>VelocityChange -&gt; 一个瞬间速度变化，不受质量影响</li>
+</ul>
+<p>这里补充下刚体 Rigidbody Component 里面几个参数的含义</p>
+<ul>
+<li>Mass -&gt; 物体的质量</li>
+<li>Drag -&gt; 空气的阻力</li>
+<li>Angular Drag -&gt; 角阻力</li>
+<li>Use Gravity -&gt; 是否使用重力</li>
+<li>Is Kinematic -&gt; 是否使用动力学</li>
+</ul>
+<h3 id="b-moveposition">b. MovePosition</h3>
+<p>实现：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rig.MovePosition(transform.position + speed * Time.deltaTime);</span><br></pre></td></tr></table></figure>
+<p>其适合模拟常规移动，但需要收到物理引擎影响的物体</p>
+<h3 id="c-velocity">c. Velocity</h3>
+<p>实现</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rig.velocity += <span class="keyword">new</span> Vector(<span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>) * Time.deltaTime;</span><br></pre></td></tr></table></figure>
+<p>瞬间给一个物体恒定的速度，将该物体提升到这个速度并保持。主要应用在跳跃上。</p>
+<h2 id="4-使用角色控制器组件移动">4. 使用角色控制器组件移动</h2>
+<p>角色控制器（Character Controller）是一个 Compoent 需要自己手动添加，里面大致有以下几个参数：</p>
+<ul>
+<li>Slope Limit -&gt; 爬坡限制，高于这个就爬不上去了</li>
+<li>Step Offset -&gt;</li>
+<li>Skin Width -&gt; 外壳厚度</li>
+<li>Min Move Distance -&gt; 最小移动距离</li>
+</ul>
+<p>以下两个功能使用均需要挂载角色控制器组件</p>
+<h3 id="a-simplemove">a. SimpleMove</h3>
+<p>实现：<code>SimpleMove(有方向的力(V3));</code></p>
+<p>以秒为单位，无需乘以时间。无需添加刚体，自带刚体效果，具有重力。Y 轴无效，若想使用 Y 轴有效需使用 Move</p>
+<p>应用于简单角色移动，角色控制器的物体有刚体的效果，但仅受限于碰撞体，其他物理效果对此无效。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cc.SimpleMove(transform.forward * speed);</span><br></pre></td></tr></table></figure>
+<h3 id="b-move">b. Move</h3>
+<p>实现：<code>Move(有方向的力(V3))</code></p>
+<p>注意其不具备重力，需要自行计算下落（需要考虑加速度之类）。主要应用在角色移动（角色控制器的物体有刚体的效果，但仅限于碰撞体，其他物理效果对此无效）。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cc.Move(transform.forward * speed * Time.deltaTime);</span><br></pre></td></tr></table></figure>
+<h2 id="5-几种移动方式的区别和应用">5. 几种移动方式的区别和应用</h2>
+<ul>
+<li>Transform：适用于既没有物理系统，又对移动无特殊要求的物体，但过于基础，不易处理障碍物阻挡问题；</li>
+<li>Vector：动作之间的渐变，不常用于移动，摄像机跟随；</li>
+<li>Rigidbody：适用于关卡障碍之类；</li>
+<li>CharacterController：常用于主角移动；</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://qiaoxu123.github.io">xqiao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://qiaoxu123.github.io/posts/Unity/20230811-unity-learning-note-3-movement.html">http://qiaoxu123.github.io/posts/Unity/20230811-unity-learning-note-3-movement.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Unity/">Unity</a><a class="post-meta__tags" href="/tags/%E8%BF%90%E5%8A%A8%E8%A7%84%E5%88%92/">运动规划</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/Unity/20230812-Unity-learning-note-2-script-data-communication.html" title="Unity 学习笔记 2 - 脚本数据传递与事件通知"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">Unity 学习笔记 2 - 脚本数据传递与事件通知</div></div></a></div><div class="next-post pull-right"><a href="/posts/Ceph/20230729-Ubuntu-20-04-ceph-quincy-installation-by-source-code.html" title="Ubuntu 20.04 下 Ceph quincy 源码安装"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">Ubuntu 20.04 下 Ceph quincy 源码安装</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">xqiao</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><a id="card-info-btn" href="https://github.com/qiaoxu123"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/qiaoxu123" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:george.x.qiao@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">个人的技术小站，随性记录问题或整理学习。文章内容如有疑问请邮件联系，备注关键字博客，会尽力解答，有的时间太长已不再维护，望理解，谢谢！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-transform-%E7%B1%BB%E7%A7%BB%E5%8A%A8"><span class="toc-text">1. Transform 类移动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#a-transform-position"><span class="toc-text">a. transform.position</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#b-transform-translate"><span class="toc-text">b. transform.Translate</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-vector3-%E7%B1%BB%E7%A7%BB%E5%8A%A8-%E6%B8%90%E5%8F%98"><span class="toc-text">2. Vector3 类移动（渐变）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#a-vector3-lerp"><span class="toc-text">a. Vector3.Lerp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#b-vector3-slerp"><span class="toc-text">b. Vector3.Slerp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c-vector3-movetowards"><span class="toc-text">c. Vector3.MoveTowards</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#d-vector3-smoothdamp"><span class="toc-text">d. Vector3.SmoothDamp</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%88%9A%E4%BD%93-rigidbody-%E6%96%B9%E5%BC%8F%E7%A7%BB%E5%8A%A8"><span class="toc-text">3. 刚体 (Rigidbody) 方式移动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#a-addforce"><span class="toc-text">a. AddForce</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#b-moveposition"><span class="toc-text">b. MovePosition</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c-velocity"><span class="toc-text">c. Velocity</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8%E8%A7%92%E8%89%B2%E6%8E%A7%E5%88%B6%E5%99%A8%E7%BB%84%E4%BB%B6%E7%A7%BB%E5%8A%A8"><span class="toc-text">4. 使用角色控制器组件移动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#a-simplemove"><span class="toc-text">a. SimpleMove</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#b-move"><span class="toc-text">b. Move</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%87%A0%E7%A7%8D%E7%A7%BB%E5%8A%A8%E6%96%B9%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E5%BA%94%E7%94%A8"><span class="toc-text">5. 几种移动方式的区别和应用</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/FPGA/20240130-FPGA-Architecture-Overview-for-Software-Engineer.html" title="HLS Learning P1 - FPGA Architecture Overview for Software Engineer">HLS Learning P1 - FPGA Architecture Overview for Software Engineer</a><time datetime="2024-01-29T16:00:00.000Z" title="Created 2024-01-30 00:00:00">2024-01-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/FPGA/20231210-fpga-learning-notes.html" title="从电路设计的角度入门 VerilogHDL 学习笔记">从电路设计的角度入门 VerilogHDL 学习笔记</a><time datetime="2023-12-09T16:00:00.000Z" title="Created 2023-12-10 00:00:00">2023-12-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/Ceph/20231207-cephfs-metadata-destroy-recovery-test.html" title="CephFS 元数据破坏 &amp; 恢复测试">CephFS 元数据破坏 &amp; 恢复测试</a><time datetime="2023-12-06T16:00:00.000Z" title="Created 2023-12-07 00:00:00">2023-12-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/Others/20231204-mac-power-error-fix.html" title="Mac电量耗尽关机后时间错误--三种解决方法">Mac电量耗尽关机后时间错误--三种解决方法</a><time datetime="2023-12-03T16:00:00.000Z" title="Created 2023-12-04 00:00:00">2023-12-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/Ceph/20231203-cephadm-problems-and-notes.html" title="Cephadm 使用相关问题 &amp; 笔记">Cephadm 使用相关问题 &amp; 笔记</a><time datetime="2023-12-03T01:39:13.455Z" title="Created 2023-12-03 09:39:13">2023-12-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By xqiao</div><div class="framework-info"><span>Framework </span><a href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

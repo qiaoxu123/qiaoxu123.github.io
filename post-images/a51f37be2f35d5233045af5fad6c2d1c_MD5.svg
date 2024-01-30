@@ -1,0 +1,20 @@
+<svg width="93" height="20" viewBox="0 0 930 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="latest: v11.9.0">
+  <title>latest: v11.9.0</title>
+  <linearGradient id="fFaFl" x2="0" y2="100%">
+    <stop offset="0" stop-opacity=".1" stop-color="#EEE"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <mask id="opIfb"><rect width="930" height="200" rx="30" fill="#FFF"/></mask>
+  <g mask="url(#opIfb)">
+    <rect width="405" height="200" fill="#555"/>
+    <rect width="525" height="200" fill="#08C" x="405"/>
+    <rect width="930" height="200" fill="url(#fFaFl)"/>
+  </g>
+  <g aria-hidden="true" fill="#fff" text-anchor="start" font-family="Verdana,DejaVu Sans,sans-serif" font-size="110">
+    <text x="60" y="148" textLength="305" fill="#000" opacity="0.25">latest</text>
+    <text x="50" y="138" textLength="305">latest</text>
+    <text x="460" y="148" textLength="425" fill="#000" opacity="0.25">v11.9.0</text>
+    <text x="450" y="138" textLength="425">v11.9.0</text>
+  </g>
+  
+</svg>
