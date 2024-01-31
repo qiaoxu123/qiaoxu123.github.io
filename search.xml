@@ -4,11 +4,92 @@
   
     
     <entry>
-      <title>HLS Learning P1 - FPGA Architecture Overview for Software Engineer</title>
+      <title>HLS Learning P1 - The Principle of Vivado HLS</title>
+      <link href="/posts/FPGA/20240131-The-Principle-of-Vivado-HLS.html"/>
+      <url>/posts/FPGA/20240131-The-Principle-of-Vivado-HLS.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-history-of-esl">1. History of ESL</h1><p>从 EDA 到 ESL，设计变得越来越方便也越来越抽象。如下图框中文字所说的，适当的抽象增加对系统的理解，开发功能的效率也会有一定提升。</p><p>Xilinx 有两种形式支持抽象开发：HLS 和 System Generator。前者使用高级语言如 C/C++，后者则是使用模型设计工具。</p><p><img src="../../../post-images/Pasted%20image%2020240113153545.png" alt=""></p><h1 id="2-high-level-synthesis-benefits">2. High-level Synthesis Benefits</h1><p>对于硬件工程师而言，采用 VHDL/VerilogHDL 语言进行开发，主要精力都会放在实现并行性和时序设计上。就比如汇编语言开发时，大部分精力都会放在寻址和访存上。而在进行算法功能模块开发时，更倾向于将精力放在算法设计，优化和验证上，底层并行实现和时序设计更希望能有相应的工具来对应完成。因此，对于 hardware designers 而言 HLS 可以减少功能模块实现所占用的精力，提高生产力，同样，对于 software designers 而言将算法模块使用 FPGA 实现可以提升运行效率（三个方面：并行性、吞吐率、功耗）。</p><p>第 4 条需要注意的是，HLS 中是使用 C/C++ 编写程序的同时，也需要使用 C/C++ 编写相应的测试脚本。这主要是因为 HLS 生成的 RTL 程序可读性很差，因此我们只能是在 C/C++ 层面进行优化调整，同时编写激励进行测试验证。</p><p>第 5 条是 HLS 开发的重点，根据需要调整 optimization directives。简单理解就是，HLS 将 C/C++ 编写的程序生成 RTL 之后，会有很多地方需要进行调整优化，如 for 循环调整为并行或者 Pipeline 。这也需要 HLS 设计者对 FPGA 开发也有一定的功底。</p><p><img src="../../../post-images/Pasted%20image%2020240113153555.png" alt=""></p><h1 id="3-phases-of-high-level-synthesis-in-vivado-hls">3. Phases of High-level Synthesis in Vivado HLS</h1><p>转换过程分为两个阶段：Scheduling/Control Logic Extraction、Binding<br><img src="../../../post-images/Pasted%20image%2020240113153636.png" alt=""></p><p>Scheduling/Control Logic Extraction 完成的是每个时钟周期该做什么样的工作，以及用几个时钟周期来完成，一些操作是否可以并行来执行。控制逻辑的提取通常会生成一个状态机。</p><p>Binding 负责管理<font color="#fac08f">每个操作需要用什么样的资源去实现</font>，完成这种映射。</p><p>Vivado HLS 实际上是通过 FSM 去控制算法或者程序的状态变化。</p><h2 id="a-scheduling-and-bind-example">a. Scheduling and Bind Example</h2><p>下图示例比较简单，编写的代码在右侧分别执行了 Scheduling 和 Binding，乘法最后映射为了 DPS48。</p><p>注意，<code>foo</code> 函数执行的操作只用一个控制状态 C0，而并不是说其只使用了一个时钟周期。另外从 Operation 中可以看到对于变量执行的操作以及变量的读写状态（read/write）。</p><p><img src="../../../post-images/Pasted%20image%2020240113153644.png" alt=""></p><h2 id="b-control-logic-extraction-example">b. Control Logic Extraction Example</h2><p>对于循环，一般需要多个状态，形成一个有限状态机，下图示例使用了 4 个状态，需要注意的是，HLS 的控制状态和最后生成的 RTL FSM 状态并不是一一对应的，只是二者之间有紧密的关系。</p><p><img src="../../../post-images/Pasted%20image%2020240113153653.png" alt=""></p><p>数组按位相加的示例（左侧流程图最后一步写错了，应该是 <code>Write C[i][j]</code>）。由算法流程图可以很清晰地推断出 HLS 生成状态的变化，辅助我们进行理解和优化。</p><p>另外可以看到 for 循环 有一个 row 和 col 关键字或标记，这种语法是 HLS 支持的，课程后面会提到其作用。<img src="../../../post-images/Pasted%20image%2020240113153700.png" alt=""></p><h1 id="4-summary">4. Summary</h1><p>注意 control states 只是为了 schedule operations into clock cycles，和 RTL FSM 的 final states 没有一一对应关系，只是关系很紧密。</p><p><img src="../../../post-images/Pasted%20image%2020240113153707.png" alt=""></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> FPGA </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> FPGA </tag>
+            
+            <tag> HLS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HLS Learning P2 - Vivado HLS Design Flow(1) - Conceptual Overview</title>
+      <link href="/posts/FPGA/20240131-Vivado-HLS-Design-Flow-1-Conceptual-Overview.html"/>
+      <url>/posts/FPGA/20240131-Vivado-HLS-Design-Flow-1-Conceptual-Overview.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-deisgn-flow-traditional-vs-high-level">1. Deisgn Flow - Traditional vs High-level</h1><p>下图描述的是典型的 RTL 开发流程图，和灰色箭头一起形成了每个部分以及整个系统调试的闭环。大致可以分成三部分：</p><p>第一部分：使用硬件描述语言进行功能设计和开发，并编写测试激励，通过仿真进行功能验证；</p><p>第二部分：Synthesis 和 Implementation，在这一阶段实现设计的收敛，从 Latency、Timing 和 Resource 三个角度考察；</p><p>第三部分：系统级的测试验证（上板验证）；</p><p>以上三个部分均需要反复迭代，保证各个部分满足要求后才能达到最终想要的方案。</p><p><img src="../../../post-images/Pasted%20image%2020240114093230.png" alt="1075"></p><p>当 HLS 参与之后，我们就可以站在更高和更抽象的层次来开发和调试工程，C Synthesis 实现将 C/C++ 代码和 TestBench 转换为 RTL，注意在这一步时就需要考虑到 Latency、Timing 以及 Resource。后续的流程便与传统的 RTL 开发没有区别了。</p><p><img src="../../../post-images/Pasted%20image%2020240114093238.png" alt="1075"></p><h1 id="2-vivado-hls-design-flow">2. Vivado HLS Design Flow</h1><p>Vivado HLS 的设计输入除了需要高级语言编写的 Source code 和 Test bench 以外，还需要 Contraints 和 Directives 用来约束收敛和优化（有相应的图形界面）。另外提供了一系列的 library 来辅助高级语言编写特定功能。</p><p>Vivado HLS 在 C Syntheis 后会生成两种版本，一种是生成 IP 直接输入给 IP Catalog 中来使用，另一种则是支持在 System Generator 中以模块化的形式来使用。<br><img src="../../../post-images/Pasted%20image%2020240114093253.png" alt="1075"></p><p>C testbench 非常重要，包含真实的结果，来和仿真的结果做对比，此外还用于自动生成 RTL Testbench。</p><p><img src="../../../post-images/Pasted%20image%2020240114093337.png" alt="1075"></p><p>具体操作可以分成如下四步，其中每一步都会单独生成一个文件夹保存生成的数据。</p><p><img src="../../../post-images/Pasted%20image%2020240114093347.png" alt="1075"></p><h1 id="3-solutions">3. Solutions</h1><p>每个工程可以创建若干个 Solutions，一般是用来测试不同的 directives 的优化效果。不同的 solution 有不同的 constraints 和 optimization directives，Directives 可以写在 source code 中，也可以写在单独的文件中，一般建议写在单独的文件中方便调试对比。<br><img src="../../../post-images/Pasted%20image%2020240114093356.png" alt="1075"></p><p><img src="../../../post-images/Pasted%20image%2020240114093404.png" alt="1075"></p><p><img src="../../../post-images/Pasted%20image%2020240114093412.png" alt="1075"></p><h1 id="4-summary">4. Summary</h1><p><img src="../../../post-images/Pasted%20image%2020240114093419.png" alt="1075"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> FPGA </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> FPGA </tag>
+            
+            <tag> HLS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HLS Learning P3 - Vivado HLS Design Flow(2) - Demo</title>
+      <link href="/posts/FPGA/20240131-Vivado-HLS-Design-Flow-2.html"/>
+      <url>/posts/FPGA/20240131-Vivado-HLS-Design-Flow-2.html</url>
+      
+        <content type="html"><![CDATA[<p>最终生成的文件中大体包含如下三部分内容：IP Catalog、DCP（Design Check Point) 以及 SysGen。</p><p><img src="../../../post-images/Pasted%20image%2020240114093515.png" alt=""></p><p>对于 HLS 只允许有一个 top-level function</p><p>一般 HLS 生成的结构与 C 语言中函数的结构基本是一致的，但也有例外，<font color="#fac08f">默认情况下，如果函数内容逻辑非常简单，那么 HLS 在生成时可能会进行 Inline 处理，将其提取出来不单独视为一个 function</font>。为了避免这种情况，可以通过修改 Directive 禁止这种 Inline 处理。<br>另外，并不是所有的 C 语言程序都是 allowed Synthesis，当程序中出现 Dynamic memory allocation 或者其中有 Operation system operations 时程序是不能够被 Synthesis 的。<br><img src="../../../post-images/Pasted%20image%2020240114093525.png" alt=""></p><p>有两种保存 Directives 设置的方式，一种是直接在源码中进行修改（下图右侧所示），另一个种是存放在单独的文件中。<br>这里注意，如下图所示，如果这个 Directive 前面符号是 %，那么这个 Directive 就是存放在单独的 directive 文件里面。如果是 #, 说明是存放在相应的 source code 里面。建议是采用第一种，也就是存放在单独的 directive files 中。<br><img src="../../../post-images/Pasted%20image%2020240114093541.png" alt=""></p><p>下面是这两种保存方式的优缺点<br><img src="../../../post-images/Pasted%20image%2020240114093619.png" alt=""></p><p>最后可以看到综合之后的结果，会生成如下三种类型的接口<br><img src="../../../post-images/Pasted%20image%2020240114093629.png" alt=""></p><p><img src="../../../post-images/Pasted%20image%2020240114093637.png" alt=""></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> FPGA </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> FPGA </tag>
+            
+            <tag> HLS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HLS Learning P0 - FPGA Architecture Overview for Software Engineer</title>
       <link href="/posts/FPGA/20240130-FPGA-Architecture-Overview-for-Software-Engineer.html"/>
       <url>/posts/FPGA/20240130-FPGA-Architecture-Overview-for-Software-Engineer.html</url>
       
-        <content type="html"><![CDATA[<p>整个课程大纲，一共 25 节。这里补充一页来自最后一课的 Summay 方便看的更清楚</p><img src="../../../post-images/Pasted%20image%2020240113150643.png" alt="1075" style="zoom:67%;" /><img src="../../../post-images/Pasted%20image%2020240128151300.png" alt="1075" style="zoom:67%;" /><p>FPGA 也被称为“Liquid Hardware”。从底层结构来看，FPGA、CPLD 和 SPLD 在逻辑单元的组织和连接方式上有所不同。</p><p>FPGA通常由大量的可编程逻辑单元（PLU）组成，这些逻辑单元可以配置成各种不同的逻辑功能，如逻辑门、寄存器等。FPGA还包括大量的可编程连线（Interconnect）和存储单元（如查找表或存储器单元），这些单元可以用于存储逻辑功能的配置信息。</p><p>CPLD通常由一系列可编程逻辑模块（PLM）组成，这些模块包含了逻辑门和触发器，以及连接这些模块的可编程连线。<strong>CPLD通常具有更快的时钟速度和更低的延迟，这是因为它们通常使用了静态逻辑技术，而不是动态逻辑技术</strong>。</p><p>SPLD通常由少量的逻辑门和触发器组成，通常用于实现相对简单的逻辑功能，如组合逻辑或状态机。</p><img src="../../../post-images/Pasted%20image%2020240113150651.png" alt="1075" style="zoom: 67%;" /><p>FPGA 与 GPU 谁是未来的趋势一直都争论不休，但其实和 CPU 一样，二者的架构不同各自擅长的领域也不同。</p><p>GPU的优势之一是能够同时执行多个进程，以及对大块数据进行流处理。这使得GPU在处理需要大规模并行计算的应用中表现出色，比如图形渲染、科学计算、深度学习等。</p><p>相比之下，FPGA（现场可编程门阵列）也可以执行并行计算,但其主要优势在于其灵活性和可定制性。FPGA可以根据特定的应用需求进行定制化设计（因为其总线位宽可以任意定制，因此可以定制特定位宽的数据处理，减少资源使用开销等）因此在某些特定的应用场景下，FPGA可以提供更高的性能和效率，功耗一般也更低。</p><img src="../../../post-images/Pasted%20image%2020240113150701.png" alt="1075" style="zoom:67%;" /><p>Xilinx 嵌入 ARM 的 FPGA 系列有：Zynq-7000 和 UltraScale+ MPSoC。左侧描述的是 FPGA 的架构，由横竖交叉的 routing 将密密麻麻的 Programmable Logic 连接起来，四周则是 Programmable I/O。右侧则是 FPGA 一般包括的资源</p><img src="../../../post-images/Pasted%20image%2020240113150714.png" alt="1075" style="zoom:67%;" /><p>上图右侧资源中，比较陌生的几个在这简单整理下起功能</p><ul><li>XADC（Xilinx Analog-to-Digital Converter）：XADC是赛灵思（Xilinx）FPGA系列中的模拟数字转换器模块，用于将模拟信号转换为数字信号。XADC可以用于采集和处理模拟信号，例如温度传感器、电压监测等</li><li>Transceiver：Transceiver是FPGA中的高速收发器模块，通常用于支持高速串行通信协议，如PCIe、SATA、以太网等。这些模块可以实现高速数据传输，支持不同的协议和数据速率</li><li>CMT（Clock Management Tile）：CMT是赛灵思FPGA中的时钟管理模块，用于生成、分配和管理时钟信号。CMT模块可以实现时钟频率的分频、倍频、延迟等功能，以满足不同的时序要求</li></ul><p>SliceM 和 SliceL 应该是最熟悉也是最重要的两个，这里也记录下：</p><ul><li>SLICEL（Slice LUT）：SLICEL是FPGA中的<strong>逻辑单元模块</strong>，通常包括查找表（LUT）、寄存器、算术逻辑单元（ALU）等。SLICEL通常用于实现逻辑功能和算术运算，是FPGA中的基本计算单元。</li><li>SLICEM（Slice Memory）：SLICEM是FPGA中的<strong>存储单元模块</strong>，用于实现存储器和存储器相关的功能。SLICEM通常包括存储器单元、存储器控制器等，用于实现存储器的读写操作和存储器相关的逻辑功能。</li></ul><p>需要注意的是，当 LUTs 被用于组成存储器时，通常会消耗 SLICEM 而不是 SLICEL（如果组成 memory 所需的 SLICEM 不够，也不会消耗 SLICEL）。这是因为SLICEM（Slice Memory）专门用于实现存储器单元和存储器相关的功能，包括存储器单元、存储器控制器等。SLICEM通常包含更多的存储器资源和相关的控制逻辑，可以更好地支持存储器的读写操作和存储器相关的功能。相比之下，SLICEL（Slice LUT）通常用于实现逻辑功能和算术运算，包括查找表（LUT）、寄存器、算术逻辑单元（ALU）等。虽然LUT也可以用于实现存储器功能，但SLICEM更适合用于实现大规模的存储器单元和相关的存储器控制逻辑。</p><p>另外还有一个没有提及的资源是 FF（Flip-Flop) 触发器资源，每个 FF 通常包含一个存储器单元，用于存储一个比特的信息，并且具有时钟信号控制的输入端，用于在时钟信号的上升沿或下降沿触发状态的更新。是的，FF 和时序逻辑直接相关，可以理解为每个使用类似 always @(posedge clk) 都会占用一个或多个 FF 资源。这是因为时序逻辑通常需要使用触发器来存储状态信息，以响应时钟信号的边沿触发状态更新。</p><p>Logic Unit 包括 LUT、MUX 以及 carry chain。在实现加法器时可以使用 LUT 实现（其本质也是数字逻辑组成的），也可以通过 Arithmetic-logic Unit 如 DSP48 这样的资源来实现。<br><img src="../../../post-images/Pasted%20image%2020240113150727.png" alt="1075" style="zoom:67%;" /></p><p>图中的 ALU 模块能够实现很多算术运算，在 Xilinx FPGA 中，ALU 指的是 DSP48<br><img src="../../../post-images/Pasted%20image%2020240113150752.png" alt="1075" style="zoom:67%;" /></p><p>Memory Unit 中 LUT 位于 SliceM 中，主要用来存放一些小块的数据（&lt; 1kb）。<br>Block RAM 的结构如下<br><img src="../../../post-images/Pasted%20image%2020240113150810.png" alt="1075" style="zoom:67%;" /></p><p>在 T 系列的 FPGA 中，一个 Block RAM 是由两个 18Kb 组成，可以被拆分重组成如上图的几种形式。<br>另外，RAM  可以被配置成如下几种形式：</p><ul><li><strong>Single port RAM</strong>：只能通过一个端口进行读写操作</li><li><strong>Simple-dual port RAM</strong>：具有两个独立的读写端口，但读操作和写操作不能同时进行。举个例子，如果一个端口正在进行读操作，那么同一时刻另一个端口就不能进行读操作，但可以进行写操作。</li><li><strong>True-dual port RAM</strong>：具有两个完全独立的读写端口，端口彼此之间的读写操作不会影响，相比上面的 Simple-dual port RAM。这是因为在它内部的存储单元，每个都有两个独立的数据输出端口，分别连接到两个读写端口。这样，即使两个端口同时访问同一个存储单元，也不会发生冲突，因为每个端口都有自己的数据输出路径。作为代价，其需要复杂的控制逻辑来确保并发的读写操作不会相互影响，通常会使用时序控制和状态机来实现这一点。</li><li><strong>Single port ROM</strong>：只能通过一个端口进行读取操作（仅读取）</li><li><strong>Dual port ROM</strong>：具有两个独立的读写端口，可以同时进行两个独立的读取操作（仅读取）</li><li><strong>FIFO</strong>：用在两个时钟域之间进行数据传输的存储器结构，可以实现数据的先进先出的顺序。</li></ul><p>在使用 C/C++ 进行开发时候，需要了解每个 function 的功能大致实现以及资源使用情况</p><img src="../../../post-images/Pasted%20image%2020240113150820.png" alt="1075" style="zoom:67%;" /><img src="../../../post-images/Pasted%20image%2020240113150837.png" alt="1075" style="zoom:67%;" />]]></content>
+        <content type="html"><![CDATA[<h1 id="1-orientation-and-overview-of-this-course">1. Orientation and Overview of this Course</h1><p>整个课程大纲，一共 25 节 5 章。这里补充一页来自最后一课的 Summay 方便看的更清楚</p><img src="../../../post-images/Pasted%20image%2020240113150643.png" alt="1075"  /><img src="../../../post-images/Pasted%20image%2020240128151300.png" alt="1075" style="zoom:67%;" /><h1 id="2-introduction">2. Introduction</h1><p>FPGA 也被称为“Liquid Hardware”。从底层结构来看，FPGA、CPLD 和 SPLD 在逻辑单元的组织和连接方式上有所不同。</p><p>FPGA通常由大量的可编程逻辑单元（PLU）组成，这些逻辑单元可以配置成各种不同的逻辑功能，如逻辑门、寄存器等。FPGA还包括大量的可编程连线（Interconnect）和存储单元（如查找表或存储器单元），这些单元可以用于存储逻辑功能的配置信息。</p><p>CPLD通常由一系列可编程逻辑模块（PLM）组成，这些模块包含了逻辑门和触发器，以及连接这些模块的可编程连线。<strong>CPLD通常具有更快的时钟速度和更低的延迟，这是因为它们通常使用了静态逻辑技术，而不是动态逻辑技术</strong>。</p><p>SPLD通常由少量的逻辑门和触发器组成，通常用于实现相对简单的逻辑功能，如组合逻辑或状态机。</p><img src="../../../post-images/Pasted%20image%2020240113150651.png" alt="1075"  /><p>FPGA 与 GPU 谁是未来的趋势一直都争论不休，但其实和 CPU 一样，二者的架构不同各自擅长的领域也不同。</p><p>GPU的优势之一是能够同时执行多个进程，以及对大块数据进行流处理。这使得GPU在处理需要大规模并行计算的应用中表现出色，比如图形渲染、科学计算、深度学习等。</p><p>相比之下，FPGA（现场可编程门阵列）也可以执行并行计算,但其主要优势在于其灵活性和可定制性。FPGA可以根据特定的应用需求进行定制化设计（因为其总线位宽可以任意定制，因此可以定制特定位宽的数据处理，减少资源使用开销等）因此在某些特定的应用场景下，FPGA可以提供更高的性能和效率，功耗一般也更低。</p><img src="../../../post-images/Pasted%20image%2020240113150701.png" alt="1075"  /><h1 id="3-fpga-architecture">3. FPGA Architecture</h1><p>Xilinx 嵌入 ARM 的 FPGA 系列有：Zynq-7000 和 UltraScale+ MPSoC。左侧描述的是 FPGA 的架构，由横竖交叉的 routing 将密密麻麻的 Programmable Logic 连接起来，四周则是 Programmable I/O。右侧则是 FPGA 一般包括的资源</p><img src="../../../post-images/Pasted%20image%2020240113150714.png" alt="1075"  /><p>上图右侧资源中，比较陌生的几个在这简单整理下起功能</p><ul><li>XADC（Xilinx Analog-to-Digital Converter）：XADC是赛灵思（Xilinx）FPGA系列中的模拟数字转换器模块，用于将模拟信号转换为数字信号。XADC可以用于采集和处理模拟信号，例如温度传感器、电压监测等</li><li>Transceiver：Transceiver是FPGA中的高速收发器模块，通常用于支持高速串行通信协议，如PCIe、SATA、以太网等。这些模块可以实现高速数据传输，支持不同的协议和数据速率</li><li>CMT（Clock Management Tile）：CMT是赛灵思FPGA中的时钟管理模块，用于生成、分配和管理时钟信号。CMT模块可以实现时钟频率的分频、倍频、延迟等功能，以满足不同的时序要求</li></ul><p>SliceM 和 SliceL 应该是最熟悉也是最重要的两个，这里也记录下：</p><ul><li>SLICEL（Slice LUT）：SLICEL是FPGA中的<strong>逻辑单元模块</strong>，通常包括查找表（LUT）、寄存器、算术逻辑单元（ALU）等。SLICEL通常用于实现逻辑功能和算术运算，是FPGA中的基本计算单元。</li><li>SLICEM（Slice Memory）：SLICEM是FPGA中的<strong>存储单元模块</strong>，用于实现存储器和存储器相关的功能。SLICEM通常包括存储器单元、存储器控制器等，用于实现存储器的读写操作和存储器相关的逻辑功能。</li></ul><p>需要注意的是，当 LUTs 被用于组成存储器时，通常会消耗 SLICEM 而不是 SLICEL（如果组成 memory 所需的 SLICEM 不够，也不会消耗 SLICEL）。这是因为SLICEM（Slice Memory）专门用于实现存储器单元和存储器相关的功能，包括存储器单元、存储器控制器等。SLICEM通常包含更多的存储器资源和相关的控制逻辑，可以更好地支持存储器的读写操作和存储器相关的功能。相比之下，SLICEL（Slice LUT）通常用于实现逻辑功能和算术运算，包括查找表（LUT）、寄存器、算术逻辑单元（ALU）等。虽然LUT也可以用于实现存储器功能，但SLICEM更适合用于实现大规模的存储器单元和相关的存储器控制逻辑。</p><p>另外还有一个没有提及的资源是 FF（Flip-Flop) 触发器资源，每个 FF 通常包含一个存储器单元，用于存储一个比特的信息，并且具有时钟信号控制的输入端，用于在时钟信号的上升沿或下降沿触发状态的更新。是的，FF 和时序逻辑直接相关，可以理解为每个使用类似 always @(posedge clk) 都会占用一个或多个 FF 资源。这是因为时序逻辑通常需要使用触发器来存储状态信息，以响应时钟信号的边沿触发状态更新。</p><h2 id="a-logic-unit">a. Logic Unit</h2><p>Logic Unit 包括 LUT、MUX 以及 carry chain。在实现加法器时可以使用 LUT 实现（其本质也是数字逻辑组成的），也可以通过 Arithmetic-logic Unit 如 DSP48 这样的资源来实现。<br><img src="../../../post-images/Pasted%20image%2020240113150727.png" alt="1075"  /></p><h2 id="b-arithmetic-logic-unit">b. Arithmetic-logic Unit</h2><p>图中的 ALU 模块能够实现很多算术运算，在 Xilinx FPGA 中，ALU 指的是 DSP48<br><img src="../../../post-images/Pasted%20image%2020240113150752.png" alt="1075"  /></p><h2 id="c-memory-unit">c. Memory Unit</h2><p>Memory Unit 中 LUT 位于 SliceM 中，主要用来存放一些小块的数据（&lt; 1kb）。<br>Block RAM 的结构如下<br><img src="../../../post-images/Pasted%20image%2020240113150810.png" alt="1075"  /></p><p>在 T 系列的 FPGA 中，一个 Block RAM 是由两个 18Kb 组成，可以被拆分重组成如上图的几种形式。<br>另外，RAM  可以被配置成如下几种形式：</p><ul><li><strong>Single port RAM</strong>：只能通过一个端口进行读写操作</li><li><strong>Simple-dual port RAM</strong>：具有两个独立的读写端口，但读操作和写操作不能同时进行。举个例子，如果一个端口正在进行读操作，那么同一时刻另一个端口就不能进行读操作，但可以进行写操作。</li><li><strong>True-dual port RAM</strong>：具有两个完全独立的读写端口，端口彼此之间的读写操作不会影响，相比上面的 Simple-dual port RAM。这是因为在它内部的存储单元，每个都有两个独立的数据输出端口，分别连接到两个读写端口。这样，即使两个端口同时访问同一个存储单元，也不会发生冲突，因为每个端口都有自己的数据输出路径。作为代价，其需要复杂的控制逻辑来确保并发的读写操作不会相互影响，通常会使用时序控制和状态机来实现这一点。</li><li><strong>Single port ROM</strong>：只能通过一个端口进行读取操作（仅读取）</li><li><strong>Dual port ROM</strong>：具有两个独立的读写端口，可以同时进行两个独立的读取操作（仅读取）</li><li><strong>FIFO</strong>：用在两个时钟域之间进行数据传输的存储器结构，可以实现数据的先进先出的顺序。</li></ul><h1 id="4-focus">4. Focus</h1><p>在使用 C/C++ 进行开发时候，需要了解每个 function 的功能大致实现以及资源使用情况</p><img src="../../../post-images/Pasted%20image%2020240113150820.png" alt="1075"  /><h1 id="5-summary">5. Summary</h1><img src="../../../post-images/Pasted%20image%2020240113150837.png" alt="1075"  />]]></content>
       
       
       <categories>
@@ -1079,33 +1160,6 @@
     
     
     <entry>
-      <title>ARM Linux SocketCAN驱动编译记录</title>
-      <link href="/posts/System-development/20180324-ARM-linux-socketCAN-driver-compilation-note.html"/>
-      <url>/posts/System-development/20180324-ARM-linux-socketCAN-driver-compilation-note.html</url>
-      
-        <content type="html"><![CDATA[<p>最近调试时使用了相关工具，参考了相关博客终于编译通过。特此汇总各博客内容进行整理</p><h3 id="1-编译环境所需工具：">1.编译环境所需工具：</h3><ul><li><a href="https://public.pengutronix.de/software/libsocketcan/">libsocketcan-0.0.10.tar.bz2</a></li><li><a href="https://public.pengutronix.de/software/socket-can/canutils/v4.0/">canutils-4.0.6.tar.bz2 </a></li></ul><p>交叉编译工具链根据每个开发板所提供的类型进行设置，我的工具链名称为</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arm-fsl-linux-gnueabi-gcc</span><br></pre></td></tr></table></figure><p>后面实际配置时请注意</p><hr><h3 id="2-参考博客">2.参考博客</h3><p><a href="https://www.cnblogs.com/eaggle/p/7641526.html">https://www.cnblogs.com/eaggle/p/7641526.html</a><br><a href="https://blog.csdn.net/sinat_35706094/article/details/79537749">https://blog.csdn.net/sinat_35706094/article/details/79537749</a><br><a href="https://blog.csdn.net/sno_guo/article/details/17029295">https://blog.csdn.net/sno_guo/article/details/17029295</a></p><hr><h3 id="3-具体配置">3.具体配置</h3><h4 id="第一步：配置交叉编译工具链">第一步：配置交叉编译工具链</h4><p>配置好交叉编译工具链为全局环境，也就是将其添加到环境变量中，具体因人而异。在这不具体说明，请自行查找资料</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export ARCH=arm</span><br><span class="line">export CROSS_COMPILE=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl</span><br><span class="line">-linaro-toolchain/bin/arm-none-linux-gnueabi-</span><br><span class="line">export PATH=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl-linaro-toolch</span><br><span class="line">ain/bin:$PATH</span><br></pre></td></tr></table></figure><h4 id="第二步-交叉编译libsocketcan">第二步 交叉编译libsocketcan</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd libsocketcan-0.0.10  //进入目录</span><br><span class="line">mkdir out              //创建文件夹，放置生成文件</span><br><span class="line">./configure --prefix=/文件夹路径/libsocketcan-0.0.10/out --host=arm-fsl-linux-gnueabi</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><p>此时生成文件会出现在<code>out/lib</code>文件夹下，将这些生成的库复制到开发板的文件系统内，可以放在lib目录下，也可以放在<code>usr/lib</code>里面<br>（每篇博客的设置都不同，该步的生成文件我没有拷贝到开发板。以防后面配置出现问题，可以设置上）</p><hr><h4 id="第三步-编译安装canutils-4-0-6-tar-bz2">第三步 编译安装<code>canutils-4.0.6.tar.bz2</code></h4><p>先将 libsocketcan 里面的头文件 <code>libsocketcan.h</code>， <code>can_netlink.h</code> 复制到 canutils 的 <code>include</code> 里面。这些文件在<code>out/include</code>目录下</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cd canutils-4.0.6/</span><br><span class="line">mkdir out</span><br><span class="line">//进行实际配置,可直接复制下面代码，务必仔细修改文件夹路径和交叉编译工具链</span><br><span class="line">./configure --host=arm-fsl-linux-gnueabi   \</span><br><span class="line">--prefix=/文件夹路径/canutils-4.0.6/out li   \</span><br><span class="line">bsocketcan_LIBS=-lsocketcan LDFLAGS=&quot;-L/   \</span><br><span class="line">文件夹路径/libsocketcan-0.0.10/out/lib/&quot; l   \  </span><br><span class="line">ibsocketcan_CFLAGS=&quot;-I/文件夹路径/libsocke   \ </span><br><span class="line">tcan-0.0.10/out/include&quot;</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><p>最后在 <code>out/sbin</code> 下能见到 <code>canconfig</code> 命令，在<code>out/bin</code> 下面 <code>candump/canecho/cansend/cansequence</code><br>将这些文件拷贝到开发板<code>/usr</code>目录下即可。</p><p>具体请看参考博客</p><hr><h3 id="4-高级设置">4.高级设置</h3><p>关键词：Linux SocketCAN工具<code>can-utils</code>中多线程设置</p><p>实际使用时，将接收到的CAN数据发送到远程，同时远程服务器会再发送数据过来，所以需要多线程的需求。写好编译时，会出现这样的报错</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">undefined reference to `pthread_create&#x27;</span><br></pre></td></tr></table></figure><p>很明显是由于设置多进程导致的，添加相应库后无效。经搜索发现需要在编译时进行相应设置，问题如下：</p><p><strong>问题：</strong> <code>pthread</code> 库不是 Linux 系统默认的库，连接时需要使用静态库 <code>libpthread.a</code>，所以在使用<code>pthread_create()</code>创建线程，以及调用 <code>pthread_atfork()</code>函数建立fork处理程序时，需要链接该库。</p><p>**解决：**在编译中要加 <code>-lpthread</code>参数（最好加在最后面，我到貌似就是这样才行）</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc thread.c -o thread -lpthread</span><br></pre></td></tr></table></figure><p><code>thread.c</code>为你些的源文件，不要忘了加上头文件<code>#include&lt;pthread.h&gt;</code></p><p>但由于<code>can-utils</code>是通过Makefile管理，因此需要找到相关的编译设置。摸索一小时终于找到~</p><p>在工具链<code>\src\GNUmakefile</code>中，第96行添加<code>-lpthread</code>，效果如下</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS = -Wall -g -lpthread -O2</span><br></pre></td></tr></table></figure><p>同时在第365行添加<code>-lpthread</code>，效果如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.c.o:</span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">(COMPILE) -MT <span class="variable">$@</span> -MD -MP -MF $(DEPDIR)/$*.Tpo -lpthread -c -o <span class="variable">$@</span> $&lt;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po</span></span><br></pre></td></tr></table></figure><p>之后执行<code>make</code>,<code>make install</code>编译即可。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> System-development </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 经验总结 </tag>
-            
-            <tag> 调试记录 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>2018年吉林大学软件学院软件工程学硕复试回忆</title>
       <link href="/posts/Others/20180324-2018-JLU-kaoyan-note-3.html"/>
       <url>/posts/Others/20180324-2018-JLU-kaoyan-note-3.html</url>
@@ -1148,6 +1202,33 @@
         <tags>
             
             <tag> 考研 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ARM Linux SocketCAN驱动编译记录</title>
+      <link href="/posts/System-development/20180324-ARM-linux-socketCAN-driver-compilation-note.html"/>
+      <url>/posts/System-development/20180324-ARM-linux-socketCAN-driver-compilation-note.html</url>
+      
+        <content type="html"><![CDATA[<p>最近调试时使用了相关工具，参考了相关博客终于编译通过。特此汇总各博客内容进行整理</p><h3 id="1-编译环境所需工具：">1.编译环境所需工具：</h3><ul><li><a href="https://public.pengutronix.de/software/libsocketcan/">libsocketcan-0.0.10.tar.bz2</a></li><li><a href="https://public.pengutronix.de/software/socket-can/canutils/v4.0/">canutils-4.0.6.tar.bz2 </a></li></ul><p>交叉编译工具链根据每个开发板所提供的类型进行设置，我的工具链名称为</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arm-fsl-linux-gnueabi-gcc</span><br></pre></td></tr></table></figure><p>后面实际配置时请注意</p><hr><h3 id="2-参考博客">2.参考博客</h3><p><a href="https://www.cnblogs.com/eaggle/p/7641526.html">https://www.cnblogs.com/eaggle/p/7641526.html</a><br><a href="https://blog.csdn.net/sinat_35706094/article/details/79537749">https://blog.csdn.net/sinat_35706094/article/details/79537749</a><br><a href="https://blog.csdn.net/sno_guo/article/details/17029295">https://blog.csdn.net/sno_guo/article/details/17029295</a></p><hr><h3 id="3-具体配置">3.具体配置</h3><h4 id="第一步：配置交叉编译工具链">第一步：配置交叉编译工具链</h4><p>配置好交叉编译工具链为全局环境，也就是将其添加到环境变量中，具体因人而异。在这不具体说明，请自行查找资料</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export ARCH=arm</span><br><span class="line">export CROSS_COMPILE=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl</span><br><span class="line">-linaro-toolchain/bin/arm-none-linux-gnueabi-</span><br><span class="line">export PATH=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl-linaro-toolch</span><br><span class="line">ain/bin:$PATH</span><br></pre></td></tr></table></figure><h4 id="第二步-交叉编译libsocketcan">第二步 交叉编译libsocketcan</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd libsocketcan-0.0.10  //进入目录</span><br><span class="line">mkdir out              //创建文件夹，放置生成文件</span><br><span class="line">./configure --prefix=/文件夹路径/libsocketcan-0.0.10/out --host=arm-fsl-linux-gnueabi</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><p>此时生成文件会出现在<code>out/lib</code>文件夹下，将这些生成的库复制到开发板的文件系统内，可以放在lib目录下，也可以放在<code>usr/lib</code>里面<br>（每篇博客的设置都不同，该步的生成文件我没有拷贝到开发板。以防后面配置出现问题，可以设置上）</p><hr><h4 id="第三步-编译安装canutils-4-0-6-tar-bz2">第三步 编译安装<code>canutils-4.0.6.tar.bz2</code></h4><p>先将 libsocketcan 里面的头文件 <code>libsocketcan.h</code>， <code>can_netlink.h</code> 复制到 canutils 的 <code>include</code> 里面。这些文件在<code>out/include</code>目录下</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cd canutils-4.0.6/</span><br><span class="line">mkdir out</span><br><span class="line">//进行实际配置,可直接复制下面代码，务必仔细修改文件夹路径和交叉编译工具链</span><br><span class="line">./configure --host=arm-fsl-linux-gnueabi   \</span><br><span class="line">--prefix=/文件夹路径/canutils-4.0.6/out li   \</span><br><span class="line">bsocketcan_LIBS=-lsocketcan LDFLAGS=&quot;-L/   \</span><br><span class="line">文件夹路径/libsocketcan-0.0.10/out/lib/&quot; l   \  </span><br><span class="line">ibsocketcan_CFLAGS=&quot;-I/文件夹路径/libsocke   \ </span><br><span class="line">tcan-0.0.10/out/include&quot;</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><p>最后在 <code>out/sbin</code> 下能见到 <code>canconfig</code> 命令，在<code>out/bin</code> 下面 <code>candump/canecho/cansend/cansequence</code><br>将这些文件拷贝到开发板<code>/usr</code>目录下即可。</p><p>具体请看参考博客</p><hr><h3 id="4-高级设置">4.高级设置</h3><p>关键词：Linux SocketCAN工具<code>can-utils</code>中多线程设置</p><p>实际使用时，将接收到的CAN数据发送到远程，同时远程服务器会再发送数据过来，所以需要多线程的需求。写好编译时，会出现这样的报错</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">undefined reference to `pthread_create&#x27;</span><br></pre></td></tr></table></figure><p>很明显是由于设置多进程导致的，添加相应库后无效。经搜索发现需要在编译时进行相应设置，问题如下：</p><p><strong>问题：</strong> <code>pthread</code> 库不是 Linux 系统默认的库，连接时需要使用静态库 <code>libpthread.a</code>，所以在使用<code>pthread_create()</code>创建线程，以及调用 <code>pthread_atfork()</code>函数建立fork处理程序时，需要链接该库。</p><p>**解决：**在编译中要加 <code>-lpthread</code>参数（最好加在最后面，我到貌似就是这样才行）</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc thread.c -o thread -lpthread</span><br></pre></td></tr></table></figure><p><code>thread.c</code>为你些的源文件，不要忘了加上头文件<code>#include&lt;pthread.h&gt;</code></p><p>但由于<code>can-utils</code>是通过Makefile管理，因此需要找到相关的编译设置。摸索一小时终于找到~</p><p>在工具链<code>\src\GNUmakefile</code>中，第96行添加<code>-lpthread</code>，效果如下</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS = -Wall -g -lpthread -O2</span><br></pre></td></tr></table></figure><p>同时在第365行添加<code>-lpthread</code>，效果如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.c.o:</span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">(COMPILE) -MT <span class="variable">$@</span> -MD -MP -MF $(DEPDIR)/$*.Tpo -lpthread -c -o <span class="variable">$@</span> $&lt;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po</span></span><br></pre></td></tr></table></figure><p>之后执行<code>make</code>,<code>make install</code>编译即可。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> System-development </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 经验总结 </tag>
+            
+            <tag> 调试记录 </tag>
             
         </tags>
       
