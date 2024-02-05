@@ -325,9 +325,9 @@
             
             <tag> FPGA </tag>
             
-            <tag> VerilogHDL </tag>
-            
             <tag> VHDL </tag>
+            
+            <tag> VerilogHDL </tag>
             
         </tags>
       
@@ -352,9 +352,9 @@
       
         <tags>
             
-            <tag> 经验总结 </tag>
-            
             <tag> Ceph </tag>
+            
+            <tag> 经验总结 </tag>
             
         </tags>
       
@@ -495,9 +495,9 @@
       
         <tags>
             
-            <tag> 经验总结 </tag>
-            
             <tag> Ceph </tag>
+            
+            <tag> 经验总结 </tag>
             
         </tags>
       
@@ -551,9 +551,9 @@
       
         <tags>
             
-            <tag> 经验总结 </tag>
-            
             <tag> ceph </tag>
+            
+            <tag> 经验总结 </tag>
             
             <tag> 服务器运维 </tag>
             
@@ -607,9 +607,9 @@
       
         <tags>
             
-            <tag> 经验总结 </tag>
-            
             <tag> ceph </tag>
+            
+            <tag> 经验总结 </tag>
             
             <tag> 服务器运维 </tag>
             
@@ -636,9 +636,9 @@
       
         <tags>
             
-            <tag> 经验总结 </tag>
-            
             <tag> 学习笔记 </tag>
+            
+            <tag> 经验总结 </tag>
             
             <tag> Unity </tag>
             
@@ -823,9 +823,9 @@
       
         <tags>
             
-            <tag> 经验总结 </tag>
-            
             <tag> 学习笔记 </tag>
+            
+            <tag> 经验总结 </tag>
             
         </tags>
       
@@ -1176,9 +1176,9 @@
       
         <tags>
             
-            <tag> 考研 </tag>
-            
             <tag> 经验总结 </tag>
+            
+            <tag> 考研 </tag>
             
         </tags>
       
@@ -1203,9 +1203,36 @@
       
         <tags>
             
+            <tag> 经验总结 </tag>
+            
             <tag> 考研 </tag>
             
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ARM Linux SocketCAN驱动编译记录</title>
+      <link href="/posts/System-development/20180324-ARM-linux-socketCAN-driver-compilation-note.html"/>
+      <url>/posts/System-development/20180324-ARM-linux-socketCAN-driver-compilation-note.html</url>
+      
+        <content type="html"><![CDATA[<p>最近调试时使用了相关工具，参考了相关博客终于编译通过。特此汇总各博客内容进行整理</p><h3 id="1-编译环境所需工具：">1.编译环境所需工具：</h3><ul><li><a href="https://public.pengutronix.de/software/libsocketcan/">libsocketcan-0.0.10.tar.bz2</a></li><li><a href="https://public.pengutronix.de/software/socket-can/canutils/v4.0/">canutils-4.0.6.tar.bz2 </a></li></ul><p>交叉编译工具链根据每个开发板所提供的类型进行设置，我的工具链名称为</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arm-fsl-linux-gnueabi-gcc</span><br></pre></td></tr></table></figure><p>后面实际配置时请注意</p><hr><h3 id="2-参考博客">2.参考博客</h3><p><a href="https://www.cnblogs.com/eaggle/p/7641526.html">https://www.cnblogs.com/eaggle/p/7641526.html</a><br><a href="https://blog.csdn.net/sinat_35706094/article/details/79537749">https://blog.csdn.net/sinat_35706094/article/details/79537749</a><br><a href="https://blog.csdn.net/sno_guo/article/details/17029295">https://blog.csdn.net/sno_guo/article/details/17029295</a></p><hr><h3 id="3-具体配置">3.具体配置</h3><h4 id="第一步：配置交叉编译工具链">第一步：配置交叉编译工具链</h4><p>配置好交叉编译工具链为全局环境，也就是将其添加到环境变量中，具体因人而异。在这不具体说明，请自行查找资料</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export ARCH=arm</span><br><span class="line">export CROSS_COMPILE=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl</span><br><span class="line">-linaro-toolchain/bin/arm-none-linux-gnueabi-</span><br><span class="line">export PATH=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl-linaro-toolch</span><br><span class="line">ain/bin:$PATH</span><br></pre></td></tr></table></figure><h4 id="第二步-交叉编译libsocketcan">第二步 交叉编译libsocketcan</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd libsocketcan-0.0.10  //进入目录</span><br><span class="line">mkdir out              //创建文件夹，放置生成文件</span><br><span class="line">./configure --prefix=/文件夹路径/libsocketcan-0.0.10/out --host=arm-fsl-linux-gnueabi</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><p>此时生成文件会出现在<code>out/lib</code>文件夹下，将这些生成的库复制到开发板的文件系统内，可以放在lib目录下，也可以放在<code>usr/lib</code>里面<br>（每篇博客的设置都不同，该步的生成文件我没有拷贝到开发板。以防后面配置出现问题，可以设置上）</p><hr><h4 id="第三步-编译安装canutils-4-0-6-tar-bz2">第三步 编译安装<code>canutils-4.0.6.tar.bz2</code></h4><p>先将 libsocketcan 里面的头文件 <code>libsocketcan.h</code>， <code>can_netlink.h</code> 复制到 canutils 的 <code>include</code> 里面。这些文件在<code>out/include</code>目录下</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cd canutils-4.0.6/</span><br><span class="line">mkdir out</span><br><span class="line">//进行实际配置,可直接复制下面代码，务必仔细修改文件夹路径和交叉编译工具链</span><br><span class="line">./configure --host=arm-fsl-linux-gnueabi   \</span><br><span class="line">--prefix=/文件夹路径/canutils-4.0.6/out li   \</span><br><span class="line">bsocketcan_LIBS=-lsocketcan LDFLAGS=&quot;-L/   \</span><br><span class="line">文件夹路径/libsocketcan-0.0.10/out/lib/&quot; l   \  </span><br><span class="line">ibsocketcan_CFLAGS=&quot;-I/文件夹路径/libsocke   \ </span><br><span class="line">tcan-0.0.10/out/include&quot;</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><p>最后在 <code>out/sbin</code> 下能见到 <code>canconfig</code> 命令，在<code>out/bin</code> 下面 <code>candump/canecho/cansend/cansequence</code><br>将这些文件拷贝到开发板<code>/usr</code>目录下即可。</p><p>具体请看参考博客</p><hr><h3 id="4-高级设置">4.高级设置</h3><p>关键词：Linux SocketCAN工具<code>can-utils</code>中多线程设置</p><p>实际使用时，将接收到的CAN数据发送到远程，同时远程服务器会再发送数据过来，所以需要多线程的需求。写好编译时，会出现这样的报错</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">undefined reference to `pthread_create&#x27;</span><br></pre></td></tr></table></figure><p>很明显是由于设置多进程导致的，添加相应库后无效。经搜索发现需要在编译时进行相应设置，问题如下：</p><p><strong>问题：</strong> <code>pthread</code> 库不是 Linux 系统默认的库，连接时需要使用静态库 <code>libpthread.a</code>，所以在使用<code>pthread_create()</code>创建线程，以及调用 <code>pthread_atfork()</code>函数建立fork处理程序时，需要链接该库。</p><p>**解决：**在编译中要加 <code>-lpthread</code>参数（最好加在最后面，我到貌似就是这样才行）</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc thread.c -o thread -lpthread</span><br></pre></td></tr></table></figure><p><code>thread.c</code>为你些的源文件，不要忘了加上头文件<code>#include&lt;pthread.h&gt;</code></p><p>但由于<code>can-utils</code>是通过Makefile管理，因此需要找到相关的编译设置。摸索一小时终于找到~</p><p>在工具链<code>\src\GNUmakefile</code>中，第96行添加<code>-lpthread</code>，效果如下</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS = -Wall -g -lpthread -O2</span><br></pre></td></tr></table></figure><p>同时在第365行添加<code>-lpthread</code>，效果如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.c.o:</span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">(COMPILE) -MT <span class="variable">$@</span> -MD -MP -MF $(DEPDIR)/$*.Tpo -lpthread -c -o <span class="variable">$@</span> $&lt;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po</span></span><br></pre></td></tr></table></figure><p>之后执行<code>make</code>,<code>make install</code>编译即可。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> System-development </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
             <tag> 经验总结 </tag>
+            
+            <tag> 调试记录 </tag>
             
         </tags>
       
@@ -1264,33 +1291,6 @@
     
     
     <entry>
-      <title>ARM Linux SocketCAN驱动编译记录</title>
-      <link href="/posts/System-development/20180324-ARM-linux-socketCAN-driver-compilation-note.html"/>
-      <url>/posts/System-development/20180324-ARM-linux-socketCAN-driver-compilation-note.html</url>
-      
-        <content type="html"><![CDATA[<p>最近调试时使用了相关工具，参考了相关博客终于编译通过。特此汇总各博客内容进行整理</p><h3 id="1-编译环境所需工具：">1.编译环境所需工具：</h3><ul><li><a href="https://public.pengutronix.de/software/libsocketcan/">libsocketcan-0.0.10.tar.bz2</a></li><li><a href="https://public.pengutronix.de/software/socket-can/canutils/v4.0/">canutils-4.0.6.tar.bz2 </a></li></ul><p>交叉编译工具链根据每个开发板所提供的类型进行设置，我的工具链名称为</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arm-fsl-linux-gnueabi-gcc</span><br></pre></td></tr></table></figure><p>后面实际配置时请注意</p><hr><h3 id="2-参考博客">2.参考博客</h3><p><a href="https://www.cnblogs.com/eaggle/p/7641526.html">https://www.cnblogs.com/eaggle/p/7641526.html</a><br><a href="https://blog.csdn.net/sinat_35706094/article/details/79537749">https://blog.csdn.net/sinat_35706094/article/details/79537749</a><br><a href="https://blog.csdn.net/sno_guo/article/details/17029295">https://blog.csdn.net/sno_guo/article/details/17029295</a></p><hr><h3 id="3-具体配置">3.具体配置</h3><h4 id="第一步：配置交叉编译工具链">第一步：配置交叉编译工具链</h4><p>配置好交叉编译工具链为全局环境，也就是将其添加到环境变量中，具体因人而异。在这不具体说明，请自行查找资料</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export ARCH=arm</span><br><span class="line">export CROSS_COMPILE=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl</span><br><span class="line">-linaro-toolchain/bin/arm-none-linux-gnueabi-</span><br><span class="line">export PATH=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl-linaro-toolch</span><br><span class="line">ain/bin:$PATH</span><br></pre></td></tr></table></figure><h4 id="第二步-交叉编译libsocketcan">第二步 交叉编译libsocketcan</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd libsocketcan-0.0.10  //进入目录</span><br><span class="line">mkdir out              //创建文件夹，放置生成文件</span><br><span class="line">./configure --prefix=/文件夹路径/libsocketcan-0.0.10/out --host=arm-fsl-linux-gnueabi</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><p>此时生成文件会出现在<code>out/lib</code>文件夹下，将这些生成的库复制到开发板的文件系统内，可以放在lib目录下，也可以放在<code>usr/lib</code>里面<br>（每篇博客的设置都不同，该步的生成文件我没有拷贝到开发板。以防后面配置出现问题，可以设置上）</p><hr><h4 id="第三步-编译安装canutils-4-0-6-tar-bz2">第三步 编译安装<code>canutils-4.0.6.tar.bz2</code></h4><p>先将 libsocketcan 里面的头文件 <code>libsocketcan.h</code>， <code>can_netlink.h</code> 复制到 canutils 的 <code>include</code> 里面。这些文件在<code>out/include</code>目录下</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cd canutils-4.0.6/</span><br><span class="line">mkdir out</span><br><span class="line">//进行实际配置,可直接复制下面代码，务必仔细修改文件夹路径和交叉编译工具链</span><br><span class="line">./configure --host=arm-fsl-linux-gnueabi   \</span><br><span class="line">--prefix=/文件夹路径/canutils-4.0.6/out li   \</span><br><span class="line">bsocketcan_LIBS=-lsocketcan LDFLAGS=&quot;-L/   \</span><br><span class="line">文件夹路径/libsocketcan-0.0.10/out/lib/&quot; l   \  </span><br><span class="line">ibsocketcan_CFLAGS=&quot;-I/文件夹路径/libsocke   \ </span><br><span class="line">tcan-0.0.10/out/include&quot;</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><p>最后在 <code>out/sbin</code> 下能见到 <code>canconfig</code> 命令，在<code>out/bin</code> 下面 <code>candump/canecho/cansend/cansequence</code><br>将这些文件拷贝到开发板<code>/usr</code>目录下即可。</p><p>具体请看参考博客</p><hr><h3 id="4-高级设置">4.高级设置</h3><p>关键词：Linux SocketCAN工具<code>can-utils</code>中多线程设置</p><p>实际使用时，将接收到的CAN数据发送到远程，同时远程服务器会再发送数据过来，所以需要多线程的需求。写好编译时，会出现这样的报错</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">undefined reference to `pthread_create&#x27;</span><br></pre></td></tr></table></figure><p>很明显是由于设置多进程导致的，添加相应库后无效。经搜索发现需要在编译时进行相应设置，问题如下：</p><p><strong>问题：</strong> <code>pthread</code> 库不是 Linux 系统默认的库，连接时需要使用静态库 <code>libpthread.a</code>，所以在使用<code>pthread_create()</code>创建线程，以及调用 <code>pthread_atfork()</code>函数建立fork处理程序时，需要链接该库。</p><p>**解决：**在编译中要加 <code>-lpthread</code>参数（最好加在最后面，我到貌似就是这样才行）</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc thread.c -o thread -lpthread</span><br></pre></td></tr></table></figure><p><code>thread.c</code>为你些的源文件，不要忘了加上头文件<code>#include&lt;pthread.h&gt;</code></p><p>但由于<code>can-utils</code>是通过Makefile管理，因此需要找到相关的编译设置。摸索一小时终于找到~</p><p>在工具链<code>\src\GNUmakefile</code>中，第96行添加<code>-lpthread</code>，效果如下</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS = -Wall -g -lpthread -O2</span><br></pre></td></tr></table></figure><p>同时在第365行添加<code>-lpthread</code>，效果如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.c.o:</span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">(COMPILE) -MT <span class="variable">$@</span> -MD -MP -MF $(DEPDIR)/$*.Tpo -lpthread -c -o <span class="variable">$@</span> $&lt;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po</span></span><br></pre></td></tr></table></figure><p>之后执行<code>make</code>,<code>make install</code>编译即可。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> System-development </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 经验总结 </tag>
-            
-            <tag> 调试记录 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>使用Pybombs安装GNURadio</title>
       <link href="/posts/System-development/20180221-install-gnuradio-with-pybombs.html"/>
       <url>/posts/System-development/20180221-install-gnuradio-with-pybombs.html</url>
@@ -1334,11 +1334,11 @@
       
         <tags>
             
-            <tag> Bug调试 </tag>
-            
             <tag> 软件无线电 </tag>
             
             <tag> 通信 </tag>
+            
+            <tag> Bug调试 </tag>
             
         </tags>
       
