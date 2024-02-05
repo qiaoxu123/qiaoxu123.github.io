@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>HLS Learning P6 - Composite Data Type</title>
+      <link href="/posts/FPGA/20240205-Composite-Data-Type.html"/>
+      <url>/posts/FPGA/20240205-Composite-Data-Type.html</url>
+      
+        <content type="html"><![CDATA[<p>HLS 支持的复合数据类型包括两种：Struct 和 Enumeration。</p><h1 id="1-struct">1. Struct</h1><p>如果 top-level functions 的参数是 Arrays，最终会被转译为 memory ports。<br>和 C/C++ 编程相同，建议是将 struct 定义在 header 文件中方便引用。<br>在 struct 中使用的 elements 最终会被 packed into a single vector（类似 C 中顺序排列组成的内存块），有两种形式：field_level 和 struct_level。<br><img src="../../../post-images/Pasted%20image%2020240106151519.jpeg" alt=""><br>示例如何规范定义和使用 struct<br>这里 sizeof(data_t) 大小为 5 的原因是，A 是 ap_int&lt;4&gt; 宽度为 4bits，占用一个 1 byte；同样 B 为 ap_uint&lt;4&gt; 数组会占用 4 byte，总共是 5 byte。<br><img src="../../../post-images/Pasted%20image%2020240106151533.jpeg" alt=""><br>对于 struct 类型对应的 Directive 叫作 DATA_PACK，下方选择目标的 byte_pad 形式（上面提到的两种)。<br><img src="../../../post-images/Pasted%20image%2020240106151545.jpeg" alt=""></p><h2 id="a-byte-pad-field-level">a. Byte Pad: field_level</h2><p>field_level 模式下，struct 中每个 elements 都需要扩展到 8 bit 倍数。<br>上图示例中由于每个元素都是 4 bits 所有最后都扩展为了 8 bits，最后总大小为 5x8=40 bits。<br><img src="../../../post-images/Pasted%20image%2020240106151556.jpeg" alt=""></p><h2 id="b-byte-pad-struct-level">b. Byte Pad: struct_level</h2><p>另一个是 struct_level，每个元素的实际位宽保留，要求 packed 后的 single vector 总的 bits 是 8 的倍数。<br>上图示例中原先大小为 20bits，packed 后大小变为 24bits。<br><img src="../../../post-images/Pasted%20image%2020240106151613.jpeg" alt=""><br>从下图资源利用率，Interval 以及 latency 等来看，两种形式没有明显差别，并且都使系统的吞吐率提高了。<br>这种 Data Pack Mode 相当于把 for-loop 展开<br><img src="../../../post-images/Pasted%20image%2020240106151637.jpeg" alt=""><br>在仿真时为了便于查看，可以将我们创建的 struct 中的元素，按照其实际的位宽拿出来，创建 virtual bus 便于查看。<br><img src="../../../post-images/Pasted%20image%2020240106151645.jpeg" alt=""></p><h1 id="2-enumerated-type">2. Enumerated Type</h1><p>所谓枚举类型，就是把需要的数值定义为符号常量便于使用，其中的元素会按照顺序被自动分配一个整数。<br><img src="../../../post-images/Pasted%20image%2020240106151658.jpeg" alt=""><br>通过枚举类型提高了代码的可读性<br><img src="../../../post-images/Pasted%20image%2020240106151708.jpeg" alt=""><br>如上图中代码所示，当定义的 enum 类型作为 function arguments 使用时，HLS 会自动推断该类型的 data width，其默认是 int 类型。<br><img src="../../../post-images/Pasted%20image%2020240106151715.png" alt=""></p><h1 id="3-summary">3. Summary</h1><p><img src="../../../post-images/Pasted%20image%2020240106151724.jpeg" alt=""></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> FPGA </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> FPGA </tag>
+            
+            <tag> HLS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>HLS Learning P4 - Data Type - Arbitrary Precision</title>
       <link href="/posts/FPGA/20240201-Data-type-Arbitrary-Precision.html"/>
       <url>/posts/FPGA/20240201-Data-type-Arbitrary-Precision.html</url>
@@ -325,9 +352,9 @@
             
             <tag> FPGA </tag>
             
-            <tag> VHDL </tag>
-            
             <tag> VerilogHDL </tag>
+            
+            <tag> VHDL </tag>
             
         </tags>
       
@@ -352,9 +379,9 @@
       
         <tags>
             
-            <tag> Ceph </tag>
-            
             <tag> 经验总结 </tag>
+            
+            <tag> Ceph </tag>
             
         </tags>
       
@@ -495,9 +522,9 @@
       
         <tags>
             
-            <tag> Ceph </tag>
-            
             <tag> 经验总结 </tag>
+            
+            <tag> Ceph </tag>
             
         </tags>
       
@@ -522,9 +549,9 @@
       
         <tags>
             
-            <tag> 学习笔记 </tag>
-            
             <tag> Ceph </tag>
+            
+            <tag> 学习笔记 </tag>
             
             <tag> 随笔 </tag>
             
@@ -551,9 +578,9 @@
       
         <tags>
             
-            <tag> ceph </tag>
-            
             <tag> 经验总结 </tag>
+            
+            <tag> ceph </tag>
             
             <tag> 服务器运维 </tag>
             
@@ -607,9 +634,9 @@
       
         <tags>
             
-            <tag> ceph </tag>
-            
             <tag> 经验总结 </tag>
+            
+            <tag> ceph </tag>
             
             <tag> 服务器运维 </tag>
             
@@ -636,9 +663,9 @@
       
         <tags>
             
-            <tag> 学习笔记 </tag>
-            
             <tag> 经验总结 </tag>
+            
+            <tag> 学习笔记 </tag>
             
             <tag> Unity </tag>
             
@@ -823,9 +850,9 @@
       
         <tags>
             
-            <tag> 学习笔记 </tag>
-            
             <tag> 经验总结 </tag>
+            
+            <tag> 学习笔记 </tag>
             
         </tags>
       
@@ -944,33 +971,6 @@
     
     
     <entry>
-      <title>个人在 ROS 工程使用Protobuf的模板和一点心得</title>
-      <link href="/posts/System-development/20191127-ros-protobuf-template-insights.html"/>
-      <url>/posts/System-development/20191127-ros-protobuf-template-insights.html</url>
-      
-        <content type="html"><![CDATA[<p>从上周搞定ROS工程下使用Protbuf的问题后，陆续对原有工程进行了更改，在这一过程中，探索了下Protobuf与ROS工程结合的不同方式，暂时总结了一份模板，并在此记录下心得。</p><h3 id="1-使用-proto-的-ros-节点">1. 使用 Proto 的 ROS 节点</h3><p>在这贴下个人使用的范例：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── CMakeLists.txt</span><br><span class="line">├── include</span><br><span class="line">│   └── map</span><br><span class="line">│       ├── map.cpp</span><br><span class="line">│       └── map.h</span><br><span class="line">├── package.xml</span><br><span class="line">├── proto</span><br><span class="line">│   └── map.proto</span><br><span class="line">└── src</span><br><span class="line">    └── map_node.cpp</span><br></pre></td></tr></table></figure><p>个人在尝试不同的组织结构的过程中，也试过把proto文件单独设置一个节点，后续节点只需要添加即可，不需要都更改CmakeLists.txt文件。但对比Apollo工程发现，这样做会使工程目录不够清晰，不能直观地看到工程中是否引用了proto文件。再三考虑后还是决定每个节点单独设置proto文件夹来存在proto文件，这样更清晰直观。</p><hr><h3 id="2-cmakelists-txt模板">2. CmakeLists.txt模板</h3><p>目前最终效果如下：</p><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">2.8</span>.<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(map)</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(catkin REQUIRED COMPONENTS</span><br><span class="line">  roscpp</span><br><span class="line">  std_msgs</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">## System dependencies are found with CMake&#x27;s conventions</span></span><br><span class="line"><span class="keyword">list</span>(APPEND CMAKE_MODULE_PATH <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/cmake)</span><br><span class="line"><span class="keyword">include</span>(FindProtobuf)</span><br><span class="line"><span class="keyword">find_package</span>(Protobuf REQUIRED)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(proto_dir <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/proto)</span><br><span class="line"><span class="keyword">file</span>(GLOB proto_files <span class="string">&quot;$&#123;proto_dir&#125;/*.proto&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Set up destination directories</span></span><br><span class="line">catkin_destinations()</span><br><span class="line"><span class="keyword">set</span>(proto_gen_dir <span class="variable">$&#123;CATKIN_DEVEL_PREFIX&#125;</span>/<span class="variable">$&#123;CATKIN_GLOBAL_INCLUDE_DESTINATION&#125;</span>/<span class="variable">$&#123;PROJECT_NAME&#125;</span>)</span><br><span class="line"><span class="keyword">set</span>(proto_gen_cpp_dir <span class="variable">$&#123;proto_gen_dir&#125;</span>)</span><br><span class="line"><span class="keyword">file</span>(<span class="keyword">MAKE_DIRECTORY</span> <span class="variable">$&#123;proto_gen_dir&#125;</span>)</span><br><span class="line"><span class="keyword">file</span>(<span class="keyword">MAKE_DIRECTORY</span> <span class="variable">$&#123;proto_gen_cpp_dir&#125;</span>)</span><br><span class="line"><span class="keyword">set</span>(protogen_include_dirs <span class="variable">$&#123;proto_gen_cpp_dir&#125;</span>/../ <span class="variable">$&#123;proto_gen_python_dir&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create lists of files to be generated</span></span><br><span class="line"><span class="keyword">set</span>(proto_gen_cpp_files <span class="string">&quot;&quot;</span>)</span><br><span class="line"><span class="keyword">foreach</span>(proto_file <span class="variable">$&#123;proto_files&#125;</span>)  </span><br><span class="line">  <span class="keyword">get_filename_component</span>(proto_name <span class="variable">$&#123;proto_file&#125;</span> NAME_WE)</span><br><span class="line">  <span class="keyword">list</span>(APPEND proto_gen_cpp_files </span><br><span class="line">       <span class="variable">$&#123;proto_gen_cpp_dir&#125;</span>/<span class="variable">$&#123;proto_name&#125;</span>.pb.h </span><br><span class="line">       <span class="variable">$&#123;proto_gen_cpp_dir&#125;</span>/<span class="variable">$&#123;proto_name&#125;</span>.pb.cc</span><br><span class="line">  )</span><br><span class="line"><span class="keyword">endforeach</span>(proto_file <span class="variable">$&#123;proto_files&#125;</span>) </span><br><span class="line"></span><br><span class="line"><span class="comment"># Run protoc and generate language-specific headers.</span></span><br><span class="line"><span class="keyword">add_custom_command</span>(</span><br><span class="line">  OUTPUT <span class="variable">$&#123;proto_gen_cpp_files&#125;</span></span><br><span class="line">  <span class="keyword">COMMAND</span> <span class="variable">$&#123;PROTOBUF_PROTOC_EXECUTABLE&#125;</span> --proto_path=<span class="variable">$&#123;proto_dir&#125;</span> --cpp_out=<span class="variable">$&#123;proto_gen_cpp_dir&#125;</span> <span class="variable">$&#123;proto_files&#125;</span></span><br><span class="line">  DEPENDS <span class="variable">$&#123;PROTOBUF_PROTOC_EXECUTABLE&#125;</span> <span class="variable">$&#123;proto_files&#125;</span></span><br><span class="line">  WORKING_DIRECTORY <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set_source_files_properties</span>(<span class="variable">$&#123;proto_gen_cpp_files&#125;</span> PROPERTIES GENERATED <span class="keyword">TRUE</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_custom_target</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span>_generate_headers</span><br><span class="line">  DEPENDS <span class="variable">$&#123;proto_gen_cpp_files&#125;</span> </span><br><span class="line">) </span><br><span class="line"></span><br><span class="line"><span class="comment"># Create proto library for lining.</span></span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;PROTOBUF_INCLUDE_DIR&#125;</span> <span class="variable">$&#123;PROTOBUF_INCLUDE_DIR&#125;</span>/../../)</span><br><span class="line"><span class="keyword">add_library</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span>_proto <span class="variable">$&#123;proto_gen_cpp_files&#125;</span>)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span>_proto <span class="variable">$&#123;PROTOBUF_LIBRARY&#125;</span>)</span><br><span class="line"><span class="keyword">add_dependencies</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span>_proto <span class="variable">$&#123;PROJECT_NAME&#125;</span>_generate_headers)</span><br><span class="line"></span><br><span class="line">catkin_package(</span><br><span class="line">  INCLUDE_DIRS <span class="variable">$&#123;protogen_include_dirs&#125;</span></span><br><span class="line">  LIBRARIES <span class="variable">$&#123;PROJECT_NAME&#125;</span>_proto</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">install</span>(TARGETS <span class="variable">$&#123;PROJECT_NAME&#125;</span>_proto</span><br><span class="line">  ARCHIVE DESTINATION <span class="variable">$&#123;CATKIN_PACKAGE_LIB_DESTINATION&#125;</span></span><br><span class="line">  LIBRARY DESTINATION <span class="variable">$&#123;CATKIN_PACKAGE_LIB_DESTINATION&#125;</span></span><br><span class="line">  RUNTIME DESTINATION <span class="variable">$&#123;CATKIN_PACKAGE_BIN_DESTINATION&#125;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">install</span>(DIRECTORY <span class="variable">$&#123;proto_gen_cpp_dir&#125;</span>/</span><br><span class="line">  DESTINATION <span class="variable">$&#123;CATKIN_PACKAGE_INCLUDE_DESTINATION&#125;</span></span><br><span class="line">  FILES_MATCHING PATTERN <span class="string">&quot;*.h&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">catkin_package(</span><br><span class="line">  INCLUDE_DIRS <span class="keyword">include</span> </span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(</span><br><span class="line">  <span class="variable">$&#123;catkin_INCLUDE_DIRS&#125;</span></span><br><span class="line">  <span class="variable">$&#123;PROTOBUF_INCLUDE_DIR&#125;</span></span><br><span class="line">  <span class="variable">$&#123;CATKIN_DEVEL_PREFIX&#125;</span></span><br><span class="line">  <span class="keyword">include</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_library</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span></span><br><span class="line">  <span class="keyword">include</span>/<span class="variable">$&#123;PROJECT_NAME&#125;</span>/map.cpp</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(map_node </span><br><span class="line">  src/map_node.cpp</span><br><span class="line">  <span class="keyword">include</span>/<span class="variable">$&#123;PROJECT_NAME&#125;</span>/map.cpp</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span>_node </span><br><span class="line">  <span class="variable">$&#123;catkin_LIBRARIES&#125;</span></span><br><span class="line">  <span class="variable">$&#123;PROTOBUF_LIBRARIES&#125;</span></span><br><span class="line">  <span class="variable">$&#123;Boost_FILESYSTEM_LIBRARY&#125;</span></span><br><span class="line">  <span class="variable">$&#123;Boost_SYSTEM_LIBRARY&#125;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure><p>在使用中，有以下几点需要注意：</p><ol><li>使用时必须保证节点根目录下存在proto文件夹，并放置好proto文件，否则会提示无目标文件错误；</li><li>使用时需对应修改下与节点名称相关的变量</li><li>注意：生成的proto文件存在于devel目录inlude文件夹下，对应生成节点名称的文件夹，下面存在生成的变量。</li><li>include_directories目录中包含${CATKIN_DEVEL_PREFIX}宏，之后才可以引用devel文件目录中的proto生成文件；</li></ol>]]></content>
-      
-      
-      <categories>
-          
-          <category> System-development </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> ROS </tag>
-            
-            <tag> Protobuf </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Reactive Planner的原理及实现</title>
       <link href="/posts/Automotive/20191127-reactive-planner.html"/>
       <url>/posts/Automotive/20191127-reactive-planner.html</url>
@@ -990,6 +990,33 @@
             <tag> 经验总结 </tag>
             
             <tag> Automotive </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>个人在 ROS 工程使用Protobuf的模板和一点心得</title>
+      <link href="/posts/System-development/20191127-ros-protobuf-template-insights.html"/>
+      <url>/posts/System-development/20191127-ros-protobuf-template-insights.html</url>
+      
+        <content type="html"><![CDATA[<p>从上周搞定ROS工程下使用Protbuf的问题后，陆续对原有工程进行了更改，在这一过程中，探索了下Protobuf与ROS工程结合的不同方式，暂时总结了一份模板，并在此记录下心得。</p><h3 id="1-使用-proto-的-ros-节点">1. 使用 Proto 的 ROS 节点</h3><p>在这贴下个人使用的范例：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── CMakeLists.txt</span><br><span class="line">├── include</span><br><span class="line">│   └── map</span><br><span class="line">│       ├── map.cpp</span><br><span class="line">│       └── map.h</span><br><span class="line">├── package.xml</span><br><span class="line">├── proto</span><br><span class="line">│   └── map.proto</span><br><span class="line">└── src</span><br><span class="line">    └── map_node.cpp</span><br></pre></td></tr></table></figure><p>个人在尝试不同的组织结构的过程中，也试过把proto文件单独设置一个节点，后续节点只需要添加即可，不需要都更改CmakeLists.txt文件。但对比Apollo工程发现，这样做会使工程目录不够清晰，不能直观地看到工程中是否引用了proto文件。再三考虑后还是决定每个节点单独设置proto文件夹来存在proto文件，这样更清晰直观。</p><hr><h3 id="2-cmakelists-txt模板">2. CmakeLists.txt模板</h3><p>目前最终效果如下：</p><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">2.8</span>.<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(map)</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(catkin REQUIRED COMPONENTS</span><br><span class="line">  roscpp</span><br><span class="line">  std_msgs</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">## System dependencies are found with CMake&#x27;s conventions</span></span><br><span class="line"><span class="keyword">list</span>(APPEND CMAKE_MODULE_PATH <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/cmake)</span><br><span class="line"><span class="keyword">include</span>(FindProtobuf)</span><br><span class="line"><span class="keyword">find_package</span>(Protobuf REQUIRED)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(proto_dir <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/proto)</span><br><span class="line"><span class="keyword">file</span>(GLOB proto_files <span class="string">&quot;$&#123;proto_dir&#125;/*.proto&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Set up destination directories</span></span><br><span class="line">catkin_destinations()</span><br><span class="line"><span class="keyword">set</span>(proto_gen_dir <span class="variable">$&#123;CATKIN_DEVEL_PREFIX&#125;</span>/<span class="variable">$&#123;CATKIN_GLOBAL_INCLUDE_DESTINATION&#125;</span>/<span class="variable">$&#123;PROJECT_NAME&#125;</span>)</span><br><span class="line"><span class="keyword">set</span>(proto_gen_cpp_dir <span class="variable">$&#123;proto_gen_dir&#125;</span>)</span><br><span class="line"><span class="keyword">file</span>(<span class="keyword">MAKE_DIRECTORY</span> <span class="variable">$&#123;proto_gen_dir&#125;</span>)</span><br><span class="line"><span class="keyword">file</span>(<span class="keyword">MAKE_DIRECTORY</span> <span class="variable">$&#123;proto_gen_cpp_dir&#125;</span>)</span><br><span class="line"><span class="keyword">set</span>(protogen_include_dirs <span class="variable">$&#123;proto_gen_cpp_dir&#125;</span>/../ <span class="variable">$&#123;proto_gen_python_dir&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create lists of files to be generated</span></span><br><span class="line"><span class="keyword">set</span>(proto_gen_cpp_files <span class="string">&quot;&quot;</span>)</span><br><span class="line"><span class="keyword">foreach</span>(proto_file <span class="variable">$&#123;proto_files&#125;</span>)  </span><br><span class="line">  <span class="keyword">get_filename_component</span>(proto_name <span class="variable">$&#123;proto_file&#125;</span> NAME_WE)</span><br><span class="line">  <span class="keyword">list</span>(APPEND proto_gen_cpp_files </span><br><span class="line">       <span class="variable">$&#123;proto_gen_cpp_dir&#125;</span>/<span class="variable">$&#123;proto_name&#125;</span>.pb.h </span><br><span class="line">       <span class="variable">$&#123;proto_gen_cpp_dir&#125;</span>/<span class="variable">$&#123;proto_name&#125;</span>.pb.cc</span><br><span class="line">  )</span><br><span class="line"><span class="keyword">endforeach</span>(proto_file <span class="variable">$&#123;proto_files&#125;</span>) </span><br><span class="line"></span><br><span class="line"><span class="comment"># Run protoc and generate language-specific headers.</span></span><br><span class="line"><span class="keyword">add_custom_command</span>(</span><br><span class="line">  OUTPUT <span class="variable">$&#123;proto_gen_cpp_files&#125;</span></span><br><span class="line">  <span class="keyword">COMMAND</span> <span class="variable">$&#123;PROTOBUF_PROTOC_EXECUTABLE&#125;</span> --proto_path=<span class="variable">$&#123;proto_dir&#125;</span> --cpp_out=<span class="variable">$&#123;proto_gen_cpp_dir&#125;</span> <span class="variable">$&#123;proto_files&#125;</span></span><br><span class="line">  DEPENDS <span class="variable">$&#123;PROTOBUF_PROTOC_EXECUTABLE&#125;</span> <span class="variable">$&#123;proto_files&#125;</span></span><br><span class="line">  WORKING_DIRECTORY <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set_source_files_properties</span>(<span class="variable">$&#123;proto_gen_cpp_files&#125;</span> PROPERTIES GENERATED <span class="keyword">TRUE</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_custom_target</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span>_generate_headers</span><br><span class="line">  DEPENDS <span class="variable">$&#123;proto_gen_cpp_files&#125;</span> </span><br><span class="line">) </span><br><span class="line"></span><br><span class="line"><span class="comment"># Create proto library for lining.</span></span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;PROTOBUF_INCLUDE_DIR&#125;</span> <span class="variable">$&#123;PROTOBUF_INCLUDE_DIR&#125;</span>/../../)</span><br><span class="line"><span class="keyword">add_library</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span>_proto <span class="variable">$&#123;proto_gen_cpp_files&#125;</span>)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span>_proto <span class="variable">$&#123;PROTOBUF_LIBRARY&#125;</span>)</span><br><span class="line"><span class="keyword">add_dependencies</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span>_proto <span class="variable">$&#123;PROJECT_NAME&#125;</span>_generate_headers)</span><br><span class="line"></span><br><span class="line">catkin_package(</span><br><span class="line">  INCLUDE_DIRS <span class="variable">$&#123;protogen_include_dirs&#125;</span></span><br><span class="line">  LIBRARIES <span class="variable">$&#123;PROJECT_NAME&#125;</span>_proto</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">install</span>(TARGETS <span class="variable">$&#123;PROJECT_NAME&#125;</span>_proto</span><br><span class="line">  ARCHIVE DESTINATION <span class="variable">$&#123;CATKIN_PACKAGE_LIB_DESTINATION&#125;</span></span><br><span class="line">  LIBRARY DESTINATION <span class="variable">$&#123;CATKIN_PACKAGE_LIB_DESTINATION&#125;</span></span><br><span class="line">  RUNTIME DESTINATION <span class="variable">$&#123;CATKIN_PACKAGE_BIN_DESTINATION&#125;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">install</span>(DIRECTORY <span class="variable">$&#123;proto_gen_cpp_dir&#125;</span>/</span><br><span class="line">  DESTINATION <span class="variable">$&#123;CATKIN_PACKAGE_INCLUDE_DESTINATION&#125;</span></span><br><span class="line">  FILES_MATCHING PATTERN <span class="string">&quot;*.h&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">catkin_package(</span><br><span class="line">  INCLUDE_DIRS <span class="keyword">include</span> </span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(</span><br><span class="line">  <span class="variable">$&#123;catkin_INCLUDE_DIRS&#125;</span></span><br><span class="line">  <span class="variable">$&#123;PROTOBUF_INCLUDE_DIR&#125;</span></span><br><span class="line">  <span class="variable">$&#123;CATKIN_DEVEL_PREFIX&#125;</span></span><br><span class="line">  <span class="keyword">include</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_library</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span></span><br><span class="line">  <span class="keyword">include</span>/<span class="variable">$&#123;PROJECT_NAME&#125;</span>/map.cpp</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(map_node </span><br><span class="line">  src/map_node.cpp</span><br><span class="line">  <span class="keyword">include</span>/<span class="variable">$&#123;PROJECT_NAME&#125;</span>/map.cpp</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span>_node </span><br><span class="line">  <span class="variable">$&#123;catkin_LIBRARIES&#125;</span></span><br><span class="line">  <span class="variable">$&#123;PROTOBUF_LIBRARIES&#125;</span></span><br><span class="line">  <span class="variable">$&#123;Boost_FILESYSTEM_LIBRARY&#125;</span></span><br><span class="line">  <span class="variable">$&#123;Boost_SYSTEM_LIBRARY&#125;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure><p>在使用中，有以下几点需要注意：</p><ol><li>使用时必须保证节点根目录下存在proto文件夹，并放置好proto文件，否则会提示无目标文件错误；</li><li>使用时需对应修改下与节点名称相关的变量</li><li>注意：生成的proto文件存在于devel目录inlude文件夹下，对应生成节点名称的文件夹，下面存在生成的变量。</li><li>include_directories目录中包含${CATKIN_DEVEL_PREFIX}宏，之后才可以引用devel文件目录中的proto生成文件；</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> System-development </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ROS </tag>
+            
+            <tag> Protobuf </tag>
             
         </tags>
       
@@ -1214,33 +1241,6 @@
     
     
     <entry>
-      <title>ARM Linux SocketCAN驱动编译记录</title>
-      <link href="/posts/System-development/20180324-ARM-linux-socketCAN-driver-compilation-note.html"/>
-      <url>/posts/System-development/20180324-ARM-linux-socketCAN-driver-compilation-note.html</url>
-      
-        <content type="html"><![CDATA[<p>最近调试时使用了相关工具，参考了相关博客终于编译通过。特此汇总各博客内容进行整理</p><h3 id="1-编译环境所需工具：">1.编译环境所需工具：</h3><ul><li><a href="https://public.pengutronix.de/software/libsocketcan/">libsocketcan-0.0.10.tar.bz2</a></li><li><a href="https://public.pengutronix.de/software/socket-can/canutils/v4.0/">canutils-4.0.6.tar.bz2 </a></li></ul><p>交叉编译工具链根据每个开发板所提供的类型进行设置，我的工具链名称为</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arm-fsl-linux-gnueabi-gcc</span><br></pre></td></tr></table></figure><p>后面实际配置时请注意</p><hr><h3 id="2-参考博客">2.参考博客</h3><p><a href="https://www.cnblogs.com/eaggle/p/7641526.html">https://www.cnblogs.com/eaggle/p/7641526.html</a><br><a href="https://blog.csdn.net/sinat_35706094/article/details/79537749">https://blog.csdn.net/sinat_35706094/article/details/79537749</a><br><a href="https://blog.csdn.net/sno_guo/article/details/17029295">https://blog.csdn.net/sno_guo/article/details/17029295</a></p><hr><h3 id="3-具体配置">3.具体配置</h3><h4 id="第一步：配置交叉编译工具链">第一步：配置交叉编译工具链</h4><p>配置好交叉编译工具链为全局环境，也就是将其添加到环境变量中，具体因人而异。在这不具体说明，请自行查找资料</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export ARCH=arm</span><br><span class="line">export CROSS_COMPILE=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl</span><br><span class="line">-linaro-toolchain/bin/arm-none-linux-gnueabi-</span><br><span class="line">export PATH=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl-linaro-toolch</span><br><span class="line">ain/bin:$PATH</span><br></pre></td></tr></table></figure><h4 id="第二步-交叉编译libsocketcan">第二步 交叉编译libsocketcan</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd libsocketcan-0.0.10  //进入目录</span><br><span class="line">mkdir out              //创建文件夹，放置生成文件</span><br><span class="line">./configure --prefix=/文件夹路径/libsocketcan-0.0.10/out --host=arm-fsl-linux-gnueabi</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><p>此时生成文件会出现在<code>out/lib</code>文件夹下，将这些生成的库复制到开发板的文件系统内，可以放在lib目录下，也可以放在<code>usr/lib</code>里面<br>（每篇博客的设置都不同，该步的生成文件我没有拷贝到开发板。以防后面配置出现问题，可以设置上）</p><hr><h4 id="第三步-编译安装canutils-4-0-6-tar-bz2">第三步 编译安装<code>canutils-4.0.6.tar.bz2</code></h4><p>先将 libsocketcan 里面的头文件 <code>libsocketcan.h</code>， <code>can_netlink.h</code> 复制到 canutils 的 <code>include</code> 里面。这些文件在<code>out/include</code>目录下</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cd canutils-4.0.6/</span><br><span class="line">mkdir out</span><br><span class="line">//进行实际配置,可直接复制下面代码，务必仔细修改文件夹路径和交叉编译工具链</span><br><span class="line">./configure --host=arm-fsl-linux-gnueabi   \</span><br><span class="line">--prefix=/文件夹路径/canutils-4.0.6/out li   \</span><br><span class="line">bsocketcan_LIBS=-lsocketcan LDFLAGS=&quot;-L/   \</span><br><span class="line">文件夹路径/libsocketcan-0.0.10/out/lib/&quot; l   \  </span><br><span class="line">ibsocketcan_CFLAGS=&quot;-I/文件夹路径/libsocke   \ </span><br><span class="line">tcan-0.0.10/out/include&quot;</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><p>最后在 <code>out/sbin</code> 下能见到 <code>canconfig</code> 命令，在<code>out/bin</code> 下面 <code>candump/canecho/cansend/cansequence</code><br>将这些文件拷贝到开发板<code>/usr</code>目录下即可。</p><p>具体请看参考博客</p><hr><h3 id="4-高级设置">4.高级设置</h3><p>关键词：Linux SocketCAN工具<code>can-utils</code>中多线程设置</p><p>实际使用时，将接收到的CAN数据发送到远程，同时远程服务器会再发送数据过来，所以需要多线程的需求。写好编译时，会出现这样的报错</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">undefined reference to `pthread_create&#x27;</span><br></pre></td></tr></table></figure><p>很明显是由于设置多进程导致的，添加相应库后无效。经搜索发现需要在编译时进行相应设置，问题如下：</p><p><strong>问题：</strong> <code>pthread</code> 库不是 Linux 系统默认的库，连接时需要使用静态库 <code>libpthread.a</code>，所以在使用<code>pthread_create()</code>创建线程，以及调用 <code>pthread_atfork()</code>函数建立fork处理程序时，需要链接该库。</p><p>**解决：**在编译中要加 <code>-lpthread</code>参数（最好加在最后面，我到貌似就是这样才行）</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc thread.c -o thread -lpthread</span><br></pre></td></tr></table></figure><p><code>thread.c</code>为你些的源文件，不要忘了加上头文件<code>#include&lt;pthread.h&gt;</code></p><p>但由于<code>can-utils</code>是通过Makefile管理，因此需要找到相关的编译设置。摸索一小时终于找到~</p><p>在工具链<code>\src\GNUmakefile</code>中，第96行添加<code>-lpthread</code>，效果如下</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS = -Wall -g -lpthread -O2</span><br></pre></td></tr></table></figure><p>同时在第365行添加<code>-lpthread</code>，效果如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.c.o:</span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">(COMPILE) -MT <span class="variable">$@</span> -MD -MP -MF $(DEPDIR)/$*.Tpo -lpthread -c -o <span class="variable">$@</span> $&lt;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po</span></span><br></pre></td></tr></table></figure><p>之后执行<code>make</code>,<code>make install</code>编译即可。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> System-development </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 经验总结 </tag>
-            
-            <tag> 调试记录 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>2018年吉林大学软件学院软件工程学硕复试回忆</title>
       <link href="/posts/Others/20180324-2018-JLU-kaoyan-note-3.html"/>
       <url>/posts/Others/20180324-2018-JLU-kaoyan-note-3.html</url>
@@ -1283,6 +1283,33 @@
         <tags>
             
             <tag> 考研 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ARM Linux SocketCAN驱动编译记录</title>
+      <link href="/posts/System-development/20180324-ARM-linux-socketCAN-driver-compilation-note.html"/>
+      <url>/posts/System-development/20180324-ARM-linux-socketCAN-driver-compilation-note.html</url>
+      
+        <content type="html"><![CDATA[<p>最近调试时使用了相关工具，参考了相关博客终于编译通过。特此汇总各博客内容进行整理</p><h3 id="1-编译环境所需工具：">1.编译环境所需工具：</h3><ul><li><a href="https://public.pengutronix.de/software/libsocketcan/">libsocketcan-0.0.10.tar.bz2</a></li><li><a href="https://public.pengutronix.de/software/socket-can/canutils/v4.0/">canutils-4.0.6.tar.bz2 </a></li></ul><p>交叉编译工具链根据每个开发板所提供的类型进行设置，我的工具链名称为</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arm-fsl-linux-gnueabi-gcc</span><br></pre></td></tr></table></figure><p>后面实际配置时请注意</p><hr><h3 id="2-参考博客">2.参考博客</h3><p><a href="https://www.cnblogs.com/eaggle/p/7641526.html">https://www.cnblogs.com/eaggle/p/7641526.html</a><br><a href="https://blog.csdn.net/sinat_35706094/article/details/79537749">https://blog.csdn.net/sinat_35706094/article/details/79537749</a><br><a href="https://blog.csdn.net/sno_guo/article/details/17029295">https://blog.csdn.net/sno_guo/article/details/17029295</a></p><hr><h3 id="3-具体配置">3.具体配置</h3><h4 id="第一步：配置交叉编译工具链">第一步：配置交叉编译工具链</h4><p>配置好交叉编译工具链为全局环境，也就是将其添加到环境变量中，具体因人而异。在这不具体说明，请自行查找资料</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export ARCH=arm</span><br><span class="line">export CROSS_COMPILE=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl</span><br><span class="line">-linaro-toolchain/bin/arm-none-linux-gnueabi-</span><br><span class="line">export PATH=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl-linaro-toolch</span><br><span class="line">ain/bin:$PATH</span><br></pre></td></tr></table></figure><h4 id="第二步-交叉编译libsocketcan">第二步 交叉编译libsocketcan</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd libsocketcan-0.0.10  //进入目录</span><br><span class="line">mkdir out              //创建文件夹，放置生成文件</span><br><span class="line">./configure --prefix=/文件夹路径/libsocketcan-0.0.10/out --host=arm-fsl-linux-gnueabi</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><p>此时生成文件会出现在<code>out/lib</code>文件夹下，将这些生成的库复制到开发板的文件系统内，可以放在lib目录下，也可以放在<code>usr/lib</code>里面<br>（每篇博客的设置都不同，该步的生成文件我没有拷贝到开发板。以防后面配置出现问题，可以设置上）</p><hr><h4 id="第三步-编译安装canutils-4-0-6-tar-bz2">第三步 编译安装<code>canutils-4.0.6.tar.bz2</code></h4><p>先将 libsocketcan 里面的头文件 <code>libsocketcan.h</code>， <code>can_netlink.h</code> 复制到 canutils 的 <code>include</code> 里面。这些文件在<code>out/include</code>目录下</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cd canutils-4.0.6/</span><br><span class="line">mkdir out</span><br><span class="line">//进行实际配置,可直接复制下面代码，务必仔细修改文件夹路径和交叉编译工具链</span><br><span class="line">./configure --host=arm-fsl-linux-gnueabi   \</span><br><span class="line">--prefix=/文件夹路径/canutils-4.0.6/out li   \</span><br><span class="line">bsocketcan_LIBS=-lsocketcan LDFLAGS=&quot;-L/   \</span><br><span class="line">文件夹路径/libsocketcan-0.0.10/out/lib/&quot; l   \  </span><br><span class="line">ibsocketcan_CFLAGS=&quot;-I/文件夹路径/libsocke   \ </span><br><span class="line">tcan-0.0.10/out/include&quot;</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><p>最后在 <code>out/sbin</code> 下能见到 <code>canconfig</code> 命令，在<code>out/bin</code> 下面 <code>candump/canecho/cansend/cansequence</code><br>将这些文件拷贝到开发板<code>/usr</code>目录下即可。</p><p>具体请看参考博客</p><hr><h3 id="4-高级设置">4.高级设置</h3><p>关键词：Linux SocketCAN工具<code>can-utils</code>中多线程设置</p><p>实际使用时，将接收到的CAN数据发送到远程，同时远程服务器会再发送数据过来，所以需要多线程的需求。写好编译时，会出现这样的报错</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">undefined reference to `pthread_create&#x27;</span><br></pre></td></tr></table></figure><p>很明显是由于设置多进程导致的，添加相应库后无效。经搜索发现需要在编译时进行相应设置，问题如下：</p><p><strong>问题：</strong> <code>pthread</code> 库不是 Linux 系统默认的库，连接时需要使用静态库 <code>libpthread.a</code>，所以在使用<code>pthread_create()</code>创建线程，以及调用 <code>pthread_atfork()</code>函数建立fork处理程序时，需要链接该库。</p><p>**解决：**在编译中要加 <code>-lpthread</code>参数（最好加在最后面，我到貌似就是这样才行）</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc thread.c -o thread -lpthread</span><br></pre></td></tr></table></figure><p><code>thread.c</code>为你些的源文件，不要忘了加上头文件<code>#include&lt;pthread.h&gt;</code></p><p>但由于<code>can-utils</code>是通过Makefile管理，因此需要找到相关的编译设置。摸索一小时终于找到~</p><p>在工具链<code>\src\GNUmakefile</code>中，第96行添加<code>-lpthread</code>，效果如下</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS = -Wall -g -lpthread -O2</span><br></pre></td></tr></table></figure><p>同时在第365行添加<code>-lpthread</code>，效果如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.c.o:</span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">(COMPILE) -MT <span class="variable">$@</span> -MD -MP -MF $(DEPDIR)/$*.Tpo -lpthread -c -o <span class="variable">$@</span> $&lt;</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po</span></span><br></pre></td></tr></table></figure><p>之后执行<code>make</code>,<code>make install</code>编译即可。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> System-development </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 经验总结 </tag>
+            
+            <tag> 调试记录 </tag>
             
         </tags>
       
@@ -1334,11 +1361,11 @@
       
         <tags>
             
+            <tag> Bug调试 </tag>
+            
             <tag> 软件无线电 </tag>
             
             <tag> 通信 </tag>
-            
-            <tag> Bug调试 </tag>
             
         </tags>
       
