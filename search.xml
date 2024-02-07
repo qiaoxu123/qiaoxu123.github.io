@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>HLS Learning P8 - Write Efficient C Test Bench(1)</title>
+      <link href="/posts/FPGA/20240207-Write-Efficient-C-Test-Bench-1.html"/>
+      <url>/posts/FPGA/20240207-Write-Efficient-C-Test-Bench-1.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-introduction">1. Introduction</h1><p><img src="../../../post-images/Pasted%20image%2020240103215744.jpeg" alt=""></p><p>相比 RTL 而言 C test bench 写起来更快，效率更高。并且可以直接转换为 RTL 的 Testbench 方便生成 <code>.v</code> 文件后进行进一步的验证。</p><p>建议是使用一个独立的 <code>_tb.c</code> 文件来组织 Test Bench 不要和 top-level function 混在一起。</p><p><img src="../../../post-images/Pasted%20image%2020240103215757.jpeg" alt=""></p><p>main() 函数的返回值必须设置为 0（表示结果正确）和非 0 值两种（结果不正确）<br><img src="../../../post-images/Pasted%20image%2020240103220547.jpeg" alt=""></p><h1 id="2-test-bench-architecture-in-c">2. Test Bench Architecture in C++</h1><p>包含如下这几个部分，每个部分具体功能后面有介绍。</p><p><img src="../../../post-images/Pasted%20image%2020240103220557.png" alt=""></p><p>参与 Test Bench 的数据可能来自或者生成到 Exteranl file（数据量比较大时候），当包括这部分功能时需要调用相关的库文件来实现外部文件的读取和写入。具体后面一节可能会讲到。</p><p><img src="../../../post-images/Pasted%20image%2020240103220604.jpeg" alt=""></p><h1 id="3-summary">3. Summary</h1><p><img src="../../../post-images/Pasted%20image%2020240103220610.jpeg" alt=""></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> FPGA </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> FPGA </tag>
+            
+            <tag> HLS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HLS Learning P7 - C++ Basic Operator</title>
+      <link href="/posts/FPGA/20240206-C++-Basic-Operator.html"/>
+      <url>/posts/FPGA/20240206-C++-Basic-Operator.html</url>
+      
+        <content type="html"><![CDATA[<p>这节课主要是关于 C++ 基本运算在 HLS 中的注意事项，C++ 基本运算的语法并不是可以直接完全在 HLS 中应用的。仔细想也能理解，在软件编程中 C++ 特性的易用和高效有很大一部分原因要归功于编译器。而在 HLS 中并没有那么高级的优化处理，因此在编写时需要遵循一些规则。</p><h1 id="1-operators">1. Operators</h1><p>当我们进行定点数的算术运算时，需要注意位宽的处理。遵循的原则是：<strong>大数据不溢出，小数据不损失</strong>。<br><img src="../../../post-images/Pasted%20image%2020240104202852.jpeg" alt=""></p><p>没有什么特别的，支持缩写形式</p><p><img src="../../../post-images/Pasted%20image%2020240104202859.jpeg" alt=""></p><p>在 Vivado HLS 中，当进行算术运算时，一定要保证运算符两侧的类型是一致的，<strong>如果存在不一致一定要手动进行数据类型的转换</strong>。因为 Vivado HLS 不支持自动类型转换，不然会报如下错误<br><img src="../../../post-images/Pasted%20image%2020240104202921.jpeg" alt=""></p><p><img src="../../../post-images/Pasted%20image%2020240104204922.jpeg" alt=""></p><p><img src="../../../post-images/Pasted%20image%2020240104202928.jpeg" alt=""></p><p>对于逻辑运算返回的结果是 True or False，而对于位运算，返回值和操作数的宽度有关系。<br><img src="../../../post-images/Pasted%20image%2020240104202941.jpeg" alt=""></p><h1 id="2-case-analysis">2. Case Analysis</h1><p>这部分主要想让我们明白，使用 HLS 加速算法时需要对算法理解到位，关键部分使用什么资源要做到心里有数，以及实现上根据 HLS 特性做相应的调整。</p><h2 id="a-complex-multiplier">a. Complex Multiplier</h2><p>如下实例所示，声明并使用了 complex 这个 library 来实现复数运算。可以看到正常的实现形式会消耗 4 个 multipliers 和 2 个 adders<img src="../../../post-images/Pasted%20image%2020240104202951.jpeg" alt=""></p><p>对公式进行变换，减少了 multiply 的使用，修改后同样的运算变成只使用 3 个加法器<br><img src="../../../post-images/Pasted%20image%2020240104202958.jpeg" alt=""></p><p><img src="../../../post-images/Pasted%20image%2020240104203005.jpeg" alt=""></p><h2 id="b-euclidean-algorithm">b. Euclidean Algorithm</h2><p>计算最大公约数的算法（主要是取余运算）<br><img src="../../../post-images/Pasted%20image%2020240104203011.jpeg" alt=""></p><p>这里采用循环方式来实现</p><p><img src="../../../post-images/Pasted%20image%2020240104203017.jpeg" alt=""></p><p><img src="../../../post-images/Pasted%20image%2020240104203024.jpeg" alt=""></p><p>Vivado HLS 不支持递归，提示的报错信息如下所示<br><img src="../../../post-images/Pasted%20image%2020240104203030.jpeg" alt=""></p><h1 id="3-summary">3. Summary</h1><p><img src="../../../post-images/Pasted%20image%2020240104203035.jpeg" alt=""></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> FPGA </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> FPGA </tag>
+            
+            <tag> HLS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>HLS Learning P6 - Composite Data Type</title>
       <link href="/posts/FPGA/20240205-Composite-Data-Type.html"/>
       <url>/posts/FPGA/20240205-Composite-Data-Type.html</url>
@@ -31,11 +85,11 @@
     
     
     <entry>
-      <title>HLS Learning P4 - Data Type - Arbitrary Precision</title>
-      <link href="/posts/FPGA/20240201-Data-type-Arbitrary-Precision.html"/>
-      <url>/posts/FPGA/20240201-Data-type-Arbitrary-Precision.html</url>
+      <title>HLS Learning P5 - Data Type - Type Conversion</title>
+      <link href="/posts/FPGA/20240201-Data-Type-Type-Conversion.html"/>
+      <url>/posts/FPGA/20240201-Data-Type-Type-Conversion.html</url>
       
-        <content type="html"><![CDATA[<h1 id="1-c-based-data-types">1. C-based Data Types</h1><p>为了避免 C 语言中固定数据类型长度带来的资源浪费，提供了任意精度数据类型的描述。首先来看下传统的 C 语言所支持的数据类型，需要注意的是对于 Vivado HLS 而言 Char 类型是不支持的。</p><p><img src="../../../post-images/Pasted%20image%2020240118215511.png" alt=""></p><p>传统的 C 语言的数据类型，受限于冯若依曼架构设计以及编译器等，都是以 8 为单位。这样的数据宽度在 FPGA 硬件设计上是难以接受的，一是 FPGA 本身是支持任意宽度的，二是为了满足这样的位宽，很容易导致资源浪费。比如设计一个 18x18 的乘法器，在 综合时为了满足要求只能使用 32x32 的硬件资源来实现，导致直接浪费掉了 4 个 DSP48E1 在 7 系列 FPGA 上。<br><img src="../../../post-images/Pasted%20image%2020240118215522.png" alt=""></p><h1 id="2-arbitrary-precision-data-types">2. Arbitrary Precision Data Types</h1><p>W 的取值范围可以是 1~1024，注意使用 ap_int 类型时要包括头文件。</p><p>HLS 也支持 System C 的任意精度类型，感兴趣参考下图中提示的文件<br><img src="../../../post-images/Pasted%20image%2020240118215528.png" alt=""></p><p>修改为任意精度的数据类型后可以使用更少的资源，获得更高的时钟频率以及更低的时延,并且 ap_int 支持基本所有的 C int 的运算。</p><p><img src="../../../post-images/Pasted%20image%2020240118215535.png" alt=""></p><p>将数据类型定义在头文件中方便后期 Debug</p><p><img src="../../../post-images/Pasted%20image%2020240118215540.png" alt=""></p><h1 id="3-sizeof">3. Sizeof()</h1><p>获取数据类型占用了几个 Bytes<br><img src="../../../post-images/Pasted%20image%2020240118215547.png" alt=""></p><p><img src="../../../post-images/Pasted%20image%2020240118215552.png" alt=""></p><h1 id="4-used-in-microsoft-vs">4. Used in Microsoft VS</h1><p><img src="../../../post-images/Pasted%20image%2020240118215557.png" alt=""></p><p><img src="../../../post-images/Pasted%20image%2020240118215603.png" alt=""></p><h1 id="5-summary">5. Summary</h1><p><img src="../../../post-images/Pasted%20image%2020240118215609.png" alt=""></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="1-variable-definition-and-initialization">1. Variable Definition and Initialization</h1><p>目前 Vivado HLS 支持 copy initialization，direct initialization 以及指定 radix format（2 进制，10 进制和 16 进制）的初始化,不支持 uniform initialization（如下图中代码第四行描述的那种初始化方式）。下面是对任意精度类型进行初始化<br><img src="../../../post-images/Pasted%20image%2020240106160827.jpeg" alt="1075"><br>Q 表明了量化模式（Quantization Mode），O 表示 Overflow 溢出模式（Overflow mode)针对高位。</p><p>示例 1.25 用二进制表示为 0101，小数点在中间。其中的 0.25 用二进制表示为 0.01，这是因为在二进制表示中，小数点的右边是 0 乘以 2 的负几次方，0.01 的话就是 0 乘以 2 的负二次方也就是 1/4 = 0.25。<br>对于 var2，采用 AP_RND 的量化模式，相当于进位了，所以是 1.5<br>对于 var3，由于是只取 4 位因此是 0011 大小为 3，而 var4 设置为 AP_SAT 模式后取了 4 位有效位宽有符号数的最大值也就是 7。<br><img src="../../../post-images/Pasted%20image%2020240106160807.jpeg" alt=""></p><h1 id="2-浮点类型处理">2. 浮点类型处理</h1><p>The Vivado HLS Math library (hls_math.h) provides extensive support for the synthesis of the standard C(math.h) and C++(cmath.h) libraries.<br>The support includes floating point and fixed-point functions.</p><h2 id="a-implicit-type-conversion：numeric-promotion">a. Implicit Type Conversion：Numeric Promotion</h2><p>隐式数据类型转换。如下图所示有两种形式，一种是 Numeric promotion，另一种是 Numeric conversion。之所以称为隐式是因为不需要在代码中显式地指定，编译器会根据需要自动进行。<br>Numeric Promotion 在编程中指的是将较低精度的数据类型在表达式中提升为较高精度的数据类型的过程。<br><img src="../../../post-images/Pasted%20image%2020240106160931.jpeg" alt=""><br>这里有符号数赋值给无符号数时，会发生符号位扩展，以保证数值的相对大小不变。如上图中的示例，-4 有符号数（以补码表示是 252)将其赋值给 res 这个无符号数时，符号扩展后数值就是 252。</p><h2 id="b-implicit-type-conversion：-numeric-conversion">b. Implicit Type conversion： Numeric Conversion</h2><p>如下图中所描述的，将一个大数据类型转换为小数据类型。<br><img src="../../../post-images/Pasted%20image%2020240106160956.jpeg" alt=""><br>当把 v5 赋值给 res2 时，由于只取了低两位即 11，因此表示的数值大小就是 -1。对于 v6 的赋值也是如此<br>当把 v1 赋值给 v3 时，采用了 AP_RND 量化模式，因此变为了 1.5。</p><h2 id="c-explicit-type-conversion-casting-：c-style">c. Explicit Type Conversion（casting）：C-Style</h2><p><img src="../../../post-images/Pasted%20image%2020240106161010.jpeg" alt=""><br>对应算术运算的位宽处理方式<br><img src="../../../post-images/Pasted%20image%2020240106161027.jpeg" alt=""></p><p><img src="../../../post-images/Pasted%20image%2020240106161037.png" alt=""></p><h1 id="3-summary">3. Summary</h1><p><img src="../../../post-images/Pasted%20image%2020240106161047.jpeg" alt=""></p>]]></content>
       
       
       <categories>
@@ -58,11 +112,11 @@
     
     
     <entry>
-      <title>HLS Learning P5 - Data Type - Type Conversion</title>
-      <link href="/posts/FPGA/20240201-Data-Type-Type-Conversion.html"/>
-      <url>/posts/FPGA/20240201-Data-Type-Type-Conversion.html</url>
+      <title>HLS Learning P4 - Data Type - Arbitrary Precision</title>
+      <link href="/posts/FPGA/20240201-Data-type-Arbitrary-Precision.html"/>
+      <url>/posts/FPGA/20240201-Data-type-Arbitrary-Precision.html</url>
       
-        <content type="html"><![CDATA[<h1 id="1-variable-definition-and-initialization">1. Variable Definition and Initialization</h1><p>目前 Vivado HLS 支持 copy initialization，direct initialization 以及指定 radix format（2 进制，10 进制和 16 进制）的初始化,不支持 uniform initialization（如下图中代码第四行描述的那种初始化方式）。下面是对任意精度类型进行初始化<br><img src="../../../post-images/Pasted%20image%2020240106160827.jpeg" alt="1075"><br>Q 表明了量化模式（Quantization Mode），O 表示 Overflow 溢出模式（Overflow mode)针对高位。</p><p>示例 1.25 用二进制表示为 0101，小数点在中间。其中的 0.25 用二进制表示为 0.01，这是因为在二进制表示中，小数点的右边是 0 乘以 2 的负几次方，0.01 的话就是 0 乘以 2 的负二次方也就是 1/4 = 0.25。<br>对于 var2，采用 AP_RND 的量化模式，相当于进位了，所以是 1.5<br>对于 var3，由于是只取 4 位因此是 0011 大小为 3，而 var4 设置为 AP_SAT 模式后取了 4 位有效位宽有符号数的最大值也就是 7。<br><img src="../../../post-images/Pasted%20image%2020240106160807.jpeg" alt=""></p><h1 id="2-浮点类型处理">2. 浮点类型处理</h1><p>The Vivado HLS Math library (hls_math.h) provides extensive support for the synthesis of the standard C(math.h) and C++(cmath.h) libraries.<br>The support includes floating point and fixed-point functions.</p><h2 id="a-implicit-type-conversion：numeric-promotion">a. Implicit Type Conversion：Numeric Promotion</h2><p>隐式数据类型转换。如下图所示有两种形式，一种是 Numeric promotion，另一种是 Numeric conversion。之所以称为隐式是因为不需要在代码中显式地指定，编译器会根据需要自动进行。<br>Numeric Promotion 在编程中指的是将较低精度的数据类型在表达式中提升为较高精度的数据类型的过程。<br><img src="../../../post-images/Pasted%20image%2020240106160931.jpeg" alt=""><br>这里有符号数赋值给无符号数时，会发生符号位扩展，以保证数值的相对大小不变。如上图中的示例，-4 有符号数（以补码表示是 252)将其赋值给 res 这个无符号数时，符号扩展后数值就是 252。</p><h2 id="b-implicit-type-conversion：-numeric-conversion">b. Implicit Type conversion： Numeric Conversion</h2><p>如下图中所描述的，将一个大数据类型转换为小数据类型。<br><img src="../../../post-images/Pasted%20image%2020240106160956.jpeg" alt=""><br>当把 v5 赋值给 res2 时，由于只取了低两位即 11，因此表示的数值大小就是 -1。对于 v6 的赋值也是如此<br>当把 v1 赋值给 v3 时，采用了 AP_RND 量化模式，因此变为了 1.5。</p><h2 id="c-explicit-type-conversion-casting-：c-style">c. Explicit Type Conversion（casting）：C-Style</h2><p><img src="../../../post-images/Pasted%20image%2020240106161010.jpeg" alt=""><br>对应算术运算的位宽处理方式<br><img src="../../../post-images/Pasted%20image%2020240106161027.jpeg" alt=""></p><p><img src="../../../post-images/Pasted%20image%2020240106161037.png" alt=""></p><h1 id="3-summary">3. Summary</h1><p><img src="../../../post-images/Pasted%20image%2020240106161047.jpeg" alt=""></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="1-c-based-data-types">1. C-based Data Types</h1><p>为了避免 C 语言中固定数据类型长度带来的资源浪费，提供了任意精度数据类型的描述。首先来看下传统的 C 语言所支持的数据类型，需要注意的是对于 Vivado HLS 而言 Char 类型是不支持的。</p><p><img src="../../../post-images/Pasted%20image%2020240118215511.png" alt=""></p><p>传统的 C 语言的数据类型，受限于冯若依曼架构设计以及编译器等，都是以 8 为单位。这样的数据宽度在 FPGA 硬件设计上是难以接受的，一是 FPGA 本身是支持任意宽度的，二是为了满足这样的位宽，很容易导致资源浪费。比如设计一个 18x18 的乘法器，在 综合时为了满足要求只能使用 32x32 的硬件资源来实现，导致直接浪费掉了 4 个 DSP48E1 在 7 系列 FPGA 上。<br><img src="../../../post-images/Pasted%20image%2020240118215522.png" alt=""></p><h1 id="2-arbitrary-precision-data-types">2. Arbitrary Precision Data Types</h1><p>W 的取值范围可以是 1~1024，注意使用 ap_int 类型时要包括头文件。</p><p>HLS 也支持 System C 的任意精度类型，感兴趣参考下图中提示的文件<br><img src="../../../post-images/Pasted%20image%2020240118215528.png" alt=""></p><p>修改为任意精度的数据类型后可以使用更少的资源，获得更高的时钟频率以及更低的时延,并且 ap_int 支持基本所有的 C int 的运算。</p><p><img src="../../../post-images/Pasted%20image%2020240118215535.png" alt=""></p><p>将数据类型定义在头文件中方便后期 Debug</p><p><img src="../../../post-images/Pasted%20image%2020240118215540.png" alt=""></p><h1 id="3-sizeof">3. Sizeof()</h1><p>获取数据类型占用了几个 Bytes<br><img src="../../../post-images/Pasted%20image%2020240118215547.png" alt=""></p><p><img src="../../../post-images/Pasted%20image%2020240118215552.png" alt=""></p><h1 id="4-used-in-microsoft-vs">4. Used in Microsoft VS</h1><p><img src="../../../post-images/Pasted%20image%2020240118215557.png" alt=""></p><p><img src="../../../post-images/Pasted%20image%2020240118215603.png" alt=""></p><h1 id="5-summary">5. Summary</h1><p><img src="../../../post-images/Pasted%20image%2020240118215609.png" alt=""></p>]]></content>
       
       
       <categories>
@@ -549,11 +603,11 @@
       
         <tags>
             
+            <tag> 随笔 </tag>
+            
             <tag> Ceph </tag>
             
             <tag> 学习笔记 </tag>
-            
-            <tag> 随笔 </tag>
             
         </tags>
       
@@ -987,9 +1041,9 @@
       
         <tags>
             
-            <tag> 经验总结 </tag>
-            
             <tag> Automotive </tag>
+            
+            <tag> 经验总结 </tag>
             
         </tags>
       
@@ -1122,11 +1176,11 @@
       
         <tags>
             
-            <tag> 随笔 </tag>
-            
             <tag> Automotive </tag>
             
             <tag> 点云 </tag>
+            
+            <tag> 随笔 </tag>
             
         </tags>
       
