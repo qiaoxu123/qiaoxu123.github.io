@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>HLS Learning P12 - Implementing Arrays as RTL Interfaces</title>
+      <link href="/posts/FPGA/20240229-Implementing-Arrays-as-RTL-Interfaces.html"/>
+      <url>/posts/FPGA/20240229-Implementing-Arrays-as-RTL-Interfaces.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-array-arguments">1. Array Arguments</h1><p>这里所说的 Arrays 是作为 <font color="#95b3d7">top-level functions</font> arguments，后面会说当其作为 arguments of <font color="#95b3d7">sub-module</font> 时如何进行优化。如下图中所说，Synthesis 时默认会把 array arguments 转为 RAM ports，这个过程是允许你通过修改 diretives 选择 RAM interface 是单口还是双口的，但如果 Vivado HLS 认为只需要 single port 就够了，那么它最后会帮你替换为 single port。另外通过修改 directives 还可以选择使用 FIFO interfaces 以及 partition（这里其实 Arrays can be <font color="#95b3d7">partitioned</font> according to <font color="#95b3d7">the data rate requirements</font>，后面课程中会讲解）。<br><img src="../../../post-images/Pasted%20image%2020240107104831.jpeg" alt=""></p><h1 id="2-case-analysis">2. Case Analysis</h1><h2 id="a-memory-interface-default">a. Memory Interface (Default)</h2><p>只要 array 作为 top-level function 的 arguments，无论什么类型，默认 protocol 都是 ap_memory。</p><p>补充：<code>d_o_ce0</code> 是片选信号。</p><p><img src="../../../post-images/Pasted%20image%2020240107104902.jpeg" alt=""></p><p>从时序波形图上看每个信号的作用</p><p><img src="../../../post-images/Pasted%20image%2020240107104916.png" alt=""></p><p>将 top-level function 综合后得到的 IP 与 RAM 模块进行连接，此时需要我们手动添加 RAM 进去，通过片选信号来决定是否激活连接。<br><img src="../../../post-images/Pasted%20image%2020240107104928.jpeg" alt=""></p><h2 id="b-fifo-interface">b. FIFO Interface</h2><p>当数据是 stream 时可以修改 directives 选择 ap_fifo mode，会生成两组 ports（FIFO 的 input 和 output ），Protocol 均为 ap_fifo。<br><img src="../../../post-images/Pasted%20image%2020240107104936.png" alt=""></p><p>同样需要手动连接一块 memory</p><p><img src="../../../post-images/Pasted%20image%2020240107104943.jpeg" alt=""></p><h1 id="3-summary">3. Summary</h1><p><img src="../../../post-images/Pasted%20image%2020240107105009.jpeg" alt=""></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> FPGA </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> FPGA </tag>
+            
+            <tag> HLS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>HLS Learning P11 - Basic Introduction of Interface Synthesis</title>
       <link href="/posts/FPGA/20240227-Basic-Introduction-of-Interface-synthesis.html"/>
       <url>/posts/FPGA/20240227-Basic-Introduction-of-Interface-synthesis.html</url>
