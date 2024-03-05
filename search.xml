@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>HLS Learning P16 - Optimization of for-loop - Loop Merging</title>
+      <link href="/posts/FPGA/20240305-Optimization-of-for-loop-loop-merging.html"/>
+      <url>/posts/FPGA/20240305-Optimization-of-for-loop-loop-merging.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-introduction">1. Introduction</h1><p>接着上讲继续来说 for-loop 的另一种方法：loop merging。</p><p>如下图中例子，两个 for-loop 分别执行 add 和 sub 操作，彼此互不干涉，理论上我们希望它们能够是并行执行的，最后生成的电路应该如下图右侧所示。<br><img src="../../../post-images/Pasted%20image%2020240114142341.png" alt=""><br>而实际上 HLS 生成的电路，两个 for 循环是按顺序进行的，如下图所示分别占用了 8 个时钟周期，考虑到进入 for 循环和离开 for 循环需要 2 个时钟周期，一共占用了 18 个时钟周期。<br><img src="../../../post-images/Pasted%20image%2020240114142350.png" alt=""></p><h1 id="2-merge-loops">2. Merge loops</h1><p>为了解决上面的问题，在 Vivado 中使用 Merge 的方法来解决。先引入一个新的概念：Region，Region 下所包含的 for 循环是它的作用域，类似 for-loop 上的关键字，用一个关键字加大括号对想要覆盖的 logic 进行包含。当 GUI 右侧 Directive 窗口出现对应关键字时说明生效。</p><p><img src="../../../post-images/Pasted%20image%2020240114142407.png" alt=""><br>使用 Regions 进行合并后 loop 变成了一个，latency 和 interval 也大大降低。<br><img src="../../../post-images/Pasted%20image%2020240114142418.png" alt=""></p><p>实际 for-loop 在运行时，会创建包含多种状态的状态机，因此会消耗较多资源。通过合并操作可以减少资源使用并降低时钟周期。</p><p><img src="../../../post-images/Pasted%20image%2020240114142434.png" alt=""></p><h1 id="3-different-bound">3. Different bound</h1><p>上面例子中循环边界是相同的常数，实际中循环边界情况各种各样，merge 又会遇到什么情况呢？</p><h2 id="a-different-constant-loop-bound">a. Different constant loop bound</h2><p>如果 for 循环边界是不同的常数，合并后是以最大的作为合并后的边界。<br><img src="../../../post-images/Pasted%20image%2020240114142442.png" alt=""></p><h2 id="b-variable-bound-and-constant-bound">b. Variable Bound and Constant Bound</h2><p>其次，如果边界一个常数一个变量，那么是没有办法合并的。这里 sub for-loop 的循环边界是一个 <code>ap_uint&lt;4&gt;</code> 的变量，因此其范围是 0~15。<br><img src="../../../post-images/Pasted%20image%2020240114143825.png" alt=""></p><h2 id="c-variable-loop-bounds">c. Variable Loop Bounds</h2><p>在两个循环边界都是变量的情况下直接进行 merge 也是会报错的，但可以通过一些技巧来解决。</p><p><img src="../../../post-images/Pasted%20image%2020240114142449.png" alt=""><br>假设这里 J 小于 K，可以将上面的 for 循环拆解开。然后进行 merge<br><img src="../../../post-images/Pasted%20image%2020240114142456.png" alt=""></p><h1 id="4-summary">4. Summary</h1><p>以上合并规则总结如下<br><img src="../../../post-images/Pasted%20image%2020240114142503.png" alt=""></p><p><img src="../../../post-images/Pasted%20image%2020240114142529.png" alt=""></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> FPGA </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> FPGA </tag>
+            
+            <tag> HLS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>HLS Learning P14 - Optimization of for-loop - Performance Metrics</title>
       <link href="/posts/FPGA/20240303-Optimization-of-for-loop-performance-metrics.html"/>
       <url>/posts/FPGA/20240303-Optimization-of-for-loop-performance-metrics.html</url>
