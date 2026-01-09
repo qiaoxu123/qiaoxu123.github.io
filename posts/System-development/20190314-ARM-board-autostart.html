@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>ARM 开发板开机自启 | Blog</title><meta name="author" content="xqiao"><meta name="copyright" content="xqiao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="最近调试工程，ARM开发板开机自启问题，困扰了一周左右，现在终于解决，整理记录！ 一、背景  开发板型号：飞凌嵌入式OKMX6X-S3（地址） 4G模块：华为me909s模块  问题来源：因为开发板需要商业应用，所以需要配置自动联网。而在官网提供的文档中，对于华为me909s模块的启动，需要通过拨号命令来实现，所以开始进行问题尝试。  二、解决 网上搜索ARM开发板开机自启，会有非常多的教程。现在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ARM 开发板开机自启">
+<meta property="og:url" content="http://qiaoxu123.github.io/posts/System-development/20190314-ARM-board-autostart.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="最近调试工程，ARM开发板开机自启问题，困扰了一周左右，现在终于解决，整理记录！ 一、背景  开发板型号：飞凌嵌入式OKMX6X-S3（地址） 4G模块：华为me909s模块  问题来源：因为开发板需要商业应用，所以需要配置自动联网。而在官网提供的文档中，对于华为me909s模块的启动，需要通过拨号命令来实现，所以开始进行问题尝试。  二、解决 网上搜索ARM开发板开机自启，会有非常多的教程。现在">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://qiaoxu123.github.io/img/myphoto.jpg">
+<meta property="article:published_time" content="2019-03-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-01-09T00:43:31.864Z">
+<meta property="article:author" content="xqiao">
+<meta property="article:tag" content="Bug调试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qiaoxu123.github.io/img/myphoto.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ARM 开发板开机自启",
+  "url": "http://qiaoxu123.github.io/posts/System-development/20190314-ARM-board-autostart.html",
+  "image": "http://qiaoxu123.github.io/img/myphoto.jpg",
+  "datePublished": "2019-03-13T16:00:00.000Z",
+  "dateModified": "2026-01-09T00:43:31.864Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "xqiao",
+      "url": "http://qiaoxu123.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://qiaoxu123.github.io/posts/System-development/20190314-ARM-board-autostart.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ARM 开发板开机自启',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/main.css"><meta name="generator" content="Hexo 7.0.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/myphoto.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">67</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">ARM 开发板开机自启</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">ARM 开发板开机自启</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2019-03-13T16:00:00.000Z" title="Created 2019-03-14 00:00:00">2019-03-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-01-09T00:43:31.864Z" title="Updated 2026-01-09 08:43:31">2026-01-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/System-development/">System-development</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:500,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2026-01-09 08:43:31&quot;}" hidden></div><p>最近调试工程，ARM开发板开机自启问题，困扰了一周左右，现在终于解决，整理记录！</p>
+<h3 id="一-背景">一、背景</h3>
+<blockquote>
+<p>开发板型号：飞凌嵌入式OKMX6X-S3（<a href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.24252e8dR0TiLL&amp;id=540409490040&amp;_u=k25861s80f54">地址</a>）<br>
+4G模块：华为me909s模块</p>
+</blockquote>
+<p>问题来源：因为开发板需要商业应用，所以需要配置自动联网。而在官网提供的文档中，对于华为me909s模块的启动，需要通过拨号命令来实现，所以开始进行问题尝试。</p>
+<hr>
+<h3 id="二-解决">二、解决</h3>
+<p>网上搜索ARM开发板开机自启，会有非常多的教程。现在分析自己的需求和问题有两个：</p>
+<ul>
+<li>开机启动后自动进行命令行</li>
+<li>自动启动4G模块<br>
+实际应用参考这篇<a href="https://www.linuxidc.com/Linux/2011-05/36109.htm">博客</a>即可。而我在实际应用中遇到的问题是，可以启动4G模块的命令，但一直处于申请连接状态<code>“sending discover”</code>。<br>
+启动命令如下：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//启动命令</span><br><span class="line">./root/me909s.sh &amp;</span><br></pre></td></tr></table></figure>
+<p>具体代码因此项目交付没有保存。</p>
+<h4 id="进入正题-实际原因是需要等其它模块初始化结束再启动4g模块">进入正题，实际原因是需要等其它模块初始化结束再启动4G模块</h4>
+<p>因为4G模块拨号需要等USB驱动初始化结束才能执行，而加入初始化程序中的4G模块启动命令并没有等待。因此加入延时，再启动即可。（具体初始命令放置位置可以参考网上博客，不用一概而论，实际测试为准）<br>
+如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/rc.d/rc.local</span><br><span class="line">vi rc.local</span><br><span class="line"></span><br><span class="line">//加入启动代码</span><br><span class="line">sleep 5   </span><br><span class="line">./root/me909s.sh</span><br></pre></td></tr></table></figure>
+<p>延时5s启动，问题解决！</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://qiaoxu123.github.io">xqiao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://qiaoxu123.github.io/posts/System-development/20190314-ARM-board-autostart.html">http://qiaoxu123.github.io/posts/System-development/20190314-ARM-board-autostart.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Bug%E8%B0%83%E8%AF%95/">Bug调试</a></div><div class="post-share"><div class="social-share" data-image="/img/myphoto.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/Automotive/20190627-scan-line-run-algorithm.html" title="Scan Line Run 聚簇算法原理与实现"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">Scan Line Run 聚簇算法原理与实现</div></div><div class="info-2"><div class="info-item-1">参考论文： Fast segmentation of 3D point clouds: A paradigm on LiDAR data for autonomous vehicle applications 代码地址 1．提取地面点(GPF算法) 参考博客 2.  聚类(SLR算法)  下面的文章主要是Paper原文的翻译，为了补充理解添加个人注释  2.1 基本原理 不属于地面的剩余点PngP_{ng}Png​需要形成要使用的簇，用在更高级别的后处理方案中。 我们的目标是为每个点 pk∈Pngpk∈P_{ng}pk∈Png​ 获取一个代表其集群标识的标签 lll，同时使用简单的机制来确保过程的快速运行时间和低复杂性。伪算法如下  从伪代码中可以提取这几个关键量，为了后面的理解方便：  PPP ：输入点云 NscanlinesN_{scanlines}Nscanlines​ : 扫描行数 ThrunTh_{run}Thrun​ : 属于同一 runrunrun 的点的阈值 ThjmergeThj_{merge}Thjmerge​ : 合并相邻 runrunrun 的阈值 new...</div></div></div></a><a class="pagination-related" href="/posts/Automotive/20190210-lane-changing-model-note.html" title="论文笔记：Lane-changing model"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">论文笔记：Lane-changing model</div></div><div class="info-2"><div class="info-item-1">主要介绍SUMO的一篇换道模型论文：Lane-changing model in SUMO  Abstract：SUMO is an open source microscopic traffic simulation. A major component of modelling microscopic vehicle behavior is the lane-changing behavior on multi-lane roads. We describe a new model which uses a 4-layered hierarchy of motivations to determine the vehicle behavior during every simulation step and motivate in which ways it improves the current lane-changing model. 论文地址  1. Introduction 主要介绍了SUMO中的几个运动模型：  Car-following model: deter...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/myphoto.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">xqiao</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">67</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><a id="card-info-btn" href="https://github.com/qiaoxu123"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/qiaoxu123" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:george.x.qiao@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">个人的技术小站，随性记录问题或整理学习。文章内容如有疑问请邮件联系，备注关键字博客，会尽力解答，有的时间太长已不再维护，望理解，谢谢！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E8%83%8C%E6%99%AF"><span class="toc-text">一、背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-%E8%A7%A3%E5%86%B3"><span class="toc-text">二、解决</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5%E6%AD%A3%E9%A2%98-%E5%AE%9E%E9%99%85%E5%8E%9F%E5%9B%A0%E6%98%AF%E9%9C%80%E8%A6%81%E7%AD%89%E5%85%B6%E5%AE%83%E6%A8%A1%E5%9D%97%E5%88%9D%E5%A7%8B%E5%8C%96%E7%BB%93%E6%9D%9F%E5%86%8D%E5%90%AF%E5%8A%A84g%E6%A8%A1%E5%9D%97"><span class="toc-text">进入正题，实际原因是需要等其它模块初始化结束再启动4G模块</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/Ceph/20260109-cephadm-problems-and-notes.html" title="Cephadm 使用相关问题 &amp; 笔记">Cephadm 使用相关问题 &amp; 笔记</a><time datetime="2026-01-09T00:43:30.370Z" title="Created 2026-01-09 08:43:30">2026-01-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/FPGA/20240306-Optimization-of-for-loop.html" title="HLS Learning P16 - Optimization-of-for-loop - Dataflow">HLS Learning P16 - Optimization-of-for-loop - Dataflow</a><time datetime="2024-03-05T16:00:00.000Z" title="Created 2024-03-06 00:00:00">2024-03-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/FPGA/20240306-Optimization-of-for-loop-Nested-loop.html" title="HLS Learning P17 - Optimization-of-for-loop - Nested Loop">HLS Learning P17 - Optimization-of-for-loop - Nested Loop</a><time datetime="2024-03-05T16:00:00.000Z" title="Created 2024-03-06 00:00:00">2024-03-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/FPGA/20240305-Optimization-of-for-loop-loop-merging.html" title="HLS Learning P16 - Optimization of for-loop - Loop Merging">HLS Learning P16 - Optimization of for-loop - Loop Merging</a><time datetime="2024-03-04T16:00:00.000Z" title="Created 2024-03-05 00:00:00">2024-03-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/FPGA/20240303-Optimization-of-for-loop-performance-metrics.html" title="HLS Learning P14 - Optimization of for-loop - Performance Metrics">HLS Learning P14 - Optimization of for-loop - Performance Metrics</a><time datetime="2024-03-02T16:00:00.000Z" title="Created 2024-03-03 00:00:00">2024-03-03</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2020 - 2026 By xqiao</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
